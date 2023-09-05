@@ -1,0 +1,2473 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="These are my study notes.">
+      
+      
+        <meta name="author" content="DC">
+      
+      
+      <link rel="icon" href="../../resources/images/favicon.ico">
+      <meta name="generator" content="mkdocs-1.3.1, mkdocs-material-8.5.3">
+    
+    
+      
+        <title>文件管理之命令补充 - IT必备知识</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.7a952b86.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.cbb835fc.min.css">
+        
+      
+      
+
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../resources/css/extra.css">
+    
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lxgw-wenkai-webfont@1.1.0/style.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="blue-grey" data-md-color-accent="amber">
+  
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#find" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../.." title="IT必备知识" class="md-header__button md-logo" aria-label="IT必备知识" data-md-component="logo">
+      
+  <img src="../../resources/images/favicon.ico" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            IT必备知识
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              文件管理之命令补充
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      <form class="md-header__option" data-md-component="palette">
+        
+          
+          
+          <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="blue-grey" data-md-color-accent="amber"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+          
+            <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"/></svg>
+            </label>
+          
+        
+          
+          
+          <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="blue-grey" data-md-color-accent="amber"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_2">
+          
+            <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12c0-2.42-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"/></svg>
+            </label>
+          
+        
+      </form>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="分享" aria-label="分享" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7 0-.24-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91 1.61 0 2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08Z"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="标签" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../0_%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/0_%E5%89%8D%E5%A5%8F%28%E4%BB%8B%E7%BB%8D%29/" class="md-tabs__link">
+        计算机基础(8)
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+    
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../0_%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C/" class="md-tabs__link md-tabs__link--active">
+        linux基础(20)
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../5_db/0_%E5%9F%BA%E7%A1%80/0_install_db/" class="md-tabs__link">
+        mysql(19)
+      </a>
+    </li>
+  
+
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../9_git/0_git%E7%94%9F%E6%B4%BB%E7%89%88/" class="md-tabs__link">
+        git(2)
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../13_%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/0_%E9%80%92%E5%BD%92_%E6%9F%A5%E6%89%BE/" class="md-tabs__link">
+        查找排序算法(5)
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="IT必备知识" class="md-nav__button md-logo" aria-label="IT必备知识" data-md-component="logo">
+      
+  <img src="../../resources/images/favicon.ico" alt="logo">
+
+    </a>
+    IT必备知识
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" data-md-toggle="__nav_1" type="checkbox" id="__nav_1" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_1">
+          计算机基础(8)
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="计算机基础(8)" data-md-level="1">
+        <label class="md-nav__title" for="__nav_1">
+          <span class="md-nav__icon md-icon"></span>
+          计算机基础(8)
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../0_%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/0_%E5%89%8D%E5%A5%8F%28%E4%BB%8B%E7%BB%8D%29/" class="md-nav__link">
+        前奏(介绍)
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../0_%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/1_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A1%AC%E4%BB%B6%E7%BB%84%E6%88%90/" class="md-nav__link">
+        计算机硬件组成
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../0_%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/2_%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" class="md-nav__link">
+        操作系统
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../0_%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/3_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E6%A6%82%E8%A7%88/" class="md-nav__link">
+        计算机网络概览
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../0_%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/4_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E4%B9%8B%E7%BD%91%E7%BB%9C%E6%8E%A5%E5%8F%A3%E5%B1%82/" class="md-nav__link">
+        网络接口层
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../0_%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/5_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E4%B9%8B%E7%BD%91%E7%BB%9C%E5%B1%82/" class="md-nav__link">
+        网络层
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../0_%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/6_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E4%B9%8B%E4%BC%A0%E8%BE%93%E5%B1%82/" class="md-nav__link">
+        传输层
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../0_%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/7_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%A1%A5%E5%85%85/" class="md-nav__link">
+        补充
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2">
+          linux基础(20)
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="linux基础(20)" data-md-level="1">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          linux基础(20)
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0_%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C/" class="md-nav__link">
+        准备工作
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../1_%E5%88%9D%E8%AF%86shell%E4%B8%8E%E5%9F%BA%E7%A1%80%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" class="md-nav__link">
+        初识shell与基础常用命令
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../2_%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86%E4%B9%8B%E5%9F%BA%E7%A1%80%E5%91%BD%E4%BB%A4/" class="md-nav__link">
+        文件管理之基础命令
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../3_%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86%E4%B9%8B%E5%9B%9B%E5%A4%A7%E6%A8%A1%E5%BC%8F/" class="md-nav__link">
+        文件管理之四大模式
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          文件管理之命令补充
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        文件管理之命令补充
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#find" class="md-nav__link">
+    find
+  </a>
+  
+    <nav class="md-nav" aria-label="find">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    按文件名
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    按文件大小
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    文件查找深度
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    按时间查找
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    按文件属主、属组
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    按文件类型
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#inode" class="md-nav__link">
+    inode号、文件权限
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#findxargs" class="md-nav__link">
+    find结合xargs
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    上传与下载
+  </a>
+  
+    <nav class="md-nav" aria-label="上传与下载">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#wget" class="md-nav__link">
+    wget下载
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#curl" class="md-nav__link">
+    curl测试
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#szrz" class="md-nav__link">
+    sz/rz
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    输出/入与重定向
+  </a>
+  
+    <nav class="md-nav" aria-label="输出/入与重定向">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    &gt; &gt;&gt;输出重定向
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    &lt; &lt;&lt;输入重定向
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    字符处理命令
+  </a>
+  
+    <nav class="md-nav" aria-label="字符处理命令">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#sort" class="md-nav__link">
+    sort 排序
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#uniq" class="md-nav__link">
+    uniq 去重
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cut" class="md-nav__link">
+    cut 分割
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tr" class="md-nav__link">
+    tr 替换删除
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#wc" class="md-nav__link">
+    wc 统计
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tarzip" class="md-nav__link">
+    tar/zip
+  </a>
+  
+    <nav class="md-nav" aria-label="tar/zip">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    打包压缩文件
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_13" class="md-nav__link">
+    解压缩
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../5_%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86%E4%B9%8B%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/" class="md-nav__link">
+        文件管理之文件系统
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../6_%E6%9D%83%E9%99%90%E7%AE%A1%E7%90%86%E4%B9%8B%E7%94%A8%E6%88%B7%E4%B8%8E%E7%BB%84/" class="md-nav__link">
+        权限管理之用户与组
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../7_%E6%9D%83%E9%99%90%E7%AE%A1%E7%90%86%E4%B9%8B%E6%96%87%E4%BB%B6%E6%9D%83%E9%99%90/" class="md-nav__link">
+        权限管理之文件权限
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../8_%E6%9D%83%E9%99%90%E7%AE%A1%E7%90%86%E4%B9%8BACL/" class="md-nav__link">
+        权限管理之ACL
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../9_%E6%9D%83%E9%99%90%E7%AE%A1%E7%90%86%E4%B9%8Bsu%E4%B8%8Esudo/" class="md-nav__link">
+        权限管理之su与sudo
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../10_%E8%BD%AF%E4%BB%B6%E5%8C%85%E7%AE%A1%E7%90%86%E4%B9%8Brpm/" class="md-nav__link">
+        软件包管理之rpm
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../11_%E8%BD%AF%E4%BB%B6%E5%8C%85%E7%AE%A1%E7%90%86%E4%B9%8Byum/" class="md-nav__link">
+        软件包管理之yum
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../12_%E6%9F%A5%E7%9C%8B%E8%BF%9B%E7%A8%8B/" class="md-nav__link">
+        查看进程
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../13_%E7%AE%A1%E7%90%86%E8%BF%9B%E7%A8%8B/" class="md-nav__link">
+        管理进程
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../14_%E5%AD%98%E5%82%A8%E7%AE%A1%E7%90%86%E4%B9%8B%E4%BC%A0%E7%BB%9F%E7%A3%81%E7%9B%98%E7%AE%A1%E7%90%86/" class="md-nav__link">
+        存储管理之传统磁盘管理
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../15_%E5%AD%98%E5%82%A8%E7%AE%A1%E7%90%86%E4%B9%8BLVM/" class="md-nav__link">
+        存储管理之LVM
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../16_%E7%BD%91%E7%BB%9C%E7%AE%A1%E7%90%86/" class="md-nav__link">
+        网络管理
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../17_shell%E5%9F%BA%E7%A1%80/" class="md-nav__link">
+        shell基础
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../18_crond%E8%AE%A1%E5%88%92%E4%BB%BB%E5%8A%A1/" class="md-nav__link">
+        crond计划任务
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../19_%E7%B3%BB%E7%BB%9F%E4%BC%98%E5%8C%96/" class="md-nav__link">
+        系统优化
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3">
+          mysql(19)
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="mysql(19)" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          mysql(19)
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" data-md-toggle="__nav_3_1" type="checkbox" id="__nav_3_1" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3_1">
+          基础
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="基础" data-md-level="2">
+        <label class="md-nav__title" for="__nav_3_1">
+          <span class="md-nav__icon md-icon"></span>
+          基础
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../5_db/0_%E5%9F%BA%E7%A1%80/0_install_db/" class="md-nav__link">
+        数据库安装
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../5_db/0_%E5%9F%BA%E7%A1%80/1_db_command/" class="md-nav__link">
+        sql命令总结
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../5_db/0_%E5%9F%BA%E7%A1%80/2_imp_knowledge/" class="md-nav__link">
+        imp_knowledge
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../5_db/0_%E5%9F%BA%E7%A1%80/3_table_field/" class="md-nav__link">
+        字段的约束和类型
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../5_db/0_%E5%9F%BA%E7%A1%80/4_table_relation/" class="md-nav__link">
+        表关系
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../5_db/0_%E5%9F%BA%E7%A1%80/5_permissions/" class="md-nav__link">
+        权限管理
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../5_db/0_%E5%9F%BA%E7%A1%80/6_single_query/" class="md-nav__link">
+        单表查询
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../5_db/0_%E5%9F%BA%E7%A1%80/7_multi_query/" class="md-nav__link">
+        多表查询
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../5_db/0_%E5%9F%BA%E7%A1%80/8_query_practice/" class="md-nav__link">
+        query_practice
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../5_db/0_%E5%9F%BA%E7%A1%80/9_pymysql/" class="md-nav__link">
+        pymysql
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../5_db/0_%E5%9F%BA%E7%A1%80/10_just_know/" class="md-nav__link">
+        just_know
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../5_db/0_%E5%9F%BA%E7%A1%80/other/01_to_11/" class="md-nav__link">
+        other1
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../5_db/0_%E5%9F%BA%E7%A1%80/other/05/" class="md-nav__link">
+        other2
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" data-md-toggle="__nav_3_2" type="checkbox" id="__nav_3_2" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3_2">
+          进阶
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="进阶" data-md-level="2">
+        <label class="md-nav__title" for="__nav_3_2">
+          <span class="md-nav__icon md-icon"></span>
+          进阶
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../5_db/1_%E8%BF%9B%E9%98%B6/0_index/" class="md-nav__link">
+        索引
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../5_db/1_%E8%BF%9B%E9%98%B6/1_explain/" class="md-nav__link">
+        执行计划
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../5_db/1_%E8%BF%9B%E9%98%B6/2_transaction/" class="md-nav__link">
+        事务
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../5_db/1_%E8%BF%9B%E9%98%B6/3_db_readPhenomenon/" class="md-nav__link">
+        读现象
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../5_db/1_%E8%BF%9B%E9%98%B6/4_lock/" class="md-nav__link">
+        锁
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../5_db/1_%E8%BF%9B%E9%98%B6/other/" class="md-nav__link">
+        数据库连接池
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4">
+          git(2)
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="git(2)" data-md-level="1">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          git(2)
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../9_git/0_git%E7%94%9F%E6%B4%BB%E7%89%88/" class="md-nav__link">
+        git生活版
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../9_git/1_git%E7%A0%94%E7%A9%B6%E7%89%88/" class="md-nav__link">
+        git研究版
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" data-md-toggle="__nav_5" type="checkbox" id="__nav_5" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_5">
+          查找排序算法(5)
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="查找排序算法(5)" data-md-level="1">
+        <label class="md-nav__title" for="__nav_5">
+          <span class="md-nav__icon md-icon"></span>
+          查找排序算法(5)
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../13_%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/0_%E9%80%92%E5%BD%92_%E6%9F%A5%E6%89%BE/" class="md-nav__link">
+        查找
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../13_%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/1_LowB%E4%B8%89%E4%BA%BA%E7%BB%84/" class="md-nav__link">
+        LowB三人组
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../13_%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/2_NB%E4%B8%89%E4%BA%BA%E7%BB%84/" class="md-nav__link">
+        NB三人组
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../13_%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/3_%E5%85%B6%E5%AE%83%E6%8E%92%E5%BA%8F/" class="md-nav__link">
+        其它排序
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../13_%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/4_%E6%9F%A5%E6%89%BE%E4%B9%A0%E9%A2%98/" class="md-nav__link">
+        查找习题
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#find" class="md-nav__link">
+    find
+  </a>
+  
+    <nav class="md-nav" aria-label="find">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    按文件名
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    按文件大小
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    文件查找深度
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    按时间查找
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    按文件属主、属组
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    按文件类型
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#inode" class="md-nav__link">
+    inode号、文件权限
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#findxargs" class="md-nav__link">
+    find结合xargs
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    上传与下载
+  </a>
+  
+    <nav class="md-nav" aria-label="上传与下载">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#wget" class="md-nav__link">
+    wget下载
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#curl" class="md-nav__link">
+    curl测试
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#szrz" class="md-nav__link">
+    sz/rz
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    输出/入与重定向
+  </a>
+  
+    <nav class="md-nav" aria-label="输出/入与重定向">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    &gt; &gt;&gt;输出重定向
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    &lt; &lt;&lt;输入重定向
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    字符处理命令
+  </a>
+  
+    <nav class="md-nav" aria-label="字符处理命令">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#sort" class="md-nav__link">
+    sort 排序
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#uniq" class="md-nav__link">
+    uniq 去重
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cut" class="md-nav__link">
+    cut 分割
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tr" class="md-nav__link">
+    tr 替换删除
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#wc" class="md-nav__link">
+    wc 统计
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tarzip" class="md-nav__link">
+    tar/zip
+  </a>
+  
+    <nav class="md-nav" aria-label="tar/zip">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    打包压缩文件
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_13" class="md-nav__link">
+    解压缩
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  <h1>文件管理之命令补充</h1>
+
+<h2 id="find">find<a class="headerlink" href="#find" title="Permanent link">&para;</a></h2>
+<blockquote>
+<p>文件查找命令</p>
+<p>find  目录 [-name;-size;-maxdepth;-mtime;-user;-group;-type;-inum;-perm] ...<br />
+找到后的处理动作 -print   -ls -ok -delete -exec</p>
+</blockquote>
+<h3 id="_1"><font color='orange'>按文件名</font><a class="headerlink" href="#_1" title="Permanent link">&para;</a></h3>
+<p><strong>会在指定的目录下递归查找..</strong>  <br />
+<code>"ifcfg-ens33"</code>确切的文件名;<code>"ifcfg-*"</code>以 *ifcfg- * 开头的文件名 <br />
+<code>-i</code> 忽略文件名的大小写.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="o">[</span>root@localhost opt<span class="o">]</span><span class="c1"># find /etc -name &quot;ifcfg-ens33&quot;</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>/etc/sysconfig/network-scripts/ifcfg-ens33
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="o">[</span>root@localhost opt<span class="o">]</span><span class="c1"># find /etc -name &quot;ifcfg-*&quot;</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>/etc/sysconfig/network-scripts/ifcfg-lo
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>/etc/sysconfig/network-scripts/ifcfg-ens33
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="o">[</span>root@localhost opt<span class="o">]</span><span class="c1"># find /etc -iname &quot;ifcfg-ens33&quot;</span>
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>/etc/sysconfig/network-scripts/ifcfg-ens33
+</code></pre></div>
+<h3 id="_2"><font color='orange'>按文件大小</font><a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
+<p><code>find man</code>  ;  <code>/ -size</code>  查看帮助信息</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>find /etc -size 3M          <span class="c1"># 文件大于3M 等同于 find /etc -size 3M -print</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>find /etc -size +3M         <span class="c1"># 文件等于3M 默认后面会加 -print</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>find /etc -size -3M         <span class="c1"># 文件小于3M</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>find /etc -size +3M -ls     <span class="c1"># 找到文件后 -ls 显示文件的详细信息</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>【了解】
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>若查找的文件大小以b为单位,注意这里的b不是字节之意,这里的1b为512个字节.
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>不写单位,默认也是以b为大小单位.
+<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>512bytes即机械磁盘读取数据的最小单位1个扇区的大小.. 通俗点,1b为1个扇区.
+<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>若查找命令为 find . -size 2b
+<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>那么只要此文件占据两个扇区的大小,大小处于512bytes-1024bytes都会被查找到.
+<a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>
+<a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a>【扩展 进行验证】造一个1024bytes和513字节的文件
+<a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a><span class="s2">&quot;&quot;&quot;</span>
+<a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a><span class="s2">if inputfile输入文件 /dev/zero此设备文件往外产生0</span>
+<a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a><span class="s2">of outputfile输出文件</span>
+<a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a><span class="s2">bs blocksize块大小 默认单位是字节</span>
+<a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a><span class="s2">count 有多少块</span>
+<a id="__codelineno-1-19" name="__codelineno-1-19" href="#__codelineno-1-19"></a><span class="s2">注意:输出文件是没有内容的,这是一种虚拟的概念,只是将这个文件填充到指定大小.</span>
+<a id="__codelineno-1-20" name="__codelineno-1-20" href="#__codelineno-1-20"></a><span class="s2">&quot;&quot;&quot;</span>
+<a id="__codelineno-1-21" name="__codelineno-1-21" href="#__codelineno-1-21"></a><span class="o">[</span>root@localhost opt<span class="o">]</span><span class="c1"># dd if=/dev/zero of=b.txt bs=1024 count=1</span>
+<a id="__codelineno-1-22" name="__codelineno-1-22" href="#__codelineno-1-22"></a>记录了1+0 的读入
+<a id="__codelineno-1-23" name="__codelineno-1-23" href="#__codelineno-1-23"></a>记录了1+0 的写出
+<a id="__codelineno-1-24" name="__codelineno-1-24" href="#__codelineno-1-24"></a>1024字节<span class="o">(</span><span class="m">1</span>.0 kB<span class="o">)</span>已复制，0.00648155 秒，158 kB/秒
+<a id="__codelineno-1-25" name="__codelineno-1-25" href="#__codelineno-1-25"></a><span class="o">[</span>root@localhost opt<span class="o">]</span><span class="c1"># dd if=/dev/zero of=c.txt bs=513 count=1</span>
+<a id="__codelineno-1-26" name="__codelineno-1-26" href="#__codelineno-1-26"></a>记录了1+0 的读入
+<a id="__codelineno-1-27" name="__codelineno-1-27" href="#__codelineno-1-27"></a>记录了1+0 的写出
+<a id="__codelineno-1-28" name="__codelineno-1-28" href="#__codelineno-1-28"></a>513字节<span class="o">(</span><span class="m">513</span> B<span class="o">)</span>已复制，0.000407585 秒，1.3 MB/秒
+<a id="__codelineno-1-29" name="__codelineno-1-29" href="#__codelineno-1-29"></a><span class="o">[</span>root@localhost opt<span class="o">]</span><span class="c1"># cat b.txt</span>
+<a id="__codelineno-1-30" name="__codelineno-1-30" href="#__codelineno-1-30"></a><span class="o">[</span>root@localhost opt<span class="o">]</span><span class="c1"># ll</span>
+<a id="__codelineno-1-31" name="__codelineno-1-31" href="#__codelineno-1-31"></a>总用量 <span class="m">8</span>
+<a id="__codelineno-1-32" name="__codelineno-1-32" href="#__codelineno-1-32"></a>-rw-r--r-- <span class="m">1</span> root root <span class="m">1024</span> 7月  <span class="m">14</span> <span class="m">11</span>:07 b.txt
+<a id="__codelineno-1-33" name="__codelineno-1-33" href="#__codelineno-1-33"></a>-rw-r--r-- <span class="m">1</span> root root  <span class="m">513</span> 7月  <span class="m">14</span> <span class="m">11</span>:11 c.txt
+<a id="__codelineno-1-34" name="__codelineno-1-34" href="#__codelineno-1-34"></a><span class="o">[</span>root@localhost opt<span class="o">]</span><span class="c1"># find . -size 2 -ls</span>
+<a id="__codelineno-1-35" name="__codelineno-1-35" href="#__codelineno-1-35"></a><span class="m">35589993</span>    <span class="m">4</span> -rw-r--r--   <span class="m">1</span> root     root         <span class="m">1024</span> 7月 <span class="m">14</span> <span class="m">11</span>:07 ./b.txt
+<a id="__codelineno-1-36" name="__codelineno-1-36" href="#__codelineno-1-36"></a><span class="m">35589994</span>    <span class="m">4</span> -rw-r--r--   <span class="m">1</span> root     root          <span class="m">513</span> 7月 <span class="m">14</span> <span class="m">11</span>:11 ./c.txt
+</code></pre></div>
+<h3 id="_3"><font color='orange'>文件查找深度</font><a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
+<p>默认会递归查找指定目录下的所有层级.. 可通过 <code>-maxdepth levels</code> 设置层级.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="c1"># /根目录  ;  -maxdepth 5层级 ; -a并且     ; -name &quot;ifcfg-*&quot; 文件名</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="c1"># 可不加-a,默认就是-a. 并列关系同时成立.</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="c1"># 补充:   -o 或者. 条件成立一个即可</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="o">[</span>root@localhost opt<span class="o">]</span><span class="c1"># find / -maxdepth 5 -a  -name &quot;ifcfg-*&quot;</span>
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>/etc/sysconfig/network-scripts/ifcfg-lo
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>/etc/sysconfig/network-scripts/ifcfg-ens33
+</code></pre></div>
+<h3 id="_4"><font color='orange'>按时间查找</font><a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
+<p>atime 最近访问;  mtime 最近更改; ctime最近改动.  <br />
+<font color='gray'>Ps: 在后续权限部分会详细讲解什么的变化会导致这三种时间的改动.</font></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>find /etc -mtime +3       <span class="c1"># 修改时间超过3天</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>find /etc -mtime <span class="m">3</span>        <span class="c1"># 修改时间等于3天</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>find /etc -mtime -3       <span class="c1"># 修改时间3天以内</span>
+</code></pre></div>
+<h3 id="_5"><font color='orange'>按文件属主、属组</font><a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>find /home -user egon               <span class="c1"># 属主是egon的文件</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>find /home -group it                <span class="c1"># 属组是it组的文件</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>find /home -user egon -group it  等同于    find /home -user egon -a -group it
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>find /home -user egon -o -group it
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="s2">&quot;&quot;&quot;</span>
+<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="s2">每创建一个用户,会在/etc/passwd添加用户的属主信息,在/etc/group添加属组信息.</span>
+<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="s2">&quot;&quot;&quot;</span>
+<a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a>find /home -nouser        <span class="c1"># 用户还存在   但在/etc/passwd中删除了记录</span>
+<a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a>find /home -nogroup       <span class="c1"># 用户还存在   但在/etc/group中删除了记录</span>
+<a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a>
+<a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a>【补充】<span class="sb">`</span>id root<span class="sb">`</span> 查看root用户的信息
+<a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a><span class="o">[</span>root@localhost opt<span class="o">]</span><span class="c1"># id root</span>
+<a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a><span class="nv">uid</span><span class="o">=</span><span class="m">0</span><span class="o">(</span>root<span class="o">)</span> <span class="nv">gid</span><span class="o">=</span><span class="m">0</span><span class="o">(</span>root<span class="o">)</span> <span class="nv">组</span><span class="o">=</span><span class="m">0</span><span class="o">(</span>root<span class="o">)</span>
+<a id="__codelineno-4-15" name="__codelineno-4-15" href="#__codelineno-4-15"></a><span class="o">[</span>root@localhost opt<span class="o">]</span><span class="c1"># id dc</span>
+<a id="__codelineno-4-16" name="__codelineno-4-16" href="#__codelineno-4-16"></a><span class="nv">uid</span><span class="o">=</span><span class="m">1001</span><span class="o">(</span>dc<span class="o">)</span> <span class="nv">gid</span><span class="o">=</span><span class="m">1001</span><span class="o">(</span>dc<span class="o">)</span> <span class="nv">组</span><span class="o">=</span><span class="m">1001</span><span class="o">(</span>dc<span class="o">)</span>
+</code></pre></div>
+<h3 id="_6"><font color='orange'>按文件类型</font><a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>find /dev -type f                       <span class="c1"># f普通文件</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>find /dev -type d                       <span class="c1"># d目录</span>
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>find /dev -type l                       <span class="c1"># l链接</span>
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>find /dev -type b                       <span class="c1"># b块设备</span>
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>find /dev -type c                       <span class="c1"># c字符设备</span>
+<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>find /dev -type s                       <span class="c1"># s套接字 通常以.sock结尾</span>
+<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a>find /dev -type p                       <span class="c1"># p管道文件</span>
+</code></pre></div>
+<h3 id="inode"><font color='orange'>inode号、文件权限</font><a class="headerlink" href="#inode" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>find / -inum <span class="m">1811</span>         <span class="c1"># 根据inode号查找: -inum n</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>find . -perm -600 -ls     <span class="c1"># 按文件权限: -perm</span>
+</code></pre></div>
+<h3 id="findxargs"><font color='orange'>find结合xargs</font><a class="headerlink" href="#findxargs" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p>xargs的参考文档: <code>https://zhuanlan.zhihu.com/p/340804463</code> !!!!!!</p>
+</blockquote>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>▲ 删除没有属主和属组的文件
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="s2">&quot;&quot;&quot;</span>
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="s2">rm -rf 本身是不支持从管道里取东西的</span>
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="s2">需要加上参数 xargs 从管道里读取参数交给 rm -rf命令</span>
+<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="s2">&quot;&quot;&quot;</span>
+<a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a>find /home -nouser -nogroup <span class="p">|</span> xargs rm -rf
+<a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a><span class="s2">&quot;&quot;&quot;</span>
+<a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a><span class="s2">等同于 以下三条命令皆可</span>
+<a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a><span class="s2">find /home -nouser -nogroup -delete</span>
+<a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a><span class="s2">find /home -nouser -nogroup -exec rm -rf {} \;  # 非交互式 注意-exec慎用！</span>
+<a id="__codelineno-7-11" name="__codelineno-7-11" href="#__codelineno-7-11"></a><span class="s2">find /home -nouser -nogroup -ok rm -rf {} \;    # 交互式(每个文件都要问是否确定删除)</span>
+<a id="__codelineno-7-12" name="__codelineno-7-12" href="#__codelineno-7-12"></a><span class="s2">注意: </span>
+<a id="__codelineno-7-13" name="__codelineno-7-13" href="#__codelineno-7-13"></a><span class="s2">        这里的 cp rm 最后 \; 是固定写法.</span>
+<a id="__codelineno-7-14" name="__codelineno-7-14" href="#__codelineno-7-14"></a><span class="s2">&quot;&quot;&quot;</span>
+<a id="__codelineno-7-15" name="__codelineno-7-15" href="#__codelineno-7-15"></a>
+<a id="__codelineno-7-16" name="__codelineno-7-16" href="#__codelineno-7-16"></a>▲ 将找到的文件移动、复制、更改权限
+<a id="__codelineno-7-17" name="__codelineno-7-17" href="#__codelineno-7-17"></a><span class="s2">&quot;&quot;&quot;</span>
+<a id="__codelineno-7-18" name="__codelineno-7-18" href="#__codelineno-7-18"></a><span class="s2">xargs -I 负责从管道里把结果拿出来,采集好丢到{}花括号里</span>
+<a id="__codelineno-7-19" name="__codelineno-7-19" href="#__codelineno-7-19"></a><span class="s2">这样的话,只要用花括号就代表用管道左边命令的结果</span>
+<a id="__codelineno-7-20" name="__codelineno-7-20" href="#__codelineno-7-20"></a><span class="s2">&quot;&quot;&quot;</span>
+<a id="__codelineno-7-21" name="__codelineno-7-21" href="#__codelineno-7-21"></a><span class="o">[</span>root@localhost opt<span class="o">]</span><span class="c1"># find /etc -name &quot;ifcfg-*&quot; | xargs -I {} cp -rf {} /opt</span>
+<a id="__codelineno-7-22" name="__codelineno-7-22" href="#__codelineno-7-22"></a><span class="o">[</span>root@localhost opt<span class="o">]</span><span class="c1"># ls</span>
+<a id="__codelineno-7-23" name="__codelineno-7-23" href="#__codelineno-7-23"></a>ifcfg-ens33  ifcfg-lo
+<a id="__codelineno-7-24" name="__codelineno-7-24" href="#__codelineno-7-24"></a><span class="s2">&quot;&quot;&quot;</span>
+<a id="__codelineno-7-25" name="__codelineno-7-25" href="#__codelineno-7-25"></a><span class="s2">等同于</span>
+<a id="__codelineno-7-26" name="__codelineno-7-26" href="#__codelineno-7-26"></a><span class="s2">find /etc -name &quot;</span>ifcfg-*<span class="s2">&quot; -exec cp -rf {} /opt \;</span>
+<a id="__codelineno-7-27" name="__codelineno-7-27" href="#__codelineno-7-27"></a><span class="s2">&quot;&quot;&quot;</span>
+<a id="__codelineno-7-28" name="__codelineno-7-28" href="#__codelineno-7-28"></a>
+<a id="__codelineno-7-29" name="__codelineno-7-29" href="#__codelineno-7-29"></a>find /test -name <span class="s2">&quot;ifcfg-ens33&quot;</span> <span class="p">|</span> xargs -I <span class="o">{}</span> mv <span class="o">{}</span> /ttt
+<a id="__codelineno-7-30" name="__codelineno-7-30" href="#__codelineno-7-30"></a>find /ttt -name <span class="s2">&quot;ifcfg*&quot;</span> <span class="p">|</span> xargs -I <span class="o">{}</span> chmod <span class="m">666</span> <span class="o">{}</span>
+</code></pre></div>
+<hr />
+<h2 id="_7">上传与下载<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h2>
+<h3 id="wget"><font color='orange'>wget下载</font><a class="headerlink" href="#wget" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p>wget -O 本地路径 远程包链接地址 <br />
+未指定本地路径,默认是下载到当前目录;指定本地路径可以指定下载软件的命名.  </p>
+<p>Ps: 浏览器在官网点击就能下载的软件包连接、右键复制的图片链接都能通过wget下载..</p>
+</blockquote>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>wget http://nginx.org/download/nginx-1.22.0.tar.gz
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>wget -O /opt/nginx.tar.gz  http://nginx.org/download/nginx-1.22.0.tar.gz
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>
+<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="o">[</span>root@localhost opt<span class="o">]</span><span class="c1"># wget -O ./1.jpg https://pics5.baidu.com/feed/6a600c338744ebf8ef9d643e6a39b9226159a708.jpeg?token=64b2865816ad2b3b0e49faf1fd43d8d5</span>
+<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="o">[</span>root@localhost opt<span class="o">]</span><span class="c1"># ls</span>
+<a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a><span class="m">1</span>.jpg  nginx-1.22.0.tar.gz  nginx.tar.gz
+<a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a>
+<a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a><span class="s2">&quot;&quot;&quot;</span>
+<a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a><span class="s2">如果wget下载提示无法建立SSL连接,则加上选项--no-check-certificate!!!</span>
+<a id="__codelineno-8-10" name="__codelineno-8-10" href="#__codelineno-8-10"></a><span class="s2">wget --no-check-certificate -O 本地路径 远程包链接地址 </span>
+<a id="__codelineno-8-11" name="__codelineno-8-11" href="#__codelineno-8-11"></a><span class="s2">&quot;&quot;&quot;</span>
+</code></pre></div>
+<h3 id="curl"><font color='orange'>curl测试</font><a class="headerlink" href="#curl" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p>curl命令是一个利用URL规则在命令行下工作的文件传输工具.</p>
+</blockquote>
+<p>curl的主要功能用于测试！<br />
+<strong>下载</strong>：<code>curl -o 文件路径 远程链接</code>  <font color='gray'>下载成功后,文件会保存本地.</font><br />
+<strong>&lt;测试&gt;</strong>：<code>curl 远程链接</code>  <font color='gray'>会显示下载的内容,但<strong>文件不会保存到本地</strong>！不占用本地硬盘空间.</font></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="o">[</span>root@localhost opt<span class="o">]</span><span class="c1"># curl -o ./2.jpg https://pics5.baidu.com/feed/6a600c338744ebf8ef9d643e6a39b9226159a708.jpeg?token=64b2865816ad2b3b0e49faf1fd43d8d5</span>
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="o">[</span>root@localhost opt<span class="o">]</span><span class="c1"># curl -o  /opt/nginx2.tar.gz  http://nginx.org/download/nginx-1.22.0.tar.gz</span>
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a>                                 Dload  Upload   Total   Spent    Left  Speed
+<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a><span class="m">100</span> 1048k  <span class="m">100</span> 1048k    <span class="m">0</span>     <span class="m">0</span>   191k      <span class="m">0</span>  <span class="m">0</span>:00:05  <span class="m">0</span>:00:05 --:--:--  232k
+<a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a><span class="o">[</span>root@localhost opt<span class="o">]</span><span class="c1"># ls</span>
+<a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a><span class="m">1</span>.jpg  <span class="m">2</span>.jpg  nginx-1.22.0.tar.gz  nginx2.tar.gz  nginx.tar.gz
+<a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a>
+<a id="__codelineno-9-9" name="__codelineno-9-9" href="#__codelineno-9-9"></a><span class="s2">&quot;&quot;&quot;</span>
+<a id="__codelineno-9-10" name="__codelineno-9-10" href="#__codelineno-9-10"></a><span class="s2">如果curl遇到下载提示无法建立SSL链接,使用-k选项或者--insecure</span>
+<a id="__codelineno-9-11" name="__codelineno-9-11" href="#__codelineno-9-11"></a><span class="s2">curl -k -o 本地路径 远程包链接地址</span>
+<a id="__codelineno-9-12" name="__codelineno-9-12" href="#__codelineno-9-12"></a><span class="s2">&quot;&quot;&quot;</span>
+<a id="__codelineno-9-13" name="__codelineno-9-13" href="#__codelineno-9-13"></a>
+<a id="__codelineno-9-14" name="__codelineno-9-14" href="#__codelineno-9-14"></a>【压力测试】一个客户端不断的向百度网页发送请求.
+<a id="__codelineno-9-15" name="__codelineno-9-15" href="#__codelineno-9-15"></a>悄悄话: 上网就是一个不断上传<span class="o">(</span>注册,支付<span class="o">)</span>下载<span class="o">(</span>打开网页<span class="o">)</span>的过程!
+<a id="__codelineno-9-16" name="__codelineno-9-16" href="#__codelineno-9-16"></a><span class="o">[</span>root@localhost opt<span class="o">]</span><span class="c1"># while true; do curl https://www.baidu.com/; done</span>
+</code></pre></div>
+<h3 id="szrz"><font color='orange'>sz/rz</font><a class="headerlink" href="#szrz" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p>需要先下载依赖的软件包 <code>yum install lrzsz -y</code> <br />
+sz,rz 是Linux/Unix同 <strong>Windows</strong> 进行文件传输的命令行工具</p>
+</blockquote>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="s2">&quot;&quot;&quot; sz  linux ==&gt; windows</span>
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="s2">▲ 将linux服务器上选定的文件下载/发送到windows端</span>
+<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="s2">注意哦,有个前提,使用此命令的所在终端要有弹出图形窗口的机制.</span>
+<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="s2">所以windows上的xshll使用此命令可以,但linux服务器上的终端使用就会出错.</span>
+<a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a><span class="s2">&quot;&quot;&quot;</span>
+<a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a><span class="o">[</span>root@localhost opt<span class="o">]</span><span class="c1"># sz nginx.tar.gz</span>
+<a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a>
+<a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a>
+<a id="__codelineno-10-9" name="__codelineno-10-9" href="#__codelineno-10-9"></a><span class="s2">&quot;&quot;&quot; rz  windows ==&gt; linux</span>
+<a id="__codelineno-10-10" name="__codelineno-10-10" href="#__codelineno-10-10"></a><span class="s2">▲ 运行该命令会弹出一个文件选择窗口,从本地选择文件上传到linux服务器.</span>
+<a id="__codelineno-10-11" name="__codelineno-10-11" href="#__codelineno-10-11"></a><span class="s2">如果linux主机上目标文件名已经存在,则上传失败,可以用-E选项解决 </span>
+<a id="__codelineno-10-12" name="__codelineno-10-12" href="#__codelineno-10-12"></a><span class="s2">rz -E 重命名传入文件,新文件名将添加一个点和一个数字(0..999）</span>
+<a id="__codelineno-10-13" name="__codelineno-10-13" href="#__codelineno-10-13"></a><span class="s2">&quot;&quot;&quot;</span>
+<a id="__codelineno-10-14" name="__codelineno-10-14" href="#__codelineno-10-14"></a><span class="o">[</span>root@localhost opt<span class="o">]</span><span class="c1"># rz</span>
+</code></pre></div>
+<hr />
+<h2 id="_8">输出/入与重定向<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h2>
+<h3 id="_9"><font color='orange'>&gt; &gt;&gt;输出重定向</font><a class="headerlink" href="#_9" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p>正常输出是把 <strong>内容</strong> 输出到显示器上,而输出重定向是 <strong>把内容输出到文件中</strong> <br />
+<code>&gt;</code> 覆盖;  <code>&gt;&gt;</code>追加.    <code>1&gt;</code>  <code>2&gt;</code>    <code>&amp;&gt;</code></p>
+<p>ps: 1 2指的是文件描述符 详见19_系统优化.md ulimit 部分的内容</p>
+</blockquote>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="o">[</span>root@localhost opt<span class="o">]</span><span class="c1"># ls</span>
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="o">[</span>root@localhost opt<span class="o">]</span><span class="c1"># ifconfig &gt; a.txt</span>
+<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="o">[</span>root@localhost opt<span class="o">]</span><span class="c1"># head -5 a.txt </span>
+<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a>ens33: <span class="nv">flags</span><span class="o">=</span><span class="m">4163</span>&lt;UP,BROADCAST,RUNNING,MULTICAST&gt;  mtu <span class="m">1500</span>
+<a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a>        inet <span class="m">172</span>.16.150.131  netmask <span class="m">255</span>.255.255.0  broadcast <span class="m">172</span>.16.150.255
+<a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a>        inet6 fe80::20c:29ff:fe90:303e  prefixlen <span class="m">64</span>  scopeid 0x20&lt;link&gt;
+<a id="__codelineno-11-7" name="__codelineno-11-7" href="#__codelineno-11-7"></a>        ether <span class="m">00</span>:0c:29:90:30:3e  txqueuelen <span class="m">1000</span>  <span class="o">(</span>Ethernet<span class="o">)</span>
+<a id="__codelineno-11-8" name="__codelineno-11-8" href="#__codelineno-11-8"></a>        RX packets <span class="m">164409</span>  bytes <span class="m">161330384</span> <span class="o">(</span><span class="m">153</span>.8 MiB<span class="o">)</span>
+<a id="__codelineno-11-9" name="__codelineno-11-9" href="#__codelineno-11-9"></a><span class="o">[</span>root@localhost opt<span class="o">]</span><span class="c1"># echo &quot;123&quot; &gt;&gt; a.txt</span>
+<a id="__codelineno-11-10" name="__codelineno-11-10" href="#__codelineno-11-10"></a><span class="o">[</span>root@localhost opt<span class="o">]</span><span class="c1"># pwd &gt;&gt; a.txt </span>
+<a id="__codelineno-11-11" name="__codelineno-11-11" href="#__codelineno-11-11"></a><span class="o">[</span>root@localhost opt<span class="o">]</span><span class="c1"># tail -2 a.txt </span>
+<a id="__codelineno-11-12" name="__codelineno-11-12" href="#__codelineno-11-12"></a><span class="m">123</span>
+<a id="__codelineno-11-13" name="__codelineno-11-13" href="#__codelineno-11-13"></a>/opt
+<a id="__codelineno-11-14" name="__codelineno-11-14" href="#__codelineno-11-14"></a><span class="o">[</span>root@localhost opt<span class="o">]</span><span class="c1"># echo &quot;haha&quot; &gt; a.txt</span>
+<a id="__codelineno-11-15" name="__codelineno-11-15" href="#__codelineno-11-15"></a><span class="o">[</span>root@localhost opt<span class="o">]</span><span class="c1"># cat a.txt </span>
+<a id="__codelineno-11-16" name="__codelineno-11-16" href="#__codelineno-11-16"></a>haha
+</code></pre></div>
+<p>一条命令的执行产生的结果内容可能是正确的也有可能是错误的. <br />
+因而在linux中, <code>0</code> 代表标准输入; <strong><code>1</code> 代表标准正确输出; <code>2</code> 代表标准错误输出.</strong></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="s2">&quot;&quot;&quot;</span>
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="s2">命令错误结果是不能直接输出到文件中的. 命令正确的结果可以.</span>
+<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span class="s2">即单独写 &gt; 相当于是 1&gt;</span>
+<a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a><span class="s2">&quot;&quot;&quot;</span>
+<a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a><span class="o">[</span>root@localhost opt<span class="o">]</span><span class="c1"># ifconfig ensxx</span>
+<a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a>ensxx: error fetching interface information: Device not found
+<a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a><span class="o">[</span>root@localhost opt<span class="o">]</span><span class="c1"># ifconfig ensxx &gt; b.txt </span>
+<a id="__codelineno-12-8" name="__codelineno-12-8" href="#__codelineno-12-8"></a>ensxx: error fetching interface information: Device not found
+</code></pre></div>
+<p>▲ <font color='blue'>将命令正确的结果输到a.txt里,错误的结果输到b.txt里 </font><br />
+&nbsp;&nbsp;&nbsp;&nbsp; <strong>注意:</strong> <font color='brown'>1&gt; 2&gt; &nbsp;&nbsp;&nbsp;&nbsp;1和2与&gt;中间不能有空格!</font></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>达到输出结果分流的效果.
+<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="o">[</span>root@localhost opt<span class="o">]</span><span class="c1"># ifconfig ensxx 1&gt;a.txt 2&gt;b.txt </span>
+<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a><span class="o">[</span>root@localhost opt<span class="o">]</span><span class="c1"># cat a.txt </span>
+<a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a><span class="o">[</span>root@localhost opt<span class="o">]</span><span class="c1"># cat b.txt </span>
+<a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a>ensxx: error fetching interface information: Device not found
+</code></pre></div>
+<p>▲ <font color='blue'>将命令不管正确还是错误的结果都输出到同一个文件中</font></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>Ps: 还有一种写法能达到一样的效果<span class="o">(</span>了解即可<span class="o">)</span> <span class="sb">`</span>ifconfig ensxx &gt; c.txt <span class="m">2</span><span class="p">&amp;</span>&gt;1<span class="sb">`</span>
+<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a><span class="o">[</span>root@localhost opt<span class="o">]</span><span class="c1"># ifconfig ensxx &amp;&gt; c.txt </span>
+<a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a><span class="o">[</span>root@localhost opt<span class="o">]</span><span class="c1"># pwd &amp;&gt;&gt; c.txt </span>
+<a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a><span class="o">[</span>root@localhost opt<span class="o">]</span><span class="c1"># cat c.txt </span>
+<a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a>ensxx: error fetching interface information: Device not found
+<a id="__codelineno-14-6" name="__codelineno-14-6" href="#__codelineno-14-6"></a>/opt
+</code></pre></div>
+<p><font color='blue'>Q: 什么时候使用 <code>&amp;&gt;</code>  <code>&amp;&gt;&gt;</code>? </font><br />
+<strong>A:</strong> 1&gt; 只需要此命令完成某个操作,并且验证后很清楚的知道此命令的结果是没有问题;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 当把此命令放到脚本程序里时,就不需要输出结果啦. <br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; eg <code>ls &amp;&gt;/dev/null</code> 直接 <strong>丢到黑洞文件</strong> 里.<br />
+&nbsp;&nbsp;&nbsp;&nbsp; 2&gt; 一堆命令的结果(脚本文件/程序) <code>&amp;&gt;&gt;</code> 输出到日志文件里,方便查看. </p>
+<h3 id="_10"><font color='orange'>&lt; &lt;&lt;输入重定向</font><a class="headerlink" href="#_10" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="o">[</span>root@localhost opt<span class="o">]</span><span class="c1"># cat /etc/hostname</span>
+<a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a>localhost.localdomain
+<a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a><span class="o">[</span>root@localhost opt<span class="o">]</span><span class="c1"># echo 111 &gt; d.txt</span>
+<a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a><span class="o">[</span>root@localhost opt<span class="o">]</span><span class="c1"># cat d.txt </span>
+<a id="__codelineno-15-5" name="__codelineno-15-5" href="#__codelineno-15-5"></a><span class="m">111</span>
+<a id="__codelineno-15-6" name="__codelineno-15-6" href="#__codelineno-15-6"></a>
+<a id="__codelineno-15-7" name="__codelineno-15-7" href="#__codelineno-15-7"></a>▼ 表示往d.txt里覆盖的内容来自/etc/hostname文件
+<a id="__codelineno-15-8" name="__codelineno-15-8" href="#__codelineno-15-8"></a>    等同于 cat /etc/hostname &gt; d.txt
+<a id="__codelineno-15-9" name="__codelineno-15-9" href="#__codelineno-15-9"></a><span class="o">[</span>root@localhost opt<span class="o">]</span><span class="c1"># cat &gt; d.txt &lt; /etc/hostname</span>
+<a id="__codelineno-15-10" name="__codelineno-15-10" href="#__codelineno-15-10"></a><span class="o">[</span>root@localhost opt<span class="o">]</span><span class="c1"># cat d.txt </span>
+<a id="__codelineno-15-11" name="__codelineno-15-11" href="#__codelineno-15-11"></a>localhost.localdomain
+<a id="__codelineno-15-12" name="__codelineno-15-12" href="#__codelineno-15-12"></a>
+<a id="__codelineno-15-13" name="__codelineno-15-13" href="#__codelineno-15-13"></a>▼ 表示往d.txt里追加的内容来自/etc/hostname文件
+<a id="__codelineno-15-14" name="__codelineno-15-14" href="#__codelineno-15-14"></a>    等同于 cat /etc/hostname &gt;&gt; d.txt
+<a id="__codelineno-15-15" name="__codelineno-15-15" href="#__codelineno-15-15"></a><span class="o">[</span>root@localhost opt<span class="o">]</span><span class="c1"># cat &gt;&gt; d.txt &lt; /etc/hostname</span>
+<a id="__codelineno-15-16" name="__codelineno-15-16" href="#__codelineno-15-16"></a><span class="o">[</span>root@localhost opt<span class="o">]</span><span class="c1"># cat d.txt </span>
+<a id="__codelineno-15-17" name="__codelineno-15-17" href="#__codelineno-15-17"></a>localhost.localdomain
+<a id="__codelineno-15-18" name="__codelineno-15-18" href="#__codelineno-15-18"></a>localhost.localdomain
+<a id="__codelineno-15-19" name="__codelineno-15-19" href="#__codelineno-15-19"></a>
+<a id="__codelineno-15-20" name="__codelineno-15-20" href="#__codelineno-15-20"></a>▼ 等待键盘的输入
+<a id="__codelineno-15-21" name="__codelineno-15-21" href="#__codelineno-15-21"></a>    EOF表示结束输入,这个可以自己设定. 建议用EOF.
+<a id="__codelineno-15-22" name="__codelineno-15-22" href="#__codelineno-15-22"></a><span class="o">[</span>root@localhost opt<span class="o">]</span><span class="c1"># cat &gt; d.txt &lt;&lt; EOF</span>
+<a id="__codelineno-15-23" name="__codelineno-15-23" href="#__codelineno-15-23"></a>&gt; <span class="m">111</span>
+<a id="__codelineno-15-24" name="__codelineno-15-24" href="#__codelineno-15-24"></a>&gt; <span class="m">222</span>
+<a id="__codelineno-15-25" name="__codelineno-15-25" href="#__codelineno-15-25"></a>&gt; EOF
+<a id="__codelineno-15-26" name="__codelineno-15-26" href="#__codelineno-15-26"></a><span class="o">[</span>root@localhost opt<span class="o">]</span><span class="c1"># cat d.txt </span>
+<a id="__codelineno-15-27" name="__codelineno-15-27" href="#__codelineno-15-27"></a><span class="m">111</span>
+<a id="__codelineno-15-28" name="__codelineno-15-28" href="#__codelineno-15-28"></a><span class="m">222</span>
+<a id="__codelineno-15-29" name="__codelineno-15-29" href="#__codelineno-15-29"></a><span class="o">[</span>root@localhost opt<span class="o">]</span><span class="c1"># cat &gt;&gt; d.txt &lt;&lt; AAA</span>
+<a id="__codelineno-15-30" name="__codelineno-15-30" href="#__codelineno-15-30"></a>&gt; <span class="m">333</span>
+<a id="__codelineno-15-31" name="__codelineno-15-31" href="#__codelineno-15-31"></a>&gt; <span class="m">444</span>
+<a id="__codelineno-15-32" name="__codelineno-15-32" href="#__codelineno-15-32"></a>&gt; AAA
+<a id="__codelineno-15-33" name="__codelineno-15-33" href="#__codelineno-15-33"></a><span class="o">[</span>root@localhost opt<span class="o">]</span><span class="c1"># cat d.txt </span>
+<a id="__codelineno-15-34" name="__codelineno-15-34" href="#__codelineno-15-34"></a><span class="m">111</span>
+<a id="__codelineno-15-35" name="__codelineno-15-35" href="#__codelineno-15-35"></a><span class="m">222</span>
+<a id="__codelineno-15-36" name="__codelineno-15-36" href="#__codelineno-15-36"></a><span class="m">333</span>
+<a id="__codelineno-15-37" name="__codelineno-15-37" href="#__codelineno-15-37"></a><span class="m">444</span>
+</code></pre></div>
+<hr />
+<h2 id="_11">字符处理命令<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h2>
+<h3 id="sort"><font color='orange'>sort 排序</font><a class="headerlink" href="#sort" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p>用于将文件内容加以排序</p>
+</blockquote>
+<p><strong>-t</strong> &nbsp;&nbsp;&nbsp;&nbsp; 指定分割符, 默认是以空格为分隔符<br />
+<strong>-n</strong> &nbsp;&nbsp;&nbsp;&nbsp; 按照数值的大小排序&nbsp;&nbsp;&nbsp;&nbsp; <font color="gray">指定后11是数值11,而不是字符串11 </font><br />
+<strong>-k</strong> &nbsp;&nbsp;&nbsp;&nbsp; 以某列进行排序 k2就是第二列 <br />
+<strong>-r</strong> &nbsp;&nbsp;&nbsp;&nbsp; 以相反的顺序来排序</p>
+<p><font color='blue'>[无序数据准备]</font></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="o">[</span>root@localhost opt<span class="o">]</span><span class="c1"># cat &gt;&gt; file.txt &lt;&lt;EOF</span>
+<a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a>&gt; b:3
+<a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a>&gt; c:2
+<a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a>&gt; a:4
+<a id="__codelineno-16-5" name="__codelineno-16-5" href="#__codelineno-16-5"></a>&gt; d:1
+<a id="__codelineno-16-6" name="__codelineno-16-6" href="#__codelineno-16-6"></a>&gt; f:11
+<a id="__codelineno-16-7" name="__codelineno-16-7" href="#__codelineno-16-7"></a>&gt; EOF
+<a id="__codelineno-16-8" name="__codelineno-16-8" href="#__codelineno-16-8"></a><span class="o">[</span>root@localhost opt<span class="o">]</span><span class="c1"># cat file.txt</span>
+<a id="__codelineno-16-9" name="__codelineno-16-9" href="#__codelineno-16-9"></a>b:3
+<a id="__codelineno-16-10" name="__codelineno-16-10" href="#__codelineno-16-10"></a>c:2
+<a id="__codelineno-16-11" name="__codelineno-16-11" href="#__codelineno-16-11"></a>a:4
+<a id="__codelineno-16-12" name="__codelineno-16-12" href="#__codelineno-16-12"></a>d:1
+<a id="__codelineno-16-13" name="__codelineno-16-13" href="#__codelineno-16-13"></a>f:11
+</code></pre></div>
+<p><font color='blue'>[默认以ACSII字符表比大小]</font><br />
+每个字符都会对应一个十进制数字,在计算机里会转换成二进制体现. <br />
+字符串第一个字符比较出来了,就不会比较第二个啦.. python中也是.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="o">[</span>root@localhost opt<span class="o">]</span><span class="c1"># sort file.txt </span>
+<a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a>a:4
+<a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a>b:3
+<a id="__codelineno-17-4" name="__codelineno-17-4" href="#__codelineno-17-4"></a>c:2
+<a id="__codelineno-17-5" name="__codelineno-17-5" href="#__codelineno-17-5"></a>d:1
+<a id="__codelineno-17-6" name="__codelineno-17-6" href="#__codelineno-17-6"></a>f:11
+</code></pre></div>
+<p><font color='blue'>[以冒号右边的数值比大小] </font> <br />
+若不指定-n,会被当作字符串,用ACSII码比较.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a><span class="o">[</span>root@localhost opt<span class="o">]</span><span class="c1"># sort -t &quot;:&quot; -n -k2 file.txt </span>
+<a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a>d:1
+<a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a>c:2
+<a id="__codelineno-18-4" name="__codelineno-18-4" href="#__codelineno-18-4"></a>b:3
+<a id="__codelineno-18-5" name="__codelineno-18-5" href="#__codelineno-18-5"></a>a:4
+<a id="__codelineno-18-6" name="__codelineno-18-6" href="#__codelineno-18-6"></a>f:11
+<a id="__codelineno-18-7" name="__codelineno-18-7" href="#__codelineno-18-7"></a><span class="o">[</span>root@localhost opt<span class="o">]</span><span class="c1"># sort -t &quot;:&quot; -k2 file.txt </span>
+<a id="__codelineno-18-8" name="__codelineno-18-8" href="#__codelineno-18-8"></a>d:1
+<a id="__codelineno-18-9" name="__codelineno-18-9" href="#__codelineno-18-9"></a>f:11
+<a id="__codelineno-18-10" name="__codelineno-18-10" href="#__codelineno-18-10"></a>c:2
+<a id="__codelineno-18-11" name="__codelineno-18-11" href="#__codelineno-18-11"></a>b:3
+<a id="__codelineno-18-12" name="__codelineno-18-12" href="#__codelineno-18-12"></a>a:4
+</code></pre></div>
+<p><font color='blue'>[-r反向排序]</font></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a><span class="o">[</span>root@localhost opt<span class="o">]</span><span class="c1"># sort -t &quot;:&quot; -n -r -k2 file.txt </span>
+<a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a>f:11
+<a id="__codelineno-19-3" name="__codelineno-19-3" href="#__codelineno-19-3"></a>a:4
+<a id="__codelineno-19-4" name="__codelineno-19-4" href="#__codelineno-19-4"></a>b:3
+<a id="__codelineno-19-5" name="__codelineno-19-5" href="#__codelineno-19-5"></a>c:2
+<a id="__codelineno-19-6" name="__codelineno-19-6" href="#__codelineno-19-6"></a>d:1
+</code></pre></div>
+<h3 id="uniq"><font color='orange'>uniq 去重</font><a class="headerlink" href="#uniq" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p><strong>去重.</strong>   用于检查及删除文本文件中 <strong>相邻重复</strong> 出现的行列, 所以一般与 sort 命令结合使用</p>
+</blockquote>
+<p><strong>-c</strong> &nbsp;&nbsp;&nbsp;&nbsp; 在每列旁边显示该行重复出现的次数<br />
+<strong>-d</strong> &nbsp;&nbsp;&nbsp;&nbsp; 仅显示重复出现的行列<br />
+<strong>-u</strong> &nbsp;&nbsp;&nbsp;&nbsp; 仅显示出一次的行列</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a><span class="o">[</span>root@localhost opt<span class="o">]</span><span class="c1"># cat file.txt </span>
+<a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a>hello
+<a id="__codelineno-20-3" name="__codelineno-20-3" href="#__codelineno-20-3"></a><span class="m">123</span>
+<a id="__codelineno-20-4" name="__codelineno-20-4" href="#__codelineno-20-4"></a>hello
+<a id="__codelineno-20-5" name="__codelineno-20-5" href="#__codelineno-20-5"></a><span class="m">123</span>
+<a id="__codelineno-20-6" name="__codelineno-20-6" href="#__codelineno-20-6"></a><span class="m">123</span>
+<a id="__codelineno-20-7" name="__codelineno-20-7" href="#__codelineno-20-7"></a>func
+<a id="__codelineno-20-8" name="__codelineno-20-8" href="#__codelineno-20-8"></a>
+<a id="__codelineno-20-9" name="__codelineno-20-9" href="#__codelineno-20-9"></a><span class="s2">&quot;&quot;&quot;</span>
+<a id="__codelineno-20-10" name="__codelineno-20-10" href="#__codelineno-20-10"></a><span class="s2">注意观察,直接使用uniq命令,只会使原数据中相邻的两个123去重.</span>
+<a id="__codelineno-20-11" name="__codelineno-20-11" href="#__codelineno-20-11"></a><span class="s2">所以需要sort命令将重复的全部放到一起</span>
+<a id="__codelineno-20-12" name="__codelineno-20-12" href="#__codelineno-20-12"></a><span class="s2">&quot;&quot;&quot;</span>
+<a id="__codelineno-20-13" name="__codelineno-20-13" href="#__codelineno-20-13"></a><span class="o">[</span>root@localhost opt<span class="o">]</span><span class="c1"># uniq file.txt </span>
+<a id="__codelineno-20-14" name="__codelineno-20-14" href="#__codelineno-20-14"></a>hello
+<a id="__codelineno-20-15" name="__codelineno-20-15" href="#__codelineno-20-15"></a><span class="m">123</span>
+<a id="__codelineno-20-16" name="__codelineno-20-16" href="#__codelineno-20-16"></a>hello
+<a id="__codelineno-20-17" name="__codelineno-20-17" href="#__codelineno-20-17"></a><span class="m">123</span>
+<a id="__codelineno-20-18" name="__codelineno-20-18" href="#__codelineno-20-18"></a>func
+<a id="__codelineno-20-19" name="__codelineno-20-19" href="#__codelineno-20-19"></a><span class="o">[</span>root@localhost opt<span class="o">]</span><span class="c1"># sort file.txt | uniq</span>
+<a id="__codelineno-20-20" name="__codelineno-20-20" href="#__codelineno-20-20"></a><span class="m">123</span>
+<a id="__codelineno-20-21" name="__codelineno-20-21" href="#__codelineno-20-21"></a>func
+<a id="__codelineno-20-22" name="__codelineno-20-22" href="#__codelineno-20-22"></a>hello
+<a id="__codelineno-20-23" name="__codelineno-20-23" href="#__codelineno-20-23"></a><span class="o">[</span>root@localhost opt<span class="o">]</span><span class="c1"># sort file.txt | uniq -c</span>
+<a id="__codelineno-20-24" name="__codelineno-20-24" href="#__codelineno-20-24"></a>      <span class="m">3</span> <span class="m">123</span>
+<a id="__codelineno-20-25" name="__codelineno-20-25" href="#__codelineno-20-25"></a>      <span class="m">1</span> func
+<a id="__codelineno-20-26" name="__codelineno-20-26" href="#__codelineno-20-26"></a>      <span class="m">2</span> hello
+<a id="__codelineno-20-27" name="__codelineno-20-27" href="#__codelineno-20-27"></a><span class="o">[</span>root@localhost opt<span class="o">]</span><span class="c1"># sort file.txt | uniq -d</span>
+<a id="__codelineno-20-28" name="__codelineno-20-28" href="#__codelineno-20-28"></a><span class="m">123</span>
+<a id="__codelineno-20-29" name="__codelineno-20-29" href="#__codelineno-20-29"></a>hello
+<a id="__codelineno-20-30" name="__codelineno-20-30" href="#__codelineno-20-30"></a><span class="o">[</span>root@localhost opt<span class="o">]</span><span class="c1"># sort file.txt | uniq -u</span>
+<a id="__codelineno-20-31" name="__codelineno-20-31" href="#__codelineno-20-31"></a>func
+</code></pre></div>
+<h3 id="cut"><font color='orange'>cut 分割</font><a class="headerlink" href="#cut" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p>用来显示行中的指定部分,删除文件中指定字段<br />
+cut支持管道符! </p>
+<p><strong>吐槽</strong>: awk完全可以取代cut的功能</p>
+</blockquote>
+<p><strong>-d</strong> &nbsp;&nbsp;&nbsp;&nbsp;指定字段的分隔符<br />
+<strong>-f</strong> &nbsp;&nbsp;&nbsp;&nbsp; 显示指定分段的内容  <code>-f1-3</code>  <code>-f1,3,4</code></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a><span class="o">[</span>root@localhost opt<span class="o">]</span><span class="c1"># head -1 /etc/passwd </span>
+<a id="__codelineno-21-2" name="__codelineno-21-2" href="#__codelineno-21-2"></a>root:x:0:0:root:/root:/bin/bash
+<a id="__codelineno-21-3" name="__codelineno-21-3" href="#__codelineno-21-3"></a><span class="o">[</span>root@localhost opt<span class="o">]</span><span class="c1"># head -1 /etc/passwd | cut -d &quot;:&quot; -f1,3,4,6</span>
+<a id="__codelineno-21-4" name="__codelineno-21-4" href="#__codelineno-21-4"></a>root:0:0:/root
+<a id="__codelineno-21-5" name="__codelineno-21-5" href="#__codelineno-21-5"></a>
+<a id="__codelineno-21-6" name="__codelineno-21-6" href="#__codelineno-21-6"></a><span class="s2">&quot;&quot;&quot;</span>
+<a id="__codelineno-21-7" name="__codelineno-21-7" href="#__codelineno-21-7"></a><span class="s2">-f1,2,3 等同于 -f1-3</span>
+<a id="__codelineno-21-8" name="__codelineno-21-8" href="#__codelineno-21-8"></a><span class="s2">&quot;&quot;&quot;</span>
+</code></pre></div>
+<p><font color='gray'>Ps: 分隔符是空格 必须用引号 <code>cut -d " "</code> ; 其余的都可以不用引号 <code>cut -d:</code>   <code>cut -d;</code></font></p>
+<h3 id="tr"><font color='orange'>tr 替换删除</font><a class="headerlink" href="#tr" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p>用于替换或删除. <font color='brown'><strong>注意:</strong> 替换的字符是一一对应的,不是指整个字符串!</font> <br />
+tr是支持管道的.</p>
+<p><strong>吐槽</strong>: sed配合管道也能达到同样的替换效果.</p>
+</blockquote>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a><span class="o">[</span>root@localhost opt<span class="o">]</span><span class="c1"># head -1 /etc/passwd</span>
+<a id="__codelineno-22-2" name="__codelineno-22-2" href="#__codelineno-22-2"></a>root:x:0:0:root:/root:/bin/bash
+<a id="__codelineno-22-3" name="__codelineno-22-3" href="#__codelineno-22-3"></a>
+<a id="__codelineno-22-4" name="__codelineno-22-4" href="#__codelineno-22-4"></a><span class="s2">&quot;&quot;&quot;</span>
+<a id="__codelineno-22-5" name="__codelineno-22-5" href="#__codelineno-22-5"></a><span class="s2">替换 </span>
+<a id="__codelineno-22-6" name="__codelineno-22-6" href="#__codelineno-22-6"></a><span class="s2">注意: 替换的字符是一一对应的,不是整个字符串!</span>
+<a id="__codelineno-22-7" name="__codelineno-22-7" href="#__codelineno-22-7"></a><span class="s2">&quot;&quot;&quot;</span>
+<a id="__codelineno-22-8" name="__codelineno-22-8" href="#__codelineno-22-8"></a><span class="o">[</span>root@localhost opt<span class="o">]</span><span class="c1"># head -1 /etc/passwd |tr &quot;root&quot; &quot;ROOT&quot;</span>
+<a id="__codelineno-22-9" name="__codelineno-22-9" href="#__codelineno-22-9"></a>ROOT:x:0:0:ROOT:/ROOT:/bin/bash
+<a id="__codelineno-22-10" name="__codelineno-22-10" href="#__codelineno-22-10"></a><span class="o">[</span>root@localhost opt<span class="o">]</span><span class="c1"># echo &quot;hello egon yyds&quot; &gt; a.txt</span>
+<a id="__codelineno-22-11" name="__codelineno-22-11" href="#__codelineno-22-11"></a><span class="o">[</span>root@localhost opt<span class="o">]</span><span class="c1"># cat a.txt </span>
+<a id="__codelineno-22-12" name="__codelineno-22-12" href="#__codelineno-22-12"></a>hello egon yyds
+<a id="__codelineno-22-13" name="__codelineno-22-13" href="#__codelineno-22-13"></a><span class="o">[</span>root@localhost opt<span class="o">]</span><span class="c1"># tr &quot;egon&quot; &quot;ABCD&quot; &lt; a.txt</span>
+<a id="__codelineno-22-14" name="__codelineno-22-14" href="#__codelineno-22-14"></a>hAllC ABCD yyds
+<a id="__codelineno-22-15" name="__codelineno-22-15" href="#__codelineno-22-15"></a>
+<a id="__codelineno-22-16" name="__codelineno-22-16" href="#__codelineno-22-16"></a><span class="s2">&quot;&quot;&quot;</span>
+<a id="__codelineno-22-17" name="__codelineno-22-17" href="#__codelineno-22-17"></a><span class="s2">删除</span>
+<a id="__codelineno-22-18" name="__codelineno-22-18" href="#__codelineno-22-18"></a><span class="s2">&quot;&quot;&quot;</span>
+<a id="__codelineno-22-19" name="__codelineno-22-19" href="#__codelineno-22-19"></a><span class="o">[</span>root@localhost opt<span class="o">]</span><span class="c1"># head -1 /etc/passwd |tr -d &quot;root&quot;</span>
+<a id="__codelineno-22-20" name="__codelineno-22-20" href="#__codelineno-22-20"></a>:x:0:0::/:/bin/bash
+</code></pre></div>
+<h3 id="wc"><font color='orange'>wc 统计</font><a class="headerlink" href="#wc" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p>用于统计,计算数字 <br />
+wc是支持管道的</p>
+</blockquote>
+<p><strong>-c</strong> &nbsp;&nbsp;&nbsp;&nbsp;统计文件的Bytes数<br />
+<strong>-l</strong> &nbsp;&nbsp;&nbsp;&nbsp;统计文件的行数<br />
+<strong>-w</strong> &nbsp;&nbsp;&nbsp;&nbsp;统计文件中单词的个数, 默认以空白字符(包括换行符)做为分隔符</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a><span class="o">[</span>root@localhost opt<span class="o">]</span><span class="c1"># ll /etc/passwd</span>
+<a id="__codelineno-23-2" name="__codelineno-23-2" href="#__codelineno-23-2"></a>-rw-r--r-- <span class="m">1</span> root root <span class="m">2351</span> 7月   <span class="m">4</span> <span class="m">16</span>:51 /etc/passwd
+<a id="__codelineno-23-3" name="__codelineno-23-3" href="#__codelineno-23-3"></a><span class="o">[</span>root@localhost opt<span class="o">]</span><span class="c1"># wc -c /etc/passwd</span>
+<a id="__codelineno-23-4" name="__codelineno-23-4" href="#__codelineno-23-4"></a><span class="m">2351</span> /etc/passwd
+<a id="__codelineno-23-5" name="__codelineno-23-5" href="#__codelineno-23-5"></a><span class="o">[</span>root@localhost opt<span class="o">]</span><span class="c1"># wc -l /etc/passwd</span>
+<a id="__codelineno-23-6" name="__codelineno-23-6" href="#__codelineno-23-6"></a><span class="m">45</span> /etc/passwd
+<a id="__codelineno-23-7" name="__codelineno-23-7" href="#__codelineno-23-7"></a><span class="c1"># 等同于 wc -l /etc/passwd | cut -d&quot; &quot; -f1</span>
+<a id="__codelineno-23-8" name="__codelineno-23-8" href="#__codelineno-23-8"></a><span class="o">[</span>root@localhost opt<span class="o">]</span><span class="c1"># cat /etc/passwd | wc -l</span>
+<a id="__codelineno-23-9" name="__codelineno-23-9" href="#__codelineno-23-9"></a><span class="m">45</span>
+<a id="__codelineno-23-10" name="__codelineno-23-10" href="#__codelineno-23-10"></a>
+<a id="__codelineno-23-11" name="__codelineno-23-11" href="#__codelineno-23-11"></a><span class="o">[</span>root@localhost opt<span class="o">]</span><span class="c1"># cat file.txt </span>
+<a id="__codelineno-23-12" name="__codelineno-23-12" href="#__codelineno-23-12"></a>abc_123 b_1_2  aaabb
+<a id="__codelineno-23-13" name="__codelineno-23-13" href="#__codelineno-23-13"></a><span class="m">111</span>  <span class="p">;</span>  ccc egonyyds
+<a id="__codelineno-23-14" name="__codelineno-23-14" href="#__codelineno-23-14"></a><span class="o">[</span>root@localhost opt<span class="o">]</span><span class="c1"># wc -w file.txt </span>
+<a id="__codelineno-23-15" name="__codelineno-23-15" href="#__codelineno-23-15"></a><span class="m">7</span> file.txt
+<a id="__codelineno-23-16" name="__codelineno-23-16" href="#__codelineno-23-16"></a>
+<a id="__codelineno-23-17" name="__codelineno-23-17" href="#__codelineno-23-17"></a><span class="s2">&quot;&quot;&quot;</span>
+<a id="__codelineno-23-18" name="__codelineno-23-18" href="#__codelineno-23-18"></a><span class="s2">▲ 统计系统现目前系统中有多少个进程</span>
+<a id="__codelineno-23-19" name="__codelineno-23-19" href="#__codelineno-23-19"></a><span class="s2">grep -v &quot;</span>ps aux<span class="s2">&quot; 是因为当前这条命令也会产生一个进程</span>
+<a id="__codelineno-23-20" name="__codelineno-23-20" href="#__codelineno-23-20"></a><span class="s2">&quot;&quot;&quot;</span>
+<a id="__codelineno-23-21" name="__codelineno-23-21" href="#__codelineno-23-21"></a><span class="o">[</span>root@localhost opt<span class="o">]</span><span class="c1"># ps aux | grep -v &quot;ps aux&quot; | wc -l</span>
+<a id="__codelineno-23-22" name="__codelineno-23-22" href="#__codelineno-23-22"></a><span class="m">203</span>
+</code></pre></div>
+<hr />
+<h2 id="tarzip">tar/zip<a class="headerlink" href="#tarzip" title="Permanent link">&para;</a></h2>
+<blockquote>
+<p>打包会将多个文件归集到一起,压缩会减少占用的空间.<br />
+用途: (1)方便加快网络传输;  (2)做备份</p>
+</blockquote>
+<p><font color='blue'><strong>[方式一  tar]</strong></font></p>
+<p>打包: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <code>tar cvf bak.tar a.txt b.txt c.txt</code> <br />
+压缩: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <code>gzip bak.tar</code> or  <code>bzip2 bak.tar</code><br />
+<font color='brown'><strong>打包压缩:</strong> </font>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <code>tar cvzf bak.tar.gz a.txt b.txt c.txt</code> <br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <code>tar cvjf bak.tar.bz2 a.txt b.txt c.txt</code> <br />
+解压缩:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  <code>tar xvf 打包压缩文件 -C 解压到的目录</code></p>
+<table>
+<thead>
+<tr>
+<th>选项</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>c</strong></td>
+<td>创建打包压缩文件 -- 打包文件以<code>.tar</code>为后缀</td>
+</tr>
+<tr>
+<td><strong>v</strong></td>
+<td>显示打包的过程</td>
+</tr>
+<tr>
+<td><strong>f</strong></td>
+<td>为打包 or 打包压缩后的文件命名   /   解压缩时指定需要解压的打包压缩文件</td>
+</tr>
+<tr>
+<td><strong>z</strong></td>
+<td>使用gzip压缩算法   -- 以 <code>.gz</code> 结尾</td>
+</tr>
+<tr>
+<td><strong>j</strong></td>
+<td>使用bzip2压缩算法    -- 以 <code>.bz2</code> 结尾</td>
+</tr>
+<tr>
+<td><strong>x</strong></td>
+<td>解压缩</td>
+</tr>
+<tr>
+<td><strong>-C</strong></td>
+<td>指定解压到的目录, 此目录需要事先存在</td>
+</tr>
+</tbody>
+</table>
+<p><font color='gray'>Ps: 压缩包的后缀不携带不会报错,但 <strong>约定俗成要携带便于区分</strong> ! </font><br />
+&nbsp;&nbsp;&nbsp;&nbsp; <font color='gray'>普通文件压缩后会小很多;视频文件压缩不了多少空间..(压缩就是清理空格换行啥的)</font></p>
+<p><font color='blue'><strong>[方式二  zip]</strong></font></p>
+<p>打包压缩:  <code>zip bak.zip a.txt b.txt c.txt</code> <br />
+解压缩: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  <code>unzip bak.zip -d 解压到的目录</code> </p>
+<p><font color='gray'>Ps: 若希望windows的软件能被linux解压,或者linux的软件包被windows能识别,选择<code>zip</code>！</font></p>
+<p><font color='brown'><strong>[扩展]</strong></font></p>
+<p>打包压缩通常用于备份文件.<br />
+<strong>备份文件的名字必须见名知意且应该带上时间、主机名之类</strong>,便于数据恢复时找到需要的那个时间点的备份.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a><span class="s2">&quot;&quot;&quot;</span>
+<a id="__codelineno-24-2" name="__codelineno-24-2" href="#__codelineno-24-2"></a><span class="s2">``反引号代表获取命令的运行结果！</span>
+<a id="__codelineno-24-3" name="__codelineno-24-3" href="#__codelineno-24-3"></a><span class="s2">&quot;&quot;&quot;</span>
+<a id="__codelineno-24-4" name="__codelineno-24-4" href="#__codelineno-24-4"></a>tar czvf <span class="sb">`</span>date +<span class="s2">&quot;%Y_%m_%d_%H_%M_%S&quot;</span><span class="sb">`</span>_bak.tar.gz /etc  
+<a id="__codelineno-24-5" name="__codelineno-24-5" href="#__codelineno-24-5"></a>
+<a id="__codelineno-24-6" name="__codelineno-24-6" href="#__codelineno-24-6"></a><span class="o">[</span>root@localhost opt<span class="o">]</span><span class="c1"># date +&quot;%Y_%m_%d_%H_%M_%S %p&quot;</span>
+<a id="__codelineno-24-7" name="__codelineno-24-7" href="#__codelineno-24-7"></a>2022_07_15_11_33_19 上午
+<a id="__codelineno-24-8" name="__codelineno-24-8" href="#__codelineno-24-8"></a>
+<a id="__codelineno-24-9" name="__codelineno-24-9" href="#__codelineno-24-9"></a>date时间的具体使用: https://zhuanlan.zhihu.com/p/325728987  详情请看&lt;<span class="m">8</span> 拓展&gt;那里
+</code></pre></div>
+<h3 id="_12"><font color='orange'>打包压缩文件</font><a class="headerlink" href="#_12" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a><span class="s2">&quot;&quot;&quot;</span>
+<a id="__codelineno-25-2" name="__codelineno-25-2" href="#__codelineno-25-2"></a><span class="s2">打包的目标路径如果是绝对路径,会提示  tar:从成员名中删除开头的“/”       但这提示不会影响打包</span>
+<a id="__codelineno-25-3" name="__codelineno-25-3" href="#__codelineno-25-3"></a><span class="s2">可以cd到/etc目录下对文件进行打包,这样的话就会少一层文件夹</span>
+<a id="__codelineno-25-4" name="__codelineno-25-4" href="#__codelineno-25-4"></a>
+<a id="__codelineno-25-5" name="__codelineno-25-5" href="#__codelineno-25-5"></a><span class="s2">注意观察:</span>
+<a id="__codelineno-25-6" name="__codelineno-25-6" href="#__codelineno-25-6"></a><span class="s2">  bak.tar     打包文件    10240个字节</span>
+<a id="__codelineno-25-7" name="__codelineno-25-7" href="#__codelineno-25-7"></a><span class="s2">  bak.tar.gz  打包压缩文件 1170个字节</span>
+<a id="__codelineno-25-8" name="__codelineno-25-8" href="#__codelineno-25-8"></a><span class="s2">  再观察打包过程,它会自动带有文件的文件夹.</span>
+<a id="__codelineno-25-9" name="__codelineno-25-9" href="#__codelineno-25-9"></a><span class="s2">&quot;&quot;&quot;</span>
+<a id="__codelineno-25-10" name="__codelineno-25-10" href="#__codelineno-25-10"></a><span class="o">[</span>root@localhost opt<span class="o">]</span><span class="c1"># tar cvf bak.tar /etc/passwd /etc/hosts /etc/hostname</span>
+<a id="__codelineno-25-11" name="__codelineno-25-11" href="#__codelineno-25-11"></a>tar: 从成员名中删除开头的“/”
+<a id="__codelineno-25-12" name="__codelineno-25-12" href="#__codelineno-25-12"></a>/etc/passwd
+<a id="__codelineno-25-13" name="__codelineno-25-13" href="#__codelineno-25-13"></a>/etc/hosts
+<a id="__codelineno-25-14" name="__codelineno-25-14" href="#__codelineno-25-14"></a>/etc/hostname
+<a id="__codelineno-25-15" name="__codelineno-25-15" href="#__codelineno-25-15"></a><span class="o">[</span>root@localhost opt<span class="o">]</span><span class="c1"># ll</span>
+<a id="__codelineno-25-16" name="__codelineno-25-16" href="#__codelineno-25-16"></a>总用量 <span class="m">12</span>
+<a id="__codelineno-25-17" name="__codelineno-25-17" href="#__codelineno-25-17"></a>-rw-r--r-- <span class="m">1</span> root root <span class="m">10240</span> 7月  <span class="m">15</span> <span class="m">10</span>:10 bak.tar
+<a id="__codelineno-25-18" name="__codelineno-25-18" href="#__codelineno-25-18"></a><span class="o">[</span>root@localhost opt<span class="o">]</span><span class="c1"># gzip bak.tar </span>
+<a id="__codelineno-25-19" name="__codelineno-25-19" href="#__codelineno-25-19"></a><span class="o">[</span>root@localhost opt<span class="o">]</span><span class="c1"># ll</span>
+<a id="__codelineno-25-20" name="__codelineno-25-20" href="#__codelineno-25-20"></a>总用量 <span class="m">4</span>
+<a id="__codelineno-25-21" name="__codelineno-25-21" href="#__codelineno-25-21"></a>-rw-r--r-- <span class="m">1</span> root root <span class="m">1170</span> 7月  <span class="m">15</span> <span class="m">10</span>:10 bak.tar.gz
+<a id="__codelineno-25-22" name="__codelineno-25-22" href="#__codelineno-25-22"></a>
+<a id="__codelineno-25-23" name="__codelineno-25-23" href="#__codelineno-25-23"></a>
+<a id="__codelineno-25-24" name="__codelineno-25-24" href="#__codelineno-25-24"></a><span class="s2">&quot;&quot;&quot;</span>
+<a id="__codelineno-25-25" name="__codelineno-25-25" href="#__codelineno-25-25"></a><span class="s2">加P选项,则‘tar:从成员名中删除开头的“/”’这个提示信息不会再显示</span>
+<a id="__codelineno-25-26" name="__codelineno-25-26" href="#__codelineno-25-26"></a>
+<a id="__codelineno-25-27" name="__codelineno-25-27" href="#__codelineno-25-27"></a><span class="s2">注意观察:</span>
+<a id="__codelineno-25-28" name="__codelineno-25-28" href="#__codelineno-25-28"></a><span class="s2">  bak2.tar.gz     1170字节</span>
+<a id="__codelineno-25-29" name="__codelineno-25-29" href="#__codelineno-25-29"></a><span class="s2">  bak3.tar.bz2    1180字节</span>
+<a id="__codelineno-25-30" name="__codelineno-25-30" href="#__codelineno-25-30"></a><span class="s2">  说明gzip压缩算法比bzip2压缩算法压缩的更多!</span>
+<a id="__codelineno-25-31" name="__codelineno-25-31" href="#__codelineno-25-31"></a><span class="s2">&quot;&quot;&quot;</span>
+<a id="__codelineno-25-32" name="__codelineno-25-32" href="#__codelineno-25-32"></a>tar cvzPf bak2.tar.gz /etc/passwd /etc/hosts /etc/hostname 
+<a id="__codelineno-25-33" name="__codelineno-25-33" href="#__codelineno-25-33"></a>tar cvjPf bak3.tar.bz2 /etc/passwd /etc/hosts /etc/hostname
+<a id="__codelineno-25-34" name="__codelineno-25-34" href="#__codelineno-25-34"></a><span class="o">[</span>root@localhost opt<span class="o">]</span><span class="c1"># ll</span>
+<a id="__codelineno-25-35" name="__codelineno-25-35" href="#__codelineno-25-35"></a>总用量 <span class="m">16</span>
+<a id="__codelineno-25-36" name="__codelineno-25-36" href="#__codelineno-25-36"></a>-rw-r--r-- <span class="m">1</span> root root <span class="m">1170</span> 7月  <span class="m">15</span> <span class="m">10</span>:10 bak2.tar.gz
+<a id="__codelineno-25-37" name="__codelineno-25-37" href="#__codelineno-25-37"></a>-rw-r--r-- <span class="m">1</span> root root <span class="m">1180</span> 7月  <span class="m">15</span> <span class="m">10</span>:11 bak3.tar.bz2
+<a id="__codelineno-25-38" name="__codelineno-25-38" href="#__codelineno-25-38"></a>-rw-r--r-- <span class="m">1</span> root root <span class="m">1170</span> 7月  <span class="m">15</span> <span class="m">10</span>:10 bak.tar.gz
+</code></pre></div>
+<h3 id="_13"><font color='orange'>解压缩</font><a class="headerlink" href="#_13" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a><span class="s2">&quot;&quot;&quot;</span>
+<a id="__codelineno-26-2" name="__codelineno-26-2" href="#__codelineno-26-2"></a><span class="s2">无需指定解压算法,tar会自行判断,自动调用gunzip和bunzip2!</span>
+<a id="__codelineno-26-3" name="__codelineno-26-3" href="#__codelineno-26-3"></a><span class="s2">不指定-C,则会解压到当前目录下.</span>
+<a id="__codelineno-26-4" name="__codelineno-26-4" href="#__codelineno-26-4"></a><span class="s2">&quot;&quot;&quot;</span>
+<a id="__codelineno-26-5" name="__codelineno-26-5" href="#__codelineno-26-5"></a><span class="o">[</span>root@localhost opt<span class="o">]</span><span class="c1"># mkdir test</span>
+<a id="__codelineno-26-6" name="__codelineno-26-6" href="#__codelineno-26-6"></a><span class="o">[</span>root@localhost opt<span class="o">]</span><span class="c1"># tar xvf bak.tar.gz -C /opt/test</span>
+<a id="__codelineno-26-7" name="__codelineno-26-7" href="#__codelineno-26-7"></a>etc/passwd
+<a id="__codelineno-26-8" name="__codelineno-26-8" href="#__codelineno-26-8"></a>etc/hosts
+<a id="__codelineno-26-9" name="__codelineno-26-9" href="#__codelineno-26-9"></a>etc/hostname
+<a id="__codelineno-26-10" name="__codelineno-26-10" href="#__codelineno-26-10"></a><span class="o">[</span>root@localhost opt<span class="o">]</span><span class="c1"># ll test/etc</span>
+<a id="__codelineno-26-11" name="__codelineno-26-11" href="#__codelineno-26-11"></a>总用量 <span class="m">12</span>
+<a id="__codelineno-26-12" name="__codelineno-26-12" href="#__codelineno-26-12"></a>-rw-r--r-- <span class="m">1</span> root root   <span class="m">22</span> 6月  <span class="m">30</span> <span class="m">18</span>:35 hostname
+<a id="__codelineno-26-13" name="__codelineno-26-13" href="#__codelineno-26-13"></a>-rw-r--r-- <span class="m">1</span> root root  <span class="m">158</span> 6月   <span class="m">7</span> <span class="m">2013</span> hosts
+<a id="__codelineno-26-14" name="__codelineno-26-14" href="#__codelineno-26-14"></a>-rw-r--r-- <span class="m">1</span> root root <span class="m">2351</span> 7月   <span class="m">4</span> <span class="m">16</span>:51 passwd
+</code></pre></div>
+<hr />
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+          <a href="#" class="md-top md-icon" data-md-component="top" hidden>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
+            回到页面顶部
+          </a>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+    <nav class="md-footer__inner md-grid" aria-label="页脚" >
+      
+        
+        <a href="../3_%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86%E4%B9%8B%E5%9B%9B%E5%A4%A7%E6%A8%A1%E5%BC%8F/" class="md-footer__link md-footer__link--prev" aria-label="上一页: 文件管理之四大模式" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                上一页
+              </span>
+              文件管理之四大模式
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="../5_%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86%E4%B9%8B%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/" class="md-footer__link md-footer__link--next" aria-label="下一页: 文件管理之文件系统" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                下一页
+              </span>
+              文件管理之文件系统
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright © 2023 from Dc_OnePiece
+    </div>
+  
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "navigation.top", "navigation.expand", "navigation.instant", "navigation.tracking", "search.suggest", "search.highlight", "search.share"], "search": "../../assets/javascripts/workers/search.5bf1dace.min.js", "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.config.lang": "ja", "search.config.pipeline": "trimmer, stemmer", "search.config.separator": "[\\s\\-\uff0c\u3002]+", "search.placeholder": "\u641c\u7d22", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version.title": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.37e9125f.min.js"></script>
+      
+        <script src="../../resources/js/extra.js"></script>
+      
+    
+  </body>
+</html>

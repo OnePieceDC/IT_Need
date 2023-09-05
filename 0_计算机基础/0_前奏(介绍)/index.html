@@ -1,0 +1,1714 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="These are my study notes.">
+      
+      
+        <meta name="author" content="DC">
+      
+      
+      <link rel="icon" href="../../resources/images/favicon.ico">
+      <meta name="generator" content="mkdocs-1.3.1, mkdocs-material-8.5.3">
+    
+    
+      
+        <title>前奏(介绍) - IT必备知识</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.7a952b86.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.cbb835fc.min.css">
+        
+      
+      
+
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../resources/css/extra.css">
+    
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lxgw-wenkai-webfont@1.1.0/style.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="blue-grey" data-md-color-accent="amber">
+  
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#_1" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../.." title="IT必备知识" class="md-header__button md-logo" aria-label="IT必备知识" data-md-component="logo">
+      
+  <img src="../../resources/images/favicon.ico" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            IT必备知识
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              前奏(介绍)
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      <form class="md-header__option" data-md-component="palette">
+        
+          
+          
+          <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="blue-grey" data-md-color-accent="amber"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+          
+            <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"/></svg>
+            </label>
+          
+        
+          
+          
+          <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="blue-grey" data-md-color-accent="amber"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_2">
+          
+            <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12c0-2.42-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"/></svg>
+            </label>
+          
+        
+      </form>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="分享" aria-label="分享" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7 0-.24-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91 1.61 0 2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08Z"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="标签" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+    
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="./" class="md-tabs__link md-tabs__link--active">
+        计算机基础(8)
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../1_linux%E5%9F%BA%E7%A1%80/0_%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C/" class="md-tabs__link">
+        linux基础(20)
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../5_db/0_%E5%9F%BA%E7%A1%80/0_install_db/" class="md-tabs__link">
+        mysql(19)
+      </a>
+    </li>
+  
+
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../9_git/0_git%E7%94%9F%E6%B4%BB%E7%89%88/" class="md-tabs__link">
+        git(2)
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../13_%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/0_%E9%80%92%E5%BD%92_%E6%9F%A5%E6%89%BE/" class="md-tabs__link">
+        查找排序算法(5)
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="IT必备知识" class="md-nav__button md-logo" aria-label="IT必备知识" data-md-component="logo">
+      
+  <img src="../../resources/images/favicon.ico" alt="logo">
+
+    </a>
+    IT必备知识
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1" type="checkbox" id="__nav_1" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_1">
+          计算机基础(8)
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="计算机基础(8)" data-md-level="1">
+        <label class="md-nav__title" for="__nav_1">
+          <span class="md-nav__icon md-icon"></span>
+          计算机基础(8)
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          前奏(介绍)
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        前奏(介绍)
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    计算机
+  </a>
+  
+    <nav class="md-nav" aria-label="计算机">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    灵魂问答
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    计算机的三层结构
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    项目完整开发流程
+  </a>
+  
+    <nav class="md-nav" aria-label="项目完整开发流程">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    需求分析阶段
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    项目开发阶段
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    项目测试阶段
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    项目上线阶段
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../1_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A1%AC%E4%BB%B6%E7%BB%84%E6%88%90/" class="md-nav__link">
+        计算机硬件组成
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../2_%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" class="md-nav__link">
+        操作系统
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../3_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E6%A6%82%E8%A7%88/" class="md-nav__link">
+        计算机网络概览
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../4_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E4%B9%8B%E7%BD%91%E7%BB%9C%E6%8E%A5%E5%8F%A3%E5%B1%82/" class="md-nav__link">
+        网络接口层
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../5_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E4%B9%8B%E7%BD%91%E7%BB%9C%E5%B1%82/" class="md-nav__link">
+        网络层
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../6_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E4%B9%8B%E4%BC%A0%E8%BE%93%E5%B1%82/" class="md-nav__link">
+        传输层
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../7_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%A1%A5%E5%85%85/" class="md-nav__link">
+        补充
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2">
+          linux基础(20)
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="linux基础(20)" data-md-level="1">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          linux基础(20)
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../1_linux%E5%9F%BA%E7%A1%80/0_%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C/" class="md-nav__link">
+        准备工作
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../1_linux%E5%9F%BA%E7%A1%80/1_%E5%88%9D%E8%AF%86shell%E4%B8%8E%E5%9F%BA%E7%A1%80%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" class="md-nav__link">
+        初识shell与基础常用命令
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../1_linux%E5%9F%BA%E7%A1%80/2_%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86%E4%B9%8B%E5%9F%BA%E7%A1%80%E5%91%BD%E4%BB%A4/" class="md-nav__link">
+        文件管理之基础命令
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../1_linux%E5%9F%BA%E7%A1%80/3_%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86%E4%B9%8B%E5%9B%9B%E5%A4%A7%E6%A8%A1%E5%BC%8F/" class="md-nav__link">
+        文件管理之四大模式
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../1_linux%E5%9F%BA%E7%A1%80/4_%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86%E4%B9%8B%E5%91%BD%E4%BB%A4%E8%A1%A5%E5%85%85/" class="md-nav__link">
+        文件管理之命令补充
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../1_linux%E5%9F%BA%E7%A1%80/5_%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86%E4%B9%8B%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/" class="md-nav__link">
+        文件管理之文件系统
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../1_linux%E5%9F%BA%E7%A1%80/6_%E6%9D%83%E9%99%90%E7%AE%A1%E7%90%86%E4%B9%8B%E7%94%A8%E6%88%B7%E4%B8%8E%E7%BB%84/" class="md-nav__link">
+        权限管理之用户与组
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../1_linux%E5%9F%BA%E7%A1%80/7_%E6%9D%83%E9%99%90%E7%AE%A1%E7%90%86%E4%B9%8B%E6%96%87%E4%BB%B6%E6%9D%83%E9%99%90/" class="md-nav__link">
+        权限管理之文件权限
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../1_linux%E5%9F%BA%E7%A1%80/8_%E6%9D%83%E9%99%90%E7%AE%A1%E7%90%86%E4%B9%8BACL/" class="md-nav__link">
+        权限管理之ACL
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../1_linux%E5%9F%BA%E7%A1%80/9_%E6%9D%83%E9%99%90%E7%AE%A1%E7%90%86%E4%B9%8Bsu%E4%B8%8Esudo/" class="md-nav__link">
+        权限管理之su与sudo
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../1_linux%E5%9F%BA%E7%A1%80/10_%E8%BD%AF%E4%BB%B6%E5%8C%85%E7%AE%A1%E7%90%86%E4%B9%8Brpm/" class="md-nav__link">
+        软件包管理之rpm
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../1_linux%E5%9F%BA%E7%A1%80/11_%E8%BD%AF%E4%BB%B6%E5%8C%85%E7%AE%A1%E7%90%86%E4%B9%8Byum/" class="md-nav__link">
+        软件包管理之yum
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../1_linux%E5%9F%BA%E7%A1%80/12_%E6%9F%A5%E7%9C%8B%E8%BF%9B%E7%A8%8B/" class="md-nav__link">
+        查看进程
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../1_linux%E5%9F%BA%E7%A1%80/13_%E7%AE%A1%E7%90%86%E8%BF%9B%E7%A8%8B/" class="md-nav__link">
+        管理进程
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../1_linux%E5%9F%BA%E7%A1%80/14_%E5%AD%98%E5%82%A8%E7%AE%A1%E7%90%86%E4%B9%8B%E4%BC%A0%E7%BB%9F%E7%A3%81%E7%9B%98%E7%AE%A1%E7%90%86/" class="md-nav__link">
+        存储管理之传统磁盘管理
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../1_linux%E5%9F%BA%E7%A1%80/15_%E5%AD%98%E5%82%A8%E7%AE%A1%E7%90%86%E4%B9%8BLVM/" class="md-nav__link">
+        存储管理之LVM
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../1_linux%E5%9F%BA%E7%A1%80/16_%E7%BD%91%E7%BB%9C%E7%AE%A1%E7%90%86/" class="md-nav__link">
+        网络管理
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../1_linux%E5%9F%BA%E7%A1%80/17_shell%E5%9F%BA%E7%A1%80/" class="md-nav__link">
+        shell基础
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../1_linux%E5%9F%BA%E7%A1%80/18_crond%E8%AE%A1%E5%88%92%E4%BB%BB%E5%8A%A1/" class="md-nav__link">
+        crond计划任务
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../1_linux%E5%9F%BA%E7%A1%80/19_%E7%B3%BB%E7%BB%9F%E4%BC%98%E5%8C%96/" class="md-nav__link">
+        系统优化
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3">
+          mysql(19)
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="mysql(19)" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          mysql(19)
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" data-md-toggle="__nav_3_1" type="checkbox" id="__nav_3_1" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3_1">
+          基础
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="基础" data-md-level="2">
+        <label class="md-nav__title" for="__nav_3_1">
+          <span class="md-nav__icon md-icon"></span>
+          基础
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../5_db/0_%E5%9F%BA%E7%A1%80/0_install_db/" class="md-nav__link">
+        数据库安装
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../5_db/0_%E5%9F%BA%E7%A1%80/1_db_command/" class="md-nav__link">
+        sql命令总结
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../5_db/0_%E5%9F%BA%E7%A1%80/2_imp_knowledge/" class="md-nav__link">
+        imp_knowledge
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../5_db/0_%E5%9F%BA%E7%A1%80/3_table_field/" class="md-nav__link">
+        字段的约束和类型
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../5_db/0_%E5%9F%BA%E7%A1%80/4_table_relation/" class="md-nav__link">
+        表关系
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../5_db/0_%E5%9F%BA%E7%A1%80/5_permissions/" class="md-nav__link">
+        权限管理
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../5_db/0_%E5%9F%BA%E7%A1%80/6_single_query/" class="md-nav__link">
+        单表查询
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../5_db/0_%E5%9F%BA%E7%A1%80/7_multi_query/" class="md-nav__link">
+        多表查询
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../5_db/0_%E5%9F%BA%E7%A1%80/8_query_practice/" class="md-nav__link">
+        query_practice
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../5_db/0_%E5%9F%BA%E7%A1%80/9_pymysql/" class="md-nav__link">
+        pymysql
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../5_db/0_%E5%9F%BA%E7%A1%80/10_just_know/" class="md-nav__link">
+        just_know
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../5_db/0_%E5%9F%BA%E7%A1%80/other/01_to_11/" class="md-nav__link">
+        other1
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../5_db/0_%E5%9F%BA%E7%A1%80/other/05/" class="md-nav__link">
+        other2
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" data-md-toggle="__nav_3_2" type="checkbox" id="__nav_3_2" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3_2">
+          进阶
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="进阶" data-md-level="2">
+        <label class="md-nav__title" for="__nav_3_2">
+          <span class="md-nav__icon md-icon"></span>
+          进阶
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../5_db/1_%E8%BF%9B%E9%98%B6/0_index/" class="md-nav__link">
+        索引
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../5_db/1_%E8%BF%9B%E9%98%B6/1_explain/" class="md-nav__link">
+        执行计划
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../5_db/1_%E8%BF%9B%E9%98%B6/2_transaction/" class="md-nav__link">
+        事务
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../5_db/1_%E8%BF%9B%E9%98%B6/3_db_readPhenomenon/" class="md-nav__link">
+        读现象
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../5_db/1_%E8%BF%9B%E9%98%B6/4_lock/" class="md-nav__link">
+        锁
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../5_db/1_%E8%BF%9B%E9%98%B6/other/" class="md-nav__link">
+        数据库连接池
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4">
+          git(2)
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="git(2)" data-md-level="1">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          git(2)
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../9_git/0_git%E7%94%9F%E6%B4%BB%E7%89%88/" class="md-nav__link">
+        git生活版
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../9_git/1_git%E7%A0%94%E7%A9%B6%E7%89%88/" class="md-nav__link">
+        git研究版
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" data-md-toggle="__nav_5" type="checkbox" id="__nav_5" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_5">
+          查找排序算法(5)
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="查找排序算法(5)" data-md-level="1">
+        <label class="md-nav__title" for="__nav_5">
+          <span class="md-nav__icon md-icon"></span>
+          查找排序算法(5)
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../13_%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/0_%E9%80%92%E5%BD%92_%E6%9F%A5%E6%89%BE/" class="md-nav__link">
+        查找
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../13_%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/1_LowB%E4%B8%89%E4%BA%BA%E7%BB%84/" class="md-nav__link">
+        LowB三人组
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../13_%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/2_NB%E4%B8%89%E4%BA%BA%E7%BB%84/" class="md-nav__link">
+        NB三人组
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../13_%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/3_%E5%85%B6%E5%AE%83%E6%8E%92%E5%BA%8F/" class="md-nav__link">
+        其它排序
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../13_%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/4_%E6%9F%A5%E6%89%BE%E4%B9%A0%E9%A2%98/" class="md-nav__link">
+        查找习题
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    计算机
+  </a>
+  
+    <nav class="md-nav" aria-label="计算机">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    灵魂问答
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    计算机的三层结构
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    项目完整开发流程
+  </a>
+  
+    <nav class="md-nav" aria-label="项目完整开发流程">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    需求分析阶段
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    项目开发阶段
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    项目测试阶段
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    项目上线阶段
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  <h1>前奏(介绍)</h1>
+
+<blockquote>
+<p>Sometimes it’s the very people who no one imagines anything of who do the things no one can imagine.      -- By 电影:模仿游戏</p>
+</blockquote>
+<p><font color='red'>学知识灵魂三问: 是什么？为什么？怎么用？</font></p>
+<p><font color='red'>开始学习前,一定要明白一点. 计算机组成原理、操作系统、计算机网络很重要很重要！但是现目前我们时间有限, 在有限的时间里, 只需要跟着egon老师先简单了解一些对接下来编程有帮助的知识点即可..!!! 不要当完美主义者、不要当完美主义者、不要当完美主义者. 不要想着对这三大块知识面面俱到!! 理论为辅,实践编程为主, 不然学起来会很痛苦, 切勿自乱阵脚, 后续再挤时间重新一丝不苟的将这三大块全面学习一遍!!!</font></p>
+<hr />
+<h2 id="_1">计算机<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<h3 id="_2"><font color='orange'>灵魂问答</font><a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p><strong>程序是什么？</strong></p>
+</blockquote>
+<p><strong>程序</strong> 就是一堆代码文件. 若程序只有一个文件,通常将此文件称之为 <strong>脚本文件</strong> .<br />
+<font color='lighblue'>程序 = 数据结构 + 算法;</font> <br />
+程序从属于软件,软件是一堆完成各自特定功能的程序的集合.<br />
+<font color='gray'>But很多时候,我们在阐述过程中说软件就是指程序,说程序就是在说软件.. 可结合具体语境分析,别纠结..</font></p>
+<blockquote>
+<p><strong>计算机的分类</strong></p>
+</blockquote>
+<p><font color='brown'><strong>计算机 = 硬件 + 软件</strong></font>.<br />
+计算机只有硬件的话,就相当于是一堆废铁.<br />
+计算机的运行全都受到软件(一堆应用程序的集合)的控制. 可以说 <strong>软件/程序是计算机硬件的灵魂</strong> .</p>
+<p><font color='brown'><strong>软件分为两大类</strong></font><br />
+1&gt; <strong>操作系统</strong>: 就是一个协调、管理、控制计算机硬件资源与应用软件的一个控制程序.<br />
+2&gt; <strong>应用软件</strong>/应用程序  </p>
+<h3 id="_3"><font color='orange'>计算机的三层结构</font><a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p>应用程序调用操作系统接口; 操作系统管理硬件; cpu是硬件中的最高指挥官..
+换句话说, cpu是硬件的老大, cpu的老大是操作系统..Hhh</p>
+</blockquote>
+<p><font color='brown'>计算机体系的三层结构:</font><br />
+最上面 -- &nbsp;&nbsp;&nbsp;&nbsp; <strong>应用程序</strong> <font color='gray'>支付宝 微信 滴滴...</font><br />
+中间层 -- &nbsp;&nbsp;&nbsp;&nbsp; <strong>操作系统</strong> <font color='gray'>Linux   Windows Mac</font><br />
+最底层 -- &nbsp;&nbsp;&nbsp;&nbsp; <strong>硬件</strong></p>
+<p><img alt="" src="../assets/%E8%AE%A1%E7%AE%97%E6%9C%BA%E4%B8%89%E5%B1%82.jpg" /> </p>
+<p>首先要明确,开发的工作就是使用解释器规定的一系列命令堆砌成一个应用程序..给用户使用.<br />
+而命令是干啥的？eg: shell解释器的ls命令就是对操作系统一些接口封装后的产物<br />
+说白了, <font color='brown'>用软件的某一个功能, 就是执行了某个程序(一堆代码/命令),进而去调用OS对应的系统接口,完成对计算机硬件的操作.</font>  所以说, 应用程序调用硬件是需要经过操作系统的&nbsp;.所有的应用程序都是运行在操作系统之上的.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>要理解的非常底层才能直接使用计算机硬件.
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>操作系统内核负责帮我们管理硬件,但内核提供的功能还是比较多比较细的.
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>系统接口将内核的一些功能封装封装.(做个比喻:内核功能十几万个,系统接口封装完可能就几万个)
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>有了系统接口后仍然不够简单,于是乎有了应用程序. shell解释器、python解释器等等..
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>而我们学python,学的是python解释器的一系列命令(即python解释器的一系列进一步封装的功能)
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>用这些python命令我们可以开发出更加上层的应用程序(解释型语言开发的应用程序)
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>注意哦,有些应用程序是可以直接调用系统接口的.
+</code></pre></div>
+<p><font color='gray'>Ps: 有一些软件(编译型语言 -- <strong>c语言</strong> go语言写的..)是不通过解释器的,它 <strong>直接调用系统接口</strong> .这样的效率会高一些.</font></p>
+<hr />
+<h2 id="_4">项目完整开发流程<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
+<p><font color='green'><strong>UE:</strong></font> 交互设计,负责软件好不好用<br />
+<font color='green'><strong>UI:</strong></font> 界面设计,负责界面好不好看<br />
+<font color='green'><strong>FE:</strong></font> 前端开发<br />
+<font color='green'><strong>RD:</strong></font> 后端开发<br />
+<font color='green'><strong>QA:</strong></font> 测试<br />
+<font color='green'><strong>OP:</strong></font> 运维</p>
+<p><img alt="" src="../assets/%E8%BD%AF%E4%BB%B6%E5%BC%80%E5%8F%91%E6%B5%81%E7%A8%8B.jpg" /> </p>
+<h3 id="_5"><font color="orange">需求分析阶段</font><a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
+<p>1&gt; <font color='brown'>产品经理</font>( <strong>PM</strong> ) 根据调研提出一个需求,<br />
+2&gt; 公司的产品部门对需求进行评审,判断是否是一个伪需求(不合理的需求);<br />
+3&gt; 若需求合理,PM会召集项目相关技术人员开需求讨论会.<br />
+&nbsp;&nbsp;&nbsp;&nbsp; 相关技术人员 [eg: UE'用户体验' UI'界面设计'  RD'研发' QA'测试' 等]<br />
+4&gt; 这一过程中,PM会先讲解产品原型(产品的样本草图)... 讨论这些需求的可行性,能否通过技术实现&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;不断开会,直到确定此需求是没问题的.<br />
+<strong>注意:</strong> 若作为开发人员,需求不明确,千万别进入开发环节; <font color='red'>不要看见某需求很简单,就马上说能实现,很多坑的&nbsp;</font></p>
+<h3 id="_6"><font color="orange">项目开发阶段</font><a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p>这一阶段分为 <strong>设计阶段</strong> 和 <strong>真正开发阶段</strong> (前后端根据接口规范分头开发). 最后合并.</p>
+</blockquote>
+<p>PM把控软件的整体质量,UE负责将PM脑中如何跟用户交互的抽象想法具像化, UI根据UE的交互设计稿设计页面.</p>
+<p>PM会跟UE泡在一起.-- 画出交互原型图.</p>
+<p><font color='brown'>交互式设计师</font>( <strong>UE</strong> ) 负责产品与用户的交互,如何交互更符合用户的习惯. 负责软件好不好用.<br />
+&nbsp;&nbsp;&nbsp;&nbsp; UE注重的是用户体验.是不管页面的具体内容的<br />
+&nbsp;&nbsp;&nbsp;&nbsp; <font color='gray'>eg: 此按钮应该大致放在页面哪个位置,跳转到哪个界面.出错了在哪弹出信息&nbsp;</font></p>
+<p><font color='brown'>界面设计师</font>( <strong>UI</strong> ) 负责设计页面具体的样子.每个页面的边边脚脚是什么样子的.本质就是画画. <br />
+&nbsp;&nbsp;&nbsp;&nbsp; <font color='gray'>eg: 背景是什么, 字体多大, 距离是怎样的, 布局是怎样的&nbsp;</font></p>
+<p><font color='brown'>前端开发</font>( <strong>FE</strong> )  负责根据UI的设计图进行客户端程序<font color='gray'>(eg: web界面,手机app,微信小程序)</font>的开发...</p>
+<p><font color='brown'>后端开发</font>( <strong>RD</strong> ) 负责收到前端的请求提供数据接口&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp; 在啥功能都没写的时候,PE和RD就会定好接口规范,要封装哪些数据接口,每个接口叫什么名,怎么用.<br />
+&nbsp;&nbsp;&nbsp;&nbsp; 后端开发的项目经理 project manager 也称为 PM... 它负责将项目的技术框架搭建好&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp; <font color='green'>一两周小迭代,一两月大迭代 <strong>-_-</strong> 我真的会谢.</font></p>
+<h3 id="_7"><font color="orange">项目测试阶段</font><a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
+<p>1&gt; 开发人员会先进行 code review(代码评审 重新过一遍代码)<br />
+2&gt; <font color='brown'>测试人员</font>( <strong>QA</strong> ) 负责设计好测试用例等.开发好的软件或多或少有点bug.. <br />
+测试环境 -- 准生产环境(与线上环境尽可能一比一 QA也会在这里面测试) -- 线上/生产环境(互联网用户使用的环境).</p>
+<h3 id="_8"><font color="orange">项目上线阶段</font><a class="headerlink" href="#_8" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>环境</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>dev</td>
+<td>前后端联调的环境 <font color='gray'>(数据自己造,乱七八糟的)</font></td>
+</tr>
+<tr>
+<td>test</td>
+<td>交给测试测试的环境 <font color='gray'>(数据自己造,乱七八糟的)</font></td>
+</tr>
+<tr>
+<td>release</td>
+<td>预发布环境, <font color='gray'>数据从真实环境拉过来的.一般不会改</font></td>
+</tr>
+<tr>
+<td>master</td>
+<td>正式环境/主分支</td>
+</tr>
+</tbody>
+</table>
+<p><font color='gray'>Ps: 一旦进入test环境,开发就会来新项目了. 就项目测试测出问题,还要占用开发新项目的时间. (つД`)ノ</font></p>
+<p>运维人员编写上线方案, 在准生产环境staging进行一遍测试.没问题后部署上线.</p>
+<p><font color='brown'>运维人员</font>( <strong>OP</strong> ) 负责设计好整套系统的架构. 环境、网络安全、计算机硬件等都归OP管.<br />
+比如: 软件要上线时,计算机硬件需要什么配置,用什么操作系统.是否需要集群去承载这个软件&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; 此版本出现问题了立刻回滚到上一个版本等.(上线时所有人都在 小问题马上改 大问题赶紧回滚)<br />
+细分的话,运维分为,devops自动化运维;dba数据库管理 等等&nbsp;.  </p>
+<p><strong>运维职责:</strong> <br />
+1&gt; 画架构图<br />
+2&gt; 保证应用程序7*24*365小时不间断的运行 <br />
+&nbsp;&nbsp;&nbsp;&nbsp; 稳定性&nbsp;&nbsp;&nbsp;&nbsp; 做好监控&nbsp; <br />
+&nbsp;&nbsp;&nbsp;&nbsp; 可靠性&nbsp;&nbsp;&nbsp;&nbsp; 数据备份&nbsp;解决单点故障<br />
+&nbsp;&nbsp;&nbsp;&nbsp; 性能&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; 优化调优,扩展, 所有的优化都会停留到IO性能上<br />
+&nbsp;&nbsp;&nbsp;&nbsp; <strong>OP在服务器上主要部署的是服务端,用户在应用商店下载的是客户端..</strong> </p>
+<p>运维要有集群的概念(电源、风扇、硬盘等),集群性能更高,也能防止单点故障..当出现问题后,及时解决问题&nbsp;<br />
+<font color='blue'>要知道哦,不是一上来就用集群,慢慢根据需求改变的&nbsp;</font></p>
+<hr />
+<p>后续的操作系统部分更多的会从应用角度阐述..</p>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+          <a href="#" class="md-top md-icon" data-md-component="top" hidden>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
+            回到页面顶部
+          </a>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+    <nav class="md-footer__inner md-grid" aria-label="页脚" >
+      
+      
+        
+        <a href="../1_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A1%AC%E4%BB%B6%E7%BB%84%E6%88%90/" class="md-footer__link md-footer__link--next" aria-label="下一页: 计算机硬件组成" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                下一页
+              </span>
+              计算机硬件组成
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright © 2023 from Dc_OnePiece
+    </div>
+  
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "navigation.top", "navigation.expand", "navigation.instant", "navigation.tracking", "search.suggest", "search.highlight", "search.share"], "search": "../../assets/javascripts/workers/search.5bf1dace.min.js", "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.config.lang": "ja", "search.config.pipeline": "trimmer, stemmer", "search.config.separator": "[\\s\\-\uff0c\u3002]+", "search.placeholder": "\u641c\u7d22", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version.title": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.37e9125f.min.js"></script>
+      
+        <script src="../../resources/js/extra.js"></script>
+      
+    
+  </body>
+</html>

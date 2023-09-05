@@ -1,0 +1,2093 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="These are my study notes.">
+      
+      
+        <meta name="author" content="DC">
+      
+      
+      <link rel="icon" href="../../resources/images/favicon.ico">
+      <meta name="generator" content="mkdocs-1.3.1, mkdocs-material-8.5.3">
+    
+    
+      
+        <title>存储管理之LVM - IT必备知识</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.7a952b86.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.cbb835fc.min.css">
+        
+      
+      
+
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../resources/css/extra.css">
+    
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lxgw-wenkai-webfont@1.1.0/style.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="blue-grey" data-md-color-accent="amber">
+  
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#lvm" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../.." title="IT必备知识" class="md-header__button md-logo" aria-label="IT必备知识" data-md-component="logo">
+      
+  <img src="../../resources/images/favicon.ico" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            IT必备知识
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              存储管理之LVM
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      <form class="md-header__option" data-md-component="palette">
+        
+          
+          
+          <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="blue-grey" data-md-color-accent="amber"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+          
+            <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"/></svg>
+            </label>
+          
+        
+          
+          
+          <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="blue-grey" data-md-color-accent="amber"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_2">
+          
+            <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12c0-2.42-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"/></svg>
+            </label>
+          
+        
+      </form>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="分享" aria-label="分享" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7 0-.24-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91 1.61 0 2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08Z"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="标签" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../0_%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/0_%E5%89%8D%E5%A5%8F%28%E4%BB%8B%E7%BB%8D%29/" class="md-tabs__link">
+        计算机基础(8)
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+    
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../0_%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C/" class="md-tabs__link md-tabs__link--active">
+        linux基础(20)
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../5_db/0_%E5%9F%BA%E7%A1%80/0_install_db/" class="md-tabs__link">
+        mysql(19)
+      </a>
+    </li>
+  
+
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../9_git/0_git%E7%94%9F%E6%B4%BB%E7%89%88/" class="md-tabs__link">
+        git(2)
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../13_%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/0_%E9%80%92%E5%BD%92_%E6%9F%A5%E6%89%BE/" class="md-tabs__link">
+        查找排序算法(5)
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="IT必备知识" class="md-nav__button md-logo" aria-label="IT必备知识" data-md-component="logo">
+      
+  <img src="../../resources/images/favicon.ico" alt="logo">
+
+    </a>
+    IT必备知识
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" data-md-toggle="__nav_1" type="checkbox" id="__nav_1" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_1">
+          计算机基础(8)
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="计算机基础(8)" data-md-level="1">
+        <label class="md-nav__title" for="__nav_1">
+          <span class="md-nav__icon md-icon"></span>
+          计算机基础(8)
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../0_%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/0_%E5%89%8D%E5%A5%8F%28%E4%BB%8B%E7%BB%8D%29/" class="md-nav__link">
+        前奏(介绍)
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../0_%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/1_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A1%AC%E4%BB%B6%E7%BB%84%E6%88%90/" class="md-nav__link">
+        计算机硬件组成
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../0_%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/2_%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" class="md-nav__link">
+        操作系统
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../0_%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/3_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E6%A6%82%E8%A7%88/" class="md-nav__link">
+        计算机网络概览
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../0_%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/4_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E4%B9%8B%E7%BD%91%E7%BB%9C%E6%8E%A5%E5%8F%A3%E5%B1%82/" class="md-nav__link">
+        网络接口层
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../0_%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/5_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E4%B9%8B%E7%BD%91%E7%BB%9C%E5%B1%82/" class="md-nav__link">
+        网络层
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../0_%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/6_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E4%B9%8B%E4%BC%A0%E8%BE%93%E5%B1%82/" class="md-nav__link">
+        传输层
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../0_%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/7_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%A1%A5%E5%85%85/" class="md-nav__link">
+        补充
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2">
+          linux基础(20)
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="linux基础(20)" data-md-level="1">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          linux基础(20)
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0_%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C/" class="md-nav__link">
+        准备工作
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../1_%E5%88%9D%E8%AF%86shell%E4%B8%8E%E5%9F%BA%E7%A1%80%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" class="md-nav__link">
+        初识shell与基础常用命令
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../2_%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86%E4%B9%8B%E5%9F%BA%E7%A1%80%E5%91%BD%E4%BB%A4/" class="md-nav__link">
+        文件管理之基础命令
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../3_%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86%E4%B9%8B%E5%9B%9B%E5%A4%A7%E6%A8%A1%E5%BC%8F/" class="md-nav__link">
+        文件管理之四大模式
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../4_%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86%E4%B9%8B%E5%91%BD%E4%BB%A4%E8%A1%A5%E5%85%85/" class="md-nav__link">
+        文件管理之命令补充
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../5_%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86%E4%B9%8B%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/" class="md-nav__link">
+        文件管理之文件系统
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../6_%E6%9D%83%E9%99%90%E7%AE%A1%E7%90%86%E4%B9%8B%E7%94%A8%E6%88%B7%E4%B8%8E%E7%BB%84/" class="md-nav__link">
+        权限管理之用户与组
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../7_%E6%9D%83%E9%99%90%E7%AE%A1%E7%90%86%E4%B9%8B%E6%96%87%E4%BB%B6%E6%9D%83%E9%99%90/" class="md-nav__link">
+        权限管理之文件权限
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../8_%E6%9D%83%E9%99%90%E7%AE%A1%E7%90%86%E4%B9%8BACL/" class="md-nav__link">
+        权限管理之ACL
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../9_%E6%9D%83%E9%99%90%E7%AE%A1%E7%90%86%E4%B9%8Bsu%E4%B8%8Esudo/" class="md-nav__link">
+        权限管理之su与sudo
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../10_%E8%BD%AF%E4%BB%B6%E5%8C%85%E7%AE%A1%E7%90%86%E4%B9%8Brpm/" class="md-nav__link">
+        软件包管理之rpm
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../11_%E8%BD%AF%E4%BB%B6%E5%8C%85%E7%AE%A1%E7%90%86%E4%B9%8Byum/" class="md-nav__link">
+        软件包管理之yum
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../12_%E6%9F%A5%E7%9C%8B%E8%BF%9B%E7%A8%8B/" class="md-nav__link">
+        查看进程
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../13_%E7%AE%A1%E7%90%86%E8%BF%9B%E7%A8%8B/" class="md-nav__link">
+        管理进程
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../14_%E5%AD%98%E5%82%A8%E7%AE%A1%E7%90%86%E4%B9%8B%E4%BC%A0%E7%BB%9F%E7%A3%81%E7%9B%98%E7%AE%A1%E7%90%86/" class="md-nav__link">
+        存储管理之传统磁盘管理
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          存储管理之LVM
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        存储管理之LVM
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#lvm" class="md-nav__link">
+    为什么要用LVM
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#lvm_1" class="md-nav__link">
+    LVM原理
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#lvm_2" class="md-nav__link">
+    LVM优缺点
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#lvm_3" class="md-nav__link">
+    LVM的基本使用
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    在线动态扩容
+  </a>
+  
+    <nav class="md-nav" aria-label="在线动态扩容">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#vg" class="md-nav__link">
+    vg容量够
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#vg_1" class="md-nav__link">
+    vg容量不够
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    删除
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#lvm_4" class="md-nav__link">
+    LVM快照
+  </a>
+  
+    <nav class="md-nav" aria-label="LVM快照">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    制作快照
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    快照恢复单个文件
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    多个文件合并恢复
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    底层原理
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../16_%E7%BD%91%E7%BB%9C%E7%AE%A1%E7%90%86/" class="md-nav__link">
+        网络管理
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../17_shell%E5%9F%BA%E7%A1%80/" class="md-nav__link">
+        shell基础
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../18_crond%E8%AE%A1%E5%88%92%E4%BB%BB%E5%8A%A1/" class="md-nav__link">
+        crond计划任务
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../19_%E7%B3%BB%E7%BB%9F%E4%BC%98%E5%8C%96/" class="md-nav__link">
+        系统优化
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3">
+          mysql(19)
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="mysql(19)" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          mysql(19)
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" data-md-toggle="__nav_3_1" type="checkbox" id="__nav_3_1" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3_1">
+          基础
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="基础" data-md-level="2">
+        <label class="md-nav__title" for="__nav_3_1">
+          <span class="md-nav__icon md-icon"></span>
+          基础
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../5_db/0_%E5%9F%BA%E7%A1%80/0_install_db/" class="md-nav__link">
+        数据库安装
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../5_db/0_%E5%9F%BA%E7%A1%80/1_db_command/" class="md-nav__link">
+        sql命令总结
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../5_db/0_%E5%9F%BA%E7%A1%80/2_imp_knowledge/" class="md-nav__link">
+        imp_knowledge
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../5_db/0_%E5%9F%BA%E7%A1%80/3_table_field/" class="md-nav__link">
+        字段的约束和类型
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../5_db/0_%E5%9F%BA%E7%A1%80/4_table_relation/" class="md-nav__link">
+        表关系
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../5_db/0_%E5%9F%BA%E7%A1%80/5_permissions/" class="md-nav__link">
+        权限管理
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../5_db/0_%E5%9F%BA%E7%A1%80/6_single_query/" class="md-nav__link">
+        单表查询
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../5_db/0_%E5%9F%BA%E7%A1%80/7_multi_query/" class="md-nav__link">
+        多表查询
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../5_db/0_%E5%9F%BA%E7%A1%80/8_query_practice/" class="md-nav__link">
+        query_practice
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../5_db/0_%E5%9F%BA%E7%A1%80/9_pymysql/" class="md-nav__link">
+        pymysql
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../5_db/0_%E5%9F%BA%E7%A1%80/10_just_know/" class="md-nav__link">
+        just_know
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../5_db/0_%E5%9F%BA%E7%A1%80/other/01_to_11/" class="md-nav__link">
+        other1
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../5_db/0_%E5%9F%BA%E7%A1%80/other/05/" class="md-nav__link">
+        other2
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" data-md-toggle="__nav_3_2" type="checkbox" id="__nav_3_2" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3_2">
+          进阶
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="进阶" data-md-level="2">
+        <label class="md-nav__title" for="__nav_3_2">
+          <span class="md-nav__icon md-icon"></span>
+          进阶
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../5_db/1_%E8%BF%9B%E9%98%B6/0_index/" class="md-nav__link">
+        索引
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../5_db/1_%E8%BF%9B%E9%98%B6/1_explain/" class="md-nav__link">
+        执行计划
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../5_db/1_%E8%BF%9B%E9%98%B6/2_transaction/" class="md-nav__link">
+        事务
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../5_db/1_%E8%BF%9B%E9%98%B6/3_db_readPhenomenon/" class="md-nav__link">
+        读现象
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../5_db/1_%E8%BF%9B%E9%98%B6/4_lock/" class="md-nav__link">
+        锁
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../5_db/1_%E8%BF%9B%E9%98%B6/other/" class="md-nav__link">
+        数据库连接池
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4">
+          git(2)
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="git(2)" data-md-level="1">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          git(2)
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../9_git/0_git%E7%94%9F%E6%B4%BB%E7%89%88/" class="md-nav__link">
+        git生活版
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../9_git/1_git%E7%A0%94%E7%A9%B6%E7%89%88/" class="md-nav__link">
+        git研究版
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" data-md-toggle="__nav_5" type="checkbox" id="__nav_5" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_5">
+          查找排序算法(5)
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="查找排序算法(5)" data-md-level="1">
+        <label class="md-nav__title" for="__nav_5">
+          <span class="md-nav__icon md-icon"></span>
+          查找排序算法(5)
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../13_%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/0_%E9%80%92%E5%BD%92_%E6%9F%A5%E6%89%BE/" class="md-nav__link">
+        查找
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../13_%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/1_LowB%E4%B8%89%E4%BA%BA%E7%BB%84/" class="md-nav__link">
+        LowB三人组
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../13_%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/2_NB%E4%B8%89%E4%BA%BA%E7%BB%84/" class="md-nav__link">
+        NB三人组
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../13_%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/3_%E5%85%B6%E5%AE%83%E6%8E%92%E5%BA%8F/" class="md-nav__link">
+        其它排序
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../13_%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/4_%E6%9F%A5%E6%89%BE%E4%B9%A0%E9%A2%98/" class="md-nav__link">
+        查找习题
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#lvm" class="md-nav__link">
+    为什么要用LVM
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#lvm_1" class="md-nav__link">
+    LVM原理
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#lvm_2" class="md-nav__link">
+    LVM优缺点
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#lvm_3" class="md-nav__link">
+    LVM的基本使用
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    在线动态扩容
+  </a>
+  
+    <nav class="md-nav" aria-label="在线动态扩容">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#vg" class="md-nav__link">
+    vg容量够
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#vg_1" class="md-nav__link">
+    vg容量不够
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    删除
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#lvm_4" class="md-nav__link">
+    LVM快照
+  </a>
+  
+    <nav class="md-nav" aria-label="LVM快照">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    制作快照
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    快照恢复单个文件
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    多个文件合并恢复
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    底层原理
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  <h1>存储管理之LVM</h1>
+
+<h2 id="lvm">为什么要用LVM<a class="headerlink" href="#lvm" title="Permanent link">&para;</a></h2>
+<p>传统的磁盘管理我们将某个硬盘通过fdisk或gdisk工具进行隔断,划分出了一个个的分区,紧接着,对这些分区进行格式化,即在分区上安装文件系统,通过文件系统这个软件来对分区进行管理...<br />
+<font color='blue'>So, <strong>分区</strong> 是站在 <strong>硬件角度</strong> 的说法,<strong>文件系统</strong> 是站在 <strong>软件角度</strong> 的说法!!!</font></p>
+<p>在我们对磁盘分区的大小进行规划时, 往往不能确定每个分区使用的空间大小, 只能凭经验分配一个大小.. 每个分区的大小就固定死了.. 这样做会有点弊端: <br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 若分区设置的过大, 就白白浪费了磁盘空间;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 若分区设置的过小, 就会导致空间不够用的情况出现;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <font color='gray'>针对A磁盘空间不够用,有个解决方案是新增块硬盘(不分区,整体作为一个分区),新增的硬盘格式化后,将A磁盘中的某个目录作为其挂载点..  "具体可以参考文件系统那的实践案例" ... 很麻烦,增大了管理难度 TnT</font></p>
+<p>上述的问题,可以通过LVM来解决..</p>
+<hr />
+<h2 id="lvm_1">LVM原理<a class="headerlink" href="#lvm_1" title="Permanent link">&para;</a></h2>
+<p><img alt="" src="../assets/LVM%E5%8E%9F%E7%90%86.png" /> <strong>PV物理卷</strong> &nbsp;&nbsp;&nbsp;&nbsp; -- 把常规的磁盘设备通过pvcreate命令对其进行初始化,形成了物理卷<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; 磁盘空间可以是 整块硬盘(<font color='gray'>sda</font>)也可以是某块盘的某个分区(<font color='gray'>sdb5</font>)<br />
+<strong>PE基本单元</strong> &nbsp;&nbsp;&nbsp;&nbsp; --  物理卷里最小的存储单位,默认为4MB<br />
+<strong>VG卷组</strong> &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; --  将多个PV整合到一起,那么卷组的大小就是多个PV大小之和..<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; 或者说, 将这些PV里的PE放到了一个名为VG的资源池里<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; <font color='gray'><strong>注意哦,</strong> 不一定要将所有的pv放到一个vg里 </font><br />
+<strong>LV逻辑卷</strong> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; --  从卷组中划分需要的空间大小出来, 用户仅需对其格式化创建文件系统,挂载后即可使用<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; <font color='brown'>LV可由VG里面不同的PV里的一个个PE组成...即跨越磁盘</font></p>
+<p>VG不够用可以扩容,加PV进去即可. <strong>通常不会从卷组中移除磁盘... </strong><br />
+LV可以动态扩容/缩容: 从VG里再拿几个PE/还几个PE给VG.. <br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <strong>虽然LVM支持LV缩容,但LV格式化若制作成xfs文件系统,是不支持缩容的</strong></p>
+<p><font color='gray'>打个比方,磁盘空间是小麦,PV将一束束小麦都磨成了面粉,PE将这些面粉整合到了一起揉成了一个面团,LV就是在将面团切成一块一块的.</font></p>
+<hr />
+<h2 id="lvm_2">LVM优缺点<a class="headerlink" href="#lvm_2" title="Permanent link">&para;</a></h2>
+<p><font color='blue'><strong>优点</strong></font></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 1&gt; 可以在系统运行的状态下动态的扩展文件系统(LV格式化并挂载后)的大小<br />
+​&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2&gt; 文件系统可以跨多个磁盘, 因此文件系统大小不会受物理磁盘的限制<br />
+​&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 3&gt; 可以增加新的磁盘到LVM的存储池VG中<br />
+​&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 4&gt; 可以以镜像的方式冗余重要的数据到多个物理磁盘   --  LVM的快照,用于进行备份<br />
+​&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 5&gt; 方便导出整个卷组到另外一台机器(基本用不到,了解即可)</p>
+<p><font color='blue'><strong>缺点</strong></font></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 1&gt; 画个解藕图  <strong>硬件 - LVM - 文件系统</strong>  简单来说,LVM是处于分区与文件系统之间的一个软件!!<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; 更高级了,但存取性能收到了影响<br />
+​&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2&gt; 当VG中的某个PV所在的磁盘空间坏了, 整个卷组都会受到影响<br />
+​&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; <font color='brown'> 因为LV里面的PE是跨越磁盘的...</font> 所以要尽量保证磁盘不会损坏..<br />
+​&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <font color='red'> <strong>解决方案</strong>: 底层用RAID + 上层LVM = 既有冗余又有动态扩展</font></p>
+<hr />
+<h2 id="lvm_3">LVM的基本使用<a class="headerlink" href="#lvm_3" title="Permanent link">&para;</a></h2>
+<p>简写逻辑: (大概只有我能一眼看懂 Hhhh)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; sdb + sdc1 -- vg1 -- lv1_from_vg1(/test1)、lv2_from_vg1(/test2)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; sdc2 + sdc3 -- vg2 -- lv1_from_vg2(/test3)、lv2_from_vg2(/test4)</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1"># -- 先移除前面实验环境中添加的硬盘 新建20G 30G 40G三块硬盘sdb sdc sdd 虚拟机不支持热插拔 关机重启生效</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="c1"># -- 在真实的实验环境中(真机) 多块硬盘需要做RAID; 云服务器不需要做RAID..</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>fdisk /dev/sdc  <span class="c1"># -- 制作5个分区 3主1扩1逻辑</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># lsblk /dev/sdc</span>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>NAME   MAJ:MIN RM SIZE RO TYPE MOUNTPOINT
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>sdc      <span class="m">8</span>:32   <span class="m">0</span>  30G  <span class="m">0</span> disk 
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>├─sdc1   <span class="m">8</span>:33   <span class="m">0</span>  10G  <span class="m">0</span> part 
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>├─sdc2   <span class="m">8</span>:34   <span class="m">0</span>   5G  <span class="m">0</span> part 
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>├─sdc3   <span class="m">8</span>:35   <span class="m">0</span>   5G  <span class="m">0</span> part 
+<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>├─sdc4   <span class="m">8</span>:36   <span class="m">0</span>   1K  <span class="m">0</span> part 
+<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>└─sdc5   <span class="m">8</span>:37   <span class="m">0</span>   5G  <span class="m">0</span> part 
+<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>
+<a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a><span class="s2">&quot;&quot;&quot;-- 1.制作pv,可以对整块盘做,也可以对分区做 --&quot;&quot;&quot;</span> 
+<a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>pvcreate /dev/sdb
+<a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a>pvcreate /dev/sdc1
+<a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a>pvcreate /dev/sdc2
+<a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a>pvcreate /dev/sdc3
+<a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a>
+<a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a><span class="s2">&quot;&quot;&quot;-- 2.制作vg:将pv划入vg中 --&quot;&quot;&quot;</span>
+<a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a><span class="c1">## vgcreate vg3 /dev/sdd 将做过pv的某一块盘或某一个分区单独做vg也可以</span>
+<a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a>vgcreate vg1 /dev/sdb /dev/sdc1
+<a id="__codelineno-0-23" name="__codelineno-0-23" href="#__codelineno-0-23"></a>vgcreate vg2 /dev/sdc2 /dev/sdc3
+<a id="__codelineno-0-24" name="__codelineno-0-24" href="#__codelineno-0-24"></a>
+<a id="__codelineno-0-25" name="__codelineno-0-25" href="#__codelineno-0-25"></a><span class="s2">&quot;&quot;&quot;-- 3.创建逻辑卷lv --&quot;&quot;&quot;</span>
+<a id="__codelineno-0-26" name="__codelineno-0-26" href="#__codelineno-0-26"></a><span class="c1">## -L 大小 -n 名字</span>
+<a id="__codelineno-0-27" name="__codelineno-0-27" href="#__codelineno-0-27"></a>lvcreate -L 1G -n lv1_from_vg1 vg1
+<a id="__codelineno-0-28" name="__codelineno-0-28" href="#__codelineno-0-28"></a>lvcreate -L 2G -n lv2_from_vg1 vg1
+<a id="__codelineno-0-29" name="__codelineno-0-29" href="#__codelineno-0-29"></a>lvcreate -L 3G -n lv1_from_vg2 vg2
+<a id="__codelineno-0-30" name="__codelineno-0-30" href="#__codelineno-0-30"></a>lvcreate -L 4G -n lv2_from_vg2 vg2
+<a id="__codelineno-0-31" name="__codelineno-0-31" href="#__codelineno-0-31"></a>
+<a id="__codelineno-0-32" name="__codelineno-0-32" href="#__codelineno-0-32"></a><span class="s2">&quot;&quot;&quot;-- 查看 --&quot;&quot;&quot;</span>
+<a id="__codelineno-0-33" name="__codelineno-0-33" href="#__codelineno-0-33"></a><span class="c1">## -- 还可以使用 pvscan 命令</span>
+<a id="__codelineno-0-34" name="__codelineno-0-34" href="#__codelineno-0-34"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># pvs</span>
+<a id="__codelineno-0-35" name="__codelineno-0-35" href="#__codelineno-0-35"></a>  PV         VG     Fmt  Attr PSize   PFree   
+<a id="__codelineno-0-36" name="__codelineno-0-36" href="#__codelineno-0-36"></a>  /dev/sda2  centos lvm2 a--  &lt;<span class="m">19</span>.00g       <span class="m">0</span>       <span class="c1"># -- 这个是安装centos时,linux自己弄的</span>
+<a id="__codelineno-0-37" name="__codelineno-0-37" href="#__codelineno-0-37"></a>  /dev/sdb   vg1    lvm2 a--  &lt;<span class="m">20</span>.00g  &lt;<span class="m">17</span>.00g
+<a id="__codelineno-0-38" name="__codelineno-0-38" href="#__codelineno-0-38"></a>  /dev/sdc1  vg1    lvm2 a--  &lt;<span class="m">10</span>.00g  &lt;<span class="m">10</span>.00g
+<a id="__codelineno-0-39" name="__codelineno-0-39" href="#__codelineno-0-39"></a>  /dev/sdc2  vg2    lvm2 a--   &lt;<span class="m">5</span>.00g   &lt;<span class="m">2</span>.00g
+<a id="__codelineno-0-40" name="__codelineno-0-40" href="#__codelineno-0-40"></a>  /dev/sdc3  vg2    lvm2 a--   &lt;<span class="m">5</span>.00g <span class="m">1020</span>.00m
+<a id="__codelineno-0-41" name="__codelineno-0-41" href="#__codelineno-0-41"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># lvs</span>
+<a id="__codelineno-0-42" name="__codelineno-0-42" href="#__codelineno-0-42"></a>  LV           VG     Attr       LSize   Pool Origin Data%  Meta%  Move Log Cpy%Sync Convert
+<a id="__codelineno-0-43" name="__codelineno-0-43" href="#__codelineno-0-43"></a>  root         centos -wi-ao---- &lt;<span class="m">17</span>.00g                                                    
+<a id="__codelineno-0-44" name="__codelineno-0-44" href="#__codelineno-0-44"></a>  swap         centos -wi-ao----   <span class="m">2</span>.00g                                                    
+<a id="__codelineno-0-45" name="__codelineno-0-45" href="#__codelineno-0-45"></a>  lv1_from_vg1 vg1    -wi-a-----   <span class="m">1</span>.00g                                                    
+<a id="__codelineno-0-46" name="__codelineno-0-46" href="#__codelineno-0-46"></a>  lv2_from_vg1 vg1    -wi-a-----   <span class="m">2</span>.00g                                                    
+<a id="__codelineno-0-47" name="__codelineno-0-47" href="#__codelineno-0-47"></a>  lv1_from_vg2 vg2    -wi-a-----   <span class="m">3</span>.00g                                                    
+<a id="__codelineno-0-48" name="__codelineno-0-48" href="#__codelineno-0-48"></a>  lv2_from_vg2 vg2    -wi-a-----   <span class="m">4</span>.00g
+<a id="__codelineno-0-49" name="__codelineno-0-49" href="#__codelineno-0-49"></a><span class="c1">## -- 可以看到vg1由两个pv组成,划分了2个lv; vg1总大小为30G,减去2G和1G还剩27G..</span>
+<a id="__codelineno-0-50" name="__codelineno-0-50" href="#__codelineno-0-50"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># vgs</span>
+<a id="__codelineno-0-51" name="__codelineno-0-51" href="#__codelineno-0-51"></a>  VG     <span class="c1">#PV #LV #SN Attr   VSize   VFree </span>
+<a id="__codelineno-0-52" name="__codelineno-0-52" href="#__codelineno-0-52"></a>  centos   <span class="m">1</span>   <span class="m">2</span>   <span class="m">0</span> wz--n- &lt;<span class="m">19</span>.00g     <span class="m">0</span> 
+<a id="__codelineno-0-53" name="__codelineno-0-53" href="#__codelineno-0-53"></a>  vg1      <span class="m">2</span>   <span class="m">2</span>   <span class="m">0</span> wz--n-  <span class="m">29</span>.99g <span class="m">26</span>.99g
+<a id="__codelineno-0-54" name="__codelineno-0-54" href="#__codelineno-0-54"></a>  vg2      <span class="m">2</span>   <span class="m">2</span>   <span class="m">0</span> wz--n-   <span class="m">9</span>.99g  <span class="m">2</span>.99g
+<a id="__codelineno-0-55" name="__codelineno-0-55" href="#__codelineno-0-55"></a>
+<a id="__codelineno-0-56" name="__codelineno-0-56" href="#__codelineno-0-56"></a><span class="s2">&quot;&quot;&quot;-- 4.格式化(制作文件系统)与挂载 --&quot;&quot;&quot;</span>
+<a id="__codelineno-0-57" name="__codelineno-0-57" href="#__codelineno-0-57"></a><span class="c1">## -- 创建的vg卷组会在/dev下面</span>
+<a id="__codelineno-0-58" name="__codelineno-0-58" href="#__codelineno-0-58"></a>mkfs.xfs /dev/vg1/lv1_from_vg1 
+<a id="__codelineno-0-59" name="__codelineno-0-59" href="#__codelineno-0-59"></a>mkfs.xfs /dev/vg1/lv2_from_vg1 
+<a id="__codelineno-0-60" name="__codelineno-0-60" href="#__codelineno-0-60"></a>mkfs.xfs /dev/vg2/lv1_from_vg2
+<a id="__codelineno-0-61" name="__codelineno-0-61" href="#__codelineno-0-61"></a>mkfs.xfs /dev/vg2/lv2_from_vg2
+<a id="__codelineno-0-62" name="__codelineno-0-62" href="#__codelineno-0-62"></a>
+<a id="__codelineno-0-63" name="__codelineno-0-63" href="#__codelineno-0-63"></a>mkdir /test1
+<a id="__codelineno-0-64" name="__codelineno-0-64" href="#__codelineno-0-64"></a>mkdir /test2
+<a id="__codelineno-0-65" name="__codelineno-0-65" href="#__codelineno-0-65"></a>mkdir /test3
+<a id="__codelineno-0-66" name="__codelineno-0-66" href="#__codelineno-0-66"></a>mkdir /test4
+<a id="__codelineno-0-67" name="__codelineno-0-67" href="#__codelineno-0-67"></a>
+<a id="__codelineno-0-68" name="__codelineno-0-68" href="#__codelineno-0-68"></a>mount /dev/vg1/lv1_from_vg1 /test1
+<a id="__codelineno-0-69" name="__codelineno-0-69" href="#__codelineno-0-69"></a>mount /dev/vg1/lv2_from_vg1 /test2
+<a id="__codelineno-0-70" name="__codelineno-0-70" href="#__codelineno-0-70"></a>mount /dev/vg2/lv1_from_vg2 /test3
+<a id="__codelineno-0-71" name="__codelineno-0-71" href="#__codelineno-0-71"></a>mount /dev/vg2/lv2_from_vg2 /test4
+<a id="__codelineno-0-72" name="__codelineno-0-72" href="#__codelineno-0-72"></a>
+<a id="__codelineno-0-73" name="__codelineno-0-73" href="#__codelineno-0-73"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># mount | grep test</span>
+<a id="__codelineno-0-74" name="__codelineno-0-74" href="#__codelineno-0-74"></a><span class="c1">## -- /dev/mapper/vg1-lv1_from_vg1 就是 /dev/vg1/lv1_from_vg1 不要太在意..</span>
+<a id="__codelineno-0-75" name="__codelineno-0-75" href="#__codelineno-0-75"></a>/dev/mapper/vg1-lv1_from_vg1 on /test1 <span class="nb">type</span> xfs <span class="o">(</span>rw,relatime,attr2,inode64,noquota<span class="o">)</span>
+<a id="__codelineno-0-76" name="__codelineno-0-76" href="#__codelineno-0-76"></a>/dev/mapper/vg1-lv2_from_vg1 on /test2 <span class="nb">type</span> xfs <span class="o">(</span>rw,relatime,attr2,inode64,noquota<span class="o">)</span>
+<a id="__codelineno-0-77" name="__codelineno-0-77" href="#__codelineno-0-77"></a>/dev/mapper/vg2-lv1_from_vg2 on /test3 <span class="nb">type</span> xfs <span class="o">(</span>rw,relatime,attr2,inode64,noquota<span class="o">)</span>
+<a id="__codelineno-0-78" name="__codelineno-0-78" href="#__codelineno-0-78"></a>/dev/mapper/vg2-lv2_from_vg2 on /test4 <span class="nb">type</span> xfs <span class="o">(</span>rw,relatime,attr2,inode64,noquota<span class="o">)</span>
+</code></pre></div>
+<hr />
+<h2 id="_1">在线动态扩容<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<blockquote>
+<p>动态扩容即在不用卸载的情况下对LV进行扩容</p>
+</blockquote>
+<p><code>lvextend -L  [+]MGT  /dev/VG_NAME/VL_NAME</code><br />
+注意:  -L 100M 与 -L +100M不是一个意思.  <br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 前者代表扩容至100M(不能小于原来的大小), 后者代表在原有的基础上扩容100M</p>
+<p><font color='red'><strong>不要缩容！！！并且xfs文件系统不支持缩容...</strong></font></p>
+<h3 id="vg"><font color='orange'>vg容量够</font><a class="headerlink" href="#vg" title="Permanent link">&para;</a></h3>
+<p>给1G大小的lv1_from_vg1扩容至5000M, 查看vg1容量是够的, 所以lv1_from_vg1可直接扩容</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># vgs | grep vg1</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>  vg1      <span class="m">2</span>   <span class="m">2</span>   <span class="m">0</span> wz--n-  <span class="m">29</span>.99g <span class="m">26</span>.99g
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># lvs | grep lv1_from_vg1</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>  lv1_from_vg1 vg1    -wi-ao----   <span class="m">1</span>.00g 
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># lvextend -L 5000M /dev/vg1/lv1_from_vg1</span>
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="c1"># 逻辑卷 vg1/lv1_from_vg1 的大小从 1.00 GiB(256 个扩展区) 更改为 4.88 GiB(1250 个扩展区).</span>
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="c1"># 逻辑卷 vg1/lv1_from_vg1 已成功调整大小</span>
+<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>Size of logical volume vg1/lv1_from_vg1 changed from <span class="m">1</span>.00 GiB<span class="o">(</span><span class="m">256</span> extents<span class="o">)</span> to <span class="m">4</span>.88 GiB<span class="o">(</span><span class="m">1250</span> extents<span class="o">)</span>. Logical volume vg1/lv1_from_vg1 successfully resized.
+<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>
+<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># vgs | grep vg1</span>
+<a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a><span class="c1"># 简单验算下 lv增加的等于vg减少的 4.88 - 1 = 26.99 - 23.11 </span>
+<a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a>  vg1      <span class="m">2</span>   <span class="m">2</span>   <span class="m">0</span> wz--n-  <span class="m">29</span>.99g &lt;<span class="m">23</span>.11g
+<a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># lvs | grep lv1_from_vg1</span>
+<a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a>  lv1_from_vg1 vg1    -wi-ao----   <span class="m">4</span>.88g 
+<a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a>
+<a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a>xfs_growfs /dev/vg1/lv1_from_vg1 <span class="c1">## -!!! 扩展逻辑卷后需要更新xfs文件系统 df -h才能看到预期的结果</span>
+</code></pre></div>
+<h3 id="vg_1"><font color='orange'>vg容量不够</font><a class="headerlink" href="#vg_1" title="Permanent link">&para;</a></h3>
+<p>给3G大小的lv1_from_vg2扩容至11G, 查看vg2容量为3G, 是不够的, 需要新增pv扩到vg2里</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># vgs | grep vg2</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>  vg2      <span class="m">2</span>   <span class="m">2</span>   <span class="m">0</span> wz--n-   <span class="m">9</span>.99g   <span class="m">2</span>.99g
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># lvs | grep lv1_from_vg2</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>  lv1_from_vg2 vg2    -wi-ao----   <span class="m">3</span>.00g  
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="c1"># -- lv1_from_vg2扩容至11G需要新增8G sdc5只有5个G 不得行. 所以我们使用40G容量的sdd</span>
+<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># lsblk /dev/sdc5 /dev/sdd</span>
+<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>NAME MAJ:MIN RM SIZE RO TYPE MOUNTPOINT
+<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a>sdc5   <span class="m">8</span>:37   <span class="m">0</span>   5G  <span class="m">0</span> part 
+<a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a>sdd    <span class="m">8</span>:48   <span class="m">0</span>  40G  <span class="m">0</span> disk 
+<a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a>
+<a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a>pvcreate /dev/sdd
+<a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a>vgextend vg2 /dev/sdd
+<a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># vgs | grep vg2</span>
+<a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a>  vg2      <span class="m">3</span>   <span class="m">2</span>   <span class="m">0</span> wz--n- &lt;<span class="m">49</span>.99g &lt;<span class="m">42</span>.99g
+<a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a>
+<a id="__codelineno-2-17" name="__codelineno-2-17" href="#__codelineno-2-17"></a>lvextend -L 10G /dev/vg2/lv1_from_vg2
+<a id="__codelineno-2-18" name="__codelineno-2-18" href="#__codelineno-2-18"></a>lvextend -L +1G /dev/vg2/lv1_from_vg2
+<a id="__codelineno-2-19" name="__codelineno-2-19" href="#__codelineno-2-19"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># lvs | grep lv1_from_vg2</span>
+<a id="__codelineno-2-20" name="__codelineno-2-20" href="#__codelineno-2-20"></a>  lv1_from_vg2 vg2    -wi-ao----  <span class="m">11</span>.00g
+<a id="__codelineno-2-21" name="__codelineno-2-21" href="#__codelineno-2-21"></a>
+<a id="__codelineno-2-22" name="__codelineno-2-22" href="#__codelineno-2-22"></a>xfs_growfs /dev/vg2/lv1_from_vg2  <span class="c1">## -!!! 扩展逻辑卷后需要更新xfs文件系统 df -h才能看到预期的结果</span>
+</code></pre></div>
+<hr />
+<h2 id="_2">删除<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<p>一句话, 先将vg中所有lv的挂载点都卸载, 再删除vg, 最后删除vg中的pv</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="s2">&quot;&quot;&quot; -- 删除,讲究个顺序 lv先卸载挂载点然后删除 lv删干净后再删除vg 最后删除pv --&quot;&quot;&quot;</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="c1"># 删除lv之前需要先卸载挂载点</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># umount /test3</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># lvremove /dev/vg2/lv1_from_vg2 </span>
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="c1"># 因为挂载后,可能产生过数据,所以问你确定要删除吗？</span>
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>Do you really want to remove active logical volume vg2/lv1_from_vg2? <span class="o">[</span>y/n<span class="o">]</span>: y
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>  Logical volume <span class="s2">&quot;lv1_from_vg2&quot;</span> successfully removed
+<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>
+<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># vgs</span>
+<a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a>  VG     <span class="c1">#PV #LV #SN Attr   VSize   VFree  </span>
+<a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a>  centos   <span class="m">1</span>   <span class="m">2</span>   <span class="m">0</span> wz--n- &lt;<span class="m">19</span>.00g      <span class="m">0</span> 
+<a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a>  vg1      <span class="m">2</span>   <span class="m">2</span>   <span class="m">0</span> wz--n-  <span class="m">29</span>.99g &lt;<span class="m">23</span>.11g
+<a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a>  vg2      <span class="m">3</span>   <span class="m">1</span>   <span class="m">0</span> wz--n- &lt;<span class="m">49</span>.99g &lt;<span class="m">45</span>.99g
+<a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a><span class="c1"># 因为vg2里还有个已经挂载的lv,所以删除vg2不成功</span>
+<a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># vgremove vg2</span>
+<a id="__codelineno-3-16" name="__codelineno-3-16" href="#__codelineno-3-16"></a>Do you really want to remove volume group <span class="s2">&quot;vg2&quot;</span> containing <span class="m">1</span> logical volumes? <span class="o">[</span>y/n<span class="o">]</span>: y
+<a id="__codelineno-3-17" name="__codelineno-3-17" href="#__codelineno-3-17"></a><span class="c1"># 逻辑卷 vg2/lv2_from_vg2 包含一个正在使用的文件系统</span>
+<a id="__codelineno-3-18" name="__codelineno-3-18" href="#__codelineno-3-18"></a>  Logical volume vg2/lv2_from_vg2 contains a filesystem <span class="k">in</span> use.
+<a id="__codelineno-3-19" name="__codelineno-3-19" href="#__codelineno-3-19"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># umount /test4</span>
+<a id="__codelineno-3-20" name="__codelineno-3-20" href="#__codelineno-3-20"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># vgremove vg2</span>
+<a id="__codelineno-3-21" name="__codelineno-3-21" href="#__codelineno-3-21"></a>Do you really want to remove volume group <span class="s2">&quot;vg2&quot;</span> containing <span class="m">1</span> logical volumes? <span class="o">[</span>y/n<span class="o">]</span>: y
+<a id="__codelineno-3-22" name="__codelineno-3-22" href="#__codelineno-3-22"></a><span class="c1"># 相当于帮忙执行了 lvremove /dev/vg2/lv2_from_vg2 命令</span>
+<a id="__codelineno-3-23" name="__codelineno-3-23" href="#__codelineno-3-23"></a>Do you really want to remove active logical volume vg2/lv2_from_vg2? <span class="o">[</span>y/n<span class="o">]</span>: y
+<a id="__codelineno-3-24" name="__codelineno-3-24" href="#__codelineno-3-24"></a>  Logical volume <span class="s2">&quot;lv2_from_vg2&quot;</span> successfully removed
+<a id="__codelineno-3-25" name="__codelineno-3-25" href="#__codelineno-3-25"></a>  Volume group <span class="s2">&quot;vg2&quot;</span> successfully removed <span class="c1"># -- 成功删除vg2</span>
+<a id="__codelineno-3-26" name="__codelineno-3-26" href="#__codelineno-3-26"></a>
+<a id="__codelineno-3-27" name="__codelineno-3-27" href="#__codelineno-3-27"></a><span class="c1"># 删pv:只能删掉那些不属于任何vg的pv</span>
+<a id="__codelineno-3-28" name="__codelineno-3-28" href="#__codelineno-3-28"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># pvs</span>
+<a id="__codelineno-3-29" name="__codelineno-3-29" href="#__codelineno-3-29"></a><span class="c1"># 可以看到原来在vg2中的3个pv已经闲置啦</span>
+<a id="__codelineno-3-30" name="__codelineno-3-30" href="#__codelineno-3-30"></a>  PV         VG     Fmt  Attr PSize   PFree  
+<a id="__codelineno-3-31" name="__codelineno-3-31" href="#__codelineno-3-31"></a>  /dev/sda2  centos lvm2 a--  &lt;<span class="m">19</span>.00g      <span class="m">0</span> 
+<a id="__codelineno-3-32" name="__codelineno-3-32" href="#__codelineno-3-32"></a>  /dev/sdb   vg1    lvm2 a--  &lt;<span class="m">20</span>.00g  <span class="m">13</span>.11g
+<a id="__codelineno-3-33" name="__codelineno-3-33" href="#__codelineno-3-33"></a>  /dev/sdc1  vg1    lvm2 a--  &lt;<span class="m">10</span>.00g &lt;<span class="m">10</span>.00g
+<a id="__codelineno-3-34" name="__codelineno-3-34" href="#__codelineno-3-34"></a>  /dev/sdc2         lvm2 ---    <span class="m">5</span>.00g   <span class="m">5</span>.00g
+<a id="__codelineno-3-35" name="__codelineno-3-35" href="#__codelineno-3-35"></a>  /dev/sdc3         lvm2 ---    <span class="m">5</span>.00g   <span class="m">5</span>.00g
+<a id="__codelineno-3-36" name="__codelineno-3-36" href="#__codelineno-3-36"></a>  /dev/sdd          lvm2 ---   <span class="m">40</span>.00g  <span class="m">40</span>.00g
+<a id="__codelineno-3-37" name="__codelineno-3-37" href="#__codelineno-3-37"></a>
+<a id="__codelineno-3-38" name="__codelineno-3-38" href="#__codelineno-3-38"></a>pvremove /dev/sdb2
+<a id="__codelineno-3-39" name="__codelineno-3-39" href="#__codelineno-3-39"></a>pvremove /dev/sdb3
+<a id="__codelineno-3-40" name="__codelineno-3-40" href="#__codelineno-3-40"></a>pvremove /dev/sdd
+<a id="__codelineno-3-41" name="__codelineno-3-41" href="#__codelineno-3-41"></a><span class="c1"># -- 卸载的pv可以不使用lvm按照传统的磁盘管理方式进行操作啦..</span>
+</code></pre></div>
+<p><font color='blue'><strong>格外实验:</strong> sdb使用完了才会使用sdc1</font>,实际上多少会用点sdc1,但很少显示不出来...</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># lsblk /dev/sdb /dev/sdc</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>NAME               MAJ:MIN RM  SIZE RO TYPE MOUNTPOINT
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="c1"># 当时很疑惑的一点,sdc1分区下面怎么没显示lv的名字呢？</span>
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>sdb                  <span class="m">8</span>:16   <span class="m">0</span>   20G  <span class="m">0</span> disk 
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>├─vg1-lv1_from_vg1 <span class="m">253</span>:2    <span class="m">0</span>  <span class="m">4</span>.9G  <span class="m">0</span> lvm  /test1
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>└─vg1-lv2_from_vg1 <span class="m">253</span>:3    <span class="m">0</span>    2G  <span class="m">0</span> lvm  /test2
+<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>sdc                  <span class="m">8</span>:32   <span class="m">0</span>   30G  <span class="m">0</span> disk 
+<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>├─sdc1               <span class="m">8</span>:33   <span class="m">0</span>   10G  <span class="m">0</span> part 
+<a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a>├─sdc2               <span class="m">8</span>:34   <span class="m">0</span>    5G  <span class="m">0</span> part <span class="c1"># -- pv删除了,划分的分区还是在的</span>
+<a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a>├─sdc3               <span class="m">8</span>:35   <span class="m">0</span>    5G  <span class="m">0</span> part 
+<a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a>├─sdc4               <span class="m">8</span>:36   <span class="m">0</span>    1K  <span class="m">0</span> part 
+<a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a>└─sdc5               <span class="m">8</span>:37   <span class="m">0</span>    5G  <span class="m">0</span> part 
+<a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a>
+<a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a><span class="s2">&quot;&quot;&quot;</span>
+<a id="__codelineno-4-15" name="__codelineno-4-15" href="#__codelineno-4-15"></a><span class="s2">经过分析,sdb(20G)+sdc1(10G)总共30G,现目前,lv1_from_vg1 5G、lv2_from_vg1 2G</span>
+<a id="__codelineno-4-16" name="__codelineno-4-16" href="#__codelineno-4-16"></a><span class="s2">我们实验将lv1_from_vg1扩容至22G 超过sdb容量的20G</span>
+<a id="__codelineno-4-17" name="__codelineno-4-17" href="#__codelineno-4-17"></a><span class="s2">&quot;&quot;&quot;</span>
+<a id="__codelineno-4-18" name="__codelineno-4-18" href="#__codelineno-4-18"></a>lvextend -L 22G /dev/vg1/lv1_from_vg1
+<a id="__codelineno-4-19" name="__codelineno-4-19" href="#__codelineno-4-19"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># pvs</span>
+<a id="__codelineno-4-20" name="__codelineno-4-20" href="#__codelineno-4-20"></a>  PV         VG     Fmt  Attr PSize   PFree 
+<a id="__codelineno-4-21" name="__codelineno-4-21" href="#__codelineno-4-21"></a>  /dev/sda2  centos lvm2 a--  &lt;<span class="m">19</span>.00g     <span class="m">0</span> 
+<a id="__codelineno-4-22" name="__codelineno-4-22" href="#__codelineno-4-22"></a>  /dev/sdb   vg1    lvm2 a--  &lt;<span class="m">20</span>.00g     <span class="m">0</span> 
+<a id="__codelineno-4-23" name="__codelineno-4-23" href="#__codelineno-4-23"></a>  /dev/sdc1  vg1    lvm2 a--  &lt;<span class="m">10</span>.00g  <span class="m">5</span>.99g  <span class="c1">## -- 20+10-22-2 = 6</span>
+<a id="__codelineno-4-24" name="__codelineno-4-24" href="#__codelineno-4-24"></a>  /dev/sdd          lvm2 ---   <span class="m">40</span>.00g <span class="m">40</span>.00g
+<a id="__codelineno-4-25" name="__codelineno-4-25" href="#__codelineno-4-25"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># lsblk /dev/sdb /dev/sdc</span>
+<a id="__codelineno-4-26" name="__codelineno-4-26" href="#__codelineno-4-26"></a>NAME                 MAJ:MIN RM SIZE RO TYPE MOUNTPOINT
+<a id="__codelineno-4-27" name="__codelineno-4-27" href="#__codelineno-4-27"></a>sdb                    <span class="m">8</span>:16   <span class="m">0</span>  20G  <span class="m">0</span> disk 
+<a id="__codelineno-4-28" name="__codelineno-4-28" href="#__codelineno-4-28"></a>├─vg1-lv1_from_vg1   <span class="m">253</span>:2    <span class="m">0</span>  22G  <span class="m">0</span> lvm  /test1
+<a id="__codelineno-4-29" name="__codelineno-4-29" href="#__codelineno-4-29"></a>└─vg1-lv2_from_vg1   <span class="m">253</span>:3    <span class="m">0</span>   2G  <span class="m">0</span> lvm  /test2
+<a id="__codelineno-4-30" name="__codelineno-4-30" href="#__codelineno-4-30"></a>sdc                    <span class="m">8</span>:32   <span class="m">0</span>  30G  <span class="m">0</span> disk 
+<a id="__codelineno-4-31" name="__codelineno-4-31" href="#__codelineno-4-31"></a>├─sdc1                 <span class="m">8</span>:33   <span class="m">0</span>  10G  <span class="m">0</span> part 
+<a id="__codelineno-4-32" name="__codelineno-4-32" href="#__codelineno-4-32"></a>│ └─vg1-lv1_from_vg1 <span class="m">253</span>:2    <span class="m">0</span>  22G  <span class="m">0</span> lvm  /test1  <span class="c1">## -- 看!!它出现了..sdb满了才使用sdc1</span>
+<a id="__codelineno-4-33" name="__codelineno-4-33" href="#__codelineno-4-33"></a>├─sdc2                 <span class="m">8</span>:34   <span class="m">0</span>   5G  <span class="m">0</span> part 
+<a id="__codelineno-4-34" name="__codelineno-4-34" href="#__codelineno-4-34"></a>├─sdc3                 <span class="m">8</span>:35   <span class="m">0</span>   5G  <span class="m">0</span> part 
+<a id="__codelineno-4-35" name="__codelineno-4-35" href="#__codelineno-4-35"></a>├─sdc4                 <span class="m">8</span>:36   <span class="m">0</span>   1K  <span class="m">0</span> part 
+<a id="__codelineno-4-36" name="__codelineno-4-36" href="#__codelineno-4-36"></a>└─sdc5                 <span class="m">8</span>:37   <span class="m">0</span>   5G  <span class="m">0</span> part 
+</code></pre></div>
+<hr />
+<h2 id="lvm_4">LVM快照<a class="headerlink" href="#lvm_4" title="Permanent link">&para;</a></h2>
+<blockquote>
+<p>简单来说,做lvm快照就是给某个lv做备份<br />
+vm虚拟机也有快照,点击vm某一个快照,虚拟机就恢复到快照那一时刻的状态..在这一层面LVM快照是相同的..</p>
+</blockquote>
+<h3 id="_3"><font color='orange'>制作快照</font><a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
+<p><strong>被做快照的lv</strong>: lv2_from_vg1 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <strong>快照</strong>: lv2_from_vg1_snap</p>
+<p>1&gt; lvm快照的本质就是创建一个特殊的LV逻辑卷.. 快照与被做快照的lv在同一vg里<br />
+2&gt; lv2_from_vg1 与 lv2_from_vg1_snap的UUID是一样的.. <br />
+3&gt; lv2_from_vg1里的内容改变后,lv2_from_vg1_snap快照里的内容是不会同步改变的!!</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="c1"># -- /test2是lv2_from_vg1逻辑卷xfs格式化后的挂载点</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># echo 111 &gt; /test2/1.txt</span>
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># echo 222 &gt; /test2/2.txt</span>
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># echo 333 &gt; /test2/3.txt</span>
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># tree /test2</span>
+<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>/test2 
+<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a>├── <span class="m">1</span>.txt
+<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a>├── <span class="m">2</span>.txt
+<a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a>└── <span class="m">3</span>.txt
+<a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a>
+<a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a><span class="m">0</span> directories, <span class="m">3</span> files
+<a id="__codelineno-5-12" name="__codelineno-5-12" href="#__codelineno-5-12"></a>
+<a id="__codelineno-5-13" name="__codelineno-5-13" href="#__codelineno-5-13"></a><span class="c1"># -- 对vg1卷组下的lv2_from_vg1逻辑卷做快照 首先要保证vg1要有剩余空间</span>
+<a id="__codelineno-5-14" name="__codelineno-5-14" href="#__codelineno-5-14"></a><span class="c1"># -- vg1还剩6g的空间</span>
+<a id="__codelineno-5-15" name="__codelineno-5-15" href="#__codelineno-5-15"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># vgs</span>
+<a id="__codelineno-5-16" name="__codelineno-5-16" href="#__codelineno-5-16"></a>  VG     <span class="c1">#PV #LV #SN Attr   VSize   VFree</span>
+<a id="__codelineno-5-17" name="__codelineno-5-17" href="#__codelineno-5-17"></a>  centos   <span class="m">1</span>   <span class="m">2</span>   <span class="m">0</span> wz--n- &lt;<span class="m">19</span>.00g    <span class="m">0</span> 
+<a id="__codelineno-5-18" name="__codelineno-5-18" href="#__codelineno-5-18"></a>  vg1      <span class="m">2</span>   <span class="m">2</span>   <span class="m">0</span> wz--n-  <span class="m">29</span>.99g <span class="m">5</span>.99g
+<a id="__codelineno-5-19" name="__codelineno-5-19" href="#__codelineno-5-19"></a>
+<a id="__codelineno-5-20" name="__codelineno-5-20" href="#__codelineno-5-20"></a><span class="c1"># -- 快照本质上也是制作一个lv. 对哪个lv做快照,就会向该lv所在的vg要空间.</span>
+<a id="__codelineno-5-21" name="__codelineno-5-21" href="#__codelineno-5-21"></a><span class="c1"># -s 即snapshot,表明是做快照</span>
+<a id="__codelineno-5-22" name="__codelineno-5-22" href="#__codelineno-5-22"></a><span class="c1"># -- lvcreate -L 快照大小 -s -n 快照名字 被做快照的lv的路径</span>
+<a id="__codelineno-5-23" name="__codelineno-5-23" href="#__codelineno-5-23"></a><span class="c1"># -- 快照先指定1G,不够的话,可以动态扩容嘛</span>
+<a id="__codelineno-5-24" name="__codelineno-5-24" href="#__codelineno-5-24"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># lvcreate -L 1G -s -n lv2_from_vg1_snap /dev/vg1/lv2_from_vg1</span>
+<a id="__codelineno-5-25" name="__codelineno-5-25" href="#__codelineno-5-25"></a>  Logical volume <span class="s2">&quot;lv2_from_vg1_snap&quot;</span> created.
+<a id="__codelineno-5-26" name="__codelineno-5-26" href="#__codelineno-5-26"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># lvs</span>
+<a id="__codelineno-5-27" name="__codelineno-5-27" href="#__codelineno-5-27"></a>  LV                VG     Attr       LSize   Pool Origin       Data%  Meta%  Move Log Cpy%Sync Convert
+<a id="__codelineno-5-28" name="__codelineno-5-28" href="#__codelineno-5-28"></a>  root              centos -wi-ao---- &lt;<span class="m">17</span>.00g                                                          
+<a id="__codelineno-5-29" name="__codelineno-5-29" href="#__codelineno-5-29"></a>  swap              centos -wi-ao----   <span class="m">2</span>.00g                                                          
+<a id="__codelineno-5-30" name="__codelineno-5-30" href="#__codelineno-5-30"></a>  lv1_from_vg1      vg1    -wi-ao----  <span class="m">22</span>.00g   
+<a id="__codelineno-5-31" name="__codelineno-5-31" href="#__codelineno-5-31"></a>  <span class="c1"># -- 可以看到快照与被做快照的lv在同一vg里!</span>
+<a id="__codelineno-5-32" name="__codelineno-5-32" href="#__codelineno-5-32"></a>  lv2_from_vg1      vg1    owi-aos---   <span class="m">2</span>.00g                                                          
+<a id="__codelineno-5-33" name="__codelineno-5-33" href="#__codelineno-5-33"></a>  lv2_from_vg1_snap vg1    swi-a-s---   <span class="m">1</span>.00g      lv2_from_vg1 <span class="m">0</span>.01 
+<a id="__codelineno-5-34" name="__codelineno-5-34" href="#__codelineno-5-34"></a>
+<a id="__codelineno-5-35" name="__codelineno-5-35" href="#__codelineno-5-35"></a><span class="c1"># -- vg1-lv2_from_vg1与vg1-lv2_from_vg1_snap的磁盘/分区UUID是一样的!!</span>
+<a id="__codelineno-5-36" name="__codelineno-5-36" href="#__codelineno-5-36"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># blkid | grep lv2_from_vg1</span>
+<a id="__codelineno-5-37" name="__codelineno-5-37" href="#__codelineno-5-37"></a>/dev/mapper/vg1-lv2_from_vg1: <span class="nv">UUID</span><span class="o">=</span><span class="s2">&quot;d0c4fc9b-3fea-409e-b7ab-d760c5c07c19&quot;</span> <span class="nv">TYPE</span><span class="o">=</span><span class="s2">&quot;xfs&quot;</span> 
+<a id="__codelineno-5-38" name="__codelineno-5-38" href="#__codelineno-5-38"></a>/dev/mapper/vg1-lv2_from_vg1_snap: <span class="nv">UUID</span><span class="o">=</span><span class="s2">&quot;d0c4fc9b-3fea-409e-b7ab-d760c5c07c19&quot;</span> <span class="nv">TYPE</span><span class="o">=</span><span class="s2">&quot;xfs&quot;</span> 
+<a id="__codelineno-5-39" name="__codelineno-5-39" href="#__codelineno-5-39"></a><span class="c1"># -- 同一个磁盘设备可以有多个挂载点,但有相同UUID的两个磁盘设备只能通过UUID挂载其中一个</span>
+<a id="__codelineno-5-40" name="__codelineno-5-40" href="#__codelineno-5-40"></a><span class="c1"># -- 可以回忆下永久挂载,在/etc/fstab配置文件中指定的就是磁盘设备的UUID</span>
+<a id="__codelineno-5-41" name="__codelineno-5-41" href="#__codelineno-5-41"></a><span class="c1"># -- So,lv2_from_vg1挂载后, 再mount挂载lv2_from_vg1_snap是失败的..</span>
+<a id="__codelineno-5-42" name="__codelineno-5-42" href="#__codelineno-5-42"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># mount /dev/vg1/lv2_from_vg1_snap /opt</span>
+<a id="__codelineno-5-43" name="__codelineno-5-43" href="#__codelineno-5-43"></a>mount: 文件系统类型错误、选项错误、/dev/mapper/vg1-lv2_from_vg1_snap 上有坏超级块、
+<a id="__codelineno-5-44" name="__codelineno-5-44" href="#__codelineno-5-44"></a>       缺少代码页或助手程序，或其他错误
+<a id="__codelineno-5-45" name="__codelineno-5-45" href="#__codelineno-5-45"></a>
+<a id="__codelineno-5-46" name="__codelineno-5-46" href="#__codelineno-5-46"></a>       有些情况下在 syslog 中可以找到一些有用信息- 请尝试
+<a id="__codelineno-5-47" name="__codelineno-5-47" href="#__codelineno-5-47"></a>       dmesg <span class="p">|</span> tail  这样的命令看看.
+<a id="__codelineno-5-48" name="__codelineno-5-48" href="#__codelineno-5-48"></a><span class="c1"># -- 但是可以曲线救国,指定-o选项让快照不通过UUID挂载</span>
+<a id="__codelineno-5-49" name="__codelineno-5-49" href="#__codelineno-5-49"></a><span class="c1"># -- 可以察觉到,做完lv2_from_vg1_snap快照后,我们并没有对其格式化做文件系统,却依旧能挂载成功!!</span>
+<a id="__codelineno-5-50" name="__codelineno-5-50" href="#__codelineno-5-50"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># mount -o nouuid /dev/vg1/lv2_from_vg1_snap /opt</span>
+<a id="__codelineno-5-51" name="__codelineno-5-51" href="#__codelineno-5-51"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># mount | grep lv2_from_vg1</span>
+<a id="__codelineno-5-52" name="__codelineno-5-52" href="#__codelineno-5-52"></a>/dev/mapper/vg1-lv2_from_vg1 on /test2 <span class="nb">type</span> xfs <span class="o">(</span>rw,relatime,attr2,inode64,noquota<span class="o">)</span>
+<a id="__codelineno-5-53" name="__codelineno-5-53" href="#__codelineno-5-53"></a>/dev/mapper/vg1-lv2_from_vg1_snap on /opt <span class="nb">type</span> xfs <span class="o">(</span>rw,relatime,nouuid,attr2,inode64,noquota<span class="o">)</span>
+<a id="__codelineno-5-54" name="__codelineno-5-54" href="#__codelineno-5-54"></a><span class="c1"># -- /opt里的内容跟/test2里的内容一模一样 </span>
+<a id="__codelineno-5-55" name="__codelineno-5-55" href="#__codelineno-5-55"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># ls /opt</span>
+<a id="__codelineno-5-56" name="__codelineno-5-56" href="#__codelineno-5-56"></a><span class="m">1</span>.txt  <span class="m">2</span>.txt  <span class="m">3</span>.txt
+<a id="__codelineno-5-57" name="__codelineno-5-57" href="#__codelineno-5-57"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># cat /test2/1.txt</span>
+<a id="__codelineno-5-58" name="__codelineno-5-58" href="#__codelineno-5-58"></a><span class="m">111</span>
+<a id="__codelineno-5-59" name="__codelineno-5-59" href="#__codelineno-5-59"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># cat /opt/1.txt</span>
+<a id="__codelineno-5-60" name="__codelineno-5-60" href="#__codelineno-5-60"></a><span class="m">111</span>
+<a id="__codelineno-5-61" name="__codelineno-5-61" href="#__codelineno-5-61"></a><span class="c1"># -- 但是 lv2_from_vg1里的内容改变后,lv2_from_vg1_snap快照里的内容是不会同步改变的!!</span>
+<a id="__codelineno-5-62" name="__codelineno-5-62" href="#__codelineno-5-62"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># echo 123456 &gt;&gt; /test2/1.txt </span>
+<a id="__codelineno-5-63" name="__codelineno-5-63" href="#__codelineno-5-63"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># cat /test2/1.txt</span>
+<a id="__codelineno-5-64" name="__codelineno-5-64" href="#__codelineno-5-64"></a><span class="m">111</span>
+<a id="__codelineno-5-65" name="__codelineno-5-65" href="#__codelineno-5-65"></a><span class="m">123456</span>
+<a id="__codelineno-5-66" name="__codelineno-5-66" href="#__codelineno-5-66"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># cat /opt/1.txt</span>
+<a id="__codelineno-5-67" name="__codelineno-5-67" href="#__codelineno-5-67"></a><span class="m">111</span>
+</code></pre></div>
+<h3 id="_4"><font color='orange'>快照恢复单个文件</font><a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="c1"># -- 平时没必要通过mount -o nouuid挂载快照,当被快照的lv里面的数据有问题了,才需要临时挂载快照进行数据恢复.</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="c1"># -- 恢复单个文件数据</span>
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># cp /opt/1.txt /test2/1.txt </span>
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>cp：是否覆盖<span class="s2">&quot;/test2/1.txt&quot;</span>？ y
+<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># cat /test2/1.txt</span>
+<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a><span class="m">111</span>
+</code></pre></div>
+<h3 id="_5"><font color='orange'>多个文件合并恢复</font><a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
+<p>先卸载数据源与快照, 再进行合并,快照会自动删除,一次性的</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="c1"># -- 恢复多个文件数据,可以合并,注意是一次性的!!(Ps:vm虚拟机里的快照恢复是永久的)</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>rm -rf /test2/2.txt 
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="nb">echo</span> <span class="m">333</span> &gt;&gt; /test2/3.txt
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># tree /test2</span>
+<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a>/test2
+<a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a>├── <span class="m">1</span>.txt   <span class="c1"># 111</span>
+<a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a>└── <span class="m">3</span>.txt <span class="c1"># 333 /n 333</span>
+<a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># tree /opt</span>
+<a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a>/opt
+<a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a>├── <span class="m">1</span>.txt   <span class="c1"># 111</span>
+<a id="__codelineno-7-11" name="__codelineno-7-11" href="#__codelineno-7-11"></a>├── <span class="m">2</span>.txt <span class="c1"># 222</span>
+<a id="__codelineno-7-12" name="__codelineno-7-12" href="#__codelineno-7-12"></a>└── <span class="m">3</span>.txt <span class="c1"># 333</span>
+<a id="__codelineno-7-13" name="__codelineno-7-13" href="#__codelineno-7-13"></a>
+<a id="__codelineno-7-14" name="__codelineno-7-14" href="#__codelineno-7-14"></a><span class="c1"># -- 若umount: /test2:目标忙, 先查看哪个进程占用fuser -cu /test2,ps查看该进程,再kill -9</span>
+<a id="__codelineno-7-15" name="__codelineno-7-15" href="#__codelineno-7-15"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># umount /opt</span>
+<a id="__codelineno-7-16" name="__codelineno-7-16" href="#__codelineno-7-16"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># umount /test2</span>
+<a id="__codelineno-7-17" name="__codelineno-7-17" href="#__codelineno-7-17"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># lvconvert --mergesnapshot /dev/vg1/lv2_from_vg1_snap </span>
+<a id="__codelineno-7-18" name="__codelineno-7-18" href="#__codelineno-7-18"></a>  Merging of volume vg1/lv2_from_vg1_snap started.
+<a id="__codelineno-7-19" name="__codelineno-7-19" href="#__codelineno-7-19"></a>  vg1/lv2_from_vg1: Merged: <span class="m">100</span>.00%
+<a id="__codelineno-7-20" name="__codelineno-7-20" href="#__codelineno-7-20"></a><span class="c1"># -- 可以发现/dev/vg1/lv2_from_vg1_snap快照文件没了</span>
+<a id="__codelineno-7-21" name="__codelineno-7-21" href="#__codelineno-7-21"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># lvs</span>
+<a id="__codelineno-7-22" name="__codelineno-7-22" href="#__codelineno-7-22"></a>  LV           VG     Attr       LSize   Pool Origin Data%  Meta%  Move Log Cpy%Sync Convert
+<a id="__codelineno-7-23" name="__codelineno-7-23" href="#__codelineno-7-23"></a>  root         centos -wi-ao---- &lt;<span class="m">17</span>.00g                                                    
+<a id="__codelineno-7-24" name="__codelineno-7-24" href="#__codelineno-7-24"></a>  swap         centos -wi-ao----   <span class="m">2</span>.00g                                                    
+<a id="__codelineno-7-25" name="__codelineno-7-25" href="#__codelineno-7-25"></a>  lv1_from_vg1 vg1    -wi-ao----  <span class="m">22</span>.00g                                                    
+<a id="__codelineno-7-26" name="__codelineno-7-26" href="#__codelineno-7-26"></a>  lv2_from_vg1 vg1    -wi-ao----   <span class="m">2</span>.00g  
+<a id="__codelineno-7-27" name="__codelineno-7-27" href="#__codelineno-7-27"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># mount /dev/vg1/lv2_from_vg1 /test2/</span>
+<a id="__codelineno-7-28" name="__codelineno-7-28" href="#__codelineno-7-28"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># ls /test2</span>
+<a id="__codelineno-7-29" name="__codelineno-7-29" href="#__codelineno-7-29"></a><span class="m">1</span>.txt  <span class="m">2</span>.txt  <span class="m">3</span>.txt
+<a id="__codelineno-7-30" name="__codelineno-7-30" href="#__codelineno-7-30"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># cat /test2/*</span>
+<a id="__codelineno-7-31" name="__codelineno-7-31" href="#__codelineno-7-31"></a><span class="m">111</span>
+<a id="__codelineno-7-32" name="__codelineno-7-32" href="#__codelineno-7-32"></a><span class="m">222</span>
+<a id="__codelineno-7-33" name="__codelineno-7-33" href="#__codelineno-7-33"></a><span class="m">333</span>
+</code></pre></div>
+<p>还有个思路是, <code>cp -r 源文件夹/* 目标文件夹</code></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>lvcreate -L 1G -s -n lv2_from_vg1_snap /dev/vg1/lv2_from_vg1
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>rm -rf /test2/2.txt
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="nb">echo</span> <span class="m">123456</span> &gt;&gt; /test2/1.txt
+<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># cat /test2/1.txt </span>
+<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="m">111</span>
+<a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a><span class="m">123456</span>
+<a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># cat /test2/2.txt </span>
+<a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a>cat: /test2/2.txt: 没有那个文件或目录
+<a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># mount -o nouuid /dev/vg1/lv2_from_vg1_snap /opt</span>
+<a id="__codelineno-8-10" name="__codelineno-8-10" href="#__codelineno-8-10"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># ls /opt</span>
+<a id="__codelineno-8-11" name="__codelineno-8-11" href="#__codelineno-8-11"></a><span class="m">1</span>.txt  <span class="m">2</span>.txt  <span class="m">3</span>.txt
+<a id="__codelineno-8-12" name="__codelineno-8-12" href="#__codelineno-8-12"></a>
+<a id="__codelineno-8-13" name="__codelineno-8-13" href="#__codelineno-8-13"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># cp -r /opt/* /test2</span>
+<a id="__codelineno-8-14" name="__codelineno-8-14" href="#__codelineno-8-14"></a>cp:是否覆盖<span class="s2">&quot;/test2/1.txt&quot;</span>？ y
+<a id="__codelineno-8-15" name="__codelineno-8-15" href="#__codelineno-8-15"></a>cp:是否覆盖<span class="s2">&quot;/test2/3.txt&quot;</span>？ y
+<a id="__codelineno-8-16" name="__codelineno-8-16" href="#__codelineno-8-16"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># ls /test2</span>
+<a id="__codelineno-8-17" name="__codelineno-8-17" href="#__codelineno-8-17"></a><span class="m">1</span>.txt  <span class="m">2</span>.txt  <span class="m">3</span>.txt
+<a id="__codelineno-8-18" name="__codelineno-8-18" href="#__codelineno-8-18"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># cat /test2/*</span>
+<a id="__codelineno-8-19" name="__codelineno-8-19" href="#__codelineno-8-19"></a><span class="m">111</span>
+<a id="__codelineno-8-20" name="__codelineno-8-20" href="#__codelineno-8-20"></a><span class="m">222</span>
+<a id="__codelineno-8-21" name="__codelineno-8-21" href="#__codelineno-8-21"></a><span class="m">333</span>
+<a id="__codelineno-8-22" name="__codelineno-8-22" href="#__codelineno-8-22"></a><span class="c1"># -- 快照文件还在</span>
+<a id="__codelineno-8-23" name="__codelineno-8-23" href="#__codelineno-8-23"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># lvs | grep snap</span>
+<a id="__codelineno-8-24" name="__codelineno-8-24" href="#__codelineno-8-24"></a>  lv2_from_vg1_snap vg1    swi-aos---   <span class="m">1</span>.00g      lv2_from_vg1 <span class="m">0</span>.20 
+</code></pre></div>
+<h3 id="_6"><font color='orange'>底层原理</font><a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
+<p><img alt="" src="../assets/lvm%E5%BF%AB%E7%85%A7.jpeg" /></p>
+<p>为了便于阐述,在这里约定被制作快照的lv叫做原始卷..(不存在这个名词哈,我们自己创造的)</p>
+<p><font size=5>Q1:</font> 我们<code>lvcreate -L 1G</code>先分配了1G的空间给快照,将快照挂载后,能访问到跟原始卷里一样的数据... <br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 实际上给快照分配的1G大小的空间几乎没有使用,<font color='blue'>也就是说快照刚建立好时是不占用空间的;矛盾的是里面却有数据.</font> 很神奇吧,如何做到的呢？<br />
+<font size=5>A1:</font> 快照刚建立好时,里面全是一堆原始卷的<strong>硬链接</strong>, 快照空间里是没有存放数据的..<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <font color='green'>正因为硬链接的创建不能跨区,所以快照跟原始卷不能跨区..</font> <em>专业一点来说, LVM 采用的写时复制, 是指当 LVM 快照创建的时候, 仅创建到实际数据的inode的硬链接(hark-link)而已..</em>  快照与原始卷共享很多PE 区块..</p>
+<p><font size=5>Q2:</font> 再思考个问题,硬链接的特点是inode号相同,硬链接的源文件和目标文件内容的修改会同步..<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 但在实验中原始卷里的1.txt文件内容改变了,快照却没有影响.. 这又是为何呢？<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <font color='gray'>实验了下,挂载的快照里的数据改了,对原始卷里的数据也没有影响..</font><br />
+<font size=5>A2:</font>  我们知道 <strong>硬盘中的所有操作都是覆盖</strong> (<font color='gray'>详见文件系统章节</font>)!! lvm快照机制在处理原始卷的改动时,<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 会先将原始卷里改动的1.txt文件整个移动到快照空间中,然后再实现1.txt文件进行覆盖操作... <strong>So,原试卷改动,快照才会占用空间</strong>. <br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <font color='brown'>专业一点来说,只要实际的数据没有改变, 快照就只包含指向数据的inode的指针,而非数据本身!  快照会跟踪原始卷中块的改变, 一旦你更改了快照对应的文件或目录，这个时候原始卷上将要改变的数据会在改变之前拷贝到快照预留的空间.</font><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 随着时间的推移,假设原试卷里的文件都改动过了,那么全都会倒腾到快照空间中. <font color='red'>因而,快照空间的大小不会超过原始卷打快照时那一刻的大小!!</font> 快照空间不够怎么办,动态扩容嘛！<font color='gray'>快照是原试卷那一时刻内容的复刻,只有原始卷里面的文件第一次改动时才会惊动快照空间..</font></p>
+<p><strong>注意哦,</strong> 备份不一定必须用LVM快照, 也可以用前面提及的xfsdump增量备份...</p>
+<hr />
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+          <a href="#" class="md-top md-icon" data-md-component="top" hidden>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
+            回到页面顶部
+          </a>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+    <nav class="md-footer__inner md-grid" aria-label="页脚" >
+      
+        
+        <a href="../14_%E5%AD%98%E5%82%A8%E7%AE%A1%E7%90%86%E4%B9%8B%E4%BC%A0%E7%BB%9F%E7%A3%81%E7%9B%98%E7%AE%A1%E7%90%86/" class="md-footer__link md-footer__link--prev" aria-label="上一页: 存储管理之传统磁盘管理" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                上一页
+              </span>
+              存储管理之传统磁盘管理
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="../16_%E7%BD%91%E7%BB%9C%E7%AE%A1%E7%90%86/" class="md-footer__link md-footer__link--next" aria-label="下一页: 网络管理" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                下一页
+              </span>
+              网络管理
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright © 2023 from Dc_OnePiece
+    </div>
+  
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "navigation.top", "navigation.expand", "navigation.instant", "navigation.tracking", "search.suggest", "search.highlight", "search.share"], "search": "../../assets/javascripts/workers/search.5bf1dace.min.js", "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.config.lang": "ja", "search.config.pipeline": "trimmer, stemmer", "search.config.separator": "[\\s\\-\uff0c\u3002]+", "search.placeholder": "\u641c\u7d22", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version.title": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.37e9125f.min.js"></script>
+      
+        <script src="../../resources/js/extra.js"></script>
+      
+    
+  </body>
+</html>

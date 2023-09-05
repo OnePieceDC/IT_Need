@@ -1,0 +1,2346 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="These are my study notes.">
+      
+      
+        <meta name="author" content="DC">
+      
+      
+      <link rel="icon" href="../../resources/images/favicon.ico">
+      <meta name="generator" content="mkdocs-1.3.1, mkdocs-material-8.5.3">
+    
+    
+      
+        <title>管理进程 - IT必备知识</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.7a952b86.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.cbb835fc.min.css">
+        
+      
+      
+
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../resources/css/extra.css">
+    
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lxgw-wenkai-webfont@1.1.0/style.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="blue-grey" data-md-color-accent="amber">
+  
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#_1" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../.." title="IT必备知识" class="md-header__button md-logo" aria-label="IT必备知识" data-md-component="logo">
+      
+  <img src="../../resources/images/favicon.ico" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            IT必备知识
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              管理进程
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      <form class="md-header__option" data-md-component="palette">
+        
+          
+          
+          <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="blue-grey" data-md-color-accent="amber"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+          
+            <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"/></svg>
+            </label>
+          
+        
+          
+          
+          <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="blue-grey" data-md-color-accent="amber"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_2">
+          
+            <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12c0-2.42-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"/></svg>
+            </label>
+          
+        
+      </form>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="分享" aria-label="分享" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7 0-.24-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91 1.61 0 2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08Z"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="标签" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../0_%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/0_%E5%89%8D%E5%A5%8F%28%E4%BB%8B%E7%BB%8D%29/" class="md-tabs__link">
+        计算机基础(8)
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+    
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../0_%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C/" class="md-tabs__link md-tabs__link--active">
+        linux基础(20)
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../5_db/0_%E5%9F%BA%E7%A1%80/0_install_db/" class="md-tabs__link">
+        mysql(19)
+      </a>
+    </li>
+  
+
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../9_git/0_git%E7%94%9F%E6%B4%BB%E7%89%88/" class="md-tabs__link">
+        git(2)
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../13_%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/0_%E9%80%92%E5%BD%92_%E6%9F%A5%E6%89%BE/" class="md-tabs__link">
+        查找排序算法(5)
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="IT必备知识" class="md-nav__button md-logo" aria-label="IT必备知识" data-md-component="logo">
+      
+  <img src="../../resources/images/favicon.ico" alt="logo">
+
+    </a>
+    IT必备知识
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" data-md-toggle="__nav_1" type="checkbox" id="__nav_1" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_1">
+          计算机基础(8)
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="计算机基础(8)" data-md-level="1">
+        <label class="md-nav__title" for="__nav_1">
+          <span class="md-nav__icon md-icon"></span>
+          计算机基础(8)
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../0_%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/0_%E5%89%8D%E5%A5%8F%28%E4%BB%8B%E7%BB%8D%29/" class="md-nav__link">
+        前奏(介绍)
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../0_%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/1_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A1%AC%E4%BB%B6%E7%BB%84%E6%88%90/" class="md-nav__link">
+        计算机硬件组成
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../0_%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/2_%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" class="md-nav__link">
+        操作系统
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../0_%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/3_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E6%A6%82%E8%A7%88/" class="md-nav__link">
+        计算机网络概览
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../0_%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/4_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E4%B9%8B%E7%BD%91%E7%BB%9C%E6%8E%A5%E5%8F%A3%E5%B1%82/" class="md-nav__link">
+        网络接口层
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../0_%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/5_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E4%B9%8B%E7%BD%91%E7%BB%9C%E5%B1%82/" class="md-nav__link">
+        网络层
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../0_%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/6_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E4%B9%8B%E4%BC%A0%E8%BE%93%E5%B1%82/" class="md-nav__link">
+        传输层
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../0_%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/7_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%A1%A5%E5%85%85/" class="md-nav__link">
+        补充
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2">
+          linux基础(20)
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="linux基础(20)" data-md-level="1">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          linux基础(20)
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0_%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C/" class="md-nav__link">
+        准备工作
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../1_%E5%88%9D%E8%AF%86shell%E4%B8%8E%E5%9F%BA%E7%A1%80%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" class="md-nav__link">
+        初识shell与基础常用命令
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../2_%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86%E4%B9%8B%E5%9F%BA%E7%A1%80%E5%91%BD%E4%BB%A4/" class="md-nav__link">
+        文件管理之基础命令
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../3_%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86%E4%B9%8B%E5%9B%9B%E5%A4%A7%E6%A8%A1%E5%BC%8F/" class="md-nav__link">
+        文件管理之四大模式
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../4_%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86%E4%B9%8B%E5%91%BD%E4%BB%A4%E8%A1%A5%E5%85%85/" class="md-nav__link">
+        文件管理之命令补充
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../5_%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86%E4%B9%8B%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/" class="md-nav__link">
+        文件管理之文件系统
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../6_%E6%9D%83%E9%99%90%E7%AE%A1%E7%90%86%E4%B9%8B%E7%94%A8%E6%88%B7%E4%B8%8E%E7%BB%84/" class="md-nav__link">
+        权限管理之用户与组
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../7_%E6%9D%83%E9%99%90%E7%AE%A1%E7%90%86%E4%B9%8B%E6%96%87%E4%BB%B6%E6%9D%83%E9%99%90/" class="md-nav__link">
+        权限管理之文件权限
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../8_%E6%9D%83%E9%99%90%E7%AE%A1%E7%90%86%E4%B9%8BACL/" class="md-nav__link">
+        权限管理之ACL
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../9_%E6%9D%83%E9%99%90%E7%AE%A1%E7%90%86%E4%B9%8Bsu%E4%B8%8Esudo/" class="md-nav__link">
+        权限管理之su与sudo
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../10_%E8%BD%AF%E4%BB%B6%E5%8C%85%E7%AE%A1%E7%90%86%E4%B9%8Brpm/" class="md-nav__link">
+        软件包管理之rpm
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../11_%E8%BD%AF%E4%BB%B6%E5%8C%85%E7%AE%A1%E7%90%86%E4%B9%8Byum/" class="md-nav__link">
+        软件包管理之yum
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../12_%E6%9F%A5%E7%9C%8B%E8%BF%9B%E7%A8%8B/" class="md-nav__link">
+        查看进程
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          管理进程
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        管理进程
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    优先级设置
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    给进程发送信号
+  </a>
+  
+    <nav class="md-nav" aria-label="给进程发送信号">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#hup" class="md-nav__link">
+    HUP
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#killterm" class="md-nav__link">
+    KILL与TERM
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    补充
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#hup_1" class="md-nav__link">
+    关于HUP信号
+  </a>
+  
+    <nav class="md-nav" aria-label="关于HUP信号">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    话题引入
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exitlogout" class="md-nav__link">
+    exit、logout
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#nohup" class="md-nav__link">
+    nohup
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#setsid" class="md-nav__link">
+    setsid
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#shell" class="md-nav__link">
+    在子shell中提交任务
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#screen" class="md-nav__link">
+    screen!!
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    管理后台进程
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    管道
+  </a>
+  
+    <nav class="md-nav" aria-label="管道">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    管道练习
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tee" class="md-nav__link">
+    管道中的tee
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#xargs" class="md-nav__link">
+    xargs
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    僵尸进程与孤儿进程
+  </a>
+  
+    <nav class="md-nav" aria-label="僵尸进程与孤儿进程">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    僵尸进程是什么？
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#wait-waitpid" class="md-nav__link">
+    wait / waitpid
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    清理僵尸进程
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    孤儿进程
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    实验验证
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../14_%E5%AD%98%E5%82%A8%E7%AE%A1%E7%90%86%E4%B9%8B%E4%BC%A0%E7%BB%9F%E7%A3%81%E7%9B%98%E7%AE%A1%E7%90%86/" class="md-nav__link">
+        存储管理之传统磁盘管理
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../15_%E5%AD%98%E5%82%A8%E7%AE%A1%E7%90%86%E4%B9%8BLVM/" class="md-nav__link">
+        存储管理之LVM
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../16_%E7%BD%91%E7%BB%9C%E7%AE%A1%E7%90%86/" class="md-nav__link">
+        网络管理
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../17_shell%E5%9F%BA%E7%A1%80/" class="md-nav__link">
+        shell基础
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../18_crond%E8%AE%A1%E5%88%92%E4%BB%BB%E5%8A%A1/" class="md-nav__link">
+        crond计划任务
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../19_%E7%B3%BB%E7%BB%9F%E4%BC%98%E5%8C%96/" class="md-nav__link">
+        系统优化
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3">
+          mysql(19)
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="mysql(19)" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          mysql(19)
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" data-md-toggle="__nav_3_1" type="checkbox" id="__nav_3_1" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3_1">
+          基础
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="基础" data-md-level="2">
+        <label class="md-nav__title" for="__nav_3_1">
+          <span class="md-nav__icon md-icon"></span>
+          基础
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../5_db/0_%E5%9F%BA%E7%A1%80/0_install_db/" class="md-nav__link">
+        数据库安装
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../5_db/0_%E5%9F%BA%E7%A1%80/1_db_command/" class="md-nav__link">
+        sql命令总结
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../5_db/0_%E5%9F%BA%E7%A1%80/2_imp_knowledge/" class="md-nav__link">
+        imp_knowledge
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../5_db/0_%E5%9F%BA%E7%A1%80/3_table_field/" class="md-nav__link">
+        字段的约束和类型
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../5_db/0_%E5%9F%BA%E7%A1%80/4_table_relation/" class="md-nav__link">
+        表关系
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../5_db/0_%E5%9F%BA%E7%A1%80/5_permissions/" class="md-nav__link">
+        权限管理
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../5_db/0_%E5%9F%BA%E7%A1%80/6_single_query/" class="md-nav__link">
+        单表查询
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../5_db/0_%E5%9F%BA%E7%A1%80/7_multi_query/" class="md-nav__link">
+        多表查询
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../5_db/0_%E5%9F%BA%E7%A1%80/8_query_practice/" class="md-nav__link">
+        query_practice
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../5_db/0_%E5%9F%BA%E7%A1%80/9_pymysql/" class="md-nav__link">
+        pymysql
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../5_db/0_%E5%9F%BA%E7%A1%80/10_just_know/" class="md-nav__link">
+        just_know
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../5_db/0_%E5%9F%BA%E7%A1%80/other/01_to_11/" class="md-nav__link">
+        other1
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../5_db/0_%E5%9F%BA%E7%A1%80/other/05/" class="md-nav__link">
+        other2
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" data-md-toggle="__nav_3_2" type="checkbox" id="__nav_3_2" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3_2">
+          进阶
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="进阶" data-md-level="2">
+        <label class="md-nav__title" for="__nav_3_2">
+          <span class="md-nav__icon md-icon"></span>
+          进阶
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../5_db/1_%E8%BF%9B%E9%98%B6/0_index/" class="md-nav__link">
+        索引
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../5_db/1_%E8%BF%9B%E9%98%B6/1_explain/" class="md-nav__link">
+        执行计划
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../5_db/1_%E8%BF%9B%E9%98%B6/2_transaction/" class="md-nav__link">
+        事务
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../5_db/1_%E8%BF%9B%E9%98%B6/3_db_readPhenomenon/" class="md-nav__link">
+        读现象
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../5_db/1_%E8%BF%9B%E9%98%B6/4_lock/" class="md-nav__link">
+        锁
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../5_db/1_%E8%BF%9B%E9%98%B6/other/" class="md-nav__link">
+        数据库连接池
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4">
+          git(2)
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="git(2)" data-md-level="1">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          git(2)
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../9_git/0_git%E7%94%9F%E6%B4%BB%E7%89%88/" class="md-nav__link">
+        git生活版
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../9_git/1_git%E7%A0%94%E7%A9%B6%E7%89%88/" class="md-nav__link">
+        git研究版
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" data-md-toggle="__nav_5" type="checkbox" id="__nav_5" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_5">
+          查找排序算法(5)
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="查找排序算法(5)" data-md-level="1">
+        <label class="md-nav__title" for="__nav_5">
+          <span class="md-nav__icon md-icon"></span>
+          查找排序算法(5)
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../13_%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/0_%E9%80%92%E5%BD%92_%E6%9F%A5%E6%89%BE/" class="md-nav__link">
+        查找
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../13_%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/1_LowB%E4%B8%89%E4%BA%BA%E7%BB%84/" class="md-nav__link">
+        LowB三人组
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../13_%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/2_NB%E4%B8%89%E4%BA%BA%E7%BB%84/" class="md-nav__link">
+        NB三人组
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../13_%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/3_%E5%85%B6%E5%AE%83%E6%8E%92%E5%BA%8F/" class="md-nav__link">
+        其它排序
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../13_%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/4_%E6%9F%A5%E6%89%BE%E4%B9%A0%E9%A2%98/" class="md-nav__link">
+        查找习题
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    优先级设置
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    给进程发送信号
+  </a>
+  
+    <nav class="md-nav" aria-label="给进程发送信号">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#hup" class="md-nav__link">
+    HUP
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#killterm" class="md-nav__link">
+    KILL与TERM
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    补充
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#hup_1" class="md-nav__link">
+    关于HUP信号
+  </a>
+  
+    <nav class="md-nav" aria-label="关于HUP信号">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    话题引入
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exitlogout" class="md-nav__link">
+    exit、logout
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#nohup" class="md-nav__link">
+    nohup
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#setsid" class="md-nav__link">
+    setsid
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#shell" class="md-nav__link">
+    在子shell中提交任务
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#screen" class="md-nav__link">
+    screen!!
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    管理后台进程
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    管道
+  </a>
+  
+    <nav class="md-nav" aria-label="管道">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    管道练习
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tee" class="md-nav__link">
+    管道中的tee
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#xargs" class="md-nav__link">
+    xargs
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    僵尸进程与孤儿进程
+  </a>
+  
+    <nav class="md-nav" aria-label="僵尸进程与孤儿进程">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    僵尸进程是什么？
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#wait-waitpid" class="md-nav__link">
+    wait / waitpid
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    清理僵尸进程
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    孤儿进程
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    实验验证
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  <h1>管理进程</h1>
+
+<h2 id="_1">优先级设置<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<blockquote>
+<p><font color='brown'>nice命令设置的优先级不是程序最终的优先级, 只是优先级的修正数值</font></p>
+</blockquote>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># ps -l | head -1</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>F S   UID    PID   PPID  C PRI  NI ADDR SZ WCHAN  TTY          TIME CMD
+</code></pre></div>
+<p>PRI:&nbsp;&nbsp;&nbsp;&nbsp;代表这个进程可被执行的优先级,其值越小越早被执行<br />
+NI:&nbsp;&nbsp;&nbsp;&nbsp;  代表这个进程的nice值</p>
+<p>NI可以通过nice命令设置,其表示进程可被执行的优先级的修正数值..<br />
+PRI值越小越快被执行,加入nice值后,将会使得PRI变为: <font color='brown'><code>PRI(new)=PRI(old)+nice</code></font></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>▲ 对某一命令设置nice值
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="sb">`</span>nice -n nice值 命令<span class="sb">`</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>▲ 对已运行的进程设置新的优先级
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="sb">`</span>renice -nice值 进程PID<span class="sb">`</span>
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>PS: 若nice命令未指定优先级的调整值,则以缺省值10来调整程序运行优先级,既在当前程序运行优先级基础之上增加10..
+</code></pre></div>
+<hr />
+<h2 id="_2">给进程发送信号<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<blockquote>
+<p>只需掌握 <font color='brown'><strong>1、9、15</strong></font>这3个信号!!!</p>
+</blockquote>
+<p><code>kill -l</code>   列出所有支持的信号  <br />
+&nbsp;&nbsp;&nbsp;&nbsp; <code>1) SIGHUP</code>    &nbsp;&nbsp;&nbsp;&nbsp; <code>9) SIGKILL</code>   &nbsp;&nbsp;&nbsp;&nbsp; <code>15) SIGTERM</code></p>
+<h3 id="hup"><font color='orange'>HUP</font><a class="headerlink" href="#hup" title="Permanent link">&para;</a></h3>
+<p>有两个作用:<br />
+&nbsp;&nbsp;&nbsp;&nbsp; 1&gt; 挂起会话<br />
+&nbsp;&nbsp;&nbsp;&nbsp; 2&gt; <strong>修改了配置文件,在不关闭该进程的情况下,重新加载配置文件 </strong><br />
+<font color='gray'>这里先详细阐述第二个作用,第一个作用后文会进行说明!</font></p>
+<p>启动软件时会读取配置文件, 难道改完配置文件后, 要让软件重启进而重新读取修改后的配置文件吗？<br />
+no.. 重启,该软件提供的服务就断掉啦.. 可以通过该软件的进程发送HUP信号解决这个问题...</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>systemctl stop firewalld
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>systemctl disable firewalld
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>setenforce <span class="m">0</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>ifconfig ens33 <span class="p">|</span> grep inet  <span class="c1">## -- 查看到服务端(vm虚机)的ip地址为172.16.150.131</span>
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>yum install vsftpd -y
+<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>systemctl start vsftpd    <span class="c1">## -- 开启ftp服务</span>
+<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>systemctl status vsftpd   <span class="c1">## -- 查看ftp服务状态</span>
+<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a>systemctl <span class="nb">enable</span> vsftpd   <span class="c1">## -- 设置开机自启</span>
+<a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a>
+<a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a><span class="c1">## -- vsftpd此软件有个默认的共享文件夹 /var/ftp/</span>
+<a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a><span class="nb">cd</span> /var/ftp 
+<a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a>ls  <span class="c1">## -- 里面默认有个hub文件夹</span>
+<a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a>
+<a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a>mkdir /var/ftp/share
+<a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a>touch /var/ftp/share/a.txt
+<a id="__codelineno-2-17" name="__codelineno-2-17" href="#__codelineno-2-17"></a>touch /var/ftp/share/b.txt
+<a id="__codelineno-2-18" name="__codelineno-2-18" href="#__codelineno-2-18"></a>touch /var/ftp/share/aaa
+<a id="__codelineno-2-19" name="__codelineno-2-19" href="#__codelineno-2-19"></a><span class="o">[</span>root@localhost ftp<span class="o">]</span><span class="c1"># tree /var/ftp</span>
+<a id="__codelineno-2-20" name="__codelineno-2-20" href="#__codelineno-2-20"></a>/var/ftp
+<a id="__codelineno-2-21" name="__codelineno-2-21" href="#__codelineno-2-21"></a>├── pub
+<a id="__codelineno-2-22" name="__codelineno-2-22" href="#__codelineno-2-22"></a>└── share
+<a id="__codelineno-2-23" name="__codelineno-2-23" href="#__codelineno-2-23"></a>    ├── aaa
+<a id="__codelineno-2-24" name="__codelineno-2-24" href="#__codelineno-2-24"></a>    ├── a.txt
+<a id="__codelineno-2-25" name="__codelineno-2-25" href="#__codelineno-2-25"></a>    └── b.txt
+<a id="__codelineno-2-26" name="__codelineno-2-26" href="#__codelineno-2-26"></a>
+<a id="__codelineno-2-27" name="__codelineno-2-27" href="#__codelineno-2-27"></a><span class="c1">## -- ftp://172.16.150.131 指向的就是 /var/ftp</span>
+<a id="__codelineno-2-28" name="__codelineno-2-28" href="#__codelineno-2-28"></a>在客户端<span class="o">(</span>mac电脑<span class="o">)</span>上,首先 ping <span class="m">172</span>.16.150.131看是否能ping通
+<a id="__codelineno-2-29" name="__codelineno-2-29" href="#__codelineno-2-29"></a>然后在mac的浏览器上输入地址 ftp://172.16.150.131 
+<a id="__codelineno-2-30" name="__codelineno-2-30" href="#__codelineno-2-30"></a>点击<span class="sb">`</span>访达.app<span class="sb">`</span>按钮,以客人的身份访问,点击连接!成功!
+</code></pre></div>
+<p><img alt="" src="../assets/ftp.jpeg" /></p>
+<p>现在我们需要将ftp服务默认的共享目录<code>/var/ftp/</code>换成 <code>/var/ftp/share</code></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="c1">## vim /etc/vsftpd/vsftpd.conf 在该配置文件最末尾添加 anon_root=/var/ftp/share</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="c1">## 使用echo       echo &#39;anon_root=/var/ftp/share&#39; &gt;&gt; /etc/vsftpd/vsftpd.conf</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="c1">## 使用sed 注意用的是单引号!! $最后一行 a添加</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>sed -i <span class="s1">&#39;$a anon_root=/var/ftp/share&#39;</span> /etc/vsftpd/vsftpd.conf
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="c1">## 让配置文件生效,若通过 systemctl restart vsftpd 命令重启服务,会导致该进程的PID改变</span>
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="o">[</span>root@localhost ftp<span class="o">]</span><span class="c1"># ps aux | grep [v]sftpd</span>
+<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>root  <span class="m">1117</span>  <span class="m">0</span>.0  <span class="m">0</span>.0  <span class="m">53292</span>  <span class="m">712</span> ? Ss  <span class="m">20</span>:02 <span class="m">0</span>:00 /usr/sbin/vsftpd /etc/vsftpd/vsftpd.conf
+<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a>
+<a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a><span class="nb">kill</span> -1 <span class="m">1117</span>
+<a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a>然后通过浏览器重新以客人身份访问.就会得到 /var/ftp/share目录下的内容
+<a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a>
+<a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a><span class="s2">&quot;&quot;&quot;</span>
+<a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a><span class="s2">若将配置文件的内容搞乱了,将配置文件恢复出厂设置怎么做？</span>
+<a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a><span class="s2">rm -rf /etc/vsftpd/vsftpd.conf</span>
+<a id="__codelineno-3-16" name="__codelineno-3-16" href="#__codelineno-3-16"></a><span class="s2">yum reinstall vsftpd -y</span>
+<a id="__codelineno-3-17" name="__codelineno-3-17" href="#__codelineno-3-17"></a><span class="s2">&quot;&quot;&quot;</span>
+</code></pre></div>
+<p><img alt="" src="../assets/ftp2.jpeg" /></p>
+<h3 id="killterm"><font color='orange'>KILL与TERM</font><a class="headerlink" href="#killterm" title="Permanent link">&para;</a></h3>
+<p><code>kill 进程PID</code> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 默认发出的就是 -15的信号, 代表终止<br />
+<code>kill -9 进程PID</code> &nbsp;&nbsp;&nbsp;&nbsp; 有些进程用15的信号是杀不死的,发送9的信号强制杀死</p>
+<p>kill命令和ftp程序都是软件,kill给ftp发了个信号过去... <br />
+<strong>ftp是否响应 取决于 ftp软件在开发时有没有设计捕捉此信号并作处理的功能..</strong> <br />
+15这个信号可能得不到应用软件响应,但9这个信号应用软件基本都会响应,不然这个软件就是病毒了...<br />
+<font color='gray'>Ps: 回顾下,处于<strong>D</strong>和<strong>Z</strong>状态的进程是杀不掉的..</font></p>
+<p>多个虚拟终端,都开启了vim, 通过 <code>pkill -9 vim</code> 命令可以<strong>批量杀死</strong>..</p>
+<h3 id="_3"><font color='orange'>补充</font><a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
+<p><code>19) SIGSTOP</code> &nbsp;&nbsp;&nbsp;&nbsp; 使进程进入T状态<br />
+<code>18) SIGCONT</code> &nbsp;&nbsp;&nbsp;&nbsp; 将停止的进程重新投入运行</p>
+<p><img alt="" src="../assets/18_19.jpeg" /></p>
+<hr />
+<h2 id="hup_1">关于HUP信号<a class="headerlink" href="#hup_1" title="Permanent link">&para;</a></h2>
+<blockquote>
+<p>给进程发送HUP信号, 可以让进程重新加载配置文件..<br />
+接下来主要讲解它的另外一个功能: <strong>挂起会话 </strong> </p>
+</blockquote>
+<h3 id="_4"><font color='orange'>话题引入</font><a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
+<p>远程连接开启了一个虚拟终端(<font color='gray'>提一嘴,用户登录成功后,会先开启一个名为bash的进程</font>), 一通命令操作后, 关闭该终端(<font color='gray'>注意,不是exit命令退出</font>),该终端窗口里执行的所有进程(<font color='gray'>bash进程连同其子进程</font>)都会被强制关掉..</p>
+<p>So,我们需要让进程脱离当前会话窗口session(<font color='gray'>通俗点,就是那个输入命令返回结果的交互式的命令行界面</font>)而运行
+换个说法,让我们的进程在后台一直运行,不要因为用户注销或者网络断开或者终端关闭而一起被干掉...</p>
+<p>有两种解决思路:<br />
+&nbsp;&nbsp;&nbsp;&nbsp; 思路1: 让进程忽略Linux HUP信号<br />
+&nbsp;&nbsp;&nbsp;&nbsp; 思路2: 让进程运行在新的会话里, 从而不属于此终端的子进程, 就不会在当前终端挂掉的情况下一起被带走</p>
+<p>有四种方式: <font color='gray'><strong>它们的原理本质上都一样 -- 让子进程认一个新的爹PID为1 </strong></font><br />
+&nbsp;&nbsp;&nbsp;&nbsp; ○ 先不着急叉掉窗口,使用exit或logout命令正常退出终端<br />
+&nbsp;&nbsp;&nbsp;&nbsp; ○ nohup 命令 &amp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp; ○ setsid<br />
+&nbsp;&nbsp;&nbsp;&nbsp; ○ (命令 &amp;)<br />
+&nbsp;&nbsp;&nbsp;&nbsp; ○ screen 命令<br />
+&nbsp;&nbsp;&nbsp;&nbsp; ○ kill -9 父进程PID</p>
+<p>▲ <font color='blue'>验证直接叉掉窗口,该会话窗口/session/交互式窗口/虚拟终端的bash进程连同它的所有子进程都会一同挂掉..</font></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="c1">## -- /dev/pts/0</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="s2">&quot;&quot;&quot;</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="s2">在第1个虚拟终端里</span>
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="s2">我们ping网址,将结果不管正确与否都丢到/dev/null黑洞中,并在后台运行 </span>
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="s2">并执行了一个在后台运行的sleep命令</span>
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="s2">查看PID为6597的ping进程的父进程的PID为6331 </span>
+<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="s2">查看得知PID为6331的进程是打开此虚拟终端/dev/pts/0产生的bash进程</span>
+<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="s2">&quot;&quot;&quot;</span>
+<a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># ping www.baidu.com &amp;&gt; /dev/null &amp;</span>
+<a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a><span class="o">[</span><span class="m">1</span><span class="o">]</span> <span class="m">6597</span>
+<a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># sleep 3000 &amp;</span>
+<a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a><span class="o">[</span><span class="m">2</span><span class="o">]</span> <span class="m">6859</span>
+<a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># ps -elf | grep 6597 | grep -v grep</span>
+<a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a><span class="m">4</span> S root   <span class="m">6597</span>   <span class="m">6331</span>  <span class="m">0</span>  <span class="m">80</span>   <span class="m">0</span> - <span class="m">33188</span> poll_s <span class="m">09</span>:50 pts/0 <span class="m">00</span>:00:00 ping www.baidu.com
+<a id="__codelineno-4-15" name="__codelineno-4-15" href="#__codelineno-4-15"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># ps aux | grep 6331 | grep -v grep</span>
+<a id="__codelineno-4-16" name="__codelineno-4-16" href="#__codelineno-4-16"></a>root       <span class="m">6331</span>  <span class="m">0</span>.0  <span class="m">0</span>.2 <span class="m">116456</span>  <span class="m">2944</span> pts/0    Ss   <span class="m">09</span>:38   <span class="m">0</span>:00 -bash
+<a id="__codelineno-4-17" name="__codelineno-4-17" href="#__codelineno-4-17"></a>
+<a id="__codelineno-4-18" name="__codelineno-4-18" href="#__codelineno-4-18"></a>
+<a id="__codelineno-4-19" name="__codelineno-4-19" href="#__codelineno-4-19"></a><span class="c1">## -- /dev/pts/1</span>
+<a id="__codelineno-4-20" name="__codelineno-4-20" href="#__codelineno-4-20"></a><span class="s2">&quot;&quot;&quot;</span>
+<a id="__codelineno-4-21" name="__codelineno-4-21" href="#__codelineno-4-21"></a><span class="s2">在第2个虚拟终端里</span>
+<a id="__codelineno-4-22" name="__codelineno-4-22" href="#__codelineno-4-22"></a><span class="s2">同样能查询到ping进程和sleep进程的父进程,都是PID为6331的bash进程</span>
+<a id="__codelineno-4-23" name="__codelineno-4-23" href="#__codelineno-4-23"></a><span class="s2">&quot;&quot;&quot;</span>
+<a id="__codelineno-4-24" name="__codelineno-4-24" href="#__codelineno-4-24"></a>ps -elf <span class="p">|</span> grep <span class="m">6597</span> <span class="p">|</span> grep -v grep
+<a id="__codelineno-4-25" name="__codelineno-4-25" href="#__codelineno-4-25"></a>ps -elf <span class="p">|</span> grep <span class="m">6859</span> <span class="p">|</span> grep -v grep
+<a id="__codelineno-4-26" name="__codelineno-4-26" href="#__codelineno-4-26"></a>ps aux <span class="p">|</span> grep <span class="m">6331</span> <span class="p">|</span> grep -v grep
+<a id="__codelineno-4-27" name="__codelineno-4-27" href="#__codelineno-4-27"></a><span class="c1">## 该命令只是想验证,开启的每个虚拟终端都有对应的bash进程 pts/0对应6331  pts/1对应6537</span>
+<a id="__codelineno-4-28" name="__codelineno-4-28" href="#__codelineno-4-28"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># ps aux | grep bash | grep -v grep</span>
+<a id="__codelineno-4-29" name="__codelineno-4-29" href="#__codelineno-4-29"></a>root     <span class="m">820</span>  <span class="m">0</span>.0  <span class="m">0</span>.0 <span class="m">115408</span>   <span class="m">956</span> ?        S    <span class="m">05</span>:09   <span class="m">0</span>:00 /bin/bash /usr/sbin/ksmtuned
+<a id="__codelineno-4-30" name="__codelineno-4-30" href="#__codelineno-4-30"></a>root       <span class="m">6331</span>  <span class="m">0</span>.0  <span class="m">0</span>.2 <span class="m">116456</span>  <span class="m">2944</span> pts/0    Ss+  <span class="m">09</span>:38   <span class="m">0</span>:00 -bash
+<a id="__codelineno-4-31" name="__codelineno-4-31" href="#__codelineno-4-31"></a>root       <span class="m">6537</span>  <span class="m">0</span>.0  <span class="m">0</span>.2 <span class="m">116456</span>  <span class="m">2936</span> pts/1    Ss   <span class="m">09</span>:49   <span class="m">0</span>:00 -bash
+<a id="__codelineno-4-32" name="__codelineno-4-32" href="#__codelineno-4-32"></a><span class="c1">## 可以查询到 PID为6631的bash进程 有两个正在运行的子进程 ping 和sleep</span>
+<a id="__codelineno-4-33" name="__codelineno-4-33" href="#__codelineno-4-33"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># pstree 6331</span>
+<a id="__codelineno-4-34" name="__codelineno-4-34" href="#__codelineno-4-34"></a>bash─┬─ping
+<a id="__codelineno-4-35" name="__codelineno-4-35" href="#__codelineno-4-35"></a>     └─sleep
+<a id="__codelineno-4-36" name="__codelineno-4-36" href="#__codelineno-4-36"></a>
+<a id="__codelineno-4-37" name="__codelineno-4-37" href="#__codelineno-4-37"></a>
+<a id="__codelineno-4-38" name="__codelineno-4-38" href="#__codelineno-4-38"></a>将第1个虚拟终端 /dev/pts/0 的会话窗口叉掉<span class="o">(</span>注意,不是exit正常退出<span class="o">)</span>,
+<a id="__codelineno-4-39" name="__codelineno-4-39" href="#__codelineno-4-39"></a>在此session关闭的时候,会向此会话窗口里的bash进程及其子进程都发一个hup信号,
+<a id="__codelineno-4-40" name="__codelineno-4-40" href="#__codelineno-4-40"></a>该hup信号的意思就是让它们都死掉..  所以ping进程、sleep进程在第2个终端/dev/pts/1里就查询不到啦
+<a id="__codelineno-4-41" name="__codelineno-4-41" href="#__codelineno-4-41"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># tty</span>
+<a id="__codelineno-4-42" name="__codelineno-4-42" href="#__codelineno-4-42"></a>/dev/pts/1
+<a id="__codelineno-4-43" name="__codelineno-4-43" href="#__codelineno-4-43"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># ps aux | grep 6597 | grep -v grep</span>
+<a id="__codelineno-4-44" name="__codelineno-4-44" href="#__codelineno-4-44"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># ps aux | grep 6859 | grep -v grep</span>
+<a id="__codelineno-4-45" name="__codelineno-4-45" href="#__codelineno-4-45"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># </span>
+<a id="__codelineno-4-46" name="__codelineno-4-46" href="#__codelineno-4-46"></a>Ps: 在第1个终端/dev/pts/0里输入命令exit而不是直接叉掉,那么在第二个终端里依旧能查到ping进程..
+</code></pre></div>
+<h3 id="exitlogout"><font color='orange'>exit、logout</font><a class="headerlink" href="#exitlogout" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p><font color='brown'>养成良好习惯,先exit/logout正常退出后,保证该窗口没有任何远程连接了,再叉掉!!!</font></p>
+</blockquote>
+<p>在centos7里内核只负责硬件部分的管理,上层运行的软件统一被systemd软件管理起来啦.<br />
+PID为1的进程就是systemd软件启动起来的..</p>
+<p>当我们在/dev/pts/0终端输入命令<code>exit</code>或者<code>logout</code> , 正常退出该终端.. <br />
+此终端里PID为7441的bash进程就会被kill关掉,但该bash进程的子进程ping托管给了PID为1的进程...</p>
+<p>So,正常退出/dev/pts/0终端后,再叉掉该终端窗口,ping进程也会一直在后台运行...<br />
+<font color='gray'>别问为什么,linux就是这么设计的！！T_T </font></p>
+<p><img alt="" src="../assets/exit_logout.jpeg" /></p>
+<p><font color=gray>Ps: 往下在进行新的实验之前,记得 kill -9 7492 ...</font></p>
+<h3 id="nohup"><font color='orange'>nohup</font><a class="headerlink" href="#nohup" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p>nohup的用途就是让提交的命令忽略 hup 信号</p>
+</blockquote>
+<p><img alt="" src="../assets/nohup_1.jpeg" /></p>
+<p><img alt="" src="../assets/nohup_2.jpeg" /></p>
+<p>nohup 的使用是十分方便的, 只需在要处理的命令前加上 nohup 即可...<br />
+但 <strong>通常</strong> 使用nohup的时候,会在命令最后加上<code>&amp;</code>,让其在后台运行...</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>注意哦!
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>在直接叉掉终端时, 该终端bash的子进程会丢掉STDOUT<span class="o">(</span>正常输出<span class="o">)</span>、STDERR<span class="o">(</span>错误输出<span class="o">)</span>的链接.
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>标准输出和标准错误缺省会被重定向到 nohup.out文件中.
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>一般我们会在结尾加上<span class="s2">&quot;&amp;&quot;</span>来将命令放入后台运行进而解决问题, 或者更改缺省的重定向文件名...
+</code></pre></div>
+<h3 id="setsid"><font color='orange'>setsid</font><a class="headerlink" href="#setsid" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p>核心思想也是让进程忽略 hup信号.. </p>
+</blockquote>
+<p>setid直接将进程的父pid设置成1, 即让运行的进程成为init( <font color='gray'>centos7以前是init,centos是systemd</font> )的子进程. 那么除非init/systemd结束, 该子进程才会结束, 当前进程所在的终端结束后并不会影响进程的运行.. <br />
+<font color='gray'>即该运行的进程跟当前终端啥关系都没有了.. 它并不属于当前终端的子进程, 从而也就不会受到当前终端的Linux HUP信号的影响了.</font></p>
+<p><strong>注意哦!</strong> <font color=brown>nohup需要在命令最后加<code>&amp;</code>, setid可用可不用...</font> setid一步到位,将运行进程的父进程变为了PID为1的进程..    </p>
+<p>实现了nohup运行命令后, 叉掉会话窗口的效果..</p>
+<p><img alt="" src="../assets/setsid.jpeg" /></p>
+<p><font color='gray' size=2>吐槽一下, 有个待解决的疑点, A终端后台运行 <code>setsid ping www.baidu.com &amp;&gt; /dev/null &amp;</code> 命令, 交互式界面返回了<code>[1] 9192</code>, 将道理,按照往常的逻辑, 9192也就是这条运行命令的PID... 但结果9193才是此命令的PID!! why? </font></p>
+<h3 id="shell"><font color='orange'>在子shell中提交任务</font><a class="headerlink" href="#shell" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p>用括号将命令括起来提交... 能达到跟setsid同样的效果.  具体的底层原理等讲shell编程时再阐述..</p>
+</blockquote>
+<p><img alt="" src="../assets/%E5%B0%8F%E6%8B%AC%E5%8F%B7.jpeg" /></p>
+<h3 id="screen"><font color='orange'>screen!!</font><a class="headerlink" href="#screen" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p><code>screen 命令</code><br />
+<code>screen -S 窗口名</code><br />
+<code>screen -ls</code>   <code>screen -r 窗口名/终端PID</code><br />
+<code>ctrl+a</code>  + <code>ctrl+d</code>组合键 <br />
+<code>screen -x  窗口名/终端PID</code>  </p>
+<p>更多操作参考:<code>https://zhuanlan.zhihu.com/p/336727473</code> screen部分内容...</p>
+</blockquote>
+<p><code>yum install screen -y</code></p>
+<p>在第一个终端运行命令 <code>screen vim a.txt</code><br />
+在第二个终端中查看   14283 -- 15367 -- 15368 -- 15369<br />
+&nbsp;&nbsp;&nbsp;&nbsp; 14283: 第一个终端的bash进程<br />
+&nbsp;&nbsp;&nbsp;&nbsp; 15367: bash的子进程,在第一个终端运行的screen命令<br />
+&nbsp;&nbsp;&nbsp;&nbsp; 15368: screen命令自个儿创建的子进程SCREEN<br />
+&nbsp;&nbsp;&nbsp;&nbsp; 15369: SCREEN进程创建了一个新的窗口/dev/pts/2来运行vim a.txt命令</p>
+<p><img alt="" src="../assets/screen.jpeg" /></p>
+<p><font color='green'>首先要知道,通过<code>screen vim a.txt</code>编辑后,正常<code>:wq</code>退出界面, 15367 -- 15368 -- 15369都会结束掉...</font></p>
+<p>若在编辑过程中 <strong>意外</strong> 关掉第一个终端, 那么, pts/0的bash进程和其子进程screen会被杀掉;<br />
+但此时PID为15368的SCREEN进程脱离pts/0终端运行, 开始依托于init/systemd进程开始运行, 即SCREEN进程的父进程变为PID为1的进程..</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="c1">## -- 在第二个终端中查看</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># ps -elf | grep [v]im</span>
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="m">5</span> S root     <span class="m">15368</span>     <span class="m">1</span>   <span class="m">0</span>  <span class="m">80</span>   <span class="m">0</span> - <span class="m">32001</span> poll_s <span class="m">15</span>:29 ?        <span class="m">00</span>:00:00 SCREEN vim a.txt
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="m">4</span> S root     <span class="m">15369</span>  <span class="m">15368</span>  <span class="m">0</span>  <span class="m">80</span>   <span class="m">0</span> - <span class="m">37398</span> poll_s <span class="m">15</span>:29 pts/2    <span class="m">00</span>:00:00 vim a.txt
+</code></pre></div>
+<p>所以,15368和15369的进程并没有死掉... 而且我们可以恢复意外关闭的vim编辑界面的窗口继续编辑..</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># screen -ls</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>There is a screen on:
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>    <span class="m">15368</span>.pts-0.localhost   <span class="o">(</span>Detached<span class="o">)</span>
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="m">1</span> Socket <span class="k">in</span> /var/run/screen/S-root.
+<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a>
+<a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a><span class="c1">## -- 打开vim界面继续编辑.. 当然是在pts/2终端继续执行的vim命令..</span>
+<a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># screen -r 15478</span>
+<a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a><span class="c1">## -- 编辑完后 :q正常退出  pts/2窗口会自动关闭！! 15368和15369进程也会结束掉..</span>
+<a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># ps -elf | grep [v]im</span>
+<a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># </span>
+</code></pre></div>
+<p><font color='green'><strong>screen 的其他玩法</strong></font> <code>screen -S 窗口名</code></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># tty</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>/dev/pts/0
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># screen -S new_s</span>
+<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a>
+<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="c1">## -- 回车,执行命令 /pts/0的终端会闪烁一下,跳出一个空白的终端界面</span>
+<a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a>
+<a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a><span class="c1">## -- 可以观察掉,此终端界面是screen创建的新终端/pts/1</span>
+<a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># tty</span>
+<a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a>/dev/pts/1
+<a id="__codelineno-8-10" name="__codelineno-8-10" href="#__codelineno-8-10"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># ps -elf | grep [b]ash</span>
+<a id="__codelineno-8-11" name="__codelineno-8-11" href="#__codelineno-8-11"></a><span class="m">1</span> S root     <span class="m">785</span>      <span class="m">1</span>  <span class="m">0</span>  <span class="m">80</span>   <span class="m">0</span> - <span class="m">28852</span> do_wai <span class="m">01</span>:23 ?   <span class="m">00</span>:00:01 /bin/bash...
+<a id="__codelineno-8-12" name="__codelineno-8-12" href="#__codelineno-8-12"></a><span class="m">1</span> S root     <span class="m">1881</span>   <span class="m">1751</span>  <span class="m">0</span>  <span class="m">80</span>   <span class="m">0</span> - <span class="m">18138</span> poll_s <span class="m">01</span>:24 ?  <span class="m">00</span>:00:01 /usr/bin/ssh-agent...
+<a id="__codelineno-8-13" name="__codelineno-8-13" href="#__codelineno-8-13"></a><span class="m">4</span> S root      <span class="m">16943</span>  <span class="m">16941</span>  <span class="m">0</span>  <span class="m">80</span>   <span class="m">0</span> - <span class="m">29114</span> do_wai <span class="m">16</span>:44 pts/0    <span class="m">00</span>:00:00 -bash
+<a id="__codelineno-8-14" name="__codelineno-8-14" href="#__codelineno-8-14"></a><span class="m">4</span> S root      <span class="m">17020</span>  <span class="m">17019</span>  <span class="m">0</span>  <span class="m">80</span>   <span class="m">0</span> - <span class="m">29142</span> do_wai <span class="m">16</span>:45 pts/1    <span class="m">00</span>:00:00 /bin/bash
+<a id="__codelineno-8-15" name="__codelineno-8-15" href="#__codelineno-8-15"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># ps -elf | grep new_s | grep -v grep</span>
+<a id="__codelineno-8-16" name="__codelineno-8-16" href="#__codelineno-8-16"></a><span class="m">4</span> S root      <span class="m">17018</span>  <span class="m">16943</span>  <span class="m">0</span>  <span class="m">80</span>   <span class="m">0</span> - <span class="m">31935</span> sys_pa <span class="m">16</span>:45 pts/0    <span class="m">00</span>:00:00 screen -S new_s
+<a id="__codelineno-8-17" name="__codelineno-8-17" href="#__codelineno-8-17"></a><span class="m">5</span> S root      <span class="m">17019</span>  <span class="m">17018</span>  <span class="m">0</span>  <span class="m">80</span>   <span class="m">0</span> - <span class="m">31968</span> poll_s <span class="m">16</span>:45 ?        <span class="m">00</span>:00:00 SCREEN -S new_s
+<a id="__codelineno-8-18" name="__codelineno-8-18" href="#__codelineno-8-18"></a><span class="c1"># -- 梳理下此进程树的关系</span>
+<a id="__codelineno-8-19" name="__codelineno-8-19" href="#__codelineno-8-19"></a><span class="s2">&quot;&quot;&quot;</span>
+<a id="__codelineno-8-20" name="__codelineno-8-20" href="#__codelineno-8-20"></a><span class="s2">  ------------------------------------------------</span>
+<a id="__codelineno-8-21" name="__codelineno-8-21" href="#__codelineno-8-21"></a><span class="s2">  命令                                 PID                                 PPID</span>
+<a id="__codelineno-8-22" name="__codelineno-8-22" href="#__codelineno-8-22"></a><span class="s2">  ------------------------------------------------</span>
+<a id="__codelineno-8-23" name="__codelineno-8-23" href="#__codelineno-8-23"></a><span class="s2">    pts/0                           16943                               </span>
+<a id="__codelineno-8-24" name="__codelineno-8-24" href="#__codelineno-8-24"></a><span class="s2">    screen -S new_s         17018                           16943</span>
+<a id="__codelineno-8-25" name="__codelineno-8-25" href="#__codelineno-8-25"></a><span class="s2">    SCREEN -S new_s         17019                               17018</span>
+<a id="__codelineno-8-26" name="__codelineno-8-26" href="#__codelineno-8-26"></a><span class="s2">    pts/1                               17020                               17019</span>
+<a id="__codelineno-8-27" name="__codelineno-8-27" href="#__codelineno-8-27"></a><span class="s2">    pstree                                                                  17020</span>
+<a id="__codelineno-8-28" name="__codelineno-8-28" href="#__codelineno-8-28"></a><span class="s2">    ------------------------------------------------</span>
+<a id="__codelineno-8-29" name="__codelineno-8-29" href="#__codelineno-8-29"></a><span class="s2">&quot;&quot;&quot;</span>
+<a id="__codelineno-8-30" name="__codelineno-8-30" href="#__codelineno-8-30"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># pstree 16943</span>
+<a id="__codelineno-8-31" name="__codelineno-8-31" href="#__codelineno-8-31"></a>bash───screen───screen───bash───pstree
+</code></pre></div>
+<p>在screen创建的pts/1终端运行命令<code>n = 0;while true;do ((n++));sleep 1;echo $n;done;</code>, <br />
+<code>ctrl+a</code>  <code>ctrl+d</code>连贯敲击.. 回到pts/0终端,可以做其他事情啦...<br />
+哪怕关闭了pts/0终端,在pts/1终端运行的命令也不会终止,会继续运行... <br />
+关闭pts/0终端, 重新连接上服务器, <code>screen -ls</code>   <code>screen -r new_S</code>  可以进入pts/1终端看运行状况等等...</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># tty</span>
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>/dev/pts/0
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># screen -S new_s</span>
+<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="o">[</span>detached from <span class="m">17019</span>.new_s<span class="o">]</span> <span class="c1">## -- 脱离new_s窗口</span>
+<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># </span>
+</code></pre></div>
+<p>还有个骚操作.. <br />
+小明正处于new_S窗口, 小川远程连接服务器后 <code>screen -x new_s</code>, <strong>两边可以同步显示操作</strong>! Amazing..</p>
+<hr />
+<h2 id="_5">管理后台进程<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
+<blockquote>
+<p><strong>此部分了解即可..</strong>  后台进程的管理通常会借助screen命令.</p>
+</blockquote>
+<p><code>&amp;</code> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; 后台运行<br />
+<code>jobs</code> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 查看 <strong>当前终端</strong> 里提交的后台进程, 注意哦,是当前终端<br />
+<code>ctrl+z</code> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 将前台的进程挂起(暂停 T)到后台  <font color='blue'>注意哦,ctrl+c是结束进程</font></p>
+<p><code>fg  %作业编号</code> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; 将后台的进程调到前台运行<br />
+<code>bg  %作业编号</code> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; 将后台挂起(T)的进程在后台运行</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># sleep 3000 &amp;</span>
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="o">[</span><span class="m">1</span><span class="o">]</span> <span class="m">20265</span>
+<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># jobs</span>
+<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="o">[</span><span class="m">1</span><span class="o">]</span>+  运行中               sleep <span class="m">3000</span> <span class="p">&amp;</span>
+<a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a><span class="c1">## -- 在vim编辑界面 ctrl+z 将前台的进程挂起(暂停)到后台</span>
+<a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a><span class="c1">## -- 中括号内的编号就是作业编号, %1代表作业1</span>
+<a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># vim b.txt</span>
+<a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a>
+<a id="__codelineno-10-9" name="__codelineno-10-9" href="#__codelineno-10-9"></a><span class="o">[</span><span class="m">2</span><span class="o">]</span>+  已停止               vim b.txt
+<a id="__codelineno-10-10" name="__codelineno-10-10" href="#__codelineno-10-10"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># jobs</span>
+<a id="__codelineno-10-11" name="__codelineno-10-11" href="#__codelineno-10-11"></a><span class="o">[</span><span class="m">1</span><span class="o">]</span>-  运行中               sleep <span class="m">3000</span> <span class="p">&amp;</span>
+<a id="__codelineno-10-12" name="__codelineno-10-12" href="#__codelineno-10-12"></a><span class="o">[</span><span class="m">2</span><span class="o">]</span>+  已停止               vim b.txt
+<a id="__codelineno-10-13" name="__codelineno-10-13" href="#__codelineno-10-13"></a>
+<a id="__codelineno-10-14" name="__codelineno-10-14" href="#__codelineno-10-14"></a><span class="c1">## -- 调到前台运行后,ctrl+z就在前台结束了该进程</span>
+<a id="__codelineno-10-15" name="__codelineno-10-15" href="#__codelineno-10-15"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># fg %1</span>
+<a id="__codelineno-10-16" name="__codelineno-10-16" href="#__codelineno-10-16"></a>sleep <span class="m">3000</span>
+<a id="__codelineno-10-17" name="__codelineno-10-17" href="#__codelineno-10-17"></a>^C
+<a id="__codelineno-10-18" name="__codelineno-10-18" href="#__codelineno-10-18"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># jobs</span>
+<a id="__codelineno-10-19" name="__codelineno-10-19" href="#__codelineno-10-19"></a><span class="o">[</span><span class="m">2</span><span class="o">]</span>+  已停止               vim b.txt
+<a id="__codelineno-10-20" name="__codelineno-10-20" href="#__codelineno-10-20"></a>
+<a id="__codelineno-10-21" name="__codelineno-10-21" href="#__codelineno-10-21"></a><span class="c1">## -- 在vim页面 :q 退出后 该进程就结束了</span>
+<a id="__codelineno-10-22" name="__codelineno-10-22" href="#__codelineno-10-22"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># fg %2</span>
+<a id="__codelineno-10-23" name="__codelineno-10-23" href="#__codelineno-10-23"></a>vim b.txt
+<a id="__codelineno-10-24" name="__codelineno-10-24" href="#__codelineno-10-24"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># jobs</span>
+</code></pre></div>
+<p>演示下杀死进程  <code>kill -9 %作业编号</code></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># vim c.txt</span>
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>
+<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="o">[</span><span class="m">1</span><span class="o">]</span>+  已停止               vim c.txt
+<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># jobs</span>
+<a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a><span class="o">[</span><span class="m">1</span><span class="o">]</span>+  已停止               vim c.txt
+<a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># ps aux | grep [v]im</span>
+<a id="__codelineno-11-7" name="__codelineno-11-7" href="#__codelineno-11-7"></a>root      <span class="m">20469</span>  <span class="m">0</span>.1  <span class="m">0</span>.5 <span class="m">149548</span>  <span class="m">5184</span> pts/0    T    <span class="m">22</span>:32   <span class="m">0</span>:00 vim c.txt
+<a id="__codelineno-11-8" name="__codelineno-11-8" href="#__codelineno-11-8"></a>
+<a id="__codelineno-11-9" name="__codelineno-11-9" href="#__codelineno-11-9"></a><span class="c1"># -- 因为vim命令是交互式的,应该在前台运行,没法让其在后台运行</span>
+<a id="__codelineno-11-10" name="__codelineno-11-10" href="#__codelineno-11-10"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># bg %1</span>
+<a id="__codelineno-11-11" name="__codelineno-11-11" href="#__codelineno-11-11"></a><span class="o">[</span><span class="m">1</span><span class="o">]</span>+ vim c.txt <span class="p">&amp;</span>
+<a id="__codelineno-11-12" name="__codelineno-11-12" href="#__codelineno-11-12"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># jobs</span>
+<a id="__codelineno-11-13" name="__codelineno-11-13" href="#__codelineno-11-13"></a><span class="o">[</span><span class="m">1</span><span class="o">]</span>+  已停止               vim c.txt
+<a id="__codelineno-11-14" name="__codelineno-11-14" href="#__codelineno-11-14"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># kill -9 %1</span>
+<a id="__codelineno-11-15" name="__codelineno-11-15" href="#__codelineno-11-15"></a>
+<a id="__codelineno-11-16" name="__codelineno-11-16" href="#__codelineno-11-16"></a><span class="o">[</span><span class="m">1</span><span class="o">]</span>+  已停止               vim c.txt
+<a id="__codelineno-11-17" name="__codelineno-11-17" href="#__codelineno-11-17"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># jobs</span>
+<a id="__codelineno-11-18" name="__codelineno-11-18" href="#__codelineno-11-18"></a><span class="o">[</span><span class="m">1</span><span class="o">]</span>+  已杀死               vim c.txt
+</code></pre></div>
+<p>演示bg命令</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="c1">## -- 在第一个终端执行</span>
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="c1"># ctrl+z后,该进程到后台挂起,不会再有信息输入到/mnt/a.txt中!!</span>
+<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># ping www.baidu.com &amp;&gt;&gt; /mnt/a.txt</span>
+<a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a>^Z
+<a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a><span class="o">[</span><span class="m">1</span><span class="o">]</span>+  已停止               ping www.baidu.com <span class="p">&amp;</span>&gt;&gt;/mnt/a.txt
+<a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># jobs</span>
+<a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a><span class="o">[</span><span class="m">1</span><span class="o">]</span>+  已停止               ping www.baidu.com <span class="p">&amp;</span>&gt;&gt;/mnt/a.txt
+<a id="__codelineno-12-8" name="__codelineno-12-8" href="#__codelineno-12-8"></a>
+<a id="__codelineno-12-9" name="__codelineno-12-9" href="#__codelineno-12-9"></a><span class="c1">## -- 解决方案: kill发送一个18）SIGCONT继续的信号给该进程 或者使用 bg命令</span>
+<a id="__codelineno-12-10" name="__codelineno-12-10" href="#__codelineno-12-10"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># bg %1</span>
+<a id="__codelineno-12-11" name="__codelineno-12-11" href="#__codelineno-12-11"></a><span class="o">[</span><span class="m">1</span><span class="o">]</span>+ ping www.baidu.com <span class="p">&amp;</span>&gt;&gt;/mnt/a.txt <span class="p">&amp;</span>
+<a id="__codelineno-12-12" name="__codelineno-12-12" href="#__codelineno-12-12"></a>
+<a id="__codelineno-12-13" name="__codelineno-12-13" href="#__codelineno-12-13"></a><span class="c1">## -- 在后台继续运行, tail -f /mnt/a.txt 可以动态查看文件里的内容进行验证</span>
+</code></pre></div>
+<hr />
+<h2 id="_6">管道<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
+<blockquote>
+<p><strong>管道用于进程间通信</strong></p>
+</blockquote>
+<p>管道操作符号 "|" 主要用来连接左右两个命令. 将左侧命令的标准输出 stdout 作为右侧命令的标准输入 stdin .<br />
+<font color='gray'><strong>注意哦!</strong> 无法传递标准错误输出给右侧命令..</font></p>
+<h3 id="_7"><font color='orange'>管道练习</font><a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>▲ 题1:统计当前/etc/passwd文件中用户使用的shell类型
+<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># cat /etc/passwd | head -1</span>
+<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a>root:x:0:0:root:/root:/bin/bash
+<a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># awk -F: &#39;{print $7}&#39; /etc/passwd | sort | uniq -c</span>
+<a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a>      <span class="m">3</span> /bin/bash
+<a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a>      <span class="m">1</span> /bin/sync
+<a id="__codelineno-13-7" name="__codelineno-13-7" href="#__codelineno-13-7"></a>      <span class="m">1</span> /sbin/halt
+<a id="__codelineno-13-8" name="__codelineno-13-8" href="#__codelineno-13-8"></a>     <span class="m">39</span> /sbin/nologin
+<a id="__codelineno-13-9" name="__codelineno-13-9" href="#__codelineno-13-9"></a>      <span class="m">1</span> /sbin/shutdown
+<a id="__codelineno-13-10" name="__codelineno-13-10" href="#__codelineno-13-10"></a>
+<a id="__codelineno-13-11" name="__codelineno-13-11" href="#__codelineno-13-11"></a>▲ 题2:统计网站的访问情况
+<a id="__codelineno-13-12" name="__codelineno-13-12" href="#__codelineno-13-12"></a>netstat -an <span class="p">|</span>grep :80 <span class="p">|</span>awk -F<span class="s2">&quot;:&quot;</span> <span class="s1">&#39;{print $8}&#39;</span><span class="p">|</span>sort <span class="p">|</span>uniq -c
+<a id="__codelineno-13-13" name="__codelineno-13-13" href="#__codelineno-13-13"></a>
+<a id="__codelineno-13-14" name="__codelineno-13-14" href="#__codelineno-13-14"></a>▲ 题3:打印当前所有的IP
+<a id="__codelineno-13-15" name="__codelineno-13-15" href="#__codelineno-13-15"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># ip addr | grep &#39;inet &#39; | awk &#39;{print $2}&#39; | awk -F &quot;/&quot; &#39;{print $1}&#39;</span>
+<a id="__codelineno-13-16" name="__codelineno-13-16" href="#__codelineno-13-16"></a><span class="m">127</span>.0.0.1
+<a id="__codelineno-13-17" name="__codelineno-13-17" href="#__codelineno-13-17"></a><span class="m">172</span>.16.150.131
+<a id="__codelineno-13-18" name="__codelineno-13-18" href="#__codelineno-13-18"></a>
+<a id="__codelineno-13-19" name="__codelineno-13-19" href="#__codelineno-13-19"></a>▲ 题4:打印根分区已用空间的百分比<span class="o">(</span>仅打印数字<span class="o">)</span>
+<a id="__codelineno-13-20" name="__codelineno-13-20" href="#__codelineno-13-20"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># df | grep &#39;/$&#39; | awk &#39;{print $5}&#39; | awk -F&quot;%&quot; &#39;{print $1}&#39;</span>
+<a id="__codelineno-13-21" name="__codelineno-13-21" href="#__codelineno-13-21"></a><span class="m">27</span>
+<a id="__codelineno-13-22" name="__codelineno-13-22" href="#__codelineno-13-22"></a>
+<a id="__codelineno-13-23" name="__codelineno-13-23" href="#__codelineno-13-23"></a>▲ 题5:统计网站的访问最多的ip top <span class="m">10</span>
+<a id="__codelineno-13-24" name="__codelineno-13-24" href="#__codelineno-13-24"></a><span class="c1">## -- 思路: 打印所有访问的过来的ip | 排序 | 去重 | 倒序排序 | 取前10</span>
+<a id="__codelineno-13-25" name="__codelineno-13-25" href="#__codelineno-13-25"></a>awk <span class="s1">&#39;{print $1}&#39;</span> access.log <span class="p">|</span>sort <span class="p">|</span>uniq -c <span class="p">|</span> sort -rn <span class="p">|</span> head
+</code></pre></div>
+<h3 id="tee"><font color='orange'>管道中的tee</font><a class="headerlink" href="#tee" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="c1">## -- ifconfig命令的结果丢到了a.txt文件中,但屏幕上没有显示啦</span>
+<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>ifconfig <span class="p">&amp;</span>&gt; /opt/a.txt
+<a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a>
+<a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a><span class="c1">## -- ifconfig命令的结果不仅会丢到了b.txt文件中,屏幕上也会显示一份</span>
+<a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a><span class="c1">## tee不加选项默认是覆盖     `tee -a`是追加</span>
+<a id="__codelineno-14-6" name="__codelineno-14-6" href="#__codelineno-14-6"></a>ifconfig <span class="p">|</span> tee /opt/b.txt
+</code></pre></div>
+<h3 id="xargs"><font color='orange'>xargs</font><a class="headerlink" href="#xargs" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p>xargs参数传递, 让一些不支持管道的命令可以使用管道技术!!!</p>
+</blockquote>
+<p>所有的命令都能将命令的结果丢到管道里, 但不是所有的命令(<font color='gray'>eg: rm mv cp</font>)都能从管道中拿出结果做处理!!!<br />
+那如何是好？<font color='red'>结合 <strong>xargs命令</strong> 使用!! </font><br />
+<font color='blue'>详情请跳转:</font> 4_文件管理之命令补充.md  find结合xargs 这部分的内容！！</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># which cat | xargs ls -l</span>
+<a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a>-rwxr-xr-x. <span class="m">1</span> root root <span class="m">54080</span> 11月 <span class="m">17</span> <span class="m">2020</span> /usr/bin/cat
+<a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a>
+<a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a><span class="c1">## -- 必须的进入/opt目录才行  `ls /opt | xargs rm -rf`是失败的</span>
+<a id="__codelineno-15-5" name="__codelineno-15-5" href="#__codelineno-15-5"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># cd /opt</span>
+<a id="__codelineno-15-6" name="__codelineno-15-6" href="#__codelineno-15-6"></a><span class="o">[</span>root@localhost opt<span class="o">]</span><span class="c1"># ls</span>
+<a id="__codelineno-15-7" name="__codelineno-15-7" href="#__codelineno-15-7"></a>a.txt  c.txt
+<a id="__codelineno-15-8" name="__codelineno-15-8" href="#__codelineno-15-8"></a><span class="o">[</span>root@localhost opt<span class="o">]</span><span class="c1"># ls | xargs rm -fv</span>
+<a id="__codelineno-15-9" name="__codelineno-15-9" href="#__codelineno-15-9"></a>已删除<span class="s2">&quot;a.txt&quot;</span>
+<a id="__codelineno-15-10" name="__codelineno-15-10" href="#__codelineno-15-10"></a>已删除<span class="s2">&quot;c.txt&quot;</span>
+<a id="__codelineno-15-11" name="__codelineno-15-11" href="#__codelineno-15-11"></a><span class="o">[</span>root@localhost opt<span class="o">]</span><span class="c1"># ls</span>
+<a id="__codelineno-15-12" name="__codelineno-15-12" href="#__codelineno-15-12"></a><span class="o">[</span>root@localhost opt<span class="o">]</span><span class="c1"># </span>
+</code></pre></div>
+<hr />
+<h2 id="_8">僵尸进程与孤儿进程<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h2>
+<blockquote>
+<p>在UNIX/Linux中, 每个进程都有一个父进程..</p>
+</blockquote>
+<h3 id="_9"><font color='orange'>僵尸进程是什么？</font><a class="headerlink" href="#_9" title="Permanent link">&para;</a></h3>
+<p>首先要明白, 当一个子进程开启起来以后, 它的运行与父进程是 <strong>异步并发</strong> 的, 彼此互不影响, 谁先死都不一定...<br />
+<font color='red'>总结来说,若直接叉掉终端, 父进程bash和其子进程都会结束掉.. 正常情况下,父进程先死,子进程会变成孤儿进程; 子进程先死,子进程会先变为僵尸进程再完全死去,对父进程没影响</font></p>
+<p>第二点, linux操作系统的设计规定: <font color='green'>父进程应该具备随时获取子进程状态的能力 </font><br />
+<font color='gray'><strong>假设子进程先于父进程运行完毕,若OS将子进程的所有资源全部释放掉,父进程就找不到该子进程啦...</strong></font><br />
+So,linux当子进程先于父进程运行完毕/死掉时,OS会将子进程占用的重型资源都释放掉( <font color='gray'>eg:关闭已打开的文件,舍弃已占用的cpu、内存、交换空间等</font> ), 但是会保留一部分子进程的关键状态信息( <font color='gray'>eg: <strong>PID</strong>、退出状态、已运行时间等</font> ), 此时子进程就相当于死了但是没完全死,没死干净, 因而得名<font color='brown'>"僵尸进程"</font>...</p>
+<p>僵尸进程是linux操作系统出于好心, 为父进程准备的一些子进程的状态数据, 专供父进程随时查阅<br />
+也就是说"僵尸进程"是linux系统的一种数据结构, <font color='brown'>所有的子进程结束后都会进入僵尸进程的状态</font></p>
+<h3 id="wait-waitpid"><font color='orange'>wait / waitpid</font><a class="headerlink" href="#wait-waitpid" title="Permanent link">&para;</a></h3>
+<p>僵尸进程残存的那些数据(eg PID)是需要回收的! 当父进程觉得自己无需查看僵尸进程的数据,觉得留着僵尸进程的数据没啥用时,会由父进程发起一个 <strong>系统调用</strong> <font color='green'>wait / waitpid</font> 来通知linux操作系统来清理这些僵尸进程..</p>
+<p>这里针对父进程有三种情况需要讨论:<br />
+1&gt; 一些优秀的开源软件  <font color='gray'>eg: nginx </font>, 这些软件在开启子进程时<br />
+&nbsp;&nbsp;&nbsp;&nbsp; 父进程内部都会及时调用wait/waitpid来通知操作系统回收僵尸进程<br />
+&nbsp;&nbsp;&nbsp;&nbsp; <font color='gray'>所以我们通常看不到优秀的开源软件堆积僵尸进程 </font><br />
+2&gt; 水平良好的程序员开发的应用程序, 知道父进程要对子进程负责, 会在父进程内考虑wait/waitpid<br />
+&nbsp;&nbsp;&nbsp;&nbsp; 但发起系统调用wait/waitpid的时间可能慢了些, 我们只需要发送17号信号提醒该父进程就行..<br />
+3&gt; 垃圾程序员开发应用程序时,压根没设计进程对OS的wait/waitpid调用... 我们发信号提醒也没用,压根不会响应!</p>
+<p>情况3可能会出现一个非常奇怪的现象:<br />
+&nbsp;&nbsp;&nbsp;&nbsp; 计算机内存和硬盘充足、cpu空闲. 但是启动新的软件就是无法启动起来. <br />
+&nbsp;&nbsp;&nbsp;&nbsp; 究其根本原因就是堆积了太多僵尸进程, 僵尸进程虽然对内存、硬盘、cpu消耗很小很小, 但一个僵尸进程就要占用一个PID, linux操作系统中PID号是有限的!!!</p>
+<h3 id="_10"><font color='orange'>清理僵尸进程</font><a class="headerlink" href="#_10" title="Permanent link">&para;</a></h3>
+<p>OS收到父进程发起的wait / waitpid系统调用后, 会释放掉僵尸进程占用的资源..</p>
+<p>针对上面情况2, 我们可以通过命令 <code>kill -CHLD 父进程PID</code> 发送 <code>17) SIGCHLD</code>信号给父进程, 让其赶快发起系统调用来通知OS清理僵尸进程!!</p>
+<p>针对上面的情况3, 父进程不会响应 <code>17) SIGCHLD</code> 信号, 只能杀掉父进程, 让僵尸子进程被PID为1的顶级进程systemd收养!! systemd非常靠谱, 会定期发起系统调用wait/waitpid来通知操作系统清理僵尸...<br />
+<font color='gray'>若累积的僵尸很少,不会直接选择杀父进程导致服务关闭, 会在软件升级的时候(优化软件),将该父进程干掉!! </font></p>
+<h3 id="_11"><font color='orange'>孤儿进程</font><a class="headerlink" href="#_11" title="Permanent link">&para;</a></h3>
+<p>父进程先死掉, 而它的一个或多个子进程还在运行. 那么那些子进程将成为孤儿进程.. <br />
+孤儿进程将被PID为1的顶级进程init / systemd所收养, 并由顶级进程对它们完成状态收集工作..</p>
+<h3 id="_12"><font color='orange'>实验验证</font><a class="headerlink" href="#_12" title="Permanent link">&para;</a></h3>
+<p>linux 僵尸进程和孤儿进程的设计没有问题, 有问题的是开发应用程序的程序员..Hhh<br />
+看到出现僵尸进程不用紧张,僵尸进程个数一直在增加才应该紧张...</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>▲ 孤儿进程验证
+<a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a>A终端
+<a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a>    后台运行命令,<span class="sb">`</span>ping www.baidu.com <span class="p">&amp;</span>&gt; /dev/null <span class="p">&amp;</span><span class="sb">`</span>
+<a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a>B终端
+<a id="__codelineno-16-5" name="__codelineno-16-5" href="#__codelineno-16-5"></a>  <span class="sb">`</span>ps -elf <span class="p">|</span> grep <span class="o">[</span>p<span class="o">]</span>ing<span class="sb">`</span> <span class="c1">## 找到PID与PPID</span>
+<a id="__codelineno-16-6" name="__codelineno-16-6" href="#__codelineno-16-6"></a>  <span class="sb">`</span><span class="nb">kill</span> -9 PPID<span class="sb">`</span>                    <span class="c1">## 干掉ping进程的PPID,也就是终端A的bash 终端A会断开与服务器的连接</span>
+<a id="__codelineno-16-7" name="__codelineno-16-7" href="#__codelineno-16-7"></a>  <span class="sb">`</span>ps -elf <span class="p">|</span> grep <span class="o">[</span>p<span class="o">]</span>ing<span class="sb">`</span> <span class="c1">## 再执行此命令,发现ping进程的PPID变为了1</span>
+<a id="__codelineno-16-8" name="__codelineno-16-8" href="#__codelineno-16-8"></a>
+<a id="__codelineno-16-9" name="__codelineno-16-9" href="#__codelineno-16-9"></a>▲ 僵尸进程验证
+<a id="__codelineno-16-10" name="__codelineno-16-10" href="#__codelineno-16-10"></a>
+<a id="__codelineno-16-11" name="__codelineno-16-11" href="#__codelineno-16-11"></a><span class="c1">## -- 终端A上操作</span>
+<a id="__codelineno-16-12" name="__codelineno-16-12" href="#__codelineno-16-12"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># vim a.py</span>
+<a id="__codelineno-16-13" name="__codelineno-16-13" href="#__codelineno-16-13"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># cat a.py</span>
+<a id="__codelineno-16-14" name="__codelineno-16-14" href="#__codelineno-16-14"></a><span class="c1">## 父进程开了3个子进程,父进程活10000秒,每个子进程都活10秒</span>
+<a id="__codelineno-16-15" name="__codelineno-16-15" href="#__codelineno-16-15"></a>from multiprocessing import Process
+<a id="__codelineno-16-16" name="__codelineno-16-16" href="#__codelineno-16-16"></a>import os
+<a id="__codelineno-16-17" name="__codelineno-16-17" href="#__codelineno-16-17"></a>import <span class="nb">time</span>
+<a id="__codelineno-16-18" name="__codelineno-16-18" href="#__codelineno-16-18"></a>
+<a id="__codelineno-16-19" name="__codelineno-16-19" href="#__codelineno-16-19"></a>def task<span class="o">()</span>:
+<a id="__codelineno-16-20" name="__codelineno-16-20" href="#__codelineno-16-20"></a>    print<span class="o">(</span><span class="s2">&quot;son -&gt; &quot;</span>,os.getpid<span class="o">())</span>
+<a id="__codelineno-16-21" name="__codelineno-16-21" href="#__codelineno-16-21"></a>    time.sleep<span class="o">(</span><span class="m">10</span><span class="o">)</span>
+<a id="__codelineno-16-22" name="__codelineno-16-22" href="#__codelineno-16-22"></a>
+<a id="__codelineno-16-23" name="__codelineno-16-23" href="#__codelineno-16-23"></a><span class="k">if</span> <span class="nv">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span>:
+<a id="__codelineno-16-24" name="__codelineno-16-24" href="#__codelineno-16-24"></a>    <span class="k">for</span> i <span class="k">in</span> range<span class="o">(</span><span class="m">3</span><span class="o">)</span>:
+<a id="__codelineno-16-25" name="__codelineno-16-25" href="#__codelineno-16-25"></a>        <span class="nv">p</span> <span class="o">=</span> Process<span class="o">(</span><span class="nv">target</span><span class="o">=</span>task<span class="o">)</span>
+<a id="__codelineno-16-26" name="__codelineno-16-26" href="#__codelineno-16-26"></a>        p.start<span class="o">()</span>
+<a id="__codelineno-16-27" name="__codelineno-16-27" href="#__codelineno-16-27"></a>
+<a id="__codelineno-16-28" name="__codelineno-16-28" href="#__codelineno-16-28"></a>    print<span class="o">(</span><span class="s2">&quot;father -&gt; &quot;</span>,os.getpid<span class="o">())</span>
+<a id="__codelineno-16-29" name="__codelineno-16-29" href="#__codelineno-16-29"></a>    time.sleep<span class="o">(</span><span class="m">10000</span><span class="o">)</span>
+<a id="__codelineno-16-30" name="__codelineno-16-30" href="#__codelineno-16-30"></a> <span class="c1">## 10秒后,3个子进程会变成僵尸进程</span>
+<a id="__codelineno-16-31" name="__codelineno-16-31" href="#__codelineno-16-31"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># python a.py </span>
+<a id="__codelineno-16-32" name="__codelineno-16-32" href="#__codelineno-16-32"></a><span class="o">(</span><span class="s1">&#39;father -&gt; &#39;</span>, <span class="m">24754</span><span class="o">)</span>
+<a id="__codelineno-16-33" name="__codelineno-16-33" href="#__codelineno-16-33"></a><span class="o">(</span><span class="s1">&#39;son -&gt; &#39;</span>, <span class="m">24756</span><span class="o">)</span>
+<a id="__codelineno-16-34" name="__codelineno-16-34" href="#__codelineno-16-34"></a><span class="o">(</span><span class="s1">&#39;son -&gt; &#39;</span>, <span class="m">24757</span><span class="o">)</span>
+<a id="__codelineno-16-35" name="__codelineno-16-35" href="#__codelineno-16-35"></a><span class="o">(</span><span class="s1">&#39;son -&gt; &#39;</span>, <span class="m">24755</span><span class="o">)</span>
+<a id="__codelineno-16-36" name="__codelineno-16-36" href="#__codelineno-16-36"></a>
+<a id="__codelineno-16-37" name="__codelineno-16-37" href="#__codelineno-16-37"></a><span class="c1">## -- 终端B上操作</span>
+<a id="__codelineno-16-38" name="__codelineno-16-38" href="#__codelineno-16-38"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># ps aux | grep 24754 | grep -v grep</span>
+<a id="__codelineno-16-39" name="__codelineno-16-39" href="#__codelineno-16-39"></a>root      <span class="m">24754</span>  <span class="m">0</span>.0  <span class="m">0</span>.5 <span class="m">151308</span>  <span class="m">5812</span> pts/1    S+   <span class="m">12</span>:58   <span class="m">0</span>:00 python a.py
+<a id="__codelineno-16-40" name="__codelineno-16-40" href="#__codelineno-16-40"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># ps aux | grep 24755 | grep -v grep</span>
+<a id="__codelineno-16-41" name="__codelineno-16-41" href="#__codelineno-16-41"></a>root      <span class="m">24755</span>  <span class="m">0</span>.0  <span class="m">0</span>.0      <span class="m">0</span>     <span class="m">0</span> pts/1    Z+   <span class="m">12</span>:58   <span class="m">0</span>:00 <span class="o">[</span>python<span class="o">]</span> &lt;defunct&gt;
+<a id="__codelineno-16-42" name="__codelineno-16-42" href="#__codelineno-16-42"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># ps aux | grep 24756 | grep -v grep</span>
+<a id="__codelineno-16-43" name="__codelineno-16-43" href="#__codelineno-16-43"></a>root      <span class="m">24756</span>  <span class="m">0</span>.0  <span class="m">0</span>.0      <span class="m">0</span>     <span class="m">0</span> pts/1    Z+   <span class="m">12</span>:58   <span class="m">0</span>:00 <span class="o">[</span>python<span class="o">]</span> &lt;defunct&gt;
+<a id="__codelineno-16-44" name="__codelineno-16-44" href="#__codelineno-16-44"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># ps aux | grep 24757 | grep -v grep</span>
+<a id="__codelineno-16-45" name="__codelineno-16-45" href="#__codelineno-16-45"></a>root      <span class="m">24757</span>  <span class="m">0</span>.0  <span class="m">0</span>.0      <span class="m">0</span>     <span class="m">0</span> pts/1    Z+   <span class="m">12</span>:58   <span class="m">0</span>:00 <span class="o">[</span>python<span class="o">]</span> &lt;defunct&gt;
+<a id="__codelineno-16-46" name="__codelineno-16-46" href="#__codelineno-16-46"></a><span class="c1">## 证明僵尸进程杀不掉</span>
+<a id="__codelineno-16-47" name="__codelineno-16-47" href="#__codelineno-16-47"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># kill -9 24757</span>
+<a id="__codelineno-16-48" name="__codelineno-16-48" href="#__codelineno-16-48"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># ps aux | grep 24757 | grep -v grep</span>
+<a id="__codelineno-16-49" name="__codelineno-16-49" href="#__codelineno-16-49"></a>root      <span class="m">24757</span>  <span class="m">0</span>.0  <span class="m">0</span>.0      <span class="m">0</span>     <span class="m">0</span> pts/1    Z+   <span class="m">12</span>:58   <span class="m">0</span>:00 <span class="o">[</span>python<span class="o">]</span> &lt;defunct&gt;
+<a id="__codelineno-16-50" name="__codelineno-16-50" href="#__codelineno-16-50"></a><span class="c1">## 再使用top命令 查看zombie字段的值 值为3</span>
+<a id="__codelineno-16-51" name="__codelineno-16-51" href="#__codelineno-16-51"></a><span class="c1">## 退出top界面</span>
+<a id="__codelineno-16-52" name="__codelineno-16-52" href="#__codelineno-16-52"></a><span class="c1">## kill -9杀掉父进程,或者在终端A的交互式界面执行ctrl+c结束掉py程序</span>
+<a id="__codelineno-16-53" name="__codelineno-16-53" href="#__codelineno-16-53"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># kill -9 24754</span>
+<a id="__codelineno-16-54" name="__codelineno-16-54" href="#__codelineno-16-54"></a><span class="c1">## 再使用top命令 查看zombie字段的值 值为0</span>
+</code></pre></div>
+<hr />
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+          <a href="#" class="md-top md-icon" data-md-component="top" hidden>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
+            回到页面顶部
+          </a>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+    <nav class="md-footer__inner md-grid" aria-label="页脚" >
+      
+        
+        <a href="../12_%E6%9F%A5%E7%9C%8B%E8%BF%9B%E7%A8%8B/" class="md-footer__link md-footer__link--prev" aria-label="上一页: 查看进程" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                上一页
+              </span>
+              查看进程
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="../14_%E5%AD%98%E5%82%A8%E7%AE%A1%E7%90%86%E4%B9%8B%E4%BC%A0%E7%BB%9F%E7%A3%81%E7%9B%98%E7%AE%A1%E7%90%86/" class="md-footer__link md-footer__link--next" aria-label="下一页: 存储管理之传统磁盘管理" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                下一页
+              </span>
+              存储管理之传统磁盘管理
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright © 2023 from Dc_OnePiece
+    </div>
+  
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "navigation.top", "navigation.expand", "navigation.instant", "navigation.tracking", "search.suggest", "search.highlight", "search.share"], "search": "../../assets/javascripts/workers/search.5bf1dace.min.js", "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.config.lang": "ja", "search.config.pipeline": "trimmer, stemmer", "search.config.separator": "[\\s\\-\uff0c\u3002]+", "search.placeholder": "\u641c\u7d22", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version.title": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.37e9125f.min.js"></script>
+      
+        <script src="../../resources/js/extra.js"></script>
+      
+    
+  </body>
+</html>

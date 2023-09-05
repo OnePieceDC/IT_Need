@@ -1,0 +1,1875 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="These are my study notes.">
+      
+      
+        <meta name="author" content="DC">
+      
+      
+      <link rel="icon" href="../../resources/images/favicon.ico">
+      <meta name="generator" content="mkdocs-1.3.1, mkdocs-material-8.5.3">
+    
+    
+      
+        <title>传输层 - IT必备知识</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.7a952b86.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.cbb835fc.min.css">
+        
+      
+      
+
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../resources/css/extra.css">
+    
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lxgw-wenkai-webfont@1.1.0/style.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="blue-grey" data-md-color-accent="amber">
+  
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#_1" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../.." title="IT必备知识" class="md-header__button md-logo" aria-label="IT必备知识" data-md-component="logo">
+      
+  <img src="../../resources/images/favicon.ico" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            IT必备知识
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              传输层
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      <form class="md-header__option" data-md-component="palette">
+        
+          
+          
+          <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="blue-grey" data-md-color-accent="amber"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+          
+            <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"/></svg>
+            </label>
+          
+        
+          
+          
+          <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="blue-grey" data-md-color-accent="amber"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_2">
+          
+            <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12c0-2.42-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"/></svg>
+            </label>
+          
+        
+      </form>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="分享" aria-label="分享" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7 0-.24-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91 1.61 0 2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08Z"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="标签" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+    
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../0_%E5%89%8D%E5%A5%8F%28%E4%BB%8B%E7%BB%8D%29/" class="md-tabs__link md-tabs__link--active">
+        计算机基础(8)
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../1_linux%E5%9F%BA%E7%A1%80/0_%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C/" class="md-tabs__link">
+        linux基础(20)
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../5_db/0_%E5%9F%BA%E7%A1%80/0_install_db/" class="md-tabs__link">
+        mysql(19)
+      </a>
+    </li>
+  
+
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../9_git/0_git%E7%94%9F%E6%B4%BB%E7%89%88/" class="md-tabs__link">
+        git(2)
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../13_%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/0_%E9%80%92%E5%BD%92_%E6%9F%A5%E6%89%BE/" class="md-tabs__link">
+        查找排序算法(5)
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="IT必备知识" class="md-nav__button md-logo" aria-label="IT必备知识" data-md-component="logo">
+      
+  <img src="../../resources/images/favicon.ico" alt="logo">
+
+    </a>
+    IT必备知识
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1" type="checkbox" id="__nav_1" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_1">
+          计算机基础(8)
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="计算机基础(8)" data-md-level="1">
+        <label class="md-nav__title" for="__nav_1">
+          <span class="md-nav__icon md-icon"></span>
+          计算机基础(8)
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0_%E5%89%8D%E5%A5%8F%28%E4%BB%8B%E7%BB%8D%29/" class="md-nav__link">
+        前奏(介绍)
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../1_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A1%AC%E4%BB%B6%E7%BB%84%E6%88%90/" class="md-nav__link">
+        计算机硬件组成
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../2_%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" class="md-nav__link">
+        操作系统
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../3_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E6%A6%82%E8%A7%88/" class="md-nav__link">
+        计算机网络概览
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../4_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E4%B9%8B%E7%BD%91%E7%BB%9C%E6%8E%A5%E5%8F%A3%E5%B1%82/" class="md-nav__link">
+        网络接口层
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../5_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E4%B9%8B%E7%BD%91%E7%BB%9C%E5%B1%82/" class="md-nav__link">
+        网络层
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          传输层
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        传输层
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    引言
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#udp" class="md-nav__link">
+    UDP 协议
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tcp" class="md-nav__link">
+    TCP协议
+  </a>
+  
+    <nav class="md-nav" aria-label="TCP协议">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    可靠交互
+  </a>
+  
+    <nav class="md-nav" aria-label="可靠交互">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    ☆ [丢包问题]
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    ☆ [效率问题]
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    ☆ [顺序问题]
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    滑动窗口机制
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    三次握手
+  </a>
+  
+    <nav class="md-nav" aria-label="三次握手">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    ☆ [说明]
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    ☆ [连接步骤]
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    ☆ [半连接池]
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#syn" class="md-nav__link">
+    ☆ [syn洪水攻击]
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    四次挥手
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../7_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%A1%A5%E5%85%85/" class="md-nav__link">
+        补充
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2">
+          linux基础(20)
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="linux基础(20)" data-md-level="1">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          linux基础(20)
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../1_linux%E5%9F%BA%E7%A1%80/0_%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C/" class="md-nav__link">
+        准备工作
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../1_linux%E5%9F%BA%E7%A1%80/1_%E5%88%9D%E8%AF%86shell%E4%B8%8E%E5%9F%BA%E7%A1%80%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" class="md-nav__link">
+        初识shell与基础常用命令
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../1_linux%E5%9F%BA%E7%A1%80/2_%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86%E4%B9%8B%E5%9F%BA%E7%A1%80%E5%91%BD%E4%BB%A4/" class="md-nav__link">
+        文件管理之基础命令
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../1_linux%E5%9F%BA%E7%A1%80/3_%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86%E4%B9%8B%E5%9B%9B%E5%A4%A7%E6%A8%A1%E5%BC%8F/" class="md-nav__link">
+        文件管理之四大模式
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../1_linux%E5%9F%BA%E7%A1%80/4_%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86%E4%B9%8B%E5%91%BD%E4%BB%A4%E8%A1%A5%E5%85%85/" class="md-nav__link">
+        文件管理之命令补充
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../1_linux%E5%9F%BA%E7%A1%80/5_%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86%E4%B9%8B%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/" class="md-nav__link">
+        文件管理之文件系统
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../1_linux%E5%9F%BA%E7%A1%80/6_%E6%9D%83%E9%99%90%E7%AE%A1%E7%90%86%E4%B9%8B%E7%94%A8%E6%88%B7%E4%B8%8E%E7%BB%84/" class="md-nav__link">
+        权限管理之用户与组
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../1_linux%E5%9F%BA%E7%A1%80/7_%E6%9D%83%E9%99%90%E7%AE%A1%E7%90%86%E4%B9%8B%E6%96%87%E4%BB%B6%E6%9D%83%E9%99%90/" class="md-nav__link">
+        权限管理之文件权限
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../1_linux%E5%9F%BA%E7%A1%80/8_%E6%9D%83%E9%99%90%E7%AE%A1%E7%90%86%E4%B9%8BACL/" class="md-nav__link">
+        权限管理之ACL
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../1_linux%E5%9F%BA%E7%A1%80/9_%E6%9D%83%E9%99%90%E7%AE%A1%E7%90%86%E4%B9%8Bsu%E4%B8%8Esudo/" class="md-nav__link">
+        权限管理之su与sudo
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../1_linux%E5%9F%BA%E7%A1%80/10_%E8%BD%AF%E4%BB%B6%E5%8C%85%E7%AE%A1%E7%90%86%E4%B9%8Brpm/" class="md-nav__link">
+        软件包管理之rpm
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../1_linux%E5%9F%BA%E7%A1%80/11_%E8%BD%AF%E4%BB%B6%E5%8C%85%E7%AE%A1%E7%90%86%E4%B9%8Byum/" class="md-nav__link">
+        软件包管理之yum
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../1_linux%E5%9F%BA%E7%A1%80/12_%E6%9F%A5%E7%9C%8B%E8%BF%9B%E7%A8%8B/" class="md-nav__link">
+        查看进程
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../1_linux%E5%9F%BA%E7%A1%80/13_%E7%AE%A1%E7%90%86%E8%BF%9B%E7%A8%8B/" class="md-nav__link">
+        管理进程
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../1_linux%E5%9F%BA%E7%A1%80/14_%E5%AD%98%E5%82%A8%E7%AE%A1%E7%90%86%E4%B9%8B%E4%BC%A0%E7%BB%9F%E7%A3%81%E7%9B%98%E7%AE%A1%E7%90%86/" class="md-nav__link">
+        存储管理之传统磁盘管理
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../1_linux%E5%9F%BA%E7%A1%80/15_%E5%AD%98%E5%82%A8%E7%AE%A1%E7%90%86%E4%B9%8BLVM/" class="md-nav__link">
+        存储管理之LVM
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../1_linux%E5%9F%BA%E7%A1%80/16_%E7%BD%91%E7%BB%9C%E7%AE%A1%E7%90%86/" class="md-nav__link">
+        网络管理
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../1_linux%E5%9F%BA%E7%A1%80/17_shell%E5%9F%BA%E7%A1%80/" class="md-nav__link">
+        shell基础
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../1_linux%E5%9F%BA%E7%A1%80/18_crond%E8%AE%A1%E5%88%92%E4%BB%BB%E5%8A%A1/" class="md-nav__link">
+        crond计划任务
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../1_linux%E5%9F%BA%E7%A1%80/19_%E7%B3%BB%E7%BB%9F%E4%BC%98%E5%8C%96/" class="md-nav__link">
+        系统优化
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3">
+          mysql(19)
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="mysql(19)" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          mysql(19)
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" data-md-toggle="__nav_3_1" type="checkbox" id="__nav_3_1" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3_1">
+          基础
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="基础" data-md-level="2">
+        <label class="md-nav__title" for="__nav_3_1">
+          <span class="md-nav__icon md-icon"></span>
+          基础
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../5_db/0_%E5%9F%BA%E7%A1%80/0_install_db/" class="md-nav__link">
+        数据库安装
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../5_db/0_%E5%9F%BA%E7%A1%80/1_db_command/" class="md-nav__link">
+        sql命令总结
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../5_db/0_%E5%9F%BA%E7%A1%80/2_imp_knowledge/" class="md-nav__link">
+        imp_knowledge
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../5_db/0_%E5%9F%BA%E7%A1%80/3_table_field/" class="md-nav__link">
+        字段的约束和类型
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../5_db/0_%E5%9F%BA%E7%A1%80/4_table_relation/" class="md-nav__link">
+        表关系
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../5_db/0_%E5%9F%BA%E7%A1%80/5_permissions/" class="md-nav__link">
+        权限管理
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../5_db/0_%E5%9F%BA%E7%A1%80/6_single_query/" class="md-nav__link">
+        单表查询
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../5_db/0_%E5%9F%BA%E7%A1%80/7_multi_query/" class="md-nav__link">
+        多表查询
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../5_db/0_%E5%9F%BA%E7%A1%80/8_query_practice/" class="md-nav__link">
+        query_practice
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../5_db/0_%E5%9F%BA%E7%A1%80/9_pymysql/" class="md-nav__link">
+        pymysql
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../5_db/0_%E5%9F%BA%E7%A1%80/10_just_know/" class="md-nav__link">
+        just_know
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../5_db/0_%E5%9F%BA%E7%A1%80/other/01_to_11/" class="md-nav__link">
+        other1
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../5_db/0_%E5%9F%BA%E7%A1%80/other/05/" class="md-nav__link">
+        other2
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" data-md-toggle="__nav_3_2" type="checkbox" id="__nav_3_2" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3_2">
+          进阶
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="进阶" data-md-level="2">
+        <label class="md-nav__title" for="__nav_3_2">
+          <span class="md-nav__icon md-icon"></span>
+          进阶
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../5_db/1_%E8%BF%9B%E9%98%B6/0_index/" class="md-nav__link">
+        索引
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../5_db/1_%E8%BF%9B%E9%98%B6/1_explain/" class="md-nav__link">
+        执行计划
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../5_db/1_%E8%BF%9B%E9%98%B6/2_transaction/" class="md-nav__link">
+        事务
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../5_db/1_%E8%BF%9B%E9%98%B6/3_db_readPhenomenon/" class="md-nav__link">
+        读现象
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../5_db/1_%E8%BF%9B%E9%98%B6/4_lock/" class="md-nav__link">
+        锁
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../5_db/1_%E8%BF%9B%E9%98%B6/other/" class="md-nav__link">
+        数据库连接池
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4">
+          git(2)
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="git(2)" data-md-level="1">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          git(2)
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../9_git/0_git%E7%94%9F%E6%B4%BB%E7%89%88/" class="md-nav__link">
+        git生活版
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../9_git/1_git%E7%A0%94%E7%A9%B6%E7%89%88/" class="md-nav__link">
+        git研究版
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" data-md-toggle="__nav_5" type="checkbox" id="__nav_5" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_5">
+          查找排序算法(5)
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="查找排序算法(5)" data-md-level="1">
+        <label class="md-nav__title" for="__nav_5">
+          <span class="md-nav__icon md-icon"></span>
+          查找排序算法(5)
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../13_%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/0_%E9%80%92%E5%BD%92_%E6%9F%A5%E6%89%BE/" class="md-nav__link">
+        查找
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../13_%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/1_LowB%E4%B8%89%E4%BA%BA%E7%BB%84/" class="md-nav__link">
+        LowB三人组
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../13_%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/2_NB%E4%B8%89%E4%BA%BA%E7%BB%84/" class="md-nav__link">
+        NB三人组
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../13_%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/3_%E5%85%B6%E5%AE%83%E6%8E%92%E5%BA%8F/" class="md-nav__link">
+        其它排序
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../13_%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/4_%E6%9F%A5%E6%89%BE%E4%B9%A0%E9%A2%98/" class="md-nav__link">
+        查找习题
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    引言
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#udp" class="md-nav__link">
+    UDP 协议
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tcp" class="md-nav__link">
+    TCP协议
+  </a>
+  
+    <nav class="md-nav" aria-label="TCP协议">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    可靠交互
+  </a>
+  
+    <nav class="md-nav" aria-label="可靠交互">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    ☆ [丢包问题]
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    ☆ [效率问题]
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    ☆ [顺序问题]
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    滑动窗口机制
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    三次握手
+  </a>
+  
+    <nav class="md-nav" aria-label="三次握手">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    ☆ [说明]
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    ☆ [连接步骤]
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    ☆ [半连接池]
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#syn" class="md-nav__link">
+    ☆ [syn洪水攻击]
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    四次挥手
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  <h1>传输层</h1>
+
+<h2 id="_1">引言<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<blockquote>
+<p>IP+MAC+port 标识一个全世界范围内独一无二的基于网络通信的软件..<br />
+参考链接: <code>https://mp.weixin.qq.com/s/Uf42QEL6WUSHOwJ403FwOA</code></p>
+</blockquote>
+<p><font color='purple'>[传输层的由来] </font><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;网络层的IP地址帮我们区分子网,以太网层的MAC帮我们找到主机..<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;我们通过IP和MAC找到了一台特定的主机,那如何标识这台主机上特定的应用程序? 答案就是端口..<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;端口即应用程序与网卡关联的编号...</p>
+<p><font color='purple'>[传输层功能]</font> <br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;建立 <strong>端</strong> 口到 <strong>端</strong> 口的通信<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color='gray'><strong>端口范围0-65535</strong>, 0-1023为系统占用端口,端口占用的是操作系统的资源</font> <br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color='gray'>端口打个比方就是操作系统开的一个个的小窗口,应用软件数据通过这些小窗口再到网卡.</font></p>
+<p><font color='purple'>[传输层的数据]</font> <br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1&gt; 依照tcp&amp;udp协议在传输层的构建的数据,称为<font color='brown'> <strong>'数据段'</strong></font><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2&gt; 数据段 = head + data<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <strong>head</strong> 里放 <strong>&lt;源端口&gt;</strong> 和 <strong>&lt;目标端口&gt;</strong><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <font color='gray'>端口在本机唯一即可!</font></p>
+<hr />
+<h2 id="udp">UDP 协议<a class="headerlink" href="#udp" title="Permanent link">&para;</a></h2>
+<blockquote>
+<p>UDP协议 -- 无连接、不可靠的用户报文协议..<br />
+在发送数据时,不需要建立连接,拿到IP和端口直接发过去了..发完后数据就删掉了.</p>
+<p><strong>应用场景:</strong>  查询类的操作(eg dhcp查询)  集群的时间同步 QQ聊天 </p>
+</blockquote>
+<p><strong>Q:</strong> 前三层协议只能把数据包从一个主机搬到另外一台主机,但是,到了目的地以后,<br />
+&nbsp;&nbsp;&nbsp;&nbsp; 数据包具体交给哪个程序(进程)呢？<br />
+<strong>A:</strong> 需要把通信的进程区分开来,于是就给每个进程分配一个数字编号: <font color='blue'>端口号</font></p>
+<p>So,现目前,经过前四层(传输层～数据链路层 从上到下),应用数据被封装成了这样:<br />
+&nbsp;&nbsp;&nbsp;&nbsp; <font color='gray'>数据链路层头部&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;网络层头部&nbsp;&nbsp;&nbsp;&nbsp;传输层头部&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 数据部分</font><br />
+&nbsp;&nbsp;&nbsp;&nbsp; <font color='gray'><strong>源MAC 目的MAC&nbsp;&nbsp;&nbsp;&nbsp;源IP 目的IP&nbsp;&nbsp;&nbsp;&nbsp;源端口号 目的端口号&nbsp;&nbsp;&nbsp;&nbsp;数据部分</strong></font><br />
+<font color='blue'>这样子,我们将主机到主机的通信,升级成了进程和进程之间的通信..</font></p>
+<p>经过上述的过程,我们在不知不觉中就已经实现了<strong>UDP 协议</strong>！<br />
+<font color='gray'>(当然 UDP 协议中不光有源端口和目标端口,还有数据包长度和校验值,我们暂且略过)</font></p>
+<p><img alt="" src="../assets/udp%E9%80%9A%E4%BF%A1.gif" /></p>
+<p><strong>[引出TCP协议]</strong><br />
+用UDP协议A同B能实现通信,但这个通信过程中存在很多问题!!!没有那么简单!!<br />
+<font color='brown'><strong>丢包问题、效率问题、顺序问题、流量问题、拥塞问题、连接问题...</strong></font> 这些问题TCP协议才能解决!!!</p>
+<hr />
+<h2 id="tcp">TCP协议<a class="headerlink" href="#tcp" title="Permanent link">&para;</a></h2>
+<blockquote>
+<p>TCP协议 --  面向连接的、可靠的、基于字节流的传输控制协议  netstat -an</p>
+<p><strong>应用场景:</strong> 与用户打交道的应用程序</p>
+</blockquote>
+<p><img alt="" src="../assets/TCP%E5%8D%8F%E8%AE%AE.png" /></p>
+<h3 id="_2"><font color='orange'>可靠交互</font><a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
+<h5 id="_3"><font color='purple' size=4>☆ [丢包问题]</font><a class="headerlink" href="#_3" title="Permanent link">&para;</a></h5>
+<blockquote>
+<p>由于网络的不可靠,A传给B的数据包可能在半路丢失.. <br />
+不难想到,对于丢包问题,B应该告诉A数据包没收到,A再重;或者B告诉A一声数据包收到了. </p>
+</blockquote>
+<p><font color='brown'>停止等待协议</font> <br />
+&nbsp;&nbsp;&nbsp;&nbsp; <font color='gray'>A每发一个包,都必须收到来自B的确认(<strong>回一个ACK包</strong>)后,再发下一个;</font><br />
+&nbsp;&nbsp;&nbsp;&nbsp; <font color='gray'>否则在一定时间内没有收到确认,就重传这个包.</font></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp; 这样以来,TCP协议的通信过程有了一个新特征 -- <font color='red'>可靠交互</font>.</p>
+<h5 id="_4"><font color='purple' size=4>☆ [效率问题]</font><a class="headerlink" href="#_4" title="Permanent link">&para;</a></h5>
+<blockquote>
+<p>停止等待解决了丢包问题,可靠是可靠,但效率太慢了..</p>
+</blockquote>
+<p>于是乎,我们提出假设,用 <font color='brown'>流水线</font> 的形式,A连续发几个数据包给B,B再按收到的顺序依次ACK确认..<br />
+<font color='gray'>(前提,A发出去的包按照发送的先后依次到达B,才能保证B依次回应的ACK对应的上..)</font></p>
+<p>看似成立,但实则傻白甜了.网络是复杂的,不可靠的.<br />
+<font color='brown'>A发出去的数据包,可是会走 <em>不同的路径</em> (耗时不同) 到达B.</font><br />
+<font color='gray'>这可能会导致出现这种情况,第2个发出去的包会在第5个发出去的包到达B后才到达B..</font></p>
+<p>也就是说,在流水线中有多个数据包和ACK包在乱序流动,他们之间对应关系乱掉啦!!</p>
+<h5 id="_5"><font color='purple' size=4>☆ [顺序问题]</font><a class="headerlink" href="#_5" title="Permanent link">&para;</a></h5>
+<blockquote>
+<p>A在发送的数据包中增加一个<strong>序号(seq),</strong> 同时B要在<strong>ACK包</strong> 上增加一个 <strong>确认号(ack)</strong>.<br />
+这样不但解决了停止等待协议的效率问题,也通过标序号的方式解决了顺序问题.</p>
+</blockquote>
+<p>现实中,为了减少网络IO,B会采用 <font color='brown'>累计确认/累计应答</font> 的方式给A回复确认号(ack).</p>
+<p>举个栗子:<br />
+&nbsp;&nbsp;&nbsp;&nbsp; A连续发送了带有1,2,3序号(seq)的数据包给B,<br />
+&nbsp;&nbsp;&nbsp;&nbsp; B收到了这三个数据包,将回应了一个带有确认号(ack=4)的ACK包给A;<br />
+&nbsp;&nbsp;&nbsp;&nbsp; <font color='lightblue'><strong>代表A发送的序号小于4的数据包都收到了..也同时告诉A下一个数据包应该发的序号是4.</strong></font></p>
+<p><img alt="" src="../assets/%E9%A1%BA%E5%BA%8F%E9%97%AE%E9%A2%98.gif" /></p>
+<p><font color='gray'>Ps: ack号是收到的最后一个数据包的序号seq+1. So,纠正下,下图中B回复A的ACK包的确认号应该为4..</font></p>
+<h3 id="_6"><font color='orange'>滑动窗口机制</font><a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p>TCP可靠传输的实现依托于 -- 以字节为单位的滑动窗口 <br />
+视频链接: <code>https://www.bilibili.com/video/BV194411h71z</code>!!!!!!</p>
+</blockquote>
+<p><img alt="" src="../assets/%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3%E6%9C%BA%E5%88%B6.png" /> </p>
+<p><font color='gray'>Ps: 图中一个个小框代表一个个字节, 收到的最后一个确认号是3.. 窗口上边界指的是滑动窗口的前沿.</font></p>
+<h3 id="_7"><font color='orange'>三次握手</font><a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p>三次握手 --  准确点应该是三报文握手,即一次握手过程中交换了三个报文,并不是进行了三次握手!</p>
+<p><strong>TCP通信之前必须建立双向通路</strong>, 这个连接是虚拟的, 是由 A 和 B 共同维护的, 在网络中的设备根本就不知道连接这回事儿！</p>
+<p><strong>TCP协议在 "通信之前" 必须建立双向连接</strong> ,通常都是客户端主动连接服务端, 所以必须先启动服务端. <br />
+Ps:UDP协议不需要先启动服务端.</p>
+</blockquote>
+<p><font color='gray'><strong>客户端</strong>: 主动发起连接建立的应用进程</font> <br />
+<font color='gray'><strong>服务端</strong>: 被动等待连接建立的应用进程</font></p>
+<p><img alt="" src="../assets/%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8B.pic" /></p>
+<p><font color='gray'>Ps: 两条线是时间线! 代表客户端和服务端建好连接需要花费的时间..</font></p>
+<h5 id="_8"><font color='purple' size=4>☆ [说明]</font><a class="headerlink" href="#_8" title="Permanent link">&para;</a></h5>
+<p>结合前面的TCP协议的组成图.<br />
+&nbsp;&nbsp;&nbsp;&nbsp; <strong>SYN</strong> --  同步位,表明发送的是连接请求报文段<br />
+&nbsp;&nbsp;&nbsp;&nbsp; <strong>ACK</strong> --  确认位,表明发送的是连接确认报文段 <br />
+&nbsp;&nbsp;&nbsp;&nbsp; <strong>seq</strong> --  序号. TCP是面向字节流的,在TCP连接中传送的字节流的每一个字节都按顺序编号<br />
+&nbsp;&nbsp;&nbsp;&nbsp; <strong>ack</strong> --  确认号,是期望收到对方下一个报文段的第一个数据字节的序号   </p>
+<h5 id="_9"><font color='purple' size=4>☆ [连接步骤]</font><a class="headerlink" href="#_9" title="Permanent link">&para;</a></h5>
+<p>1&gt; 一开始,B会处于LISTEN(监听)状态,等待某些客户的连接请求.<br />
+2&gt; A发送完SYN连接报文段后,进入SYN-SENT(同步已发送)状态. <br />
+3&gt; B收到A发送的SYN后,若同意建立连接,会向A发送ACK确认报文段.进入SYN_RCVD(同步收到)状态.<br />
+&nbsp;&nbsp;&nbsp;&nbsp; 只不过在这个确认报文段中,不仅将ACK置为1,还会将SYN置为1,相当于把向B发送连接请求的活一起干了..<br />
+&nbsp;&nbsp;&nbsp;&nbsp; 也可以简说发送的是ACK+SYN报文段..<br />
+&nbsp;&nbsp;&nbsp;&nbsp; 注意: <code>ack = x+1</code> 表示B已经接收到A发送过来的序号为x的报文. <br />
+4&gt; A收到B的确认后,还要向B给出确认.A进入ESTAB_LISHED(已经建立连接)状态.<br />
+&nbsp;&nbsp;&nbsp;&nbsp; 注意: 这里的<code>seq = x+1</code>,是因为A收到的B的确认报文中 <code>ack = x+1</code><br />
+&nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; -- 期望收到的下一个报文的序号是以x+1开始的.<br />
+5&gt; B收到A的确认后,B进入ESTAB_LISHED状态. <strong>此刻A与B的双向道路才真正的打通!</strong></p>
+<p>注意哦! <font color='gray'> <strong>SYN_RCVD</strong> 也叫做 <strong>半连接</strong> 状态</font><br />
+敲黑板! <font color='gray'>B向A发送的报文实际上可以拆成两个报文段,可以先发送一个确认报文段(ACK=1 ack=x+1),再发送一个同步报文段(SYN=1,seq=y). <strong>这样四报文握手的效果跟三报文握手的效果是一样的!</strong></font></p>
+<p><font color='green'>Q:讲道理,A向B发送连接请求后,B同意了,那么AB之间的通路就建立了.那为什么A最后还要向B发送一次确认？</font><br />
+<strong>A:</strong> 假设A不发送最后那次请求.这是前提.A向B发送的连接请求因为网络原因未能及时到达B.<br />
+&nbsp;&nbsp;&nbsp;&nbsp; 于是乎,A重新发送了一次连接请求,而后A收到了B的确认,连接建立.<br />
+&nbsp;&nbsp;&nbsp;&nbsp; AB之间数据传输完毕后,连接释放..好巧不巧,A向B发送的第一次连接请求并没有丢失,在连接释放后到达了B.<br />
+&nbsp;&nbsp;&nbsp;&nbsp; B就会认为A发送了一次新的连接请求.并一直等待A发来数据..B的许多资源就这样浪费掉了..<br />
+&nbsp;&nbsp;&nbsp;&nbsp; A最后向B发送一次确认就能有效的避免这种情况!! client不会向server的确认发出确认. server由于收不到确认,就知道client并没有要求建立连接!!</p>
+<h5 id="_10"><font color='purple' size=4>☆ [半连接池]</font><a class="headerlink" href="#_10" title="Permanent link">&para;</a></h5>
+<blockquote>
+<p>半连接池占用服务器固定内存的大小</p>
+</blockquote>
+<p>多个客户端同时向一个服务端发送SYN请求连接,这些连接到了服务端会先依次放到半连接池里面..<br />
+<strong>在不断放的同时</strong>, 服务器的操作系统会根据队列先进先出的原则 <strong>不断的取</strong> 半连接池里的请求..</p>
+<p>在现实当中,打开某一个网页,若原地转圈,表示请求已经在半连接池里了,要等一小会;<br />
+若直接拒绝了请求,访问不上,则证明池子已经满了,请求在池子外面.. <br />
+所以在高并发的场景下,我们会进行一个优化: 将半连接池增大. <br />
+调多大没个标准,因为半连接池占用的内存空间变大了,相应的其他进程存取数据可用的空间就少了..<br />
+<font color='gray'><strong>敲黑板!</strong> 最本质的优化,  <strong><em>加内存条</em></strong> 是软件优化的N倍.</font></p>
+<h5 id="syn"><font color='purple' size=4>☆ [syn洪水攻击]</font><a class="headerlink" href="#syn" title="Permanent link">&para;</a></h5>
+<p>服务器处于LISTEN和ESTABLISHED状态都是正常的,前者表示正在监听,后者表示服务器正在服务多个客户端.<br />
+若发现服务器有大量客户端发来的请求连接处于SYN_RCVD状态,就不正常啦...表明操作系统忙不过来了.<br />
+<strong>why？因为连接建立是很快很快... 客户端的SYN_SENT状态和服务器的SYN_RCVD状态是很难捕捉的到.</strong></p>
+<p><font color='green'><em>syn洪水攻击就会造成服务器大量SYN_RCVD状态出现..</em></font> 
+它会模拟大量的假的客户端朝服务端发SYN连接请求,发完后客户端就消失了; 服务端收到后, <strong>TCP是好人协议嘛</strong> ,不会验证客户端的身份,会直接回复确认信息,但客户端已经消失了,是不会回复最后的确认的,但服务端不知道啊,服务端会每隔一段时间重复回一次,尝试几次后发现客户端还是没有回复最后的确认信息,那么服务端就会认为这是个客户端出现了什么异常...连接就取消啦. 但在这期间,要占用服务端的资源嘛...<br />
+<font color='gray'>也许你会说,TCP为啥不能验证身份后再开始建立连接呢？因为TCP是一个底层的协议,设计复杂一点,建立连接的速度就会降下来,整个互联网通信效率都会被拉下来.. 所以安全性的问题往往会在应用层,应用程序里解决..</font></p>
+<p>再唠唠嗑,服务器通常存放在机房里,服务器外面是交换机,交换机外面是路由,再往外是各种网络设备..<br />
+syn洪水攻击往往是外网攻击,攻击的流量若很大很大,还没到服务器就把外面的交换机给干趴下了..那么不管增大服务器的半连接池到多大,服务器的性能有多牛也没有用.. <br />
+用正规的机房,使用阿里云腾讯云的服务器,它们会帮忙解决这个问题..</p>
+<h3 id="_11"><font color='orange'>四次挥手</font><a class="headerlink" href="#_11" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p>四报文握手.</p>
+</blockquote>
+<p>C与S谁先发完数据,谁就先主动发起断开连接.这里假设客户端A先发完数据<br />
+<font color='gray'>一台机器既是某个软件的客户端也运行着某个软件的服务端.所以在一台机器上可以同时看到C与S的状态.</font>   </p>
+<p><img alt="" src="../assets/%E5%9B%9B%E6%AC%A1%E6%8C%A5%E6%89%8B.pic" /></p>
+<p>1&gt; A会向服务端B发送FIN连接释放报文段.A进入FIN_WAIT_1(终止等待1)状态,等待B的确认.<br />
+2&gt; B收到A发送来的FIN=1报文后,立即发送ACK确认报文.B进入CLOSE_WAIT(关闭等待)状态.<br />
+3&gt; A收到来自B的确认后,A进入FIN_WAIT_2(终止等待2)状态.<br />
+4&gt; 等待一会,服务端B也发完数据后,B会向A发送FIN连接释放报文段.B进入LAST_ACK(最后确认)状态.<br />
+5&gt; A收到B发送来的FIN=1报文后,A进入TIME_WAIT(时间等待)状态.<br />
+6&gt; <font color='green'>A向B发送ACK=1的确认报文后,必须处于TIME_WAIT等待2MSL的时间后,A才会进入CLOSE状态.</font><br />
+&nbsp;&nbsp;&nbsp;&nbsp; 具体来说是为了避免两种情况.<br />
+&nbsp;&nbsp;&nbsp;&nbsp; 第一种,B长时间没有收到最后一次确认,B会再次向A发送FIN报文,A会重传最后一次的ACK报文<br />
+&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 为了B能准确无误的收到最后一次的ACK确认报文.<br />
+&nbsp;&nbsp;&nbsp;&nbsp; 第二种,防止"已经失效的连接请求报文段"出现在本连接中.A在发送完最后一个ACK报文段后,<br />
+&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 再经过2MSL的时间,就可以使本连接持续的时间内所产生的所有报文段都从网络中消失.<br />
+&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 这样就可以使下一个新的连接中不会出现这种旧的连接请求报文段..<br />
+7&gt; B只要收到来自A的确认后,服务端B直接关掉了这个连接..B进入CLOSE状态..<br />
+&nbsp;&nbsp;&nbsp;&nbsp; 可以发现,B进入CLOSE状态会比A早一些!!<br />
+<font color='gray'>Ps: MSL通常为2min; </font><br />
+<font color='brown'>敲黑板!</font>  <font color='gray'><strong>针对断连接,中间的两次为啥不能合二为一?</strong> S要等数据全部发给C后,才会发送FIN报文段.</font>  </p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>qTCP协议的重点:
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>[可靠性]
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>不是说建立了双向通路就可靠,而是A发送的数据是拷贝一份沿着网络发送给B,待B接收到后,会回个ACK给A,意味着B告诉A收到数据啦,A才会将这份数据在内存中删除掉.. 若等一段时候,A没有得到ACK确定,会重传.. 尝试几次后都没得到,A就会认为B坏了..不会再发了. TCP这种保证数据可靠性的方式,对传输速率没有影响,但对资源是浪费了..因为A在等待B回复ACK的期间,数据一直在内存里放着..牺牲空间来换取可靠性.
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>[三连四挥 各种状态]
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>建立连接是三次,断连接是四次,因为前者没有数据在传,后者有数据在传!!
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>建连接通常是s先启动后,C对S发起连接;断连接就没准了,C与S谁先发完谁先断.
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>
+<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>为啥需要三次握手建立连接,四次挥手断开连接.
+<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>https://blog.csdn.net/LO<span class="nb">_</span>YUN/article/details/115541563
+</code></pre></div>
+<hr />
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+          <a href="#" class="md-top md-icon" data-md-component="top" hidden>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
+            回到页面顶部
+          </a>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+    <nav class="md-footer__inner md-grid" aria-label="页脚" >
+      
+        
+        <a href="../5_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E4%B9%8B%E7%BD%91%E7%BB%9C%E5%B1%82/" class="md-footer__link md-footer__link--prev" aria-label="上一页: 网络层" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                上一页
+              </span>
+              网络层
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="../7_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%A1%A5%E5%85%85/" class="md-footer__link md-footer__link--next" aria-label="下一页: 补充" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                下一页
+              </span>
+              补充
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright © 2023 from Dc_OnePiece
+    </div>
+  
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "navigation.top", "navigation.expand", "navigation.instant", "navigation.tracking", "search.suggest", "search.highlight", "search.share"], "search": "../../assets/javascripts/workers/search.5bf1dace.min.js", "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.config.lang": "ja", "search.config.pipeline": "trimmer, stemmer", "search.config.separator": "[\\s\\-\uff0c\u3002]+", "search.placeholder": "\u641c\u7d22", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version.title": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.37e9125f.min.js"></script>
+      
+        <script src="../../resources/js/extra.js"></script>
+      
+    
+  </body>
+</html>

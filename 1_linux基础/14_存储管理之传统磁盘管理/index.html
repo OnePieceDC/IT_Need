@@ -1,0 +1,2491 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="These are my study notes.">
+      
+      
+        <meta name="author" content="DC">
+      
+      
+      <link rel="icon" href="../../resources/images/favicon.ico">
+      <meta name="generator" content="mkdocs-1.3.1, mkdocs-material-8.5.3">
+    
+    
+      
+        <title>存储管理之传统磁盘管理 - IT必备知识</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.7a952b86.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.cbb835fc.min.css">
+        
+      
+      
+
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../resources/css/extra.css">
+    
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lxgw-wenkai-webfont@1.1.0/style.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="blue-grey" data-md-color-accent="amber">
+  
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#_1" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../.." title="IT必备知识" class="md-header__button md-logo" aria-label="IT必备知识" data-md-component="logo">
+      
+  <img src="../../resources/images/favicon.ico" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            IT必备知识
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              存储管理之传统磁盘管理
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      <form class="md-header__option" data-md-component="palette">
+        
+          
+          
+          <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="blue-grey" data-md-color-accent="amber"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+          
+            <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"/></svg>
+            </label>
+          
+        
+          
+          
+          <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="blue-grey" data-md-color-accent="amber"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_2">
+          
+            <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12c0-2.42-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"/></svg>
+            </label>
+          
+        
+      </form>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="分享" aria-label="分享" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7 0-.24-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91 1.61 0 2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08Z"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="标签" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../0_%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/0_%E5%89%8D%E5%A5%8F%28%E4%BB%8B%E7%BB%8D%29/" class="md-tabs__link">
+        计算机基础(8)
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+    
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../0_%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C/" class="md-tabs__link md-tabs__link--active">
+        linux基础(20)
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../5_db/0_%E5%9F%BA%E7%A1%80/0_install_db/" class="md-tabs__link">
+        mysql(19)
+      </a>
+    </li>
+  
+
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../9_git/0_git%E7%94%9F%E6%B4%BB%E7%89%88/" class="md-tabs__link">
+        git(2)
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../13_%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/0_%E9%80%92%E5%BD%92_%E6%9F%A5%E6%89%BE/" class="md-tabs__link">
+        查找排序算法(5)
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="IT必备知识" class="md-nav__button md-logo" aria-label="IT必备知识" data-md-component="logo">
+      
+  <img src="../../resources/images/favicon.ico" alt="logo">
+
+    </a>
+    IT必备知识
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" data-md-toggle="__nav_1" type="checkbox" id="__nav_1" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_1">
+          计算机基础(8)
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="计算机基础(8)" data-md-level="1">
+        <label class="md-nav__title" for="__nav_1">
+          <span class="md-nav__icon md-icon"></span>
+          计算机基础(8)
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../0_%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/0_%E5%89%8D%E5%A5%8F%28%E4%BB%8B%E7%BB%8D%29/" class="md-nav__link">
+        前奏(介绍)
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../0_%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/1_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A1%AC%E4%BB%B6%E7%BB%84%E6%88%90/" class="md-nav__link">
+        计算机硬件组成
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../0_%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/2_%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" class="md-nav__link">
+        操作系统
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../0_%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/3_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E6%A6%82%E8%A7%88/" class="md-nav__link">
+        计算机网络概览
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../0_%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/4_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E4%B9%8B%E7%BD%91%E7%BB%9C%E6%8E%A5%E5%8F%A3%E5%B1%82/" class="md-nav__link">
+        网络接口层
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../0_%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/5_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E4%B9%8B%E7%BD%91%E7%BB%9C%E5%B1%82/" class="md-nav__link">
+        网络层
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../0_%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/6_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E4%B9%8B%E4%BC%A0%E8%BE%93%E5%B1%82/" class="md-nav__link">
+        传输层
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../0_%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/7_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%A1%A5%E5%85%85/" class="md-nav__link">
+        补充
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2">
+          linux基础(20)
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="linux基础(20)" data-md-level="1">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          linux基础(20)
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0_%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C/" class="md-nav__link">
+        准备工作
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../1_%E5%88%9D%E8%AF%86shell%E4%B8%8E%E5%9F%BA%E7%A1%80%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" class="md-nav__link">
+        初识shell与基础常用命令
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../2_%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86%E4%B9%8B%E5%9F%BA%E7%A1%80%E5%91%BD%E4%BB%A4/" class="md-nav__link">
+        文件管理之基础命令
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../3_%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86%E4%B9%8B%E5%9B%9B%E5%A4%A7%E6%A8%A1%E5%BC%8F/" class="md-nav__link">
+        文件管理之四大模式
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../4_%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86%E4%B9%8B%E5%91%BD%E4%BB%A4%E8%A1%A5%E5%85%85/" class="md-nav__link">
+        文件管理之命令补充
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../5_%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86%E4%B9%8B%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/" class="md-nav__link">
+        文件管理之文件系统
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../6_%E6%9D%83%E9%99%90%E7%AE%A1%E7%90%86%E4%B9%8B%E7%94%A8%E6%88%B7%E4%B8%8E%E7%BB%84/" class="md-nav__link">
+        权限管理之用户与组
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../7_%E6%9D%83%E9%99%90%E7%AE%A1%E7%90%86%E4%B9%8B%E6%96%87%E4%BB%B6%E6%9D%83%E9%99%90/" class="md-nav__link">
+        权限管理之文件权限
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../8_%E6%9D%83%E9%99%90%E7%AE%A1%E7%90%86%E4%B9%8BACL/" class="md-nav__link">
+        权限管理之ACL
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../9_%E6%9D%83%E9%99%90%E7%AE%A1%E7%90%86%E4%B9%8Bsu%E4%B8%8Esudo/" class="md-nav__link">
+        权限管理之su与sudo
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../10_%E8%BD%AF%E4%BB%B6%E5%8C%85%E7%AE%A1%E7%90%86%E4%B9%8Brpm/" class="md-nav__link">
+        软件包管理之rpm
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../11_%E8%BD%AF%E4%BB%B6%E5%8C%85%E7%AE%A1%E7%90%86%E4%B9%8Byum/" class="md-nav__link">
+        软件包管理之yum
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../12_%E6%9F%A5%E7%9C%8B%E8%BF%9B%E7%A8%8B/" class="md-nav__link">
+        查看进程
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../13_%E7%AE%A1%E7%90%86%E8%BF%9B%E7%A8%8B/" class="md-nav__link">
+        管理进程
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          存储管理之传统磁盘管理
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        存储管理之传统磁盘管理
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    磁盘分区
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mbr" class="md-nav__link">
+    MBR进行分区
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#gpt" class="md-nav__link">
+    GPT进行分区
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    制作文件系统与挂载
+  </a>
+  
+    <nav class="md-nav" aria-label="制作文件系统与挂载">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    格式化/制作文件系统
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    临时挂载
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    卸载
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    从右往左最近原则
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    永久挂载
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#swap" class="md-nav__link">
+    制作swap交换分区
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dell-r740raid" class="md-nav__link">
+    Dell R740服务器制作RAID
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    修复服务器文件系统
+  </a>
+  
+    <nav class="md-nav" aria-label="修复服务器文件系统">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    模拟文件系统损坏
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    文件系统修复
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#xfs" class="md-nav__link">
+    xfs文件系统备份与恢复
+  </a>
+  
+    <nav class="md-nav" aria-label="xfs文件系统备份与恢复">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#xfsdump" class="md-nav__link">
+    备份 xfsdump
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#xfsrestore" class="md-nav__link">
+    恢复 xfsrestore
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../15_%E5%AD%98%E5%82%A8%E7%AE%A1%E7%90%86%E4%B9%8BLVM/" class="md-nav__link">
+        存储管理之LVM
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../16_%E7%BD%91%E7%BB%9C%E7%AE%A1%E7%90%86/" class="md-nav__link">
+        网络管理
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../17_shell%E5%9F%BA%E7%A1%80/" class="md-nav__link">
+        shell基础
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../18_crond%E8%AE%A1%E5%88%92%E4%BB%BB%E5%8A%A1/" class="md-nav__link">
+        crond计划任务
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../19_%E7%B3%BB%E7%BB%9F%E4%BC%98%E5%8C%96/" class="md-nav__link">
+        系统优化
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3">
+          mysql(19)
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="mysql(19)" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          mysql(19)
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" data-md-toggle="__nav_3_1" type="checkbox" id="__nav_3_1" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3_1">
+          基础
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="基础" data-md-level="2">
+        <label class="md-nav__title" for="__nav_3_1">
+          <span class="md-nav__icon md-icon"></span>
+          基础
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../5_db/0_%E5%9F%BA%E7%A1%80/0_install_db/" class="md-nav__link">
+        数据库安装
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../5_db/0_%E5%9F%BA%E7%A1%80/1_db_command/" class="md-nav__link">
+        sql命令总结
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../5_db/0_%E5%9F%BA%E7%A1%80/2_imp_knowledge/" class="md-nav__link">
+        imp_knowledge
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../5_db/0_%E5%9F%BA%E7%A1%80/3_table_field/" class="md-nav__link">
+        字段的约束和类型
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../5_db/0_%E5%9F%BA%E7%A1%80/4_table_relation/" class="md-nav__link">
+        表关系
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../5_db/0_%E5%9F%BA%E7%A1%80/5_permissions/" class="md-nav__link">
+        权限管理
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../5_db/0_%E5%9F%BA%E7%A1%80/6_single_query/" class="md-nav__link">
+        单表查询
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../5_db/0_%E5%9F%BA%E7%A1%80/7_multi_query/" class="md-nav__link">
+        多表查询
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../5_db/0_%E5%9F%BA%E7%A1%80/8_query_practice/" class="md-nav__link">
+        query_practice
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../5_db/0_%E5%9F%BA%E7%A1%80/9_pymysql/" class="md-nav__link">
+        pymysql
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../5_db/0_%E5%9F%BA%E7%A1%80/10_just_know/" class="md-nav__link">
+        just_know
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../5_db/0_%E5%9F%BA%E7%A1%80/other/01_to_11/" class="md-nav__link">
+        other1
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../5_db/0_%E5%9F%BA%E7%A1%80/other/05/" class="md-nav__link">
+        other2
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" data-md-toggle="__nav_3_2" type="checkbox" id="__nav_3_2" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3_2">
+          进阶
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="进阶" data-md-level="2">
+        <label class="md-nav__title" for="__nav_3_2">
+          <span class="md-nav__icon md-icon"></span>
+          进阶
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../5_db/1_%E8%BF%9B%E9%98%B6/0_index/" class="md-nav__link">
+        索引
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../5_db/1_%E8%BF%9B%E9%98%B6/1_explain/" class="md-nav__link">
+        执行计划
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../5_db/1_%E8%BF%9B%E9%98%B6/2_transaction/" class="md-nav__link">
+        事务
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../5_db/1_%E8%BF%9B%E9%98%B6/3_db_readPhenomenon/" class="md-nav__link">
+        读现象
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../5_db/1_%E8%BF%9B%E9%98%B6/4_lock/" class="md-nav__link">
+        锁
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../5_db/1_%E8%BF%9B%E9%98%B6/other/" class="md-nav__link">
+        数据库连接池
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4">
+          git(2)
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="git(2)" data-md-level="1">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          git(2)
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../9_git/0_git%E7%94%9F%E6%B4%BB%E7%89%88/" class="md-nav__link">
+        git生活版
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../9_git/1_git%E7%A0%94%E7%A9%B6%E7%89%88/" class="md-nav__link">
+        git研究版
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" data-md-toggle="__nav_5" type="checkbox" id="__nav_5" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_5">
+          查找排序算法(5)
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="查找排序算法(5)" data-md-level="1">
+        <label class="md-nav__title" for="__nav_5">
+          <span class="md-nav__icon md-icon"></span>
+          查找排序算法(5)
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../13_%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/0_%E9%80%92%E5%BD%92_%E6%9F%A5%E6%89%BE/" class="md-nav__link">
+        查找
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../13_%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/1_LowB%E4%B8%89%E4%BA%BA%E7%BB%84/" class="md-nav__link">
+        LowB三人组
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../13_%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/2_NB%E4%B8%89%E4%BA%BA%E7%BB%84/" class="md-nav__link">
+        NB三人组
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../13_%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/3_%E5%85%B6%E5%AE%83%E6%8E%92%E5%BA%8F/" class="md-nav__link">
+        其它排序
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../13_%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/4_%E6%9F%A5%E6%89%BE%E4%B9%A0%E9%A2%98/" class="md-nav__link">
+        查找习题
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    磁盘分区
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mbr" class="md-nav__link">
+    MBR进行分区
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#gpt" class="md-nav__link">
+    GPT进行分区
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    制作文件系统与挂载
+  </a>
+  
+    <nav class="md-nav" aria-label="制作文件系统与挂载">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    格式化/制作文件系统
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    临时挂载
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    卸载
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    从右往左最近原则
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    永久挂载
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#swap" class="md-nav__link">
+    制作swap交换分区
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dell-r740raid" class="md-nav__link">
+    Dell R740服务器制作RAID
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    修复服务器文件系统
+  </a>
+  
+    <nav class="md-nav" aria-label="修复服务器文件系统">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    模拟文件系统损坏
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    文件系统修复
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#xfs" class="md-nav__link">
+    xfs文件系统备份与恢复
+  </a>
+  
+    <nav class="md-nav" aria-label="xfs文件系统备份与恢复">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#xfsdump" class="md-nav__link">
+    备份 xfsdump
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#xfsrestore" class="md-nav__link">
+    恢复 xfsrestore
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  <h1>存储管理之传统磁盘管理</h1>
+
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="s2">&quot;&quot;&quot; -- 对磁盘进行分区并查看磁盘有哪些分区 -- &quot;&quot;&quot;</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>fdisk /dev/sdb              <span class="c1"># -- 以MBR格式对某个磁盘进行分区</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>gdisk /dev/sdd              <span class="c1"># -- 以GPT格式对某个磁盘进行分区</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>partprobe                   <span class="c1"># -- 及时更新磁盘分区后的分区表信息!!</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>lsblk                       <span class="c1"># -- 查看所有磁盘分区情况</span>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>ls /dev/sdb 连续按两下Tab键!! <span class="c1"># -- 查看某一磁盘下有哪些分区 </span>
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="c1"># -- 查看某个磁盘分区情况</span>
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>     lsblk /dev/sda     
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>     fdisk /dev/sdb 进去后 输入p
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>     fdisk -l /dev/sdb
+<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>     gdisk -l /dev/sdd
+<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>
+<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a><span class="s2">&quot;&quot;&quot; -- 格式化分区并挂载(临时、永久) -- &quot;&quot;&quot;</span>
+<a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>mkfs.xfs /dev/sdb1          <span class="c1"># -- 格式化某个分区</span>
+<a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>mount /dev/sdb1 /a          <span class="c1"># -- 将某个分区进行临时挂载</span>
+<a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a>blkid                       <span class="c1"># -- 查看每个分区的UUID</span>
+<a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a>vim /etc/fstab              <span class="c1"># -- 设置开机自动挂载</span>
+<a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a>sed -i <span class="s1">&#39;$a /dev/sdb3 /opt xfs defaults 0 0&#39;</span> /etc/fstab  
+<a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a>mount -a                    <span class="c1"># -- 不reboot重启机器,使配置文件/etc/fstab生效</span>
+<a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a>                            <span class="c1"># 前提: 分区对应的挂载参数设置为defaults或者多个挂载参数中包含auto</span>
+<a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a>df                          <span class="c1"># -- 查看已经挂载磁盘的使用情况</span>
+<a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a>mount <span class="p">|</span> grep sdb            <span class="c1"># -- 最准确的显示是否挂载成功</span>
+<a id="__codelineno-0-23" name="__codelineno-0-23" href="#__codelineno-0-23"></a>
+<a id="__codelineno-0-24" name="__codelineno-0-24" href="#__codelineno-0-24"></a>
+<a id="__codelineno-0-25" name="__codelineno-0-25" href="#__codelineno-0-25"></a><span class="s2">&quot;&quot;&quot; -- 制作swap分区并激活 -- &quot;&quot;&quot;</span>
+<a id="__codelineno-0-26" name="__codelineno-0-26" href="#__codelineno-0-26"></a>mkswap /dev/sdd3
+<a id="__codelineno-0-27" name="__codelineno-0-27" href="#__codelineno-0-27"></a>swapon /dev/sdd3            <span class="c1"># -- 激活/临时挂载swap分区</span>
+<a id="__codelineno-0-28" name="__codelineno-0-28" href="#__codelineno-0-28"></a>swapon -s                   <span class="c1"># -- 查看有哪些挂载的swap分区</span>
+<a id="__codelineno-0-29" name="__codelineno-0-29" href="#__codelineno-0-29"></a>swapoff -a                  <span class="c1"># -- 关闭所有swap分区</span>
+<a id="__codelineno-0-30" name="__codelineno-0-30" href="#__codelineno-0-30"></a>swapoff /dev/sdd3           <span class="c1"># -- 关闭某个swap分区</span>
+<a id="__codelineno-0-31" name="__codelineno-0-31" href="#__codelineno-0-31"></a>free -m                     <span class="c1"># -- 查看虚拟内存情况</span>
+<a id="__codelineno-0-32" name="__codelineno-0-32" href="#__codelineno-0-32"></a>vim /etc/fstab              <span class="c1"># -- 开机自动挂载新增的swap分区    临时 + 开机挂载 = 永久</span>
+<a id="__codelineno-0-33" name="__codelineno-0-33" href="#__codelineno-0-33"></a>sed -i <span class="s1">&#39;$a /dev/sdd3 swap swap defaults 0 0&#39;</span> /etc/fstab 
+</code></pre></div>
+<h3 id="_1">磁盘分区<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p><strong>回顾详见:</strong> 0_计算机基础/1_计算机硬件组成.md 中 <strong>存储器详解</strong> 这一部分的内容...</p>
+</blockquote>
+<p><code>lsblk /dev/sda</code></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="c1">## -- 在vm虚拟机里可以直接添加多个硬盘 </span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="c1">## -- 这里我添加了 sdb sdc sdd三块硬盘(都是SCSI接口 容量分别为20G、20G、2500G/2.5TB) </span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># ls /dev | grep sd</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>sda     <span class="c1">## -- 第一块物理磁盘</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>sda1    <span class="c1">## -- 第一块物理磁盘第一分区</span>
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>sda2    <span class="c1">## -- 第一块物理磁盘第二分区</span>
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>sdb     <span class="c1">## -- 第二块物理磁盘</span>
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>sdc     <span class="c1">## -- 第三块物理磁盘</span>
+<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>sdd     <span class="c1">## -- 第四块物理磁盘</span>
+<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="c1">## Ps:  vde4 第五块虚拟磁盘的第四分区</span>
+<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>
+<a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a><span class="c1">## -- 查看磁盘设备详情,以及分区情况</span>
+<a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a><span class="s2">&quot;&quot;&quot;</span>
+<a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a><span class="s2">TYPE</span>
+<a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a><span class="s2">    disk 磁盘</span>
+<a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a><span class="s2">    part 分区</span>
+<a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a><span class="s2">    rom  只读</span>
+<a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a><span class="s2">&quot;&quot;&quot;</span>
+<a id="__codelineno-1-19" name="__codelineno-1-19" href="#__codelineno-1-19"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># lsblk /dev/sda</span>
+<a id="__codelineno-1-20" name="__codelineno-1-20" href="#__codelineno-1-20"></a>NAME            MAJ:MIN RM SIZE RO TYPE MOUNTPOINT
+<a id="__codelineno-1-21" name="__codelineno-1-21" href="#__codelineno-1-21"></a>sda               <span class="m">8</span>:0    <span class="m">0</span>  20G  <span class="m">0</span> disk 
+<a id="__codelineno-1-22" name="__codelineno-1-22" href="#__codelineno-1-22"></a>├─sda1            <span class="m">8</span>:1    <span class="m">0</span>   1G  <span class="m">0</span> part /boot
+<a id="__codelineno-1-23" name="__codelineno-1-23" href="#__codelineno-1-23"></a>└─sda2            <span class="m">8</span>:2    <span class="m">0</span>  19G  <span class="m">0</span> part 
+<a id="__codelineno-1-24" name="__codelineno-1-24" href="#__codelineno-1-24"></a>  ├─centos-root <span class="m">253</span>:0    <span class="m">0</span>  17G  <span class="m">0</span> lvm  /
+<a id="__codelineno-1-25" name="__codelineno-1-25" href="#__codelineno-1-25"></a>  └─centos-swap <span class="m">253</span>:1    <span class="m">0</span>   2G  <span class="m">0</span> lvm  <span class="o">[</span>SWAP<span class="o">]</span>
+<a id="__codelineno-1-26" name="__codelineno-1-26" href="#__codelineno-1-26"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># lsblk /dev/sdb</span>
+<a id="__codelineno-1-27" name="__codelineno-1-27" href="#__codelineno-1-27"></a>NAME MAJ:MIN RM SIZE RO TYPE MOUNTPOINT
+<a id="__codelineno-1-28" name="__codelineno-1-28" href="#__codelineno-1-28"></a>sdb    <span class="m">8</span>:16   <span class="m">0</span>  20G  <span class="m">0</span> disk 
+<a id="__codelineno-1-29" name="__codelineno-1-29" href="#__codelineno-1-29"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># lsblk /dev/sdc</span>
+<a id="__codelineno-1-30" name="__codelineno-1-30" href="#__codelineno-1-30"></a>NAME MAJ:MIN RM SIZE RO TYPE MOUNTPOINT
+<a id="__codelineno-1-31" name="__codelineno-1-31" href="#__codelineno-1-31"></a>sdc    <span class="m">8</span>:32   <span class="m">0</span>  20G  <span class="m">0</span> disk 
+<a id="__codelineno-1-32" name="__codelineno-1-32" href="#__codelineno-1-32"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># lsblk /dev/sdd</span>
+<a id="__codelineno-1-33" name="__codelineno-1-33" href="#__codelineno-1-33"></a>NAME MAJ:MIN RM  SIZE RO TYPE MOUNTPOINT
+<a id="__codelineno-1-34" name="__codelineno-1-34" href="#__codelineno-1-34"></a>sdd    <span class="m">8</span>:48   <span class="m">0</span>  <span class="m">2</span>.5T  <span class="m">0</span> disk 
+</code></pre></div>
+<p><font color='blue'>某个磁盘划分的分区主要分为三类: </font><br />
+&nbsp;&nbsp;&nbsp;&nbsp; <strong>主分区/引导分区</strong> 、 <strong>扩展分区</strong> -- <font color='gray'>包含</font>-- <strong>逻辑分区</strong></p>
+<p>主分区/引导分区: 包含主引导记录MBR的分区,意味着可以安装系统(MBR里有OS的启动程序grub)<br />
+<font color='gray'>Ps: 相关知识点翻阅  0_计算机基础/1_计算机硬件组成.md 中 <strong>计算机启动过程</strong> 以及 1_linux基础/0_准备工作.md  <strong>Linux启动流程</strong> 这两部分内容...</font></p>
+<p><font color='blue'>常见的磁盘分区方案有两种:</font> MBR分区表和GUID分区表(简称GPT)<br />
+&nbsp;&nbsp;&nbsp;&nbsp; MBR -- 最多能识别 2TB 的容量 ; 最多只能支持4个主分区 or 3个主分区+1个扩展分区(逻辑分区不限制)<br />
+&nbsp;&nbsp;&nbsp;&nbsp; GPT  -- 支持的磁盘容量比 MBR 大得多,最多支持128个主分区</p>
+<p>我们拿到一块没有分区的新硬盘, 首先将硬盘划分出n个主分区(MBR方案通常是3个), 再将硬盘剩余空间给扩展分区, 然后将扩展分区划分为若干个逻辑分区,具体的细节操作后文会详细阐述..</p>
+<p><font color='blue'>磁盘分区的工具 </font><br />
+&nbsp;&nbsp;&nbsp;&nbsp; <strong>fdisk</strong>  工具  --  MBR<br />
+&nbsp;&nbsp;&nbsp;&nbsp; <strong>gdisk</strong> 工具  --  GPT</p>
+<p>磁盘容量小于2TB的通常用MBR, GPT当然也可以,但存着效率的问题...</p>
+<hr />
+<h3 id="mbr">MBR进行分区<a class="headerlink" href="#mbr" title="Permanent link">&para;</a></h3>
+<p><code>fdisk /dev/sdb</code></p>
+<p>m &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;查看帮助<br />
+q &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 退出, <font color='gray'>未w保存的分区信息不会写入磁盘,不会生效</font> <br />
+n &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 新建分区(p 主分区;e 扩展分区)<br />
+d &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 删除分区<br />
+p &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 查看磁盘已划分分区的信息<br />
+w &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 保存</p>
+<p>★ <font color='blue'>创建3个大小为1G的主分区,剩余容量给扩展分区,扩展分区里划分出了两个逻辑分区,一个为2G,另一个为3G.. </font> </p>
+<p>中途还验证了,MBR的方案新建四个主分区后,不能再新建任何分区..</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># fdisk /dev/sdb</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>欢迎使用 fdisk <span class="o">(</span>util-linux <span class="m">2</span>.23.2<span class="o">)</span>。
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>... ... ...
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="s2">&quot;&quot;&quot; -- 新建第一个主分区分区(1G) -- &quot;&quot;&quot;</span>
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>命令<span class="o">(</span>输入 m 获取帮助<span class="o">)</span>: n    <span class="c1">## -- 新建分区</span>
+<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>Partition type:
+<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>   p   primary <span class="o">(</span><span class="m">0</span> primary, <span class="m">0</span> extended, <span class="m">4</span> free<span class="o">)</span> <span class="c1">## -- 主分区</span>
+<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a>   e   extended    <span class="c1">## -- 扩展分区</span>
+<a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a>Select <span class="o">(</span>default p<span class="o">)</span>: p   <span class="c1">## -- 选择新建主分区</span>
+<a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a>分区号 <span class="o">(</span><span class="m">1</span>-4，默认 <span class="m">1</span><span class="o">)</span>:     <span class="c1">## -- 回车,使用默认的</span>
+<a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a><span class="c1">## -- 上一个分区的结束应该作为下一个分区的启始 </span>
+<a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a>起始 扇区 <span class="o">(</span><span class="m">2048</span>-41943039,默认为 <span class="m">2048</span><span class="o">)</span>:     <span class="c1">## -- 回车,启始位置不指定使用默认的</span>
+<a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a>将使用默认值 <span class="m">2048</span>
+<a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a>Last 扇区, +扇区 or +size<span class="o">{</span>K,M,G<span class="o">}</span> <span class="o">(</span><span class="m">2048</span>-41943039, 默认为 <span class="m">41943039</span><span class="o">)</span>：+1G  <span class="c1">## -- 1GB大小</span>
+<a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a>分区 <span class="m">1</span> 已设置为 Linux 类型,大小设为 <span class="m">1</span> GiB
+<a id="__codelineno-2-17" name="__codelineno-2-17" href="#__codelineno-2-17"></a>
+<a id="__codelineno-2-18" name="__codelineno-2-18" href="#__codelineno-2-18"></a><span class="s2">&quot;&quot;&quot; -- 重复上述步骤,新建第二个第三个第四个大小都为1G的主分区 -- &quot;&quot;&quot;</span>
+<a id="__codelineno-2-19" name="__codelineno-2-19" href="#__codelineno-2-19"></a>命令<span class="o">(</span>输入 m 获取帮助<span class="o">)</span>: n
+<a id="__codelineno-2-20" name="__codelineno-2-20" href="#__codelineno-2-20"></a>Select <span class="o">(</span>default p<span class="o">)</span>: p   
+<a id="__codelineno-2-21" name="__codelineno-2-21" href="#__codelineno-2-21"></a>分区号 <span class="o">(</span><span class="m">2</span>-4,默认 <span class="m">2</span><span class="o">)</span>:
+<a id="__codelineno-2-22" name="__codelineno-2-22" href="#__codelineno-2-22"></a>起始 扇区 <span class="o">(</span><span class="m">2099200</span>-41943039,默认为 <span class="m">2099200</span><span class="o">)</span>:
+<a id="__codelineno-2-23" name="__codelineno-2-23" href="#__codelineno-2-23"></a>Last 扇区, +扇区 or +size<span class="o">{</span>K,M,G<span class="o">}</span> <span class="o">(</span><span class="m">2099200</span>-41943039, 默认为 <span class="m">41943039</span><span class="o">)</span>：+1G
+<a id="__codelineno-2-24" name="__codelineno-2-24" href="#__codelineno-2-24"></a>
+<a id="__codelineno-2-25" name="__codelineno-2-25" href="#__codelineno-2-25"></a>命令<span class="o">(</span>输入 m 获取帮助<span class="o">)</span>: n
+<a id="__codelineno-2-26" name="__codelineno-2-26" href="#__codelineno-2-26"></a>Select <span class="o">(</span>default p<span class="o">)</span>: p   
+<a id="__codelineno-2-27" name="__codelineno-2-27" href="#__codelineno-2-27"></a>分区号 <span class="o">(</span><span class="m">3</span>,4，默认 <span class="m">3</span><span class="o">)</span>:
+<a id="__codelineno-2-28" name="__codelineno-2-28" href="#__codelineno-2-28"></a>起始 扇区 <span class="o">(</span><span class="m">4196352</span>-41943039,默认为 <span class="m">4196352</span><span class="o">)</span>:
+<a id="__codelineno-2-29" name="__codelineno-2-29" href="#__codelineno-2-29"></a>Last 扇区, +扇区 or +size<span class="o">{</span>K,M,G<span class="o">}</span> <span class="o">(</span><span class="m">4196352</span>-41943039, 默认为 <span class="m">41943039</span><span class="o">)</span>：+1G
+<a id="__codelineno-2-30" name="__codelineno-2-30" href="#__codelineno-2-30"></a>
+<a id="__codelineno-2-31" name="__codelineno-2-31" href="#__codelineno-2-31"></a>命令<span class="o">(</span>输入 m 获取帮助<span class="o">)</span>: n
+<a id="__codelineno-2-32" name="__codelineno-2-32" href="#__codelineno-2-32"></a>Select <span class="o">(</span>default e<span class="o">)</span>: p <span class="c1">## -- 建第4个分区的时候,fdisk工具已经开始提示,&quot;default e,该建扩展分区啦&quot;</span>
+<a id="__codelineno-2-33" name="__codelineno-2-33" href="#__codelineno-2-33"></a>                      <span class="c1">## -- 当然,可以不听,执意创建主分区</span>
+<a id="__codelineno-2-34" name="__codelineno-2-34" href="#__codelineno-2-34"></a>已选择分区 <span class="m">4</span>  <span class="c1">## -- 可以发现,因为只剩一个分区了,就不让你选择分区号啦</span>
+<a id="__codelineno-2-35" name="__codelineno-2-35" href="#__codelineno-2-35"></a>起始 扇区 <span class="o">(</span><span class="m">6293504</span>-41943039, 默认为 <span class="m">6293504</span><span class="o">)</span>:
+<a id="__codelineno-2-36" name="__codelineno-2-36" href="#__codelineno-2-36"></a>Last 扇区, +扇区 or +size<span class="o">{</span>K,M,G<span class="o">}</span> <span class="o">(</span><span class="m">6293504</span>-41943039, 默认为 <span class="m">41943039</span><span class="o">)</span>：+1G
+<a id="__codelineno-2-37" name="__codelineno-2-37" href="#__codelineno-2-37"></a>
+<a id="__codelineno-2-38" name="__codelineno-2-38" href="#__codelineno-2-38"></a><span class="s2">&quot;&quot;&quot; -- 我们已经创建了4个主分区(大小都为1G),哪怕还剩16G,空间够用也不能继续新建分区啦 -- &quot;&quot;&quot;</span>
+<a id="__codelineno-2-39" name="__codelineno-2-39" href="#__codelineno-2-39"></a>命令<span class="o">(</span>输入 m 获取帮助<span class="o">)</span>: n
+<a id="__codelineno-2-40" name="__codelineno-2-40" href="#__codelineno-2-40"></a><span class="c1">## -- 如果要创建四个以上的分区,必须替换一个主分区优先使用扩展分区!!</span>
+<a id="__codelineno-2-41" name="__codelineno-2-41" href="#__codelineno-2-41"></a>If you want to create more than four partitions, you must replace a
+<a id="__codelineno-2-42" name="__codelineno-2-42" href="#__codelineno-2-42"></a>primary partition with an extended partition first.
+<a id="__codelineno-2-43" name="__codelineno-2-43" href="#__codelineno-2-43"></a>
+<a id="__codelineno-2-44" name="__codelineno-2-44" href="#__codelineno-2-44"></a><span class="s2">&quot;&quot;&quot; -- 删除第4个分区 -- &quot;&quot;&quot;</span>
+<a id="__codelineno-2-45" name="__codelineno-2-45" href="#__codelineno-2-45"></a>命令<span class="o">(</span>输入 m 获取帮助<span class="o">)</span>: d
+<a id="__codelineno-2-46" name="__codelineno-2-46" href="#__codelineno-2-46"></a>分区号 <span class="o">(</span><span class="m">1</span>-4，默认 <span class="m">4</span><span class="o">)</span>: <span class="m">4</span>
+<a id="__codelineno-2-47" name="__codelineno-2-47" href="#__codelineno-2-47"></a>分区 <span class="m">4</span> 已删除
+<a id="__codelineno-2-48" name="__codelineno-2-48" href="#__codelineno-2-48"></a>
+<a id="__codelineno-2-49" name="__codelineno-2-49" href="#__codelineno-2-49"></a><span class="s2">&quot;&quot;&quot; -- 创建第4个分区为扩展分区,磁盘剩余的空间都给它 -- &quot;&quot;&quot;</span>
+<a id="__codelineno-2-50" name="__codelineno-2-50" href="#__codelineno-2-50"></a>命令<span class="o">(</span>输入 m 获取帮助<span class="o">)</span>：n
+<a id="__codelineno-2-51" name="__codelineno-2-51" href="#__codelineno-2-51"></a>Partition type:
+<a id="__codelineno-2-52" name="__codelineno-2-52" href="#__codelineno-2-52"></a>   p   primary <span class="o">(</span><span class="m">3</span> primary, <span class="m">0</span> extended, <span class="m">1</span> free<span class="o">)</span>
+<a id="__codelineno-2-53" name="__codelineno-2-53" href="#__codelineno-2-53"></a>   e   extended
+<a id="__codelineno-2-54" name="__codelineno-2-54" href="#__codelineno-2-54"></a>Select <span class="o">(</span>default e<span class="o">)</span>: e
+<a id="__codelineno-2-55" name="__codelineno-2-55" href="#__codelineno-2-55"></a>已选择分区 <span class="m">4</span>
+<a id="__codelineno-2-56" name="__codelineno-2-56" href="#__codelineno-2-56"></a>起始 扇区 <span class="o">(</span><span class="m">6293504</span>-41943039，默认为 <span class="m">6293504</span><span class="o">)</span>:
+<a id="__codelineno-2-57" name="__codelineno-2-57" href="#__codelineno-2-57"></a>将使用默认值 <span class="m">6293504</span>
+<a id="__codelineno-2-58" name="__codelineno-2-58" href="#__codelineno-2-58"></a>Last 扇区, +扇区 or +size<span class="o">{</span>K,M,G<span class="o">}</span> <span class="o">(</span><span class="m">6293504</span>-41943039, 默认为 <span class="m">41943039</span><span class="o">)</span>: <span class="c1">## -- 空格,默认剩下的都给</span>
+<a id="__codelineno-2-59" name="__codelineno-2-59" href="#__codelineno-2-59"></a>将使用默认值 <span class="m">41943039</span>
+<a id="__codelineno-2-60" name="__codelineno-2-60" href="#__codelineno-2-60"></a>分区 <span class="m">4</span> 已设置为 Extended 类型, 大小设为 <span class="m">17</span> GiB
+<a id="__codelineno-2-61" name="__codelineno-2-61" href="#__codelineno-2-61"></a>
+<a id="__codelineno-2-62" name="__codelineno-2-62" href="#__codelineno-2-62"></a><span class="s2">&quot;&quot;&quot; -- 查看磁盘已划分分区的信息 -- &quot;&quot;&quot;</span>
+<a id="__codelineno-2-63" name="__codelineno-2-63" href="#__codelineno-2-63"></a>命令<span class="o">(</span>输入 m 获取帮助<span class="o">)</span>: p
+<a id="__codelineno-2-64" name="__codelineno-2-64" href="#__codelineno-2-64"></a>
+<a id="__codelineno-2-65" name="__codelineno-2-65" href="#__codelineno-2-65"></a>磁盘 /dev/sdb：21.5 GB, <span class="m">21474836480</span> 字节，41943040 个扇区
+<a id="__codelineno-2-66" name="__codelineno-2-66" href="#__codelineno-2-66"></a><span class="nv">Units</span> <span class="o">=</span> 扇区 of <span class="m">1</span> * <span class="nv">512</span> <span class="o">=</span> <span class="m">512</span> bytes
+<a id="__codelineno-2-67" name="__codelineno-2-67" href="#__codelineno-2-67"></a>扇区大小<span class="o">(</span>逻辑/物理<span class="o">)</span>: <span class="m">512</span> 字节 / <span class="m">512</span> 字节
+<a id="__codelineno-2-68" name="__codelineno-2-68" href="#__codelineno-2-68"></a>I/O 大小<span class="o">(</span>最小/最佳<span class="o">)</span>: <span class="m">512</span> 字节 / <span class="m">512</span> 字节
+<a id="__codelineno-2-69" name="__codelineno-2-69" href="#__codelineno-2-69"></a>磁盘标签类型: dos
+<a id="__codelineno-2-70" name="__codelineno-2-70" href="#__codelineno-2-70"></a>磁盘标识符: 0x651efb78
+<a id="__codelineno-2-71" name="__codelineno-2-71" href="#__codelineno-2-71"></a><span class="c1">## -- 可以观察到,每个分区都是紧挨着的 2099199-2099200 4196351-4196352 6293503-6293504</span>
+<a id="__codelineno-2-72" name="__codelineno-2-72" href="#__codelineno-2-72"></a>   设备 Boot      Start         End      Blocks   Id  System
+<a id="__codelineno-2-73" name="__codelineno-2-73" href="#__codelineno-2-73"></a>/dev/sdb1            <span class="m">2048</span>     <span class="m">2099199</span>     <span class="m">1048576</span>   <span class="m">83</span>  Linux
+<a id="__codelineno-2-74" name="__codelineno-2-74" href="#__codelineno-2-74"></a>/dev/sdb2         <span class="m">2099200</span>     <span class="m">4196351</span>     <span class="m">1048576</span>   <span class="m">83</span>  Linux
+<a id="__codelineno-2-75" name="__codelineno-2-75" href="#__codelineno-2-75"></a>/dev/sdb3         <span class="m">4196352</span>     <span class="m">6293503</span>     <span class="m">1048576</span>   <span class="m">83</span>  Linux
+<a id="__codelineno-2-76" name="__codelineno-2-76" href="#__codelineno-2-76"></a>/dev/sdb4         <span class="m">6293504</span>    <span class="m">41943039</span>    <span class="m">17824768</span>    <span class="m">5</span>  Extended
+<a id="__codelineno-2-77" name="__codelineno-2-77" href="#__codelineno-2-77"></a>
+<a id="__codelineno-2-78" name="__codelineno-2-78" href="#__codelineno-2-78"></a><span class="s2">&quot;&quot;&quot; -- 已经划分了四个主分区,接着新建的分区是在扩展分区里划分的逻辑分区 新建两个逻辑分区(2G和3G) -- &quot;&quot;&quot;</span>
+<a id="__codelineno-2-79" name="__codelineno-2-79" href="#__codelineno-2-79"></a>命令<span class="o">(</span>输入 m 获取帮助<span class="o">)</span>: n
+<a id="__codelineno-2-80" name="__codelineno-2-80" href="#__codelineno-2-80"></a>All primary partitions are <span class="k">in</span> use
+<a id="__codelineno-2-81" name="__codelineno-2-81" href="#__codelineno-2-81"></a>添加逻辑分区 <span class="m">5</span>
+<a id="__codelineno-2-82" name="__codelineno-2-82" href="#__codelineno-2-82"></a><span class="c1">## -- 可以观察到逻辑分区默认的启始 6295552 接近于/dev/sdb4这一扩展分区的启始 6293504</span>
+<a id="__codelineno-2-83" name="__codelineno-2-83" href="#__codelineno-2-83"></a><span class="c1">## -- 没有紧贴,空出来的那部分空间记录的就是扩展分区里逻辑分区的信息</span>
+<a id="__codelineno-2-84" name="__codelineno-2-84" href="#__codelineno-2-84"></a>起始 扇区 <span class="o">(</span><span class="m">6295552</span>-41943039，默认为 <span class="m">6295552</span><span class="o">)</span>: <span class="c1">## -- 同样的不指定启始位置</span>
+<a id="__codelineno-2-85" name="__codelineno-2-85" href="#__codelineno-2-85"></a>将使用默认值 <span class="m">6295552</span>
+<a id="__codelineno-2-86" name="__codelineno-2-86" href="#__codelineno-2-86"></a>Last 扇区, +扇区 or +size<span class="o">{</span>K,M,G<span class="o">}</span> <span class="o">(</span><span class="m">6295552</span>-41943039,默认为 <span class="m">41943039</span><span class="o">)</span>: +2G
+<a id="__codelineno-2-87" name="__codelineno-2-87" href="#__codelineno-2-87"></a>分区 <span class="m">5</span> 已设置为 Linux 类型,大小设为 <span class="m">2</span> GiB
+<a id="__codelineno-2-88" name="__codelineno-2-88" href="#__codelineno-2-88"></a>
+<a id="__codelineno-2-89" name="__codelineno-2-89" href="#__codelineno-2-89"></a>命令<span class="o">(</span>输入 m 获取帮助<span class="o">)</span>: n
+<a id="__codelineno-2-90" name="__codelineno-2-90" href="#__codelineno-2-90"></a>All primary partitions are <span class="k">in</span> use
+<a id="__codelineno-2-91" name="__codelineno-2-91" href="#__codelineno-2-91"></a>添加逻辑分区 <span class="m">6</span>
+<a id="__codelineno-2-92" name="__codelineno-2-92" href="#__codelineno-2-92"></a>起始 扇区 <span class="o">(</span><span class="m">10491904</span>-41943039,默认为 <span class="m">10491904</span><span class="o">)</span>：
+<a id="__codelineno-2-93" name="__codelineno-2-93" href="#__codelineno-2-93"></a>将使用默认值 <span class="m">10491904</span>
+<a id="__codelineno-2-94" name="__codelineno-2-94" href="#__codelineno-2-94"></a>Last 扇区, +扇区 or +size<span class="o">{</span>K,M,G<span class="o">}</span> <span class="o">(</span><span class="m">10491904</span>-41943039,默认为 <span class="m">41943039</span><span class="o">)</span>: +3G
+<a id="__codelineno-2-95" name="__codelineno-2-95" href="#__codelineno-2-95"></a>分区 <span class="m">6</span> 已设置为 Linux 类型,大小设为 <span class="m">3</span> GiB
+<a id="__codelineno-2-96" name="__codelineno-2-96" href="#__codelineno-2-96"></a>
+<a id="__codelineno-2-97" name="__codelineno-2-97" href="#__codelineno-2-97"></a><span class="s2">&quot;&quot;&quot; -- 保存退出 -- &quot;&quot;&quot;</span>
+<a id="__codelineno-2-98" name="__codelineno-2-98" href="#__codelineno-2-98"></a>命令<span class="o">(</span>输入 m 获取帮助<span class="o">)</span>: w
+<a id="__codelineno-2-99" name="__codelineno-2-99" href="#__codelineno-2-99"></a>The partition table has been altered!
+<a id="__codelineno-2-100" name="__codelineno-2-100" href="#__codelineno-2-100"></a>
+<a id="__codelineno-2-101" name="__codelineno-2-101" href="#__codelineno-2-101"></a>Calling ioctl<span class="o">()</span> to re-read partition table.
+<a id="__codelineno-2-102" name="__codelineno-2-102" href="#__codelineno-2-102"></a>正在同步磁盘.
+</code></pre></div>
+<p>可以查看下/dev/sdb的分区结果</p>
+<p><code>partprobe</code> <code>lsblk /dev/sdb</code></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="c1">## -- 执行partprobe命令刷新一下分区表 更新分区表信息</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># partprobe</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="c1">## -- 我们主要使用 sdb1、sdb2、sdb3、sdb5、sdb6</span>
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># ls /dev/sdb          ## -- 连续按两下Tab键!!</span>
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>sdb   sdb1  sdb2  sdb3  sdb4  sdb5  sdb6  
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># lsblk /dev/sdb</span>
+<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>NAME   MAJ:MIN RM SIZE RO TYPE MOUNTPOINT
+<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a>sdb      <span class="m">8</span>:16   <span class="m">0</span>  20G  <span class="m">0</span> disk 
+<a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a>├─sdb1   <span class="m">8</span>:17   <span class="m">0</span>   1G  <span class="m">0</span> part 
+<a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a>├─sdb2   <span class="m">8</span>:18   <span class="m">0</span>   1G  <span class="m">0</span> part 
+<a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a>├─sdb3   <span class="m">8</span>:19   <span class="m">0</span>   1G  <span class="m">0</span> part 
+<a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a>├─sdb4   <span class="m">8</span>:20   <span class="m">0</span>   1K  <span class="m">0</span> part 
+<a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a>├─sdb5   <span class="m">8</span>:21   <span class="m">0</span>   2G  <span class="m">0</span> part 
+<a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a>└─sdb6   <span class="m">8</span>:22   <span class="m">0</span>   3G  <span class="m">0</span> part 
+</code></pre></div>
+<hr />
+<h3 id="gpt">GPT进行分区<a class="headerlink" href="#gpt" title="Permanent link">&para;</a></h3>
+<p>/dev/sdd 磁盘的空间大小为2.5T</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># lsblk /dev/sdd</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>NAME MAJ:MIN RM  SIZE RO TYPE MOUNTPOINT
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>sdd    <span class="m">8</span>:48   <span class="m">0</span>  <span class="m">2</span>.5T  <span class="m">0</span> disk 
+</code></pre></div>
+<p>n &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 新建分区(建的每个分区都是主分区)
+p &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 查看已建分区的信息
+d &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 删除
+w &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;保存
+q &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;退出</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># gdisk /dev/sdd</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>Command <span class="o">(</span>? <span class="k">for</span> <span class="nb">help</span><span class="o">)</span>: n   
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>Partition number <span class="o">(</span><span class="m">1</span>-128, default <span class="m">1</span><span class="o">)</span>: 
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>First sector <span class="o">(</span><span class="m">34</span>-5242879966, <span class="nv">default</span> <span class="o">=</span> <span class="m">2048</span><span class="o">)</span> or <span class="o">{</span>+-<span class="o">}</span>size<span class="o">{</span>KMGTP<span class="o">}</span>: 
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>Last sector <span class="o">(</span><span class="m">2048</span>-5242879966, <span class="nv">default</span> <span class="o">=</span> <span class="m">5242879966</span><span class="o">)</span> or <span class="o">{</span>+-<span class="o">}</span>size<span class="o">{</span>KMGTP<span class="o">}</span>: +1G
+<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>Current <span class="nb">type</span> is <span class="s1">&#39;Linux filesystem&#39;</span>  <span class="c1">## - 当前类型是“Linux 文件系统” </span>
+<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a>Hex code or GUID <span class="o">(</span>L to show codes, <span class="nv">Enter</span> <span class="o">=</span> <span class="m">8300</span><span class="o">)</span>:  <span class="c1">## - 通过L查看8300指的就是“Linux 文件系统” </span>
+<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a>                                                                        <span class="c1">## - Linux文件系统包含xfs,也就是该分区可以选择xfs格式化</span>
+<a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a>Changed <span class="nb">type</span> of partition to <span class="s1">&#39;Linux filesystem&#39;</span>
+<a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a>
+<a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a>Partition number <span class="o">(</span><span class="m">2</span>-128, default <span class="m">2</span><span class="o">)</span>: 
+<a id="__codelineno-5-12" name="__codelineno-5-12" href="#__codelineno-5-12"></a>Last sector <span class="o">(</span><span class="m">2099200</span>-5242879966, <span class="nv">default</span> <span class="o">=</span> <span class="m">5242879966</span><span class="o">)</span> or <span class="o">{</span>+-<span class="o">}</span>size<span class="o">{</span>KMGTP<span class="o">}</span>: +1G
+<a id="__codelineno-5-13" name="__codelineno-5-13" href="#__codelineno-5-13"></a>
+<a id="__codelineno-5-14" name="__codelineno-5-14" href="#__codelineno-5-14"></a>Command <span class="o">(</span>? <span class="k">for</span> <span class="nb">help</span><span class="o">)</span>: p
+<a id="__codelineno-5-15" name="__codelineno-5-15" href="#__codelineno-5-15"></a>Disk /dev/sdd: <span class="m">5242880000</span> sectors, <span class="m">2</span>.4 TiB
+<a id="__codelineno-5-16" name="__codelineno-5-16" href="#__codelineno-5-16"></a>... ... ...
+<a id="__codelineno-5-17" name="__codelineno-5-17" href="#__codelineno-5-17"></a>
+<a id="__codelineno-5-18" name="__codelineno-5-18" href="#__codelineno-5-18"></a>Number  Start <span class="o">(</span>sector<span class="o">)</span>    End <span class="o">(</span>sector<span class="o">)</span>  Size       Code  Name
+<a id="__codelineno-5-19" name="__codelineno-5-19" href="#__codelineno-5-19"></a>   <span class="m">1</span>            <span class="m">2048</span>         <span class="m">2099199</span>   <span class="m">1024</span>.0 MiB  <span class="m">8300</span>  Linux filesystem
+<a id="__codelineno-5-20" name="__codelineno-5-20" href="#__codelineno-5-20"></a>   <span class="m">2</span>         <span class="m">2099200</span>         <span class="m">4196351</span>   <span class="m">1024</span>.0 MiB  <span class="m">8300</span>  Linux filesystem
+<a id="__codelineno-5-21" name="__codelineno-5-21" href="#__codelineno-5-21"></a>
+<a id="__codelineno-5-22" name="__codelineno-5-22" href="#__codelineno-5-22"></a>Command <span class="o">(</span>? <span class="k">for</span> <span class="nb">help</span><span class="o">)</span>: w
+<a id="__codelineno-5-23" name="__codelineno-5-23" href="#__codelineno-5-23"></a>Do you want to proceed? <span class="o">(</span>Y/N<span class="o">)</span>: y
+<a id="__codelineno-5-24" name="__codelineno-5-24" href="#__codelineno-5-24"></a>OK<span class="p">;</span> writing new GUID partition table <span class="o">(</span>GPT<span class="o">)</span> to /dev/sdd.
+<a id="__codelineno-5-25" name="__codelineno-5-25" href="#__codelineno-5-25"></a>The operation has completed successfully.
+</code></pre></div>
+<p>查看sdd分区的情况</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># lsblk /dev/sdd</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>NAME   MAJ:MIN RM  SIZE RO TYPE MOUNTPOINT
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>sdd      <span class="m">8</span>:48   <span class="m">0</span>  <span class="m">2</span>.5T  <span class="m">0</span> disk 
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>├─sdd1   <span class="m">8</span>:49   <span class="m">0</span>    1G  <span class="m">0</span> part 
+<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>└─sdd2   <span class="m">8</span>:50   <span class="m">0</span>    1G  <span class="m">0</span> part 
+</code></pre></div>
+<hr />
+<h3 id="_2">制作文件系统与挂载<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p>磁盘容量小于2T的用MBR进行分区,容量大于2T的用GPT进行分区..<br />
+往后的操作就一样啦, 分完区后选择xfs对分区进行格式化...然后进行挂载..</p>
+</blockquote>
+<h6 id="_3"><font color='orange' size=4>格式化/制作文件系统</font><a class="headerlink" href="#_3" title="Permanent link">&para;</a></h6>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="c1">## -- 注意: 格式化后,分区里面的数据都没了</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>mkfs.xfs /dev/sdb1   <span class="c1"># -- 格式化sdb1分区</span>
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>mkfs.xfs /dev/sdb2   <span class="c1"># -- 格式化sdb2分区</span>
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a>mkfs.xfs /dev/sdb3   <span class="c1"># -- 格式化sdb3分区</span>
+<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a>mkfs.xfs /dev/sdb5   <span class="c1"># -- 格式化sdb5分区</span>
+<a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a>mkfs.xfs /dev/sdb6   <span class="c1"># -- 格式化sdb6分区</span>
+<a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a>mkfs.xfs /dev/sdd1   <span class="c1"># -- sdd1分区</span>
+<a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a><span class="c1">## -- 试着对/dev/sdb4这一扩展分区进行格式化,提示sdb4里包含分区表(指的就是sdb5、sdb6两个逻辑分区)</span>
+<a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a><span class="c1">## -- 可以加上-f选项,强制格式化,但通常不会这么做</span>
+<a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># mkfs.xfs /dev/sdb4</span>
+<a id="__codelineno-7-11" name="__codelineno-7-11" href="#__codelineno-7-11"></a>mkfs.xfs: /dev/sdb4 appears to contain a partition table <span class="o">(</span>dos<span class="o">)</span>.
+<a id="__codelineno-7-12" name="__codelineno-7-12" href="#__codelineno-7-12"></a>mkfs.xfs: Use the -f option to force overwrite.
+</code></pre></div>
+<p><font color='blue'>磁盘可以不分区,直接格式化制作文件系统,相当于整个盘是一个分区!!不建议这样做..</font></p>
+<h6 id="_4"><font color='orange' size=4>临时挂载</font><a class="headerlink" href="#_4" title="Permanent link">&para;</a></h6>
+<blockquote>
+<p>mount -t  源  挂载点</p>
+</blockquote>
+<p><code>mount -a</code> 可以不重启服务器, 让<code>/etc/fstab</code>中的永久挂载配置生效!</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>mkdir /a
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>mkdir /b
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>mkdir /c
+<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a>mkdir /d
+<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a>mkdir /e
+<a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a>mount /dev/sdb1 /a
+<a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a>mount /dev/sdb2 /b
+<a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a>mount /dev/sdb3 /c
+<a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a>mount /dev/sdb5 /d
+<a id="__codelineno-8-10" name="__codelineno-8-10" href="#__codelineno-8-10"></a>mount /dev/sdb6 /e
+<a id="__codelineno-8-11" name="__codelineno-8-11" href="#__codelineno-8-11"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># df | grep sdb</span>
+<a id="__codelineno-8-12" name="__codelineno-8-12" href="#__codelineno-8-12"></a><span class="c1">## 文件系统                 1K-块    已用     可用       已用% 挂载点</span>
+<a id="__codelineno-8-13" name="__codelineno-8-13" href="#__codelineno-8-13"></a>/dev/sdb1                <span class="m">1038336</span>   <span class="m">32992</span>  <span class="m">1005344</span>    <span class="m">4</span>%     /a
+<a id="__codelineno-8-14" name="__codelineno-8-14" href="#__codelineno-8-14"></a>/dev/sdb2                <span class="m">1038336</span>   <span class="m">32992</span>  <span class="m">1005344</span>    <span class="m">4</span>%     /b
+<a id="__codelineno-8-15" name="__codelineno-8-15" href="#__codelineno-8-15"></a>/dev/sdb3                <span class="m">1038336</span>   <span class="m">32992</span>  <span class="m">1005344</span>    <span class="m">4</span>%     /c
+<a id="__codelineno-8-16" name="__codelineno-8-16" href="#__codelineno-8-16"></a>/dev/sdb5                <span class="m">2086912</span>   <span class="m">32992</span>  <span class="m">2053920</span>    <span class="m">2</span>%     /d
+<a id="__codelineno-8-17" name="__codelineno-8-17" href="#__codelineno-8-17"></a>/dev/sdb6                <span class="m">3135488</span>   <span class="m">32992</span>  <span class="m">3102496</span>    <span class="m">2</span>%     /e
+</code></pre></div>
+<h6 id="_5"><font color='orange' size=4>卸载</font><a class="headerlink" href="#_5" title="Permanent link">&para;</a></h6>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="c1">## -- umount /dev/sdb1 卸载文件系统或挂载点都能达到预期的效果</span>
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>umount /a /b /c /d /e  <span class="c1"># -- 卸载多个</span>
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="s2">&quot;&quot;&quot;</span>
+<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="s2">若正处于某个分区下,umount卸载该分区,会提示目标忙</span>
+<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a><span class="s2">解决方案一: cd 到其他分区下</span>
+<a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a><span class="s2">解决方案二: umount -l /a # -- 加上l选项,强制卸载</span>
+<a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a><span class="s2">&quot;&quot;&quot;</span>
+</code></pre></div>
+<h6 id="_6"><font color='orange' size=4>从右往左最近原则</font><a class="headerlink" href="#_6" title="Permanent link">&para;</a></h6>
+<blockquote>
+<p>从右往左最近原则  同一个分区可以有多个挂载点</p>
+</blockquote>
+<p>判断文件属于哪一个分区,需要从右到左进行分析..<br />
+<strong>从右往左最近原则</strong>:  文件离哪个挂载点最近, 就会存储到最近的挂载点所在的分区里.. </p>
+<p><font color='blue'>打个比方, 在挂载点是个水龙头, 水从哪里来？挂载点从所对应的某个分区中取水!!!</font></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>mkdir /opt/a                    <span class="c1">## -- opt目录在根分区/里;根分区下创建的a目录也在根分区里</span>
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>mount /dev/sdb1 /opt/a          <span class="c1">## -- /opt/a成为了sdb1分区的挂载点</span>
+<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>mkdir /opt/a/b                  <span class="c1">## -- 在/opt/a挂载点下创建的b目录存储在sdb1分区里</span>
+<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a>mount /dev/sdb2 /opt/a/b        <span class="c1">## -- /opt/a/b成为了sdb2分区的挂载点</span>
+<a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a>touch /opt/a/b/1.txt            <span class="c1">## -- 在/opt/a/b挂载点下创建的1.txt文件存储在sdb2分区里</span>
+<a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a><span class="s2">&quot;&quot;&quot;到此为止,问这几个分区下分别存储了什么？ 可以反向验证**从右往左最近原则**！！！</span>
+<a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a><span class="s2">根分区             opt、a</span>
+<a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a><span class="s2">sdb1分区       b</span>
+<a id="__codelineno-10-9" name="__codelineno-10-9" href="#__codelineno-10-9"></a><span class="s2">sdb2分区       1.txt </span>
+<a id="__codelineno-10-10" name="__codelineno-10-10" href="#__codelineno-10-10"></a>
+<a id="__codelineno-10-11" name="__codelineno-10-11" href="#__codelineno-10-11"></a><span class="s2">★ /opt/a/b/1.txt 反向验证分析: 1.txt离/opt/a/b挂载点最近; b离/opt/a挂载点最近</span>
+<a id="__codelineno-10-12" name="__codelineno-10-12" href="#__codelineno-10-12"></a>
+<a id="__codelineno-10-13" name="__codelineno-10-13" href="#__codelineno-10-13"></a><span class="s2">简单粗暴,卸载了哪个分区,那个分区里的内容就不会显示..</span>
+<a id="__codelineno-10-14" name="__codelineno-10-14" href="#__codelineno-10-14"></a><span class="s2">但首先你要能卸载的了,比如这里直接umount /opt/a卸载sdb1分区是失败的!!要先卸载sdb2分区..</span>
+<a id="__codelineno-10-15" name="__codelineno-10-15" href="#__codelineno-10-15"></a><span class="s2">&quot;&quot;&quot;</span>
+<a id="__codelineno-10-16" name="__codelineno-10-16" href="#__codelineno-10-16"></a><span class="o">[</span>root@localhost opt<span class="o">]</span><span class="c1"># tree /opt</span>
+<a id="__codelineno-10-17" name="__codelineno-10-17" href="#__codelineno-10-17"></a>/opt
+<a id="__codelineno-10-18" name="__codelineno-10-18" href="#__codelineno-10-18"></a>└── a
+<a id="__codelineno-10-19" name="__codelineno-10-19" href="#__codelineno-10-19"></a>    └── b
+<a id="__codelineno-10-20" name="__codelineno-10-20" href="#__codelineno-10-20"></a>        └── <span class="m">1</span>.txt
+<a id="__codelineno-10-21" name="__codelineno-10-21" href="#__codelineno-10-21"></a>
+<a id="__codelineno-10-22" name="__codelineno-10-22" href="#__codelineno-10-22"></a><span class="m">2</span> directories, <span class="m">1</span> file
+<a id="__codelineno-10-23" name="__codelineno-10-23" href="#__codelineno-10-23"></a><span class="o">[</span>root@localhost opt<span class="o">]</span><span class="c1"># echo 111 &gt; /opt/a/b/1.txt</span>
+<a id="__codelineno-10-24" name="__codelineno-10-24" href="#__codelineno-10-24"></a><span class="o">[</span>root@localhost opt<span class="o">]</span><span class="c1"># cat /opt/a/b/1.txt </span>
+<a id="__codelineno-10-25" name="__codelineno-10-25" href="#__codelineno-10-25"></a><span class="m">111</span>
+<a id="__codelineno-10-26" name="__codelineno-10-26" href="#__codelineno-10-26"></a><span class="o">[</span>root@localhost opt<span class="o">]</span><span class="c1"># df | grep sdb | grep -v grep</span>
+<a id="__codelineno-10-27" name="__codelineno-10-27" href="#__codelineno-10-27"></a>/dev/sdb1                <span class="m">1038336</span>   <span class="m">32992</span>  <span class="m">1005344</span>    <span class="m">4</span>% /opt/a
+<a id="__codelineno-10-28" name="__codelineno-10-28" href="#__codelineno-10-28"></a>/dev/sdb2                <span class="m">1038336</span>   <span class="m">32996</span>  <span class="m">1005340</span>    <span class="m">4</span>% /opt/a/b
+<a id="__codelineno-10-29" name="__codelineno-10-29" href="#__codelineno-10-29"></a>
+<a id="__codelineno-10-30" name="__codelineno-10-30" href="#__codelineno-10-30"></a><span class="s2">&quot;&quot;&quot;sdb2分区隐居山林,为何1.txt文件神秘消失？</span>
+<a id="__codelineno-10-31" name="__codelineno-10-31" href="#__codelineno-10-31"></a><span class="s2">因为1.txt文件是存储在sdb2分区里的!!sdb2分区未挂载就读取不了里面的内容.</span>
+<a id="__codelineno-10-32" name="__codelineno-10-32" href="#__codelineno-10-32"></a><span class="s2">&quot;&quot;&quot;</span>
+<a id="__codelineno-10-33" name="__codelineno-10-33" href="#__codelineno-10-33"></a><span class="o">[</span>root@localhost opt<span class="o">]</span><span class="c1"># umount /opt/a/b</span>
+<a id="__codelineno-10-34" name="__codelineno-10-34" href="#__codelineno-10-34"></a><span class="o">[</span>root@localhost opt<span class="o">]</span><span class="c1"># tree /opt</span>
+<a id="__codelineno-10-35" name="__codelineno-10-35" href="#__codelineno-10-35"></a>/opt
+<a id="__codelineno-10-36" name="__codelineno-10-36" href="#__codelineno-10-36"></a>└── a
+<a id="__codelineno-10-37" name="__codelineno-10-37" href="#__codelineno-10-37"></a>    └── b
+<a id="__codelineno-10-38" name="__codelineno-10-38" href="#__codelineno-10-38"></a>
+<a id="__codelineno-10-39" name="__codelineno-10-39" href="#__codelineno-10-39"></a><span class="m">2</span> directories, <span class="m">0</span> files
+<a id="__codelineno-10-40" name="__codelineno-10-40" href="#__codelineno-10-40"></a>
+<a id="__codelineno-10-41" name="__codelineno-10-41" href="#__codelineno-10-41"></a><span class="s2">&quot;&quot;&quot;趁乱在/opt/a/b下创建的2.txt文件,根据从右到左最近原则,是存储在挂载点/opt/a所对应的sdb1分区里!!</span>
+<a id="__codelineno-10-42" name="__codelineno-10-42" href="#__codelineno-10-42"></a><span class="s2">&quot;&quot;&quot;</span>
+<a id="__codelineno-10-43" name="__codelineno-10-43" href="#__codelineno-10-43"></a><span class="o">[</span>root@localhost opt<span class="o">]</span><span class="c1"># echo 222 &gt; /opt/a/b/2.txt</span>
+<a id="__codelineno-10-44" name="__codelineno-10-44" href="#__codelineno-10-44"></a><span class="o">[</span>root@localhost opt<span class="o">]</span><span class="c1"># cat /opt/a/b/2.txt </span>
+<a id="__codelineno-10-45" name="__codelineno-10-45" href="#__codelineno-10-45"></a><span class="m">222</span>
+<a id="__codelineno-10-46" name="__codelineno-10-46" href="#__codelineno-10-46"></a><span class="o">[</span>root@localhost opt<span class="o">]</span><span class="c1"># tree /opt</span>
+<a id="__codelineno-10-47" name="__codelineno-10-47" href="#__codelineno-10-47"></a>/opt
+<a id="__codelineno-10-48" name="__codelineno-10-48" href="#__codelineno-10-48"></a>└── a
+<a id="__codelineno-10-49" name="__codelineno-10-49" href="#__codelineno-10-49"></a>    └── b
+<a id="__codelineno-10-50" name="__codelineno-10-50" href="#__codelineno-10-50"></a>        └── <span class="m">2</span>.txt
+<a id="__codelineno-10-51" name="__codelineno-10-51" href="#__codelineno-10-51"></a>
+<a id="__codelineno-10-52" name="__codelineno-10-52" href="#__codelineno-10-52"></a><span class="m">2</span> directories, <span class="m">1</span> file
+<a id="__codelineno-10-53" name="__codelineno-10-53" href="#__codelineno-10-53"></a>
+<a id="__codelineno-10-54" name="__codelineno-10-54" href="#__codelineno-10-54"></a><span class="s2">&quot;&quot;&quot;重新让/opt/a/b成为sdb2分区的挂载点,2.txt文件消失,1.txt文件重见江湖!</span>
+<a id="__codelineno-10-55" name="__codelineno-10-55" href="#__codelineno-10-55"></a><span class="s2">因为/opt/a/b挂载点会从sdb2分区里取水,sdb2分区里只有1.txt,可没有2.txt</span>
+<a id="__codelineno-10-56" name="__codelineno-10-56" href="#__codelineno-10-56"></a><span class="s2">&quot;&quot;&quot;</span>
+<a id="__codelineno-10-57" name="__codelineno-10-57" href="#__codelineno-10-57"></a><span class="o">[</span>root@localhost opt<span class="o">]</span><span class="c1"># mount /dev/sdb2 /opt/a/b</span>
+<a id="__codelineno-10-58" name="__codelineno-10-58" href="#__codelineno-10-58"></a><span class="o">[</span>root@localhost opt<span class="o">]</span><span class="c1"># tree /opt</span>
+<a id="__codelineno-10-59" name="__codelineno-10-59" href="#__codelineno-10-59"></a>/opt
+<a id="__codelineno-10-60" name="__codelineno-10-60" href="#__codelineno-10-60"></a>└── a
+<a id="__codelineno-10-61" name="__codelineno-10-61" href="#__codelineno-10-61"></a>    └── b
+<a id="__codelineno-10-62" name="__codelineno-10-62" href="#__codelineno-10-62"></a>        └── <span class="m">1</span>.txt
+<a id="__codelineno-10-63" name="__codelineno-10-63" href="#__codelineno-10-63"></a>
+<a id="__codelineno-10-64" name="__codelineno-10-64" href="#__codelineno-10-64"></a><span class="m">2</span> directories, <span class="m">1</span> file
+<a id="__codelineno-10-65" name="__codelineno-10-65" href="#__codelineno-10-65"></a>
+<a id="__codelineno-10-66" name="__codelineno-10-66" href="#__codelineno-10-66"></a><span class="s2">&quot;&quot;&quot;开始作妖,/test和/opt/a/b都作为sdb2分区的挂载点!!</span>
+<a id="__codelineno-10-67" name="__codelineno-10-67" href="#__codelineno-10-67"></a><span class="s2">所以神奇的发现,新建的test目录下也出现了1.txt文件!!</span>
+<a id="__codelineno-10-68" name="__codelineno-10-68" href="#__codelineno-10-68"></a><span class="s2">进一步验证了,挂载点会从所对应的分区里取水!!</span>
+<a id="__codelineno-10-69" name="__codelineno-10-69" href="#__codelineno-10-69"></a><span class="s2">需要注意的是:不管是改变/test还是/opt/a/b下的1.txt文件,实则上都是更改sdb2分区里存储的1.txt!!!</span>
+<a id="__codelineno-10-70" name="__codelineno-10-70" href="#__codelineno-10-70"></a><span class="s2">                     /test/1.txt和/opt/a/b/1.txt会同时改变!!!</span>
+<a id="__codelineno-10-71" name="__codelineno-10-71" href="#__codelineno-10-71"></a><span class="s2">&quot;&quot;&quot;</span>
+<a id="__codelineno-10-72" name="__codelineno-10-72" href="#__codelineno-10-72"></a><span class="o">[</span>root@localhost opt<span class="o">]</span><span class="c1"># cd</span>
+<a id="__codelineno-10-73" name="__codelineno-10-73" href="#__codelineno-10-73"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># mkdir /test</span>
+<a id="__codelineno-10-74" name="__codelineno-10-74" href="#__codelineno-10-74"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># mount /dev/sdb2 /test</span>
+<a id="__codelineno-10-75" name="__codelineno-10-75" href="#__codelineno-10-75"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># tree /test</span>
+<a id="__codelineno-10-76" name="__codelineno-10-76" href="#__codelineno-10-76"></a>/test
+<a id="__codelineno-10-77" name="__codelineno-10-77" href="#__codelineno-10-77"></a>└── <span class="m">1</span>.txt
+<a id="__codelineno-10-78" name="__codelineno-10-78" href="#__codelineno-10-78"></a>
+<a id="__codelineno-10-79" name="__codelineno-10-79" href="#__codelineno-10-79"></a><span class="m">0</span> directories, <span class="m">1</span> file
+<a id="__codelineno-10-80" name="__codelineno-10-80" href="#__codelineno-10-80"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># mount | grep /dev/sdb2  ## -- df可能不会显示全,但mount命令显示的肯定是全的!!!</span>
+<a id="__codelineno-10-81" name="__codelineno-10-81" href="#__codelineno-10-81"></a>/dev/sdb2 on /opt/a/b <span class="nb">type</span> xfs <span class="o">(</span>rw,relatime,attr2,inode64,noquota<span class="o">)</span>
+<a id="__codelineno-10-82" name="__codelineno-10-82" href="#__codelineno-10-82"></a>/dev/sdb2 on /test <span class="nb">type</span> xfs <span class="o">(</span>rw,relatime,attr2,inode64,noquota<span class="o">)</span>
+<a id="__codelineno-10-83" name="__codelineno-10-83" href="#__codelineno-10-83"></a>
+<a id="__codelineno-10-84" name="__codelineno-10-84" href="#__codelineno-10-84"></a><span class="s2">&quot;&quot;&quot;小小验证下,b目录和2.txt都是存储在/opt/a对应的sdb1分区里</span>
+<a id="__codelineno-10-85" name="__codelineno-10-85" href="#__codelineno-10-85"></a><span class="s2">sdb1分区退隐江湖,b目录和2.txt都会消失!!!</span>
+<a id="__codelineno-10-86" name="__codelineno-10-86" href="#__codelineno-10-86"></a><span class="s2">&quot;&quot;&quot;</span>
+<a id="__codelineno-10-87" name="__codelineno-10-87" href="#__codelineno-10-87"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># tree /opt</span>
+<a id="__codelineno-10-88" name="__codelineno-10-88" href="#__codelineno-10-88"></a>/opt
+<a id="__codelineno-10-89" name="__codelineno-10-89" href="#__codelineno-10-89"></a>└── a
+<a id="__codelineno-10-90" name="__codelineno-10-90" href="#__codelineno-10-90"></a>    └── b
+<a id="__codelineno-10-91" name="__codelineno-10-91" href="#__codelineno-10-91"></a>        └── <span class="m">1</span>.txt
+<a id="__codelineno-10-92" name="__codelineno-10-92" href="#__codelineno-10-92"></a>
+<a id="__codelineno-10-93" name="__codelineno-10-93" href="#__codelineno-10-93"></a><span class="m">2</span> directories, <span class="m">1</span> file
+<a id="__codelineno-10-94" name="__codelineno-10-94" href="#__codelineno-10-94"></a><span class="c1">## -- 特别注意这里,直接umount /opt/a是失败的!!</span>
+<a id="__codelineno-10-95" name="__codelineno-10-95" href="#__codelineno-10-95"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># umount /opt/a</span>
+<a id="__codelineno-10-96" name="__codelineno-10-96" href="#__codelineno-10-96"></a>umount: /opt/a：目标忙。
+<a id="__codelineno-10-97" name="__codelineno-10-97" href="#__codelineno-10-97"></a>        <span class="o">(</span>有些情况下通过 lsof<span class="o">(</span><span class="m">8</span><span class="o">)</span> 或 fuser<span class="o">(</span><span class="m">1</span><span class="o">)</span> 可以
+<a id="__codelineno-10-98" name="__codelineno-10-98" href="#__codelineno-10-98"></a>         找到有关使用该设备的进程的有用信息<span class="o">)</span>
+<a id="__codelineno-10-99" name="__codelineno-10-99" href="#__codelineno-10-99"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># umount /opt/a/b</span>
+<a id="__codelineno-10-100" name="__codelineno-10-100" href="#__codelineno-10-100"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># tree /opt</span>
+<a id="__codelineno-10-101" name="__codelineno-10-101" href="#__codelineno-10-101"></a>/opt
+<a id="__codelineno-10-102" name="__codelineno-10-102" href="#__codelineno-10-102"></a>└── a
+<a id="__codelineno-10-103" name="__codelineno-10-103" href="#__codelineno-10-103"></a>    └── b
+<a id="__codelineno-10-104" name="__codelineno-10-104" href="#__codelineno-10-104"></a>        └── <span class="m">2</span>.txt
+<a id="__codelineno-10-105" name="__codelineno-10-105" href="#__codelineno-10-105"></a>
+<a id="__codelineno-10-106" name="__codelineno-10-106" href="#__codelineno-10-106"></a><span class="m">2</span> directories, <span class="m">1</span> file
+<a id="__codelineno-10-107" name="__codelineno-10-107" href="#__codelineno-10-107"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># umount /opt/a</span>
+<a id="__codelineno-10-108" name="__codelineno-10-108" href="#__codelineno-10-108"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># tree /opt</span>
+<a id="__codelineno-10-109" name="__codelineno-10-109" href="#__codelineno-10-109"></a>/opt
+<a id="__codelineno-10-110" name="__codelineno-10-110" href="#__codelineno-10-110"></a>└── a
+</code></pre></div>
+<h6 id="_7"><font color='orange' size=4>永久挂载</font><a class="headerlink" href="#_7" title="Permanent link">&para;</a></h6>
+<blockquote>
+<p>上面操作的挂载都是临时挂载, <code>reboot</code>命令重启服务器后, 挂载会失效!!!<br />
+而linux中有些挂载就是永久的,如何做到的呢？</p>
+</blockquote>
+<p><code>/etc/fstab</code>文件</p>
+<table>
+<thead>
+<tr>
+<th>要挂载的设备</th>
+<th>挂载点(入口)</th>
+<th>文件系统类型</th>
+<th>挂载参数</th>
+<th>是否备份</th>
+<th>是否检查</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>UUID</td>
+<td>挂载点路径</td>
+<td>eg: xfs</td>
+<td>defaults</td>
+<td>0</td>
+<td>0</td>
+</tr>
+</tbody>
+</table>
+<p><font color='gray'>Ps: 通常是defaults 0 0, 具体的选项配置详见 <code>https://zhuanlan.zhihu.com/p/337009754</code></font></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="c1">## -- 查看linux中永久挂载的信息</span>
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># cat /etc/fstab</span>
+<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a>/dev/mapper/centos-root                                     /          xfs     defaults        <span class="m">0</span> <span class="m">0</span>
+<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a><span class="nv">UUID</span><span class="o">=</span>7edef40b-555b-485b-a94c-4b345143b5d5 /boot      xfs     defaults        <span class="m">0</span> <span class="m">0</span>
+<a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a>/dev/mapper/centos-swap                                     swap       swap    defaults        <span class="m">0</span> <span class="m">0</span>
+<a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a>
+<a id="__codelineno-11-7" name="__codelineno-11-7" href="#__codelineno-11-7"></a><span class="c1">## -- 查看每个磁盘的UUID</span>
+<a id="__codelineno-11-8" name="__codelineno-11-8" href="#__codelineno-11-8"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># blkid</span>
+<a id="__codelineno-11-9" name="__codelineno-11-9" href="#__codelineno-11-9"></a>/dev/sdb1: <span class="nv">UUID</span><span class="o">=</span><span class="s2">&quot;057edccc-4db0-4688-bb18-5e2d5e681c5e&quot;</span> <span class="nv">TYPE</span><span class="o">=</span><span class="s2">&quot;xfs&quot;</span> 
+<a id="__codelineno-11-10" name="__codelineno-11-10" href="#__codelineno-11-10"></a>/dev/sdb2: <span class="nv">UUID</span><span class="o">=</span><span class="s2">&quot;41a7d6a4-b8b6-489a-892a-2e2c1e7d295e&quot;</span> <span class="nv">TYPE</span><span class="o">=</span><span class="s2">&quot;xfs&quot;</span> 
+<a id="__codelineno-11-11" name="__codelineno-11-11" href="#__codelineno-11-11"></a>/dev/sdb3: <span class="nv">UUID</span><span class="o">=</span><span class="s2">&quot;db12f68f-9ea0-4b7a-a927-47d8345dedd3&quot;</span> <span class="nv">TYPE</span><span class="o">=</span><span class="s2">&quot;xfs&quot;</span> 
+<a id="__codelineno-11-12" name="__codelineno-11-12" href="#__codelineno-11-12"></a>/dev/sdb5: <span class="nv">UUID</span><span class="o">=</span><span class="s2">&quot;29301422-0035-417c-bfd0-8d244ce59e0c&quot;</span> <span class="nv">TYPE</span><span class="o">=</span><span class="s2">&quot;xfs&quot;</span> 
+<a id="__codelineno-11-13" name="__codelineno-11-13" href="#__codelineno-11-13"></a>/dev/sdb6: <span class="nv">UUID</span><span class="o">=</span><span class="s2">&quot;73122250-bd11-4ca2-8c84-0a2e412ef708&quot;</span> <span class="nv">TYPE</span><span class="o">=</span><span class="s2">&quot;xfs&quot;</span> 
+<a id="__codelineno-11-14" name="__codelineno-11-14" href="#__codelineno-11-14"></a>/dev/sda1: <span class="nv">UUID</span><span class="o">=</span><span class="s2">&quot;7edef40b-555b-485b-a94c-4b345143b5d5&quot;</span> <span class="nv">TYPE</span><span class="o">=</span><span class="s2">&quot;xfs&quot;</span> 
+<a id="__codelineno-11-15" name="__codelineno-11-15" href="#__codelineno-11-15"></a>/dev/sda2: <span class="nv">UUID</span><span class="o">=</span><span class="s2">&quot;jG51ec-dKTo-gsGv-o7wf-2wXp-Irc8-FYrzXT&quot;</span> <span class="nv">TYPE</span><span class="o">=</span><span class="s2">&quot;LVM2_member&quot;</span> 
+<a id="__codelineno-11-16" name="__codelineno-11-16" href="#__codelineno-11-16"></a>/dev/mapper/centos-root: <span class="nv">UUID</span><span class="o">=</span><span class="s2">&quot;dc8ff591-4043-4c29-82bd-cdc39a0d48fb&quot;</span> <span class="nv">TYPE</span><span class="o">=</span><span class="s2">&quot;xfs&quot;</span> 
+<a id="__codelineno-11-17" name="__codelineno-11-17" href="#__codelineno-11-17"></a>/dev/mapper/centos-swap: <span class="nv">UUID</span><span class="o">=</span><span class="s2">&quot;9a6222cd-5632-4215-acbc-94a9b22ddd6e&quot;</span> <span class="nv">TYPE</span><span class="o">=</span><span class="s2">&quot;swap&quot;</span> 
+<a id="__codelineno-11-18" name="__codelineno-11-18" href="#__codelineno-11-18"></a>
+<a id="__codelineno-11-19" name="__codelineno-11-19" href="#__codelineno-11-19"></a><span class="c1">## -- 编辑/etc/fstab 将sdb1和sdb2进行挂载 通常使用UUID,使用分区名称(不建议)也可以</span>
+<a id="__codelineno-11-20" name="__codelineno-11-20" href="#__codelineno-11-20"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># mkdir /root/test1</span>
+<a id="__codelineno-11-21" name="__codelineno-11-21" href="#__codelineno-11-21"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># mkdir /root/test2</span>
+<a id="__codelineno-11-22" name="__codelineno-11-22" href="#__codelineno-11-22"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># tail -2 /etc/fstab </span>
+<a id="__codelineno-11-23" name="__codelineno-11-23" href="#__codelineno-11-23"></a><span class="nv">UUID</span><span class="o">=</span>057edccc-4db0-4688-bb18-5e2d5e681c5e /root/test1 xfs defaults <span class="m">0</span> <span class="m">0</span>
+<a id="__codelineno-11-24" name="__codelineno-11-24" href="#__codelineno-11-24"></a>/dev/sdb2 /root/test2 xfs defaults <span class="m">0</span> <span class="m">0</span> 
+<a id="__codelineno-11-25" name="__codelineno-11-25" href="#__codelineno-11-25"></a>
+<a id="__codelineno-11-26" name="__codelineno-11-26" href="#__codelineno-11-26"></a><span class="c1">## -- reboot重启服务器后永久挂载生效</span>
+<a id="__codelineno-11-27" name="__codelineno-11-27" href="#__codelineno-11-27"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># reboot</span>
+<a id="__codelineno-11-28" name="__codelineno-11-28" href="#__codelineno-11-28"></a>
+<a id="__codelineno-11-29" name="__codelineno-11-29" href="#__codelineno-11-29"></a><span class="c1">## -- 检查是否永久挂载成功</span>
+<a id="__codelineno-11-30" name="__codelineno-11-30" href="#__codelineno-11-30"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># mount | grep sdb</span>
+<a id="__codelineno-11-31" name="__codelineno-11-31" href="#__codelineno-11-31"></a>/dev/sdb1 on /root/test1 <span class="nb">type</span> xfs <span class="o">(</span>rw,relatime,attr2,inode64,noquota<span class="o">)</span>
+<a id="__codelineno-11-32" name="__codelineno-11-32" href="#__codelineno-11-32"></a>/dev/sdb2 on /root/test2 <span class="nb">type</span> xfs <span class="o">(</span>rw,relatime,attr2,inode64,noquota<span class="o">)</span>
+<a id="__codelineno-11-33" name="__codelineno-11-33" href="#__codelineno-11-33"></a>
+<a id="__codelineno-11-34" name="__codelineno-11-34" href="#__codelineno-11-34"></a><span class="c1">## -- 不重启服务器,使用mount -a重新加载配置文件实现自动挂载</span>
+<a id="__codelineno-11-35" name="__codelineno-11-35" href="#__codelineno-11-35"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># sed -i &#39;$a /dev/sdb3 /opt xfs defaults 0 0&#39; /etc/fstab </span>
+<a id="__codelineno-11-36" name="__codelineno-11-36" href="#__codelineno-11-36"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># mount -a</span>
+<a id="__codelineno-11-37" name="__codelineno-11-37" href="#__codelineno-11-37"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># mount | grep sdb</span>
+<a id="__codelineno-11-38" name="__codelineno-11-38" href="#__codelineno-11-38"></a>/dev/sdb1 on /root/test1 <span class="nb">type</span> xfs <span class="o">(</span>rw,relatime,attr2,inode64,noquota<span class="o">)</span>
+<a id="__codelineno-11-39" name="__codelineno-11-39" href="#__codelineno-11-39"></a>/dev/sdb2 on /root/test2 <span class="nb">type</span> xfs <span class="o">(</span>rw,relatime,attr2,inode64,noquota<span class="o">)</span>
+<a id="__codelineno-11-40" name="__codelineno-11-40" href="#__codelineno-11-40"></a>/dev/sdb3 on /opt <span class="nb">type</span> xfs <span class="o">(</span>rw,relatime,attr2,inode64,noquota<span class="o">)</span>
+</code></pre></div>
+<hr />
+<h3 id="swap">制作swap交换分区<a class="headerlink" href="#swap" title="Permanent link">&para;</a></h3>
+<p>查看swap分区的大小,当前是2个G,准备给它加1个G..<br />
+<font color='blue'><strong>步骤:</strong> </font> 新增分区  --  mkswap制作swap文件系统  --  激活分区 --  开机自动挂载新增的swap分区</p>
+<p>swapon &nbsp;&nbsp;&nbsp;&nbsp; /dev/sdd3
+swapon &nbsp;&nbsp;&nbsp;&nbsp; -s
+swapoff &nbsp;&nbsp;&nbsp;&nbsp; /dev/sdd3
+swapoff &nbsp;&nbsp;&nbsp;&nbsp; -a</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># free -m</span>
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>              total        used        free      shared  buff/cache   available
+<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a>Mem:            <span class="m">972</span>         <span class="m">621</span>          <span class="m">61</span>           <span class="m">9</span>         <span class="m">289</span>         <span class="m">190</span>
+<a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a>Swap:          <span class="m">2047</span>           <span class="m">4</span>        <span class="m">2043</span>
+<a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a>
+<a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a><span class="s2">&quot;&quot;&quot; -- 从磁盘中划个1G空间的分区 sdb的逻辑分区 sdd的主分区都可以 -- &quot;&quot;&quot;</span>
+<a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a>gdisk /dev/sdd
+<a id="__codelineno-12-8" name="__codelineno-12-8" href="#__codelineno-12-8"></a>partprobe 
+<a id="__codelineno-12-9" name="__codelineno-12-9" href="#__codelineno-12-9"></a>
+<a id="__codelineno-12-10" name="__codelineno-12-10" href="#__codelineno-12-10"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># lsblk /dev/sdd</span>
+<a id="__codelineno-12-11" name="__codelineno-12-11" href="#__codelineno-12-11"></a>NAME   MAJ:MIN RM  SIZE RO TYPE MOUNTPOINT
+<a id="__codelineno-12-12" name="__codelineno-12-12" href="#__codelineno-12-12"></a>sdd      <span class="m">8</span>:48   <span class="m">0</span>  <span class="m">2</span>.5T  <span class="m">0</span> disk 
+<a id="__codelineno-12-13" name="__codelineno-12-13" href="#__codelineno-12-13"></a>├─sdd1   <span class="m">8</span>:49   <span class="m">0</span>    1G  <span class="m">0</span> part 
+<a id="__codelineno-12-14" name="__codelineno-12-14" href="#__codelineno-12-14"></a>├─sdd2   <span class="m">8</span>:50   <span class="m">0</span>    1G  <span class="m">0</span> part 
+<a id="__codelineno-12-15" name="__codelineno-12-15" href="#__codelineno-12-15"></a>└─sdd3   <span class="m">8</span>:51   <span class="m">0</span>    1G  <span class="m">0</span> part 
+<a id="__codelineno-12-16" name="__codelineno-12-16" href="#__codelineno-12-16"></a>
+<a id="__codelineno-12-17" name="__codelineno-12-17" href="#__codelineno-12-17"></a><span class="s2">&quot;&quot;&quot; -- 制作swap分区 -- &quot;&quot;&quot;</span>
+<a id="__codelineno-12-18" name="__codelineno-12-18" href="#__codelineno-12-18"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># mkswap /dev/sdd3</span>
+<a id="__codelineno-12-19" name="__codelineno-12-19" href="#__codelineno-12-19"></a>正在设置交换空间版本 <span class="m">1</span>，大小 <span class="o">=</span> <span class="m">1048572</span> KiB
+<a id="__codelineno-12-20" name="__codelineno-12-20" href="#__codelineno-12-20"></a>无标签，UUID<span class="o">=</span>37fcc4d0-a581-404a-b13c-45311d09c7fc
+<a id="__codelineno-12-21" name="__codelineno-12-21" href="#__codelineno-12-21"></a>
+<a id="__codelineno-12-22" name="__codelineno-12-22" href="#__codelineno-12-22"></a><span class="s2">&quot;&quot;&quot; -- 激活/临时挂载 刚制作好的swap分区 -- &quot;&quot;&quot;</span>
+<a id="__codelineno-12-23" name="__codelineno-12-23" href="#__codelineno-12-23"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># swapon /dev/sdd3</span>
+<a id="__codelineno-12-24" name="__codelineno-12-24" href="#__codelineno-12-24"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># free -m</span>
+<a id="__codelineno-12-25" name="__codelineno-12-25" href="#__codelineno-12-25"></a>              total        used        free      shared  buff/cache   available
+<a id="__codelineno-12-26" name="__codelineno-12-26" href="#__codelineno-12-26"></a>Mem:            <span class="m">972</span>         <span class="m">622</span>          <span class="m">70</span>           <span class="m">9</span>         <span class="m">279</span>         <span class="m">189</span>
+<a id="__codelineno-12-27" name="__codelineno-12-27" href="#__codelineno-12-27"></a>Swap:          <span class="m">3071</span>           <span class="m">4</span>        <span class="m">3067</span>
+<a id="__codelineno-12-28" name="__codelineno-12-28" href="#__codelineno-12-28"></a>
+<a id="__codelineno-12-29" name="__codelineno-12-29" href="#__codelineno-12-29"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># swapon -s</span>
+<a id="__codelineno-12-30" name="__codelineno-12-30" href="#__codelineno-12-30"></a>文件名             类型      大小  已用  权限
+<a id="__codelineno-12-31" name="__codelineno-12-31" href="#__codelineno-12-31"></a>/dev/sdd3                               partition   <span class="m">1048572</span> <span class="m">4872</span>    -2
+<a id="__codelineno-12-32" name="__codelineno-12-32" href="#__codelineno-12-32"></a>/dev/dm-1                               partition   <span class="m">2097148</span> <span class="m">0</span>   -3
+<a id="__codelineno-12-33" name="__codelineno-12-33" href="#__codelineno-12-33"></a>
+<a id="__codelineno-12-34" name="__codelineno-12-34" href="#__codelineno-12-34"></a><span class="c1">## -- 开机自动挂载新增的swap分区</span>
+<a id="__codelineno-12-35" name="__codelineno-12-35" href="#__codelineno-12-35"></a><span class="c1">## -- 最好使用UUID</span>
+<a id="__codelineno-12-36" name="__codelineno-12-36" href="#__codelineno-12-36"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># sed -i &#39;$a /dev/sdd3 swap swap defaults 0 0&#39; /etc/fstab </span>
+<a id="__codelineno-12-37" name="__codelineno-12-37" href="#__codelineno-12-37"></a><span class="s2">&quot;&quot;&quot;</span>
+<a id="__codelineno-12-38" name="__codelineno-12-38" href="#__codelineno-12-38"></a><span class="s2">实验了下 swapoff /dev/sdd3 关闭sdd3这个swap分区,</span>
+<a id="__codelineno-12-39" name="__codelineno-12-39" href="#__codelineno-12-39"></a><span class="s2">尽管写进了配置文件, 但使用mount -a命令不会重新挂载上去</span>
+<a id="__codelineno-12-40" name="__codelineno-12-40" href="#__codelineno-12-40"></a><span class="s2">可以使用swapon /dev/sdd3 重新激活/临时挂载</span>
+<a id="__codelineno-12-41" name="__codelineno-12-41" href="#__codelineno-12-41"></a><span class="s2">开机的时候会自动挂载文件里的swap配置</span>
+<a id="__codelineno-12-42" name="__codelineno-12-42" href="#__codelineno-12-42"></a><span class="s2">不就相当于永久挂载了嘛!!!!</span>
+<a id="__codelineno-12-43" name="__codelineno-12-43" href="#__codelineno-12-43"></a><span class="s2">&quot;&quot;&quot;</span>
+</code></pre></div>
+<hr />
+<h3 id="dell-r740raid">Dell R740服务器制作RAID<a class="headerlink" href="#dell-r740raid" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p><font color='blue'>RAID的基础理论详见</font>:  0_计算机基础/1_计算机硬件组成.md  中 <strong>◎ RAID技术</strong> 部分的内容...</p>
+</blockquote>
+<p><font color='gray'>Ps: 提一嘴,实体服务器需要做RAID,但大多数中小型公司用的阿里云(提供的是虚拟机),云环境不需要做RAID!!</font></p>
+<p>简单回顾下: <br />
+&nbsp;&nbsp;&nbsp;&nbsp; 在生产环境中,通常会将多个盘合到一起做一个RAID...<br />
+&nbsp;&nbsp;&nbsp;&nbsp; RAID0: 两块盘同时提供读写的功能,坏其中一块就不能用了;<br />
+&nbsp;&nbsp;&nbsp;&nbsp; RAID1: 称作备份盘/镜像盘, 一块读写,另一块备份, 通常系统盘做RAID1;<br />
+&nbsp;&nbsp;&nbsp;&nbsp; RAID5: 既考虑了读写速度也考虑了冗余..<br />
+&nbsp;&nbsp;&nbsp;&nbsp; RAID10: 土豪玩法.. 结合raid0和1的优点..  </p>
+<p>制作RAID需要raid卡这个设备,硬盘是插在raid卡上的.. raid卡将这些硬盘做成磁盘阵列..</p>
+<p>具体过程参考: <code>https://www.cnblogs.com/linhaifeng/articles/13921161.html</code></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>注意几个地方:
+<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="m">4</span>.在BIOS界面ctrl+R进入阵列卡,不同厂商快捷键不一样,需要查一下<span class="p">;</span>
+<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a><span class="m">6</span>.多少个盘根据自己的需求选择<span class="p">;</span><span class="o">(</span>这里选择的是要操作哪些盘<span class="o">)</span>
+<a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a><span class="m">7</span>.create New VD <span class="c1"># -- VD虚拟磁盘,即多个硬盘组成一个虚拟层面的硬盘</span>
+<a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a><span class="m">8</span>.这里是选择哪些盘做RAID  按ok完成
+<a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a><span class="m">9</span>.可以将在步骤6中已经选中而没有做raid的硬盘 继续做其他raid
+<a id="__codelineno-13-7" name="__codelineno-13-7" href="#__codelineno-13-7"></a><span class="m">11</span>.做的RAID5的话,还可以有一块热备盘<span class="o">(</span>当RAID5中任一盘坏了,其余2块可以做奇偶校验将数据恢复到格外的热备盘中<span class="o">)</span> 
+</code></pre></div>
+<hr />
+<h3 id="_8">修复服务器文件系统<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h3>
+<p>将一块硬盘分区,格式化制作文件系统,再挂载使用.. linux针对写操作会先将数据在内存的buffer缓冲区中攒一波, <strong>若在将buffer中的数据往硬盘中写的过程中</strong>,突然断电重启后会提示文件错误: “emergency mode”...</p>
+<h6 id="_9"><font color='orange' size=4>模拟文件系统损坏</font><a class="headerlink" href="#_9" title="Permanent link">&para;</a></h6>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="s2">&quot;&quot;&quot; 1、准备一个1G的文件系统与数据 &quot;&quot;&quot;</span>
+<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>fdisk /dev/sdc            <span class="c1"># -- 创建容量大小为1G的分区/dev/sdc1</span>
+<a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a>mkfs.xfs /dev/sdc1        <span class="c1"># -- 格式化/dev/sdc1分区</span>
+<a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a>mount /dev/sdc1 /mnt/     <span class="c1"># -- 挂载使用</span>
+<a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a><span class="nb">echo</span> <span class="m">111</span> &gt; /mnt/1.txt     <span class="c1"># -- 1.txt在sdc1分区中</span>
+<a id="__codelineno-14-6" name="__codelineno-14-6" href="#__codelineno-14-6"></a>
+<a id="__codelineno-14-7" name="__codelineno-14-7" href="#__codelineno-14-7"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># lsblk /dev/sdc</span>
+<a id="__codelineno-14-8" name="__codelineno-14-8" href="#__codelineno-14-8"></a>NAME   MAJ:MIN RM SIZE RO TYPE MOUNTPOINT
+<a id="__codelineno-14-9" name="__codelineno-14-9" href="#__codelineno-14-9"></a>sdc      <span class="m">8</span>:32   <span class="m">0</span>  20G  <span class="m">0</span> disk 
+<a id="__codelineno-14-10" name="__codelineno-14-10" href="#__codelineno-14-10"></a>└─sdc1   <span class="m">8</span>:33   <span class="m">0</span>   1G  <span class="m">0</span> part 
+<a id="__codelineno-14-11" name="__codelineno-14-11" href="#__codelineno-14-11"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># mount | grep sdc1</span>
+<a id="__codelineno-14-12" name="__codelineno-14-12" href="#__codelineno-14-12"></a>/dev/sdc1 on /mnt <span class="nb">type</span> xfs <span class="o">(</span>rw,relatime,attr2,inode64,noquota<span class="o">)</span>
+<a id="__codelineno-14-13" name="__codelineno-14-13" href="#__codelineno-14-13"></a>
+<a id="__codelineno-14-14" name="__codelineno-14-14" href="#__codelineno-14-14"></a><span class="s2">&quot;&quot;&quot; 2、模拟文件系统损坏 &quot;&quot;&quot;</span>
+<a id="__codelineno-14-15" name="__codelineno-14-15" href="#__codelineno-14-15"></a><span class="c1">## -- 数据往硬盘中的文件写入的过程中,突然断电.. 文件就不完整啦</span>
+<a id="__codelineno-14-16" name="__codelineno-14-16" href="#__codelineno-14-16"></a><span class="c1">## -- 这里通过dd命令用冒0机往sdc硬盘中输入500M的数据,会覆盖掉硬盘中分区表的信息,整个结构就乱了..</span>
+<a id="__codelineno-14-17" name="__codelineno-14-17" href="#__codelineno-14-17"></a><span class="c1">## -- 注意哦,不是sdc1 是sdc</span>
+<a id="__codelineno-14-18" name="__codelineno-14-18" href="#__codelineno-14-18"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># dd if=/dev/zero of=/dev/sdc bs=500M count=1</span>
+<a id="__codelineno-14-19" name="__codelineno-14-19" href="#__codelineno-14-19"></a>记录了1+0 的读入
+<a id="__codelineno-14-20" name="__codelineno-14-20" href="#__codelineno-14-20"></a>记录了1+0 的写出
+<a id="__codelineno-14-21" name="__codelineno-14-21" href="#__codelineno-14-21"></a>524288000字节<span class="o">(</span><span class="m">524</span> MB<span class="o">)</span>已复制，1.14939 秒，456 MB/秒
+<a id="__codelineno-14-22" name="__codelineno-14-22" href="#__codelineno-14-22"></a>
+<a id="__codelineno-14-23" name="__codelineno-14-23" href="#__codelineno-14-23"></a><span class="s2">&quot;&quot;&quot; 3、卸载后重新挂载,发现无法挂载 模拟断电后重启 &quot;&quot;&quot;</span>
+<a id="__codelineno-14-24" name="__codelineno-14-24" href="#__codelineno-14-24"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># umount /mnt </span>
+<a id="__codelineno-14-25" name="__codelineno-14-25" href="#__codelineno-14-25"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># mount /dev/sdc1 /mnt/</span>
+<a id="__codelineno-14-26" name="__codelineno-14-26" href="#__codelineno-14-26"></a>mount: /dev/sdc1 写保护,将以只读方式挂载
+<a id="__codelineno-14-27" name="__codelineno-14-27" href="#__codelineno-14-27"></a>mount: 文件系统类型错误、选项错误、/dev/sdc1 上有坏超级块、
+<a id="__codelineno-14-28" name="__codelineno-14-28" href="#__codelineno-14-28"></a>       缺少代码页或助手程序，或其他错误
+<a id="__codelineno-14-29" name="__codelineno-14-29" href="#__codelineno-14-29"></a>
+<a id="__codelineno-14-30" name="__codelineno-14-30" href="#__codelineno-14-30"></a>       有些情况下在 syslog 中可以找到一些有用信息- 请尝试
+<a id="__codelineno-14-31" name="__codelineno-14-31" href="#__codelineno-14-31"></a>       dmesg <span class="p">|</span> tail  这样的命令看看..
+<a id="__codelineno-14-32" name="__codelineno-14-32" href="#__codelineno-14-32"></a>
+<a id="__codelineno-14-33" name="__codelineno-14-33" href="#__codelineno-14-33"></a><span class="c1">## -- 吐槽一下: vm虚拟机上进行模拟,直接把/dev/sdc1分区给我干没了..无法开展修复的实验了..</span>
+<a id="__codelineno-14-34" name="__codelineno-14-34" href="#__codelineno-14-34"></a><span class="c1">## -- 修复部分就听理论吧!!</span>
+<a id="__codelineno-14-35" name="__codelineno-14-35" href="#__codelineno-14-35"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># lsblk /dev/sdc</span>
+<a id="__codelineno-14-36" name="__codelineno-14-36" href="#__codelineno-14-36"></a>NAME MAJ:MIN RM SIZE RO TYPE MOUNTPOINT
+<a id="__codelineno-14-37" name="__codelineno-14-37" href="#__codelineno-14-37"></a>sdc    <span class="m">8</span>:32   <span class="m">0</span>  20G  <span class="m">0</span> disk 
+</code></pre></div>
+<p><font color='blue'>文件系统损坏后,若不能成功重启,可以用单用户模式(进去无挂载)、光盘修复模式来管理操作本地硬盘中的东西...</font></p>
+<h6 id="_10"><font color='orange' size=4>文件系统修复</font><a class="headerlink" href="#_10" title="Permanent link">&para;</a></h6>
+<p>使用<code>xfs_repair</code> 命令强制修复后, 数据丢失, 所以此时修复的意义在于可用, 所以数据要有备份意识...</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>xfs_repair /dev/sdc1            <span class="c1"># -- 修复时先尝试这条命令</span>
+<a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a>xfs_repair -L /dev/sdb1     <span class="c1"># -- 若上一条命令失败,进行强制修复</span>
+<a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a>mount /dev/sdc1 /mnt/           <span class="c1"># -- 重新挂载</span>
+<a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a>
+<a id="__codelineno-15-5" name="__codelineno-15-5" href="#__codelineno-15-5"></a>若是ext文件系统,修复需要用fsck命令
+<a id="__codelineno-15-6" name="__codelineno-15-6" href="#__codelineno-15-6"></a><span class="c1"># -y 对所有问题都回答 &quot;yes&quot;</span>
+<a id="__codelineno-15-7" name="__codelineno-15-7" href="#__codelineno-15-7"></a><span class="c1"># -f 即使文件系统标记为 clean 也强制进行检查</span>
+<a id="__codelineno-15-8" name="__codelineno-15-8" href="#__codelineno-15-8"></a>fsck -f -y /dev/sda1 
+</code></pre></div>
+<hr />
+<h3 id="xfs">xfs文件系统备份与恢复<a class="headerlink" href="#xfs" title="Permanent link">&para;</a></h3>
+<h6 id="xfsdump"><font color='orange' size=4>备份 xfsdump</font><a class="headerlink" href="#xfsdump" title="Permanent link">&para;</a></h6>
+<p><strong>全量备份 + 增量备份</strong><br />
+<font color='brown'>第一次备份是全量备份,增量备份是和上一次的备份进行比较, 仅备份有差异的文件...</font></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># rpm -qf `which xfsdump`</span>
+<a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a>xfsdump-3.1.7-1.el7.x86_64
+<a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># rpm -qf `which xfsrestore`</span>
+<a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a>xfsdump-3.1.7-1.el7.x86_64
+</code></pre></div>
+<p><font color='purple'><strong>选项</strong></font></p>
+<table>
+<thead>
+<tr>
+<th>选项</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>-l</td>
+<td>是L的小写, 指定level, 有0~9共10个等级.默认值为0, 即完全备份 ; 数字1至9都是增量备份!!</td>
+</tr>
+<tr>
+<td>-L</td>
+<td>指定该次备份的标签名.</td>
+</tr>
+<tr>
+<td>-M</td>
+<td>简易描述信息, 关于什么什么的备份</td>
+</tr>
+<tr>
+<td>-f</td>
+<td>备份的文件存放的路径 + 空格 + 需要备份文件的路径(备份源路径)</td>
+</tr>
+</tbody>
+</table>
+<p><font color='red'><strong>切记: 备份源路径后面千万不要加/斜杠</strong></font></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="s2">&quot;&quot;&quot; -- 数据准备 -- &quot;&quot;&quot;</span>
+<a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># mount | grep -E &quot;sdb3|sda1&quot;</span>
+<a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a>/dev/sdb3 on /opt <span class="nb">type</span> xfs <span class="o">(</span>rw,relatime,attr2,inode64,noquota<span class="o">)</span>
+<a id="__codelineno-17-4" name="__codelineno-17-4" href="#__codelineno-17-4"></a>/dev/sda1 on /boot <span class="nb">type</span> xfs <span class="o">(</span>rw,relatime,attr2,inode64,noquota<span class="o">)</span>
+<a id="__codelineno-17-5" name="__codelineno-17-5" href="#__codelineno-17-5"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># cp -r /etc /opt/</span>
+<a id="__codelineno-17-6" name="__codelineno-17-6" href="#__codelineno-17-6"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># du -sh /opt</span>
+<a id="__codelineno-17-7" name="__codelineno-17-7" href="#__codelineno-17-7"></a>43M /opt
+<a id="__codelineno-17-8" name="__codelineno-17-8" href="#__codelineno-17-8"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># echo 111 &gt; /opt/1.txt</span>
+<a id="__codelineno-17-9" name="__codelineno-17-9" href="#__codelineno-17-9"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># ls /opt</span>
+<a id="__codelineno-17-10" name="__codelineno-17-10" href="#__codelineno-17-10"></a><span class="m">1</span>.txt  etc
+<a id="__codelineno-17-11" name="__codelineno-17-11" href="#__codelineno-17-11"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># cat /opt/1.txt </span>
+<a id="__codelineno-17-12" name="__codelineno-17-12" href="#__codelineno-17-12"></a><span class="m">111</span>
+<a id="__codelineno-17-13" name="__codelineno-17-13" href="#__codelineno-17-13"></a>
+<a id="__codelineno-17-14" name="__codelineno-17-14" href="#__codelineno-17-14"></a><span class="s2">&quot;&quot;&quot; -- 1.先做全量备份 -- &quot;&quot;&quot;</span>
+<a id="__codelineno-17-15" name="__codelineno-17-15" href="#__codelineno-17-15"></a><span class="c1">## -- 将sdb3分区的内容 备份到 sda1分区下 (备份源与备份文件要分别属于两个不同的硬盘)</span>
+<a id="__codelineno-17-16" name="__codelineno-17-16" href="#__codelineno-17-16"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># xfsdump -l 0 -L sdb3_bak -M sdb3_bak -f /boot/sdb3_bak_all /opt</span>
+<a id="__codelineno-17-17" name="__codelineno-17-17" href="#__codelineno-17-17"></a>... ... ...
+<a id="__codelineno-17-18" name="__codelineno-17-18" href="#__codelineno-17-18"></a>xfsdump: Dump Status: SUCCESS
+<a id="__codelineno-17-19" name="__codelineno-17-19" href="#__codelineno-17-19"></a>
+<a id="__codelineno-17-20" name="__codelineno-17-20" href="#__codelineno-17-20"></a>
+<a id="__codelineno-17-21" name="__codelineno-17-21" href="#__codelineno-17-21"></a><span class="s2">&quot;&quot;&quot; -- 2.做增量备份 做了两次增量备份-- &quot;&quot;&quot;</span>
+<a id="__codelineno-17-22" name="__codelineno-17-22" href="#__codelineno-17-22"></a><span class="c1">## -- 增删改都属于增量的部分</span>
+<a id="__codelineno-17-23" name="__codelineno-17-23" href="#__codelineno-17-23"></a><span class="nb">echo</span> <span class="m">222</span> &gt;&gt; /opt/1.txt
+<a id="__codelineno-17-24" name="__codelineno-17-24" href="#__codelineno-17-24"></a><span class="nb">echo</span> <span class="m">333</span> &gt; /opt/2.txt
+<a id="__codelineno-17-25" name="__codelineno-17-25" href="#__codelineno-17-25"></a><span class="c1"># 通常会在增量备份文件名上加上时间</span>
+<a id="__codelineno-17-26" name="__codelineno-17-26" href="#__codelineno-17-26"></a>xfsdump -l <span class="m">1</span> -L sdb3_bak -M sdb3_bak -f /boot/sdb3_bak_add1 /opt
+<a id="__codelineno-17-27" name="__codelineno-17-27" href="#__codelineno-17-27"></a>
+<a id="__codelineno-17-28" name="__codelineno-17-28" href="#__codelineno-17-28"></a><span class="nb">echo</span> <span class="m">333333</span> &gt; /opt/3.txt
+<a id="__codelineno-17-29" name="__codelineno-17-29" href="#__codelineno-17-29"></a>xfsdump -l <span class="m">1</span> -L sdb3_bak -M sdb3_bak -f /boot/sdb3_bak_add2 /opt
+<a id="__codelineno-17-30" name="__codelineno-17-30" href="#__codelineno-17-30"></a>
+<a id="__codelineno-17-31" name="__codelineno-17-31" href="#__codelineno-17-31"></a><span class="s2">&quot;&quot;&quot; -- 查看 -- &quot;&quot;&quot;</span>
+<a id="__codelineno-17-32" name="__codelineno-17-32" href="#__codelineno-17-32"></a><span class="c1"># -- 备份源的大小</span>
+<a id="__codelineno-17-33" name="__codelineno-17-33" href="#__codelineno-17-33"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># du -sh /opt/</span>
+<a id="__codelineno-17-34" name="__codelineno-17-34" href="#__codelineno-17-34"></a>43M /opt/
+<a id="__codelineno-17-35" name="__codelineno-17-35" href="#__codelineno-17-35"></a><span class="c1"># -- 备份文件(全量、增量)的大小</span>
+<a id="__codelineno-17-36" name="__codelineno-17-36" href="#__codelineno-17-36"></a><span class="c1"># 可以发现增量备份sdb3_bak_add1、sdb3_bak_add2的大小是小于全量备份的,全量备份的大小是小于备份源的</span>
+<a id="__codelineno-17-37" name="__codelineno-17-37" href="#__codelineno-17-37"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># ll -h /boot | grep sdb3_bak</span>
+<a id="__codelineno-17-38" name="__codelineno-17-38" href="#__codelineno-17-38"></a>-rw-r--r--  <span class="m">1</span> root root  23K 8月  <span class="m">26</span> <span class="m">17</span>:41 sdb3_bak_add1
+<a id="__codelineno-17-39" name="__codelineno-17-39" href="#__codelineno-17-39"></a>-rw-r--r--  <span class="m">1</span> root root  24K 8月  <span class="m">26</span> <span class="m">17</span>:41 sdb3_bak_add2
+<a id="__codelineno-17-40" name="__codelineno-17-40" href="#__codelineno-17-40"></a>-rw-r--r--  <span class="m">1</span> root root  37M 8月  <span class="m">26</span> <span class="m">17</span>:41 sdb3_bak_all
+</code></pre></div>
+<p><font color='purple'><strong>使用限制</strong></font></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a><span class="m">1</span>.必须用root权限
+<a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a><span class="m">2</span>.只能备份已挂载的文件系统
+<a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a><span class="m">3</span>.只能备份XFS文件系统
+<a id="__codelineno-18-4" name="__codelineno-18-4" href="#__codelineno-18-4"></a><span class="m">4</span>.只能用xfsrestore进行恢复
+<a id="__codelineno-18-5" name="__codelineno-18-5" href="#__codelineno-18-5"></a><span class="m">5</span>.通过文件系统的UUID来分辨备份档,因此不能备份相同UUID的文件系统
+</code></pre></div>
+<h6 id="xfsrestore"><font color='orange' size=4>恢复 xfsrestore</font><a class="headerlink" href="#xfsrestore" title="Permanent link">&para;</a></h6>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a><span class="s2">&quot;&quot;&quot; -- 删除/opt里所有的内容 --&quot;&quot;&quot;</span>
+<a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># ls /opt</span>
+<a id="__codelineno-19-3" name="__codelineno-19-3" href="#__codelineno-19-3"></a><span class="m">1</span>.txt  <span class="m">2</span>.txt  <span class="m">3</span>.txt  etc
+<a id="__codelineno-19-4" name="__codelineno-19-4" href="#__codelineno-19-4"></a>
+<a id="__codelineno-19-5" name="__codelineno-19-5" href="#__codelineno-19-5"></a><span class="m">0</span> directories, <span class="m">3</span> files
+<a id="__codelineno-19-6" name="__codelineno-19-6" href="#__codelineno-19-6"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># rm -rf /opt/*</span>
+<a id="__codelineno-19-7" name="__codelineno-19-7" href="#__codelineno-19-7"></a>
+<a id="__codelineno-19-8" name="__codelineno-19-8" href="#__codelineno-19-8"></a><span class="s2">&quot;&quot;&quot; -- 依次恢复全量、增量1、增量2 -- &quot;&quot;&quot;</span>
+<a id="__codelineno-19-9" name="__codelineno-19-9" href="#__codelineno-19-9"></a><span class="c1"># 全量</span>
+<a id="__codelineno-19-10" name="__codelineno-19-10" href="#__codelineno-19-10"></a>xfsrestore -f /boot/sdb3_bak_all /opt/
+<a id="__codelineno-19-11" name="__codelineno-19-11" href="#__codelineno-19-11"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># ls /opt</span>
+<a id="__codelineno-19-12" name="__codelineno-19-12" href="#__codelineno-19-12"></a><span class="m">1</span>.txt  etc
+<a id="__codelineno-19-13" name="__codelineno-19-13" href="#__codelineno-19-13"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># cat /opt/1.txt</span>
+<a id="__codelineno-19-14" name="__codelineno-19-14" href="#__codelineno-19-14"></a><span class="m">111</span>
+<a id="__codelineno-19-15" name="__codelineno-19-15" href="#__codelineno-19-15"></a>
+<a id="__codelineno-19-16" name="__codelineno-19-16" href="#__codelineno-19-16"></a><span class="c1"># 增量1</span>
+<a id="__codelineno-19-17" name="__codelineno-19-17" href="#__codelineno-19-17"></a>xfsrestore -f /boot/sdb3_bak_add1 /opt/
+<a id="__codelineno-19-18" name="__codelineno-19-18" href="#__codelineno-19-18"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># ls /opt</span>
+<a id="__codelineno-19-19" name="__codelineno-19-19" href="#__codelineno-19-19"></a><span class="m">1</span>.txt  <span class="m">2</span>.txt  etc
+<a id="__codelineno-19-20" name="__codelineno-19-20" href="#__codelineno-19-20"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># cat /opt/1.txt</span>
+<a id="__codelineno-19-21" name="__codelineno-19-21" href="#__codelineno-19-21"></a><span class="m">111</span>
+<a id="__codelineno-19-22" name="__codelineno-19-22" href="#__codelineno-19-22"></a><span class="m">222</span>
+<a id="__codelineno-19-23" name="__codelineno-19-23" href="#__codelineno-19-23"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># cat /opt/2.txt</span>
+<a id="__codelineno-19-24" name="__codelineno-19-24" href="#__codelineno-19-24"></a><span class="m">333</span>
+<a id="__codelineno-19-25" name="__codelineno-19-25" href="#__codelineno-19-25"></a>
+<a id="__codelineno-19-26" name="__codelineno-19-26" href="#__codelineno-19-26"></a><span class="c1"># 增量2</span>
+<a id="__codelineno-19-27" name="__codelineno-19-27" href="#__codelineno-19-27"></a>xfsrestore -f /boot/sdb3_bak_add2 /opt/
+<a id="__codelineno-19-28" name="__codelineno-19-28" href="#__codelineno-19-28"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># ls /opt</span>
+<a id="__codelineno-19-29" name="__codelineno-19-29" href="#__codelineno-19-29"></a><span class="m">1</span>.txt  <span class="m">2</span>.txt  <span class="m">3</span>.txt  etc
+<a id="__codelineno-19-30" name="__codelineno-19-30" href="#__codelineno-19-30"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># cat /opt/3.txt</span>
+<a id="__codelineno-19-31" name="__codelineno-19-31" href="#__codelineno-19-31"></a><span class="m">333333</span>
+</code></pre></div>
+<hr />
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+          <a href="#" class="md-top md-icon" data-md-component="top" hidden>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
+            回到页面顶部
+          </a>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+    <nav class="md-footer__inner md-grid" aria-label="页脚" >
+      
+        
+        <a href="../13_%E7%AE%A1%E7%90%86%E8%BF%9B%E7%A8%8B/" class="md-footer__link md-footer__link--prev" aria-label="上一页: 管理进程" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                上一页
+              </span>
+              管理进程
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="../15_%E5%AD%98%E5%82%A8%E7%AE%A1%E7%90%86%E4%B9%8BLVM/" class="md-footer__link md-footer__link--next" aria-label="下一页: 存储管理之LVM" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                下一页
+              </span>
+              存储管理之LVM
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright © 2023 from Dc_OnePiece
+    </div>
+  
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "navigation.top", "navigation.expand", "navigation.instant", "navigation.tracking", "search.suggest", "search.highlight", "search.share"], "search": "../../assets/javascripts/workers/search.5bf1dace.min.js", "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.config.lang": "ja", "search.config.pipeline": "trimmer, stemmer", "search.config.separator": "[\\s\\-\uff0c\u3002]+", "search.placeholder": "\u641c\u7d22", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version.title": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.37e9125f.min.js"></script>
+      
+        <script src="../../resources/js/extra.js"></script>
+      
+    
+  </body>
+</html>

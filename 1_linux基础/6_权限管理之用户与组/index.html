@@ -1,0 +1,2655 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="These are my study notes.">
+      
+      
+        <meta name="author" content="DC">
+      
+      
+      <link rel="icon" href="../../resources/images/favicon.ico">
+      <meta name="generator" content="mkdocs-1.3.1, mkdocs-material-8.5.3">
+    
+    
+      
+        <title>权限管理之用户与组 - IT必备知识</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.7a952b86.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.cbb835fc.min.css">
+        
+      
+      
+
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../resources/css/extra.css">
+    
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lxgw-wenkai-webfont@1.1.0/style.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="blue-grey" data-md-color-accent="amber">
+  
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#_1" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../.." title="IT必备知识" class="md-header__button md-logo" aria-label="IT必备知识" data-md-component="logo">
+      
+  <img src="../../resources/images/favicon.ico" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            IT必备知识
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              权限管理之用户与组
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      <form class="md-header__option" data-md-component="palette">
+        
+          
+          
+          <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="blue-grey" data-md-color-accent="amber"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+          
+            <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"/></svg>
+            </label>
+          
+        
+          
+          
+          <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="blue-grey" data-md-color-accent="amber"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_2">
+          
+            <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12c0-2.42-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"/></svg>
+            </label>
+          
+        
+      </form>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="分享" aria-label="分享" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7 0-.24-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91 1.61 0 2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08Z"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="标签" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../0_%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/0_%E5%89%8D%E5%A5%8F%28%E4%BB%8B%E7%BB%8D%29/" class="md-tabs__link">
+        计算机基础(8)
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+    
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../0_%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C/" class="md-tabs__link md-tabs__link--active">
+        linux基础(20)
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../5_db/0_%E5%9F%BA%E7%A1%80/0_install_db/" class="md-tabs__link">
+        mysql(19)
+      </a>
+    </li>
+  
+
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../9_git/0_git%E7%94%9F%E6%B4%BB%E7%89%88/" class="md-tabs__link">
+        git(2)
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../13_%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/0_%E9%80%92%E5%BD%92_%E6%9F%A5%E6%89%BE/" class="md-tabs__link">
+        查找排序算法(5)
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="IT必备知识" class="md-nav__button md-logo" aria-label="IT必备知识" data-md-component="logo">
+      
+  <img src="../../resources/images/favicon.ico" alt="logo">
+
+    </a>
+    IT必备知识
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" data-md-toggle="__nav_1" type="checkbox" id="__nav_1" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_1">
+          计算机基础(8)
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="计算机基础(8)" data-md-level="1">
+        <label class="md-nav__title" for="__nav_1">
+          <span class="md-nav__icon md-icon"></span>
+          计算机基础(8)
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../0_%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/0_%E5%89%8D%E5%A5%8F%28%E4%BB%8B%E7%BB%8D%29/" class="md-nav__link">
+        前奏(介绍)
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../0_%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/1_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A1%AC%E4%BB%B6%E7%BB%84%E6%88%90/" class="md-nav__link">
+        计算机硬件组成
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../0_%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/2_%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" class="md-nav__link">
+        操作系统
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../0_%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/3_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E6%A6%82%E8%A7%88/" class="md-nav__link">
+        计算机网络概览
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../0_%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/4_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E4%B9%8B%E7%BD%91%E7%BB%9C%E6%8E%A5%E5%8F%A3%E5%B1%82/" class="md-nav__link">
+        网络接口层
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../0_%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/5_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E4%B9%8B%E7%BD%91%E7%BB%9C%E5%B1%82/" class="md-nav__link">
+        网络层
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../0_%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/6_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E4%B9%8B%E4%BC%A0%E8%BE%93%E5%B1%82/" class="md-nav__link">
+        传输层
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../0_%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/7_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%A1%A5%E5%85%85/" class="md-nav__link">
+        补充
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2">
+          linux基础(20)
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="linux基础(20)" data-md-level="1">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          linux基础(20)
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0_%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C/" class="md-nav__link">
+        准备工作
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../1_%E5%88%9D%E8%AF%86shell%E4%B8%8E%E5%9F%BA%E7%A1%80%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" class="md-nav__link">
+        初识shell与基础常用命令
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../2_%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86%E4%B9%8B%E5%9F%BA%E7%A1%80%E5%91%BD%E4%BB%A4/" class="md-nav__link">
+        文件管理之基础命令
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../3_%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86%E4%B9%8B%E5%9B%9B%E5%A4%A7%E6%A8%A1%E5%BC%8F/" class="md-nav__link">
+        文件管理之四大模式
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../4_%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86%E4%B9%8B%E5%91%BD%E4%BB%A4%E8%A1%A5%E5%85%85/" class="md-nav__link">
+        文件管理之命令补充
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../5_%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86%E4%B9%8B%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/" class="md-nav__link">
+        文件管理之文件系统
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          权限管理之用户与组
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        权限管理之用户与组
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    介绍
+  </a>
+  
+    <nav class="md-nav" aria-label="介绍">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    推导过程
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    用户
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    用户组
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    用户角色划分
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    用户与组相关文件
+  </a>
+  
+    <nav class="md-nav" aria-label="用户与组相关文件">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#etcpasswd" class="md-nav__link">
+    /etc/passwd
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#etcshadow" class="md-nav__link">
+    /etc/shadow
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#etcgroup" class="md-nav__link">
+    /etc/group
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#etcgshadow" class="md-nav__link">
+    /etc/gshadow
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    其它
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    手动创建用户
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    用户管理命令
+  </a>
+  
+    <nav class="md-nav" aria-label="用户管理命令">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#useradd" class="md-nav__link">
+    useradd
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#userdel" class="md-nav__link">
+    userdel
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#usermod" class="md-nav__link">
+    usermod
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    组管理命令
+  </a>
+  
+    <nav class="md-nav" aria-label="组管理命令">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#groupadd" class="md-nav__link">
+    groupadd
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#groupmod" class="md-nav__link">
+    groupmod
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#groupdel" class="md-nav__link">
+    groupdel
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gpasswd" class="md-nav__link">
+    gpasswd
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    补充
+  </a>
+  
+    <nav class="md-nav" aria-label="补充">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    哈希算法
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_13" class="md-nav__link">
+    密码加盐
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../7_%E6%9D%83%E9%99%90%E7%AE%A1%E7%90%86%E4%B9%8B%E6%96%87%E4%BB%B6%E6%9D%83%E9%99%90/" class="md-nav__link">
+        权限管理之文件权限
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../8_%E6%9D%83%E9%99%90%E7%AE%A1%E7%90%86%E4%B9%8BACL/" class="md-nav__link">
+        权限管理之ACL
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../9_%E6%9D%83%E9%99%90%E7%AE%A1%E7%90%86%E4%B9%8Bsu%E4%B8%8Esudo/" class="md-nav__link">
+        权限管理之su与sudo
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../10_%E8%BD%AF%E4%BB%B6%E5%8C%85%E7%AE%A1%E7%90%86%E4%B9%8Brpm/" class="md-nav__link">
+        软件包管理之rpm
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../11_%E8%BD%AF%E4%BB%B6%E5%8C%85%E7%AE%A1%E7%90%86%E4%B9%8Byum/" class="md-nav__link">
+        软件包管理之yum
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../12_%E6%9F%A5%E7%9C%8B%E8%BF%9B%E7%A8%8B/" class="md-nav__link">
+        查看进程
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../13_%E7%AE%A1%E7%90%86%E8%BF%9B%E7%A8%8B/" class="md-nav__link">
+        管理进程
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../14_%E5%AD%98%E5%82%A8%E7%AE%A1%E7%90%86%E4%B9%8B%E4%BC%A0%E7%BB%9F%E7%A3%81%E7%9B%98%E7%AE%A1%E7%90%86/" class="md-nav__link">
+        存储管理之传统磁盘管理
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../15_%E5%AD%98%E5%82%A8%E7%AE%A1%E7%90%86%E4%B9%8BLVM/" class="md-nav__link">
+        存储管理之LVM
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../16_%E7%BD%91%E7%BB%9C%E7%AE%A1%E7%90%86/" class="md-nav__link">
+        网络管理
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../17_shell%E5%9F%BA%E7%A1%80/" class="md-nav__link">
+        shell基础
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../18_crond%E8%AE%A1%E5%88%92%E4%BB%BB%E5%8A%A1/" class="md-nav__link">
+        crond计划任务
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../19_%E7%B3%BB%E7%BB%9F%E4%BC%98%E5%8C%96/" class="md-nav__link">
+        系统优化
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3">
+          mysql(19)
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="mysql(19)" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          mysql(19)
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" data-md-toggle="__nav_3_1" type="checkbox" id="__nav_3_1" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3_1">
+          基础
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="基础" data-md-level="2">
+        <label class="md-nav__title" for="__nav_3_1">
+          <span class="md-nav__icon md-icon"></span>
+          基础
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../5_db/0_%E5%9F%BA%E7%A1%80/0_install_db/" class="md-nav__link">
+        数据库安装
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../5_db/0_%E5%9F%BA%E7%A1%80/1_db_command/" class="md-nav__link">
+        sql命令总结
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../5_db/0_%E5%9F%BA%E7%A1%80/2_imp_knowledge/" class="md-nav__link">
+        imp_knowledge
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../5_db/0_%E5%9F%BA%E7%A1%80/3_table_field/" class="md-nav__link">
+        字段的约束和类型
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../5_db/0_%E5%9F%BA%E7%A1%80/4_table_relation/" class="md-nav__link">
+        表关系
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../5_db/0_%E5%9F%BA%E7%A1%80/5_permissions/" class="md-nav__link">
+        权限管理
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../5_db/0_%E5%9F%BA%E7%A1%80/6_single_query/" class="md-nav__link">
+        单表查询
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../5_db/0_%E5%9F%BA%E7%A1%80/7_multi_query/" class="md-nav__link">
+        多表查询
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../5_db/0_%E5%9F%BA%E7%A1%80/8_query_practice/" class="md-nav__link">
+        query_practice
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../5_db/0_%E5%9F%BA%E7%A1%80/9_pymysql/" class="md-nav__link">
+        pymysql
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../5_db/0_%E5%9F%BA%E7%A1%80/10_just_know/" class="md-nav__link">
+        just_know
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../5_db/0_%E5%9F%BA%E7%A1%80/other/01_to_11/" class="md-nav__link">
+        other1
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../5_db/0_%E5%9F%BA%E7%A1%80/other/05/" class="md-nav__link">
+        other2
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" data-md-toggle="__nav_3_2" type="checkbox" id="__nav_3_2" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3_2">
+          进阶
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="进阶" data-md-level="2">
+        <label class="md-nav__title" for="__nav_3_2">
+          <span class="md-nav__icon md-icon"></span>
+          进阶
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../5_db/1_%E8%BF%9B%E9%98%B6/0_index/" class="md-nav__link">
+        索引
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../5_db/1_%E8%BF%9B%E9%98%B6/1_explain/" class="md-nav__link">
+        执行计划
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../5_db/1_%E8%BF%9B%E9%98%B6/2_transaction/" class="md-nav__link">
+        事务
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../5_db/1_%E8%BF%9B%E9%98%B6/3_db_readPhenomenon/" class="md-nav__link">
+        读现象
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../5_db/1_%E8%BF%9B%E9%98%B6/4_lock/" class="md-nav__link">
+        锁
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../5_db/1_%E8%BF%9B%E9%98%B6/other/" class="md-nav__link">
+        数据库连接池
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4">
+          git(2)
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="git(2)" data-md-level="1">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          git(2)
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../9_git/0_git%E7%94%9F%E6%B4%BB%E7%89%88/" class="md-nav__link">
+        git生活版
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../9_git/1_git%E7%A0%94%E7%A9%B6%E7%89%88/" class="md-nav__link">
+        git研究版
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" data-md-toggle="__nav_5" type="checkbox" id="__nav_5" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_5">
+          查找排序算法(5)
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="查找排序算法(5)" data-md-level="1">
+        <label class="md-nav__title" for="__nav_5">
+          <span class="md-nav__icon md-icon"></span>
+          查找排序算法(5)
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../13_%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/0_%E9%80%92%E5%BD%92_%E6%9F%A5%E6%89%BE/" class="md-nav__link">
+        查找
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../13_%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/1_LowB%E4%B8%89%E4%BA%BA%E7%BB%84/" class="md-nav__link">
+        LowB三人组
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../13_%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/2_NB%E4%B8%89%E4%BA%BA%E7%BB%84/" class="md-nav__link">
+        NB三人组
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../13_%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/3_%E5%85%B6%E5%AE%83%E6%8E%92%E5%BA%8F/" class="md-nav__link">
+        其它排序
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../13_%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/4_%E6%9F%A5%E6%89%BE%E4%B9%A0%E9%A2%98/" class="md-nav__link">
+        查找习题
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    介绍
+  </a>
+  
+    <nav class="md-nav" aria-label="介绍">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    推导过程
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    用户
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    用户组
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    用户角色划分
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    用户与组相关文件
+  </a>
+  
+    <nav class="md-nav" aria-label="用户与组相关文件">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#etcpasswd" class="md-nav__link">
+    /etc/passwd
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#etcshadow" class="md-nav__link">
+    /etc/shadow
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#etcgroup" class="md-nav__link">
+    /etc/group
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#etcgshadow" class="md-nav__link">
+    /etc/gshadow
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    其它
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    手动创建用户
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    用户管理命令
+  </a>
+  
+    <nav class="md-nav" aria-label="用户管理命令">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#useradd" class="md-nav__link">
+    useradd
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#userdel" class="md-nav__link">
+    userdel
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#usermod" class="md-nav__link">
+    usermod
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    组管理命令
+  </a>
+  
+    <nav class="md-nav" aria-label="组管理命令">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#groupadd" class="md-nav__link">
+    groupadd
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#groupmod" class="md-nav__link">
+    groupmod
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#groupdel" class="md-nav__link">
+    groupdel
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gpasswd" class="md-nav__link">
+    gpasswd
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    补充
+  </a>
+  
+    <nav class="md-nav" aria-label="补充">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    哈希算法
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_13" class="md-nav__link">
+    密码加盐
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  <h1>权限管理之用户与组</h1>
+
+<h2 id="_1">介绍<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<h3 id="_2"><font color='orange'>推导过程</font><a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p>OS - 进程 - 进程使用文件 - 进程权限 - 用户 </p>
+</blockquote>
+<p>OS是协调管理硬件资源与上层应用程序的软件. <font color='gray'>通俗点,OS拿着硬件资源给上层的应用程序用 </font><br />
+每运行一个应用程序就会产生一个进程. So,再准确点,操作系统是在协调管理一堆进程来使用硬件.</p>
+<p>OS手握一堆进程, 应用程序的运行(进程)过程中涉及到对数据的操作.. <br />
+而数据是硬盘中存放着的一个个文件. 不同的进程可能会对同一个文件有不同的读写权限.<br />
+那如何区分不同进程的权限？<font color='gray'>别问,问就是对文件的权限! Linux中一切皆文件 <sup>_</sup> !</font></p>
+<p>试想一下,如果没有用户这个概念.每个文件的元数据里都要记录每个进程对其拥有的权限..<br />
+<font color='gray'>若运行了100个进程,每个文件都要记录100个进程权限.. </font> <br />
+It's very fool ! 这会导致文件的元数据非常大! <br />
+<font color='gray'>这一设想还未考虑不同人使用进程时,进程对文件的权限还会产生变化这一变数..</font></p>
+<p>换个思路,将 <em>Linux所有的文件</em> 都设置好其关联的用户、用户组、其他人以及对应的权限.<br />
+再以用户的身份去起进程, <strong>该用户运行的进程与用户拥有的权限一致..</strong> 就得到了完美解决.</p>
+<h3 id="_3"><font color='orange'>用户</font><a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
+<p><font color='blue'><strong>Q:</strong> 用户是什么？</font> <br />
+<strong>A:</strong> 用户是操作系统提供的一种安全机制,用户与组都是权限的化身!</p>
+<p><font color='blue'><strong>Q:</strong> 为何要有用户？ </font> <br />
+<strong>A:</strong> 划分权限,增强安全性. <br />
+&nbsp;&nbsp;&nbsp;&nbsp; 进程关联用户,用户拥有权限,权限作用于文件上.** <font color='gray'>TnT 搁这绕口令呐..</font></p>
+<h3 id="_4"><font color='orange'>用户组</font><a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p>组也就是类,一类人拥有相同的权限..</p>
+</blockquote>
+<p>主组: 用户本身所在的部门<br />
+附加组: 为用户添加的部门</p>
+<p>▲ 用户与组的关系<br />
+&nbsp;&nbsp;&nbsp;&nbsp; <strong>一对一</strong>: 一个用户可以属于一个组,用户默认在自己的主组下<br />
+&nbsp;&nbsp;&nbsp;&nbsp; <strong>一对多</strong>: 一个用户可以属于多个组,用户只有一个主组,但可以为用户添加多个附加组<br />
+&nbsp;&nbsp;&nbsp;&nbsp; <strong>多对多</strong>: 多个用户可以属于多个组. <font color='gray'>即一个用户属于多个组,一个组里可以有多个用户</font></p>
+<p>▲ <font color='brown'><strong>对于linux系统来说,它可不认识啥用户名,组名,用户和组的角色是通过 <em>UID</em> 和 <em>GID</em> 识别的!</strong></font></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="s2">&quot;&quot;&quot;</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="s2">`id`: 查看当前登录用户的用户信息</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="s2">`id dc`: 查看指定用户dc的用户信息</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="s2">`whoami`: 查看当前登录的用户</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="s2">`who`: 用于显示系统中有哪些使用者正在上面</span>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="s2">&quot;&quot;&quot;</span>
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># id</span>
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="nv">uid</span><span class="o">=</span><span class="m">0</span><span class="o">(</span>root<span class="o">)</span> <span class="nv">gid</span><span class="o">=</span><span class="m">0</span><span class="o">(</span>root<span class="o">)</span> <span class="nv">组</span><span class="o">=</span><span class="m">0</span><span class="o">(</span>root<span class="o">)</span>
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># id dc</span>
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="nv">uid</span><span class="o">=</span><span class="m">1001</span><span class="o">(</span>dc<span class="o">)</span> <span class="nv">gid</span><span class="o">=</span><span class="m">1001</span><span class="o">(</span>dc<span class="o">)</span> <span class="nv">组</span><span class="o">=</span><span class="m">1001</span><span class="o">(</span>dc<span class="o">)</span>
+<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># whoami</span>
+<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>root
+<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># who</span>
+<a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>root     :0           <span class="m">2022</span>-07-04 <span class="m">22</span>:55 <span class="o">(</span>:0<span class="o">)</span>
+<a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>root     pts/0        <span class="m">2022</span>-07-20 <span class="m">22</span>:08 <span class="o">(</span><span class="m">172</span>.16.150.1<span class="o">)</span>
+<a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a>
+<a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a>
+<a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a>UID<span class="o">(</span>User Identify<span class="o">)</span>:用户ID.
+<a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a>    每创建一个用户,操作系统就会为其分配一个UID.
+<a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a>    uid相当于一个人的身份证,用户名就相当于这个人的名字.
+<a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a>GID<span class="o">(</span>Group Identify<span class="o">)</span>:组ID.
+<a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a>    如果把一个操作系统当成一家公司,uid相当于某人的员工号,gid相当于他的部门编号.
+<a id="__codelineno-0-23" name="__codelineno-0-23" href="#__codelineno-0-23"></a><span class="nv">组</span><span class="o">=</span><span class="m">0</span><span class="o">(</span>root<span class="o">)</span>:指的是附加组.没有的话,默认是主组.
+<a id="__codelineno-0-24" name="__codelineno-0-24" href="#__codelineno-0-24"></a>
+<a id="__codelineno-0-25" name="__codelineno-0-25" href="#__codelineno-0-25"></a><span class="o">[</span>了解<span class="o">]</span>
+<a id="__codelineno-0-26" name="__codelineno-0-26" href="#__codelineno-0-26"></a>centos7系统之前约定
+<a id="__codelineno-0-27" name="__codelineno-0-27" href="#__codelineno-0-27"></a>uid:0         由超级用户或具备超级用户权限的用户创建的用户,不受权限的压制<span class="o">(</span>￣▽￣<span class="o">)</span>   
+<a id="__codelineno-0-28" name="__codelineno-0-28" href="#__codelineno-0-28"></a>uid:1~499     系统虚拟用户,不能登录,以某种身份起进程,让进程拥有权限.
+<a id="__codelineno-0-29" name="__codelineno-0-29" href="#__codelineno-0-29"></a>uid:500-65535 普通用户
+<a id="__codelineno-0-30" name="__codelineno-0-30" href="#__codelineno-0-30"></a>
+<a id="__codelineno-0-31" name="__codelineno-0-31" href="#__codelineno-0-31"></a>centos7系统约定：
+<a id="__codelineno-0-32" name="__codelineno-0-32" href="#__codelineno-0-32"></a>uid:0         超级管理员,最高权限,有着极强的破坏能力,不受权限的压制<span class="o">(</span>￣▽￣<span class="o">)</span> 
+<a id="__codelineno-0-33" name="__codelineno-0-33" href="#__codelineno-0-33"></a>uid:1~200     系统用户,用来运行系统自带的进程,默认已创建
+<a id="__codelineno-0-34" name="__codelineno-0-34" href="#__codelineno-0-34"></a>uid:201~999   系统用户,用来运行安装的程序,所以此类用户无需登录系统
+<a id="__codelineno-0-35" name="__codelineno-0-35" href="#__codelineno-0-35"></a>uid:1000+     普通用户,正常可以登录系统的用户,权限比较小,能执行的任务有限
+<a id="__codelineno-0-36" name="__codelineno-0-36" href="#__codelineno-0-36"></a>
+<a id="__codelineno-0-37" name="__codelineno-0-37" href="#__codelineno-0-37"></a>Ps: root超级用户是不受权限压制的!
+<a id="__codelineno-0-38" name="__codelineno-0-38" href="#__codelineno-0-38"></a>    即便某个文件对它来说没有读权限,它也可以读.
+<a id="__codelineno-0-39" name="__codelineno-0-39" href="#__codelineno-0-39"></a>    哪怕有些文件能阻止它对其的修改,但root账户是可以修改权限的!!!
+</code></pre></div>
+<h3 id="_5"><font color='orange'>用户角色划分</font><a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
+<p><strong>细分属主 <em>u</em> 、属组 <em>g</em>、其它人 <em>o</em> 对文件的权限:</strong> 将用户划分为三类,使不同的角色对此文件都拥有相对应的权限.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># ll /etc/passwd</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>-rw-r--r-- <span class="m">1</span> root root <span class="m">2351</span> 7月  <span class="m">18</span> <span class="m">18</span>:12 /etc/passwd
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="s2">&quot;&quot;&quot;</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="s2">-rwxrw-r-- 1 egon IT 2351 7月  18 18:12 /etc/passwd</span>
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="s2">linux系统把文件权限分为了三类:属主、属组、其它人</span>
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="s2">一个用户对文件的权限扫描的优先级:</span>
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="s2">  ○ 先看该用户是否是文件的属主</span>
+<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="s2">  ○ 在第一步失败的情况下,再看该用户是否是文件的属组</span>
+<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="s2">  ○ 在第二步失败的情况下,该用户属于其他人权限</span>
+<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a><span class="s2">&quot;&quot;&quot;</span>
+<a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a><span class="m">1</span>&gt; 若当前登录用户时egon,egon所属的部门是IT部门.
+<a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a>/etc/passwd的拥有者是egon,那么egon对其拥有的权限是rwx<span class="p">;</span>哪怕egon属于IT部门,文件拥有者的优先级会高一些.
+<a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a><span class="m">2</span>&gt; 若当前登录用户不是文件的拥有者,是lili,lili是属于IT部门的,那么lili对/etc/passwd的权限为rw-
+<a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a><span class="m">3</span>&gt; 若当前登录用户既不是文件的主人,也不是IT部门里的,那么对其拥有的权限为r--
+</code></pre></div>
+<hr />
+<h2 id="_6">用户与组相关文件<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>文件</th>
+<th>相关</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>/etc/passwd</td>
+<td>用户</td>
+</tr>
+<tr>
+<td>/etc/shadow</td>
+<td>密码</td>
+</tr>
+<tr>
+<td>/etc/group</td>
+<td>组</td>
+</tr>
+<tr>
+<td>/etc/gshadow</td>
+<td>组密码</td>
+</tr>
+<tr>
+<td>/etc/skel/</td>
+<td>家目录的模版</td>
+</tr>
+<tr>
+<td>/home/用户名</td>
+<td>用户的家目录</td>
+</tr>
+<tr>
+<td>/var/spool/mail</td>
+<td>用户的邮箱文件</td>
+</tr>
+</tbody>
+</table>
+<h3 id="etcpasswd"><font color='orange'>/etc/passwd</font><a class="headerlink" href="#etcpasswd" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>useradd tom
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># head -1 /etc/passwd</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>root:x:0:0:root:/root:/bin/bash
+</code></pre></div>
+<p><img alt="" src="../assets/passwd.png" /> </p>
+<p><strong>注意:</strong> 在实验环境下,将第二列密码占位符设置为空..就不需要密码登录了... 在真实环境下,这是大忌!!!!!!</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>root:x:0:0:root:/root:/bin/bash  以:为分隔符,分为了7列
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="m">1</span>&gt; 第一列: 用户名/登录名
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="m">2</span>&gt; 第二列: 密码占位符, 这里是一个x, 其实密码已被映射到/etc/shadow文件中<span class="p">;</span>
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>      为什么要这样做？Because杜绝将鸡蛋放在同一个篮子里.
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>      那将密码加个密不就行了嘛？密码在另一个篮子/etc/shadow里确实加密啦.并且除了root,谁也没有权限.
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>      放在两个篮子里,黑客要破解两个文件的权限,并且要对密码进行解密..
+<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>      <span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># ll /etc/passwd</span>
+<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a>      -rw-r--r-- <span class="m">1</span> root root <span class="m">2351</span> 7月  <span class="m">18</span> <span class="m">18</span>:12 /etc/passwd
+<a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a>      <span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># ll /etc/shadow</span>
+<a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a>      ---------- <span class="m">1</span> root root <span class="m">1388</span> 7月   <span class="m">4</span> <span class="m">16</span>:53 /etc/shadow
+<a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a>      Ps:浏览器客户端默认会将表单里的密码进行加密后再post给服务端.防止中间人攻击.
+<a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a>         <span class="o">(</span>即若C-&gt;S传输数据过程中包被截获拿走后,中间人不能直接用<span class="o">)</span>
+<a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a>         实则,高级黑客可以自己写浏览器客户端,不然其加密,直接密码明文传输..
+<a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a><span class="m">3</span>&gt; 第三列: UID
+<a id="__codelineno-3-16" name="__codelineno-3-16" href="#__codelineno-3-16"></a><span class="m">4</span>&gt; 第四列: GID
+<a id="__codelineno-3-17" name="__codelineno-3-17" href="#__codelineno-3-17"></a><span class="m">5</span>&gt; 第五列: 用户的描述信息,可选
+<a id="__codelineno-3-18" name="__codelineno-3-18" href="#__codelineno-3-18"></a><span class="m">6</span>&gt; 第六列: 用户的家目录所在位置<span class="o">(</span>即个人/私人文件夹<span class="o">)</span>
+<a id="__codelineno-3-19" name="__codelineno-3-19" href="#__codelineno-3-19"></a><span class="m">7</span>&gt; 第七列: 用户所用SHELL的类型,代表用户登录之后运行的第一个程序
+<a id="__codelineno-3-20" name="__codelineno-3-20" href="#__codelineno-3-20"></a>          /bin/bash    登录后出现交互式的界面,可以直接输入命令
+<a id="__codelineno-3-21" name="__codelineno-3-21" href="#__codelineno-3-21"></a>          /sbin/nologin 不允许登录.属于系统用户.
+<a id="__codelineno-3-22" name="__codelineno-3-22" href="#__codelineno-3-22"></a>          Ps: 除了/bin/bash标识的用户外,其它都是系统用户..
+</code></pre></div>
+<h3 id="etcshadow"><font color='orange'>/etc/shadow</font><a class="headerlink" href="#etcshadow" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>nobody:*:18353:0:99999:7:::
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>onepiece:!!:19173:0:99999:7:::
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>root:<span class="s">$</span><span class="m">6</span><span class="s">$</span>l2UODot/le0BbEsQ9x7T0/ZUjclL9Zo7bjZ1::0:99999:7:::
+</code></pre></div>
+<p><img alt="" src="../assets/shadow.png" /> </p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>以:为分隔符,分为了9列
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="m">1</span>&gt; 第一列: 用户名/登录名,这个字段是非空的
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>          文件/etc/shadow与/etc/passwd的用户名是相同的,这样就将两文件的用户记录联系到了一起
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="m">2</span>&gt; 第二列: 密码,这个字段是非空的
+<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>          *         代表是系统用户/不能登录的用户
+<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a>          !!        代表还未设置密码,账号没有密码压根是登录不上的
+<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a>          一堆字符串  加密密码
+<a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a><span class="m">3</span>&gt; 第三列: 最近修改密码的时间
+<a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a>          这个时间是从UNIX元年1970年01月01日算起到最近一次修改口令/密码的时间间隔<span class="o">(</span>天数<span class="o">)</span>
+<a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a>          您可以通过passwd命令来修改用户的密码,然后查看/etc/shadow中此字段的变化
+<a id="__codelineno-5-12" name="__codelineno-5-12" href="#__codelineno-5-12"></a><span class="m">4</span>&gt; 第四列: 用户密码最少多少天才能修改,如果设置为0,则禁用此功能.
+<a id="__codelineno-5-13" name="__codelineno-5-13" href="#__codelineno-5-13"></a>          默认值是通过设置/etc/login.defs文件中的PASS_MIN_DAYS字段进行定义.
+<a id="__codelineno-5-14" name="__codelineno-5-14" href="#__codelineno-5-14"></a><span class="m">5</span>&gt; 第五列: 最多多少天就必须改密码了.
+<a id="__codelineno-5-15" name="__codelineno-5-15" href="#__codelineno-5-15"></a>          默认值是通过设置/etc/login.defs文件中的PASS_MAX_DAYS字段进行定义.
+<a id="__codelineno-5-16" name="__codelineno-5-16" href="#__codelineno-5-16"></a><span class="m">6</span>&gt; 第六列: 提前多少天告知用户密码将过期.
+<a id="__codelineno-5-17" name="__codelineno-5-17" href="#__codelineno-5-17"></a>          默认值是通过设置/etc/login.defs文件中的PASS_WARN_AGE字段进行定义.
+<a id="__codelineno-5-18" name="__codelineno-5-18" href="#__codelineno-5-18"></a><span class="m">7</span>&gt; 第七列: 在账号失效日期到了后,还可以使用几天.
+<a id="__codelineno-5-19" name="__codelineno-5-19" href="#__codelineno-5-19"></a><span class="m">8</span>&gt; 第八列: 账号失效日期.若此字段的值为空,表明帐号永久可用<span class="p">;</span>
+<a id="__codelineno-5-20" name="__codelineno-5-20" href="#__codelineno-5-20"></a><span class="m">9</span>&gt; 第九列: 保留字段,目前为空,以备将来Linux扩展之用
+<a id="__codelineno-5-21" name="__codelineno-5-21" href="#__codelineno-5-21"></a>
+<a id="__codelineno-5-22" name="__codelineno-5-22" href="#__codelineno-5-22"></a>Ps: man shadow来查看帮助可会得到更为详尽的资料.
+</code></pre></div>
+<h3 id="etcgroup"><font color='orange'>/etc/group</font><a class="headerlink" href="#etcgroup" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p><strong>每创建一个用户都会创建一个该用户的主组,主组的名字与用户名相同! </strong><br />
+(即 <code>useradd tom</code>创建tom用户的同时创建了一个名为tom的组)</p>
+</blockquote>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># head -1 /etc/group</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>root:x:0:
+</code></pre></div>
+<p><img alt="" src="../assets/group.png" /></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>以:为分隔符,分为了4列
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="m">1</span>&gt; 第一列: 用户组的名称
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="m">2</span>&gt; 第二列: 用户组的密码占位符 /etc/group的影子文件是/etc/gshadow
+<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="m">3</span>&gt; 第三列: 用户组的ID/GID.
+<a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a>          注意:员工编号001和其所在部门的001编号是两个意思.
+<a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a><span class="m">4</span>&gt; 第四列: 组里有哪些成员.用逗号分隔.
+<a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a>          若为空,代表与该用户组名称同名的用户的附加组与主组一样.
+<a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a>          若不为空,会将该组添加到组成员的附加组里.
+<a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a>
+<a id="__codelineno-7-11" name="__codelineno-7-11" href="#__codelineno-7-11"></a>△ 为tom用户组添加组成员
+<a id="__codelineno-7-12" name="__codelineno-7-12" href="#__codelineno-7-12"></a>修改/etc/group文件即可
+<a id="__codelineno-7-13" name="__codelineno-7-13" href="#__codelineno-7-13"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># tail -1 /etc/group</span>
+<a id="__codelineno-7-14" name="__codelineno-7-14" href="#__codelineno-7-14"></a>tom:x:1003:dc,egon
+<a id="__codelineno-7-15" name="__codelineno-7-15" href="#__codelineno-7-15"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># id dc</span>
+<a id="__codelineno-7-16" name="__codelineno-7-16" href="#__codelineno-7-16"></a><span class="nv">uid</span><span class="o">=</span><span class="m">1001</span><span class="o">(</span>dc<span class="o">)</span> <span class="nv">gid</span><span class="o">=</span><span class="m">1001</span><span class="o">(</span>dc<span class="o">)</span> <span class="nv">组</span><span class="o">=</span><span class="m">1001</span><span class="o">(</span>dc<span class="o">)</span>,1003<span class="o">(</span>tom<span class="o">)</span>
+<a id="__codelineno-7-17" name="__codelineno-7-17" href="#__codelineno-7-17"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># id egon</span>
+<a id="__codelineno-7-18" name="__codelineno-7-18" href="#__codelineno-7-18"></a><span class="nv">uid</span><span class="o">=</span><span class="m">1002</span><span class="o">(</span>root<span class="o">)</span> <span class="nv">gid</span><span class="o">=</span><span class="m">1002</span><span class="o">(</span>root<span class="o">)</span> <span class="nv">组</span><span class="o">=</span><span class="m">1002</span><span class="o">(</span>root<span class="o">)</span>,1003<span class="o">(</span>tom<span class="o">)</span>
+</code></pre></div>
+<h3 id="etcgshadow"><font color='orange'>/etc/gshadow</font><a class="headerlink" href="#etcgshadow" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># tail -1 /etc/gshadow</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>dc:!::
+</code></pre></div>
+<p><img src="./assets/gshadow.png" style="zoom:90%;" ></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>以:为分隔符,分为了4列
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="m">1</span>&gt; 第一列: 用户组的名称
+<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="m">2</span>&gt; 第二列: 用户组的密码
+<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a>          若为空或! 表明没有密码
+<a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a><span class="m">3</span>&gt; 第三列: 用户组管理员,组长 这个字段可为空
+<a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a>          若有多个用户组管理员,用逗号分隔
+<a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a><span class="m">4</span>&gt; 第四列: 组里有哪些成员.用逗号分隔.
+<a id="__codelineno-9-9" name="__codelineno-9-9" href="#__codelineno-9-9"></a>
+<a id="__codelineno-9-10" name="__codelineno-9-10" href="#__codelineno-9-10"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># ll /etc/gshadow</span>
+<a id="__codelineno-9-11" name="__codelineno-9-11" href="#__codelineno-9-11"></a>---------- <span class="m">1</span> root root <span class="m">800</span> 7月   <span class="m">4</span> <span class="m">16</span>:51 /etc/gshadow
+</code></pre></div>
+<h3 id="_7"><font color='orange'>其它</font><a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p><code>/etc/skel/</code> &nbsp;&nbsp;&nbsp;&nbsp; 家目录的模版<br />
+<code>/home/用户名</code>&nbsp;&nbsp;&nbsp;&nbsp;用户的家目录<br />
+<code>/var/spool/mail</code> &nbsp;&nbsp;&nbsp;&nbsp; 用户的邮箱文件</p>
+</blockquote>
+<p><font color='blue'><strong>[/etc/skel]</strong></font></p>
+<p>创建一个用户在该用户的家目录下产生的初始文件都会从这个路径下提取.<br />
+即会将此路径下的一堆模版文件直接复制到创建的用户的家目录下.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># ll -a /etc/skel/</span>
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>总用量 <span class="m">24</span>
+<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>drwxr-xr-x.   <span class="m">3</span> root root   <span class="m">78</span> 6月  <span class="m">30</span> <span class="m">23</span>:41 .
+<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a>drwxr-xr-x. <span class="m">144</span> root root <span class="m">8192</span> 7月  <span class="m">22</span> <span class="m">11</span>:47 ..
+<a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a>-rw-r--r--.   <span class="m">1</span> root root   <span class="m">18</span> 11月 <span class="m">25</span> <span class="m">2021</span> .bash_logout
+<a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a>-rw-r--r--.   <span class="m">1</span> root root  <span class="m">193</span> 11月 <span class="m">25</span> <span class="m">2021</span> .bash_profile
+<a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a>-rw-r--r--.   <span class="m">1</span> root root  <span class="m">231</span> 11月 <span class="m">25</span> <span class="m">2021</span> .bashrc
+<a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a>drwxr-xr-x.   <span class="m">4</span> root root   <span class="m">39</span> 6月  <span class="m">30</span> <span class="m">18</span>:17 .mozilla
+</code></pre></div>
+<p><font color='blue'><strong>[/etc/用户名]</strong></font></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># ll /home</span>
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>总用量 <span class="m">4</span>
+<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a>drwx------   <span class="m">5</span> dc       dc        <span class="m">205</span> 7月   <span class="m">8</span> <span class="m">18</span>:36 dc
+<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a>drwx------. <span class="m">15</span> onepiece onepiece <span class="m">4096</span> 6月  <span class="m">30</span> <span class="m">22</span>:54 onepiece
+<a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># ll -a /home/dc</span>
+<a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a>总用量 <span class="m">40</span>
+<a id="__codelineno-11-7" name="__codelineno-11-7" href="#__codelineno-11-7"></a>drwx------  <span class="m">5</span> dc   dc     <span class="m">205</span> 7月   <span class="m">8</span> <span class="m">18</span>:36 .                  <span class="c1"># 当前文件目录的硬链接</span>
+<a id="__codelineno-11-8" name="__codelineno-11-8" href="#__codelineno-11-8"></a>drwxr-xr-x. <span class="m">4</span> root root    <span class="m">32</span> 7月   <span class="m">4</span> <span class="m">16</span>:51 ..                 <span class="c1"># 上一级文件目录的硬链接</span>
+<a id="__codelineno-11-9" name="__codelineno-11-9" href="#__codelineno-11-9"></a>-rw-rw-r--  <span class="m">1</span> dc   dc       <span class="m">0</span> 7月   <span class="m">6</span> <span class="m">21</span>:34 a.txt
+<a id="__codelineno-11-10" name="__codelineno-11-10" href="#__codelineno-11-10"></a>-rw-r--r--  <span class="m">1</span> dc   dc   <span class="m">12288</span> 7月   <span class="m">8</span> <span class="m">18</span>:36 .a.txt.swp
+<a id="__codelineno-11-11" name="__codelineno-11-11" href="#__codelineno-11-11"></a>-rw-------  <span class="m">1</span> dc   dc     <span class="m">992</span> 7月   <span class="m">8</span> <span class="m">18</span>:36 .bash_history
+<a id="__codelineno-11-12" name="__codelineno-11-12" href="#__codelineno-11-12"></a>-rw-r--r--  <span class="m">1</span> dc   dc      <span class="m">18</span> 11月 <span class="m">25</span> <span class="m">2021</span> .bash_logout
+<a id="__codelineno-11-13" name="__codelineno-11-13" href="#__codelineno-11-13"></a>-rw-r--r--  <span class="m">1</span> dc   dc     <span class="m">193</span> 11月 <span class="m">25</span> <span class="m">2021</span> .bash_profile
+<a id="__codelineno-11-14" name="__codelineno-11-14" href="#__codelineno-11-14"></a>-rw-r--r--  <span class="m">1</span> dc   dc     <span class="m">231</span> 11月 <span class="m">25</span> <span class="m">2021</span> .bashrc
+<a id="__codelineno-11-15" name="__codelineno-11-15" href="#__codelineno-11-15"></a>drwxrwxr-x  <span class="m">3</span> dc   dc      <span class="m">18</span> 7月   <span class="m">4</span> <span class="m">16</span>:57 .cache
+<a id="__codelineno-11-16" name="__codelineno-11-16" href="#__codelineno-11-16"></a>drwxrwxr-x  <span class="m">3</span> dc   dc      <span class="m">18</span> 7月   <span class="m">4</span> <span class="m">16</span>:57 .config
+<a id="__codelineno-11-17" name="__codelineno-11-17" href="#__codelineno-11-17"></a>-rw-------  <span class="m">1</span> dc   dc      <span class="m">39</span> 7月   <span class="m">6</span> <span class="m">22</span>:34 .lesshst
+<a id="__codelineno-11-18" name="__codelineno-11-18" href="#__codelineno-11-18"></a>drwxr-xr-x  <span class="m">4</span> dc   dc      <span class="m">39</span> 6月  <span class="m">30</span> <span class="m">18</span>:17 .mozilla
+<a id="__codelineno-11-19" name="__codelineno-11-19" href="#__codelineno-11-19"></a>-rw-------  <span class="m">1</span> dc   dc    <span class="m">1920</span> 7月   <span class="m">8</span> <span class="m">18</span>:36 .viminfo
+<a id="__codelineno-11-20" name="__codelineno-11-20" href="#__codelineno-11-20"></a>-rw-rw-r--  <span class="m">1</span> dc   dc      <span class="m">21</span> 7月   <span class="m">8</span> <span class="m">18</span>:35 .vimrc
+</code></pre></div>
+<p><font color='blue'><strong>[/var/spool/mail]</strong></font></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># ll -a /var/spool/mail</span>
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>总用量 <span class="m">0</span>
+<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a>drwxrwxr-x.  <span class="m">2</span> root     mail  <span class="m">43</span> 7月   <span class="m">4</span> <span class="m">16</span>:51 .
+<a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a>drwxr-xr-x. <span class="m">12</span> root     root <span class="m">140</span> 6月  <span class="m">30</span> <span class="m">18</span>:25 ..
+<a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a>-rw-rw----   <span class="m">1</span> dc       mail   <span class="m">0</span> 7月   <span class="m">4</span> <span class="m">16</span>:51 dc
+<a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a>-rw-rw----.  <span class="m">1</span> onepiece mail   <span class="m">0</span> 6月  <span class="m">30</span> <span class="m">18</span>:55 onepiece
+<a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a>-rw-rw----.  <span class="m">1</span> rpc      mail   <span class="m">0</span> 6月  <span class="m">30</span> <span class="m">18</span>:20 rpc
+<a id="__codelineno-12-8" name="__codelineno-12-8" href="#__codelineno-12-8"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># ll -a /var/spool/mail/dc</span>
+<a id="__codelineno-12-9" name="__codelineno-12-9" href="#__codelineno-12-9"></a>-rw-rw---- <span class="m">1</span> dc mail <span class="m">0</span> 7月   <span class="m">4</span> <span class="m">16</span>:51 /var/spool/mail/dc
+</code></pre></div>
+<hr />
+<h2 id="_8">手动创建用户<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h2>
+<p>实验目标: 通过修改文件创建一个名为lufei的用户  四大步骤.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>▲ 准备用户信息
+<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># tail -1 /etc/passwd</span>
+<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a>lufei:x:1004:1004::/home/lufei:/bin/bash
+<a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a><span class="s2">&quot;&quot;&quot;</span>
+<a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a><span class="s2">可以制作密码</span>
+<a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a><span class="s2">openssl passwd的作用是用来计算密码hash的,目的是为了防止密码以明文的形式出现。</span>
+<a id="__codelineno-13-7" name="__codelineno-13-7" href="#__codelineno-13-7"></a><span class="s2">语法格式: openssl passwd [option] passwd</span>
+<a id="__codelineno-13-8" name="__codelineno-13-8" href="#__codelineno-13-8"></a><span class="s2">         -1: 表示采用的是MD5加密算法。</span>
+<a id="__codelineno-13-9" name="__codelineno-13-9" href="#__codelineno-13-9"></a><span class="s2">         -salt: 指定salt值,不使用随机产生的salt.</span>
+<a id="__codelineno-13-10" name="__codelineno-13-10" href="#__codelineno-13-10"></a><span class="s2">               在使用加密算法进行加密时,即使密码一样,salt不一样,所计算出来的hash值也不一样.</span>
+<a id="__codelineno-13-11" name="__codelineno-13-11" href="#__codelineno-13-11"></a><span class="s2">               除非密码一样,salt值也一样,计算出来的hash值才一样.salt为8字节的字符串. </span>
+<a id="__codelineno-13-12" name="__codelineno-13-12" href="#__codelineno-13-12"></a><span class="s2">&quot;&quot;&quot;</span>
+<a id="__codelineno-13-13" name="__codelineno-13-13" href="#__codelineno-13-13"></a><span class="c1">## 注意&#39;i have a dream&#39; 不是密码而是密码的盐,切记密码的盐里不要有中文</span>
+<a id="__codelineno-13-14" name="__codelineno-13-14" href="#__codelineno-13-14"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># openssl passwd -1 -salt &#39;i have a dream&#39;  </span>
+<a id="__codelineno-13-15" name="__codelineno-13-15" href="#__codelineno-13-15"></a>Password:         <span class="c1">##这里输入的是密码123456</span>
+<a id="__codelineno-13-16" name="__codelineno-13-16" href="#__codelineno-13-16"></a><span class="nv">$1$i</span> have a<span class="nv">$UEsc7yzrB5DWmTvxRpTsp</span>.       <span class="c1">##这是生成的密文密码</span>
+<a id="__codelineno-13-17" name="__codelineno-13-17" href="#__codelineno-13-17"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># vim /etc/shadow</span>
+<a id="__codelineno-13-18" name="__codelineno-13-18" href="#__codelineno-13-18"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># tail -1 /etc/shadow  ##放明文密码是无效的</span>
+<a id="__codelineno-13-19" name="__codelineno-13-19" href="#__codelineno-13-19"></a>lufei:<span class="nv">$1$i</span> have a<span class="nv">$UEsc7yzrB5DWmTvxRpTsp</span>.:19177:0:99999:7:::
+<a id="__codelineno-13-20" name="__codelineno-13-20" href="#__codelineno-13-20"></a>
+<a id="__codelineno-13-21" name="__codelineno-13-21" href="#__codelineno-13-21"></a>
+<a id="__codelineno-13-22" name="__codelineno-13-22" href="#__codelineno-13-22"></a>▲ 准备组信息
+<a id="__codelineno-13-23" name="__codelineno-13-23" href="#__codelineno-13-23"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># tail -1 /etc/group</span>
+<a id="__codelineno-13-24" name="__codelineno-13-24" href="#__codelineno-13-24"></a>lufei:x:1004:
+<a id="__codelineno-13-25" name="__codelineno-13-25" href="#__codelineno-13-25"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># tail -1 /etc/gshadow</span>
+<a id="__codelineno-13-26" name="__codelineno-13-26" href="#__codelineno-13-26"></a>lufei:!::
+<a id="__codelineno-13-27" name="__codelineno-13-27" href="#__codelineno-13-27"></a>
+<a id="__codelineno-13-28" name="__codelineno-13-28" href="#__codelineno-13-28"></a>
+<a id="__codelineno-13-29" name="__codelineno-13-29" href="#__codelineno-13-29"></a>▲ 准备家目录
+<a id="__codelineno-13-30" name="__codelineno-13-30" href="#__codelineno-13-30"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># mkdir /home/lufei</span>
+<a id="__codelineno-13-31" name="__codelineno-13-31" href="#__codelineno-13-31"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># ll /home</span>
+<a id="__codelineno-13-32" name="__codelineno-13-32" href="#__codelineno-13-32"></a>总用量 <span class="m">4</span>
+<a id="__codelineno-13-33" name="__codelineno-13-33" href="#__codelineno-13-33"></a>drwx------   <span class="m">5</span> dc       dc        <span class="m">205</span> 7月   <span class="m">8</span> <span class="m">18</span>:36 dc
+<a id="__codelineno-13-34" name="__codelineno-13-34" href="#__codelineno-13-34"></a>drwxr-xr-x   <span class="m">2</span> root     root        <span class="m">6</span> 7月  <span class="m">25</span> <span class="m">09</span>:11 lufei
+<a id="__codelineno-13-35" name="__codelineno-13-35" href="#__codelineno-13-35"></a>drwx------. <span class="m">15</span> onepiece onepiece <span class="m">4096</span> 6月  <span class="m">30</span> <span class="m">22</span>:54 onepiece
+<a id="__codelineno-13-36" name="__codelineno-13-36" href="#__codelineno-13-36"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># chown lufei.lufei /home/lufei</span>
+<a id="__codelineno-13-37" name="__codelineno-13-37" href="#__codelineno-13-37"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># chmod 700 /home/lufei</span>
+<a id="__codelineno-13-38" name="__codelineno-13-38" href="#__codelineno-13-38"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># ll /home</span>
+<a id="__codelineno-13-39" name="__codelineno-13-39" href="#__codelineno-13-39"></a>总用量 <span class="m">4</span>
+<a id="__codelineno-13-40" name="__codelineno-13-40" href="#__codelineno-13-40"></a>drwx------   <span class="m">5</span> dc       dc        <span class="m">205</span> 7月   <span class="m">8</span> <span class="m">18</span>:36 dc
+<a id="__codelineno-13-41" name="__codelineno-13-41" href="#__codelineno-13-41"></a>drwx------   <span class="m">2</span> lufei    lufei       <span class="m">6</span> 7月  <span class="m">25</span> <span class="m">09</span>:11 lufei
+<a id="__codelineno-13-42" name="__codelineno-13-42" href="#__codelineno-13-42"></a>drwx------. <span class="m">15</span> onepiece onepiece <span class="m">4096</span> 6月  <span class="m">30</span> <span class="m">22</span>:54 onepiece
+<a id="__codelineno-13-43" name="__codelineno-13-43" href="#__codelineno-13-43"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># ll -a /home/dc</span>
+<a id="__codelineno-13-44" name="__codelineno-13-44" href="#__codelineno-13-44"></a>总用量 <span class="m">40</span>
+<a id="__codelineno-13-45" name="__codelineno-13-45" href="#__codelineno-13-45"></a>drwx------  <span class="m">5</span> dc   dc     <span class="m">205</span> 7月   <span class="m">8</span> <span class="m">18</span>:36 .
+<a id="__codelineno-13-46" name="__codelineno-13-46" href="#__codelineno-13-46"></a>drwxr-xr-x. <span class="m">5</span> root root    <span class="m">45</span> 7月  <span class="m">25</span> <span class="m">09</span>:11 ..
+<a id="__codelineno-13-47" name="__codelineno-13-47" href="#__codelineno-13-47"></a>-rw-rw-r--  <span class="m">1</span> dc   dc       <span class="m">0</span> 7月   <span class="m">6</span> <span class="m">21</span>:34 a.txt
+<a id="__codelineno-13-48" name="__codelineno-13-48" href="#__codelineno-13-48"></a>-rw-r--r--  <span class="m">1</span> dc   dc   <span class="m">12288</span> 7月   <span class="m">8</span> <span class="m">18</span>:36 .a.txt.swp
+<a id="__codelineno-13-49" name="__codelineno-13-49" href="#__codelineno-13-49"></a>-rw-------  <span class="m">1</span> dc   dc     <span class="m">992</span> 7月   <span class="m">8</span> <span class="m">18</span>:36 .bash_history  <span class="c1"># 此文件自动产生,与历史记录有关</span>
+<a id="__codelineno-13-50" name="__codelineno-13-50" href="#__codelineno-13-50"></a>-rw-r--r--  <span class="m">1</span> dc   dc      <span class="m">18</span> 11月 <span class="m">25</span> <span class="m">2021</span> .bash_logout
+<a id="__codelineno-13-51" name="__codelineno-13-51" href="#__codelineno-13-51"></a>-rw-r--r--  <span class="m">1</span> dc   dc     <span class="m">193</span> 11月 <span class="m">25</span> <span class="m">2021</span> .bash_profile
+<a id="__codelineno-13-52" name="__codelineno-13-52" href="#__codelineno-13-52"></a>-rw-r--r--  <span class="m">1</span> dc   dc     <span class="m">231</span> 11月 <span class="m">25</span> <span class="m">2021</span> .bashrc
+<a id="__codelineno-13-53" name="__codelineno-13-53" href="#__codelineno-13-53"></a>drwxrwxr-x  <span class="m">3</span> dc   dc      <span class="m">18</span> 7月   <span class="m">4</span> <span class="m">16</span>:57 .cache
+<a id="__codelineno-13-54" name="__codelineno-13-54" href="#__codelineno-13-54"></a>drwxrwxr-x  <span class="m">3</span> dc   dc      <span class="m">18</span> 7月   <span class="m">4</span> <span class="m">16</span>:57 .config
+<a id="__codelineno-13-55" name="__codelineno-13-55" href="#__codelineno-13-55"></a>-rw-------  <span class="m">1</span> dc   dc      <span class="m">39</span> 7月   <span class="m">6</span> <span class="m">22</span>:34 .lesshst
+<a id="__codelineno-13-56" name="__codelineno-13-56" href="#__codelineno-13-56"></a>drwxr-xr-x  <span class="m">4</span> dc   dc      <span class="m">39</span> 6月  <span class="m">30</span> <span class="m">18</span>:17 .mozilla
+<a id="__codelineno-13-57" name="__codelineno-13-57" href="#__codelineno-13-57"></a>-rw-------  <span class="m">1</span> dc   dc    <span class="m">1920</span> 7月   <span class="m">8</span> <span class="m">18</span>:36 .viminfo
+<a id="__codelineno-13-58" name="__codelineno-13-58" href="#__codelineno-13-58"></a>-rw-rw-r--  <span class="m">1</span> dc   dc      <span class="m">21</span> 7月   <span class="m">8</span> <span class="m">18</span>:35 .vimrc
+<a id="__codelineno-13-59" name="__codelineno-13-59" href="#__codelineno-13-59"></a>
+<a id="__codelineno-13-60" name="__codelineno-13-60" href="#__codelineno-13-60"></a><span class="s2">&quot;&quot;&quot;</span>
+<a id="__codelineno-13-61" name="__codelineno-13-61" href="#__codelineno-13-61"></a><span class="s2">.[!.]*</span>
+<a id="__codelineno-13-62" name="__codelineno-13-62" href="#__codelineno-13-62"></a><span class="s2">[]中括号代表取其中之一 !感叹号代表取反 </span>
+<a id="__codelineno-13-63" name="__codelineno-13-63" href="#__codelineno-13-63"></a><span class="s2">第一个是点 第二个字符不是点 其余的字符爱啥是啥</span>
+<a id="__codelineno-13-64" name="__codelineno-13-64" href="#__codelineno-13-64"></a><span class="s2">&quot;&quot;&quot;</span>
+<a id="__codelineno-13-65" name="__codelineno-13-65" href="#__codelineno-13-65"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># cp -ra /etc/skel/.[!.]* /home/lufei</span>
+<a id="__codelineno-13-66" name="__codelineno-13-66" href="#__codelineno-13-66"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># ll -a /home/lufei</span>
+<a id="__codelineno-13-67" name="__codelineno-13-67" href="#__codelineno-13-67"></a>总用量 <span class="m">12</span>
+<a id="__codelineno-13-68" name="__codelineno-13-68" href="#__codelineno-13-68"></a>drwx------  <span class="m">3</span> lufei lufei  <span class="m">78</span> 7月  <span class="m">25</span> <span class="m">09</span>:26 .
+<a id="__codelineno-13-69" name="__codelineno-13-69" href="#__codelineno-13-69"></a>drwxr-xr-x. <span class="m">5</span> root  root   <span class="m">45</span> 7月  <span class="m">25</span> <span class="m">09</span>:11 ..
+<a id="__codelineno-13-70" name="__codelineno-13-70" href="#__codelineno-13-70"></a>-rw-r--r--. <span class="m">1</span> root  root   <span class="m">18</span> 11月 <span class="m">25</span> <span class="m">2021</span> .bash_logout
+<a id="__codelineno-13-71" name="__codelineno-13-71" href="#__codelineno-13-71"></a>-rw-r--r--. <span class="m">1</span> root  root  <span class="m">193</span> 11月 <span class="m">25</span> <span class="m">2021</span> .bash_profile
+<a id="__codelineno-13-72" name="__codelineno-13-72" href="#__codelineno-13-72"></a>-rw-r--r--. <span class="m">1</span> root  root  <span class="m">231</span> 11月 <span class="m">25</span> <span class="m">2021</span> .bashrc
+<a id="__codelineno-13-73" name="__codelineno-13-73" href="#__codelineno-13-73"></a>drwxr-xr-x. <span class="m">4</span> root  root   <span class="m">95</span> 7月  <span class="m">25</span> <span class="m">09</span>:17 .mozilla
+<a id="__codelineno-13-74" name="__codelineno-13-74" href="#__codelineno-13-74"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># chown lufei.lufei /home/lufei/.[!.]*</span>
+<a id="__codelineno-13-75" name="__codelineno-13-75" href="#__codelineno-13-75"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># ll -a /home/lufei</span>
+<a id="__codelineno-13-76" name="__codelineno-13-76" href="#__codelineno-13-76"></a>总用量 <span class="m">12</span>
+<a id="__codelineno-13-77" name="__codelineno-13-77" href="#__codelineno-13-77"></a>drwx------  <span class="m">3</span> lufei lufei  <span class="m">78</span> 7月  <span class="m">25</span> <span class="m">09</span>:26 .
+<a id="__codelineno-13-78" name="__codelineno-13-78" href="#__codelineno-13-78"></a>drwxr-xr-x. <span class="m">5</span> root  root   <span class="m">45</span> 7月  <span class="m">25</span> <span class="m">09</span>:11 ..
+<a id="__codelineno-13-79" name="__codelineno-13-79" href="#__codelineno-13-79"></a>-rw-r--r--. <span class="m">1</span> lufei lufei  <span class="m">18</span> 11月 <span class="m">25</span> <span class="m">2021</span> .bash_logout
+<a id="__codelineno-13-80" name="__codelineno-13-80" href="#__codelineno-13-80"></a>-rw-r--r--. <span class="m">1</span> lufei lufei <span class="m">193</span> 11月 <span class="m">25</span> <span class="m">2021</span> .bash_profile
+<a id="__codelineno-13-81" name="__codelineno-13-81" href="#__codelineno-13-81"></a>-rw-r--r--. <span class="m">1</span> lufei lufei <span class="m">231</span> 11月 <span class="m">25</span> <span class="m">2021</span> .bashrc
+<a id="__codelineno-13-82" name="__codelineno-13-82" href="#__codelineno-13-82"></a>drwxr-xr-x. <span class="m">4</span> lufei lufei  <span class="m">95</span> 7月  <span class="m">25</span> <span class="m">09</span>:17 .mozilla
+<a id="__codelineno-13-83" name="__codelineno-13-83" href="#__codelineno-13-83"></a>
+<a id="__codelineno-13-84" name="__codelineno-13-84" href="#__codelineno-13-84"></a>
+<a id="__codelineno-13-85" name="__codelineno-13-85" href="#__codelineno-13-85"></a>▲ 准备邮箱
+<a id="__codelineno-13-86" name="__codelineno-13-86" href="#__codelineno-13-86"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># ll /var/spool/mail/dc </span>
+<a id="__codelineno-13-87" name="__codelineno-13-87" href="#__codelineno-13-87"></a>-rw-rw---- <span class="m">1</span> dc mail <span class="m">0</span> 7月   <span class="m">4</span> <span class="m">16</span>:51 /var/spool/mail/dc
+<a id="__codelineno-13-88" name="__codelineno-13-88" href="#__codelineno-13-88"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># touch /var/spool/mail/lufei</span>
+<a id="__codelineno-13-89" name="__codelineno-13-89" href="#__codelineno-13-89"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># ll /var/spool/mail/lufei</span>
+<a id="__codelineno-13-90" name="__codelineno-13-90" href="#__codelineno-13-90"></a>-rw-r--r-- <span class="m">1</span> root root <span class="m">0</span> 7月  <span class="m">25</span> <span class="m">09</span>:32 /var/spool/mail/lufei
+<a id="__codelineno-13-91" name="__codelineno-13-91" href="#__codelineno-13-91"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># chmod 660 /var/spool/mail/lufei </span>
+<a id="__codelineno-13-92" name="__codelineno-13-92" href="#__codelineno-13-92"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># chown lufei.mail /var/spool/mail/lufei </span>
+<a id="__codelineno-13-93" name="__codelineno-13-93" href="#__codelineno-13-93"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># ll /var/spool/mail/lufei</span>
+<a id="__codelineno-13-94" name="__codelineno-13-94" href="#__codelineno-13-94"></a>-rw-rw---- <span class="m">1</span> lufei mail <span class="m">0</span> 7月  <span class="m">25</span> <span class="m">09</span>:32 /var/spool/mail/lufei
+<a id="__codelineno-13-95" name="__codelineno-13-95" href="#__codelineno-13-95"></a>
+<a id="__codelineno-13-96" name="__codelineno-13-96" href="#__codelineno-13-96"></a>
+<a id="__codelineno-13-97" name="__codelineno-13-97" href="#__codelineno-13-97"></a>▲ 验证
+<a id="__codelineno-13-98" name="__codelineno-13-98" href="#__codelineno-13-98"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># exit</span>
+<a id="__codelineno-13-99" name="__codelineno-13-99" href="#__codelineno-13-99"></a>登出
+<a id="__codelineno-13-100" name="__codelineno-13-100" href="#__codelineno-13-100"></a>Connection to <span class="m">172</span>.16.150.131 closed.
+<a id="__codelineno-13-101" name="__codelineno-13-101" href="#__codelineno-13-101"></a>One_Piece@DCdeMacBook-Air ~ % ssh lufei@172.16.150.131
+<a id="__codelineno-13-102" name="__codelineno-13-102" href="#__codelineno-13-102"></a>lufei@172.16.150.131<span class="err">&#39;</span>s password:            <span class="c1">## 密码为123456</span>
+<a id="__codelineno-13-103" name="__codelineno-13-103" href="#__codelineno-13-103"></a>Last login: Mon Jul <span class="m">25</span> <span class="m">09</span>:40:07 <span class="m">2022</span> from <span class="m">172</span>.16.150.1
+<a id="__codelineno-13-104" name="__codelineno-13-104" href="#__codelineno-13-104"></a><span class="o">[</span>lufei@localhost ~<span class="o">]</span>$ 
+</code></pre></div>
+<hr />
+<h2 id="_9">用户管理命令<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h2>
+<h3 id="useradd"><font color='orange'>useradd</font><a class="headerlink" href="#useradd" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p><strong>添加用户</strong></p>
+<p>当创建一个用户时,若没有指定用户的主组,将会创建一个同名的组作为用户的主组.<br />
+即在<code>useradd user1</code>的同时,会默认执行两条命令: <code>groupadd user1</code> ; <code>usermod -g user1 user1</code></p>
+<p>敲黑板！linux <em>规定</em> 一个用户必须在一个组内,该组称之为它的主组.</p>
+</blockquote>
+<p><font color='blue'>[一般情况]</font></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>○ 创建用户
+<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># useradd user1</span>
+<a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a>
+<a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a>○ 查看用户
+<a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a><span class="m">1</span>&gt; <span class="sb">`</span>id<span class="sb">`</span>       查看当前登录用户的信息
+<a id="__codelineno-14-6" name="__codelineno-14-6" href="#__codelineno-14-6"></a><span class="m">2</span>&gt; <span class="sb">`</span>id 用户名<span class="sb">`</span> 查看指定用户的信息
+<a id="__codelineno-14-7" name="__codelineno-14-7" href="#__codelineno-14-7"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># id</span>
+<a id="__codelineno-14-8" name="__codelineno-14-8" href="#__codelineno-14-8"></a><span class="nv">uid</span><span class="o">=</span><span class="m">0</span><span class="o">(</span>root<span class="o">)</span> <span class="nv">gid</span><span class="o">=</span><span class="m">0</span><span class="o">(</span>root<span class="o">)</span> <span class="nv">组</span><span class="o">=</span><span class="m">0</span><span class="o">(</span>root<span class="o">)</span>
+<a id="__codelineno-14-9" name="__codelineno-14-9" href="#__codelineno-14-9"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># id user1</span>
+<a id="__codelineno-14-10" name="__codelineno-14-10" href="#__codelineno-14-10"></a><span class="nv">uid</span><span class="o">=</span><span class="m">2001</span><span class="o">(</span>user1<span class="o">)</span> <span class="nv">gid</span><span class="o">=</span><span class="m">2001</span><span class="o">(</span>user1<span class="o">)</span> <span class="nv">组</span><span class="o">=</span><span class="m">2001</span><span class="o">(</span>user1<span class="o">)</span>
+<a id="__codelineno-14-11" name="__codelineno-14-11" href="#__codelineno-14-11"></a>
+<a id="__codelineno-14-12" name="__codelineno-14-12" href="#__codelineno-14-12"></a>○ 设定与修改密码
+<a id="__codelineno-14-13" name="__codelineno-14-13" href="#__codelineno-14-13"></a><span class="m">1</span>&gt; passwd  <span class="c1"># 默认给当前当前登录用户修改密码</span>
+<a id="__codelineno-14-14" name="__codelineno-14-14" href="#__codelineno-14-14"></a><span class="m">2</span>&gt; <span class="c1"># root用户可以给自己以及所有其他用户设定密码,普通用户只能设定自己的密码</span>
+<a id="__codelineno-14-15" name="__codelineno-14-15" href="#__codelineno-14-15"></a>   passwd 用户名  <span class="c1"># 交互式</span>
+<a id="__codelineno-14-16" name="__codelineno-14-16" href="#__codelineno-14-16"></a>   <span class="nb">echo</span> <span class="s2">&quot;密码&quot;</span> <span class="p">|</span> passwd --stdin 用户名  <span class="c1"># 非交互式,此命令只有root用户能使用</span>
+<a id="__codelineno-14-17" name="__codelineno-14-17" href="#__codelineno-14-17"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># echo &quot;123456&quot; | passwd --stdin user1</span>
+<a id="__codelineno-14-18" name="__codelineno-14-18" href="#__codelineno-14-18"></a>更改用户user1 的密码
+<a id="__codelineno-14-19" name="__codelineno-14-19" href="#__codelineno-14-19"></a>passwd: 所有的身份验证令牌已经成功更新
+<a id="__codelineno-14-20" name="__codelineno-14-20" href="#__codelineno-14-20"></a>
+<a id="__codelineno-14-21" name="__codelineno-14-21" href="#__codelineno-14-21"></a>○ 查看登录用户信息
+<a id="__codelineno-14-22" name="__codelineno-14-22" href="#__codelineno-14-22"></a><span class="s2">&quot;&quot;&quot;</span>
+<a id="__codelineno-14-23" name="__codelineno-14-23" href="#__codelineno-14-23"></a><span class="s2">whoami 查看当前登录的用户名</span>
+<a id="__codelineno-14-24" name="__codelineno-14-24" href="#__codelineno-14-24"></a><span class="s2">who    查看所有登录的用户信息</span>
+<a id="__codelineno-14-25" name="__codelineno-14-25" href="#__codelineno-14-25"></a><span class="s2">&quot;&quot;&quot;</span>
+<a id="__codelineno-14-26" name="__codelineno-14-26" href="#__codelineno-14-26"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># whoami</span>
+<a id="__codelineno-14-27" name="__codelineno-14-27" href="#__codelineno-14-27"></a>root
+<a id="__codelineno-14-28" name="__codelineno-14-28" href="#__codelineno-14-28"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># who</span>
+<a id="__codelineno-14-29" name="__codelineno-14-29" href="#__codelineno-14-29"></a>root     :0           <span class="m">2022</span>-07-22 <span class="m">11</span>:40 <span class="o">(</span>:0<span class="o">)</span>
+<a id="__codelineno-14-30" name="__codelineno-14-30" href="#__codelineno-14-30"></a>user1    pts/0        <span class="m">2022</span>-07-25 <span class="m">11</span>:00 <span class="o">(</span><span class="m">172</span>.16.150.1<span class="o">)</span>
+<a id="__codelineno-14-31" name="__codelineno-14-31" href="#__codelineno-14-31"></a>lufei    pts/1        <span class="m">2022</span>-07-25 <span class="m">10</span>:37 <span class="o">(</span><span class="m">172</span>.16.150.1<span class="o">)</span>
+<a id="__codelineno-14-32" name="__codelineno-14-32" href="#__codelineno-14-32"></a>root     pts/2        <span class="m">2022</span>-07-25 <span class="m">10</span>:54 <span class="o">(</span><span class="m">172</span>.16.150.1<span class="o">)</span>
+<a id="__codelineno-14-33" name="__codelineno-14-33" href="#__codelineno-14-33"></a>dc       pts/3        <span class="m">2022</span>-07-25 <span class="m">10</span>:55 <span class="o">(</span><span class="m">172</span>.16.150.1<span class="o">)</span>
+</code></pre></div>
+<p><font color='blue'>[指定选项]</font></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="s2">&quot;&quot;&quot;</span>
+<a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a><span class="s2">功能: 新增一个用户.</span>
+<a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a><span class="s2">了解useradd命令的常用选项:</span>
+<a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a><span class="s2">    –u: 指定用户的UID</span>
+<a id="__codelineno-15-5" name="__codelineno-15-5" href="#__codelineno-15-5"></a><span class="s2">    –g: 指定用户所属的主组</span>
+<a id="__codelineno-15-6" name="__codelineno-15-6" href="#__codelineno-15-6"></a><span class="s2">    –G: 指定用户所属的附加组</span>
+<a id="__codelineno-15-7" name="__codelineno-15-7" href="#__codelineno-15-7"></a><span class="s2">    –d: 指定用户的家目录</span>
+<a id="__codelineno-15-8" name="__codelineno-15-8" href="#__codelineno-15-8"></a><span class="s2">    –c: 指定用户的备注信息</span>
+<a id="__codelineno-15-9" name="__codelineno-15-9" href="#__codelineno-15-9"></a><span class="s2">    –s: 指定用户所用的shell</span>
+<a id="__codelineno-15-10" name="__codelineno-15-10" href="#__codelineno-15-10"></a><span class="s2">    -e: 账号失效日期</span>
+<a id="__codelineno-15-11" name="__codelineno-15-11" href="#__codelineno-15-11"></a><span class="s2">    -M: 不创建家目录,通常应用于系统用户,不能登录系统</span>
+<a id="__codelineno-15-12" name="__codelineno-15-12" href="#__codelineno-15-12"></a><span class="s2">    -r: 创建系统账户,uid应处于系统用户范围内(1000以内),默认就没有家目录</span>
+<a id="__codelineno-15-13" name="__codelineno-15-13" href="#__codelineno-15-13"></a><span class="s2">&quot;&quot;&quot;</span>
+<a id="__codelineno-15-14" name="__codelineno-15-14" href="#__codelineno-15-14"></a><span class="c1">## 指定选项创建用户时候,创建用户的主组和附加组对应的用户组必须事先存在.</span>
+<a id="__codelineno-15-15" name="__codelineno-15-15" href="#__codelineno-15-15"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># groupadd group1</span>
+<a id="__codelineno-15-16" name="__codelineno-15-16" href="#__codelineno-15-16"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># cat /etc/group | grep 1004</span>
+<a id="__codelineno-15-17" name="__codelineno-15-17" href="#__codelineno-15-17"></a>lufei:x:1004:
+<a id="__codelineno-15-18" name="__codelineno-15-18" href="#__codelineno-15-18"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># grep group1 /etc/group</span>
+<a id="__codelineno-15-19" name="__codelineno-15-19" href="#__codelineno-15-19"></a>group1:x:1005:
+<a id="__codelineno-15-20" name="__codelineno-15-20" href="#__codelineno-15-20"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># useradd -u 2000 -g 1005 -G 1004 -d /home/likui -c &quot;这是李逵&quot; -e &quot;2022-12-12&quot; -s /sbin/nologin likui</span>
+<a id="__codelineno-15-21" name="__codelineno-15-21" href="#__codelineno-15-21"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># cat /etc/passwd | grep likui</span>
+<a id="__codelineno-15-22" name="__codelineno-15-22" href="#__codelineno-15-22"></a>likui:x:2000:1005:这是李逵:/home/likui:/sbin/nologin
+<a id="__codelineno-15-23" name="__codelineno-15-23" href="#__codelineno-15-23"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># id likui</span>
+<a id="__codelineno-15-24" name="__codelineno-15-24" href="#__codelineno-15-24"></a><span class="nv">uid</span><span class="o">=</span><span class="m">2000</span><span class="o">(</span>likui<span class="o">)</span> <span class="nv">gid</span><span class="o">=</span><span class="m">1005</span><span class="o">(</span>group1<span class="o">)</span> <span class="nv">组</span><span class="o">=</span><span class="m">1005</span><span class="o">(</span>group1<span class="o">)</span>,1004<span class="o">(</span>lufei<span class="o">)</span>
+<a id="__codelineno-15-25" name="__codelineno-15-25" href="#__codelineno-15-25"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># grep 1004 /etc/group</span>
+<a id="__codelineno-15-26" name="__codelineno-15-26" href="#__codelineno-15-26"></a>lufei:x:1004:likui
+<a id="__codelineno-15-27" name="__codelineno-15-27" href="#__codelineno-15-27"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># echo &quot;123456&quot; | passwd --stdin likui</span>
+<a id="__codelineno-15-28" name="__codelineno-15-28" href="#__codelineno-15-28"></a>更改用户 likui 的密码.
+<a id="__codelineno-15-29" name="__codelineno-15-29" href="#__codelineno-15-29"></a>passwd：所有的身份验证令牌已经成功更新.
+<a id="__codelineno-15-30" name="__codelineno-15-30" href="#__codelineno-15-30"></a>
+<a id="__codelineno-15-31" name="__codelineno-15-31" href="#__codelineno-15-31"></a>!!!哪怕为李逵账号设置了密码.
+<a id="__codelineno-15-32" name="__codelineno-15-32" href="#__codelineno-15-32"></a>   登录时会显示This account is currently not available.当前账号不可用.Hhhh
+<a id="__codelineno-15-33" name="__codelineno-15-33" href="#__codelineno-15-33"></a>   因为likui登录时运行的第一个程序是/sbin/nologin
+<a id="__codelineno-15-34" name="__codelineno-15-34" href="#__codelineno-15-34"></a>
+<a id="__codelineno-15-35" name="__codelineno-15-35" href="#__codelineno-15-35"></a>实际上,在工作中通常会通过选项 -r -s -M 造出一个系统用户,不让其登操作系统,用于启软件服务用的.
+<a id="__codelineno-15-36" name="__codelineno-15-36" href="#__codelineno-15-36"></a>因为系统每多一个可登录的用户,就多一份风险.. 所以一般不会 -u -g.
+<a id="__codelineno-15-37" name="__codelineno-15-37" href="#__codelineno-15-37"></a><span class="c1">## 创建普通用户,但是没有家目录,不能登录系统</span>
+<a id="__codelineno-15-38" name="__codelineno-15-38" href="#__codelineno-15-38"></a>useradd -M -s /sbin/nologin xxx 
+<a id="__codelineno-15-39" name="__codelineno-15-39" href="#__codelineno-15-39"></a><span class="c1">## yyy属于系统用户,uid处于系统用户uid范围内</span>
+<a id="__codelineno-15-40" name="__codelineno-15-40" href="#__codelineno-15-40"></a>useradd -r -s /sbin/nologin yyy 
+<a id="__codelineno-15-41" name="__codelineno-15-41" href="#__codelineno-15-41"></a><span class="c1">## zzz属于系统用户,uid处于系统用户uid范围内,没有家目录,不能登录系统</span>
+<a id="__codelineno-15-42" name="__codelineno-15-42" href="#__codelineno-15-42"></a>useradd -M -r -s /sbin/nologin zzz  
+</code></pre></div>
+<p><font color='gray'>Ps: useradd创建用户时,对于未指定的选项(-u、-g等等), 会以<code>/etc/login.defs</code>、<code>/etc/default/useradd</code>两个配置文件中的配置作为参照物, 详见<code>https://zhuanlan.zhihu.com/p/329789819</code></font></p>
+<h3 id="userdel"><font color='orange'>userdel</font><a class="headerlink" href="#userdel" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p><strong>删除用户</strong></p>
+</blockquote>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>userdel user1     <span class="c1"># 删除用户user1,但不删除用户家目录和mail</span>
+<a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a>userdel -r user1  <span class="c1"># 要想删彻底,加-r选项</span>
+<a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a>
+<a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a>Ps: 删除likui用户,是删不干净的.创建likui用户时手动创建的用户组不会自动删除.
+<a id="__codelineno-16-5" name="__codelineno-16-5" href="#__codelineno-16-5"></a>    哪怕在创建likui用户时,很细节的指定了主组名与用户名一样,也不会自动删除.
+<a id="__codelineno-16-6" name="__codelineno-16-6" href="#__codelineno-16-6"></a>    So,最好使用useradd命令的默认选项.
+<a id="__codelineno-16-7" name="__codelineno-16-7" href="#__codelineno-16-7"></a>
+<a id="__codelineno-16-8" name="__codelineno-16-8" href="#__codelineno-16-8"></a>其实最重要的一点就是要明白哪些文件与用户和组相关!没删干净,对应删除就好啦!!!
+</code></pre></div>
+<h3 id="usermod"><font color='orange'>usermod</font><a class="headerlink" href="#usermod" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p><strong>修改用户</strong></p>
+</blockquote>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="c1">## 同useradd参数基一致,只不过useradd是添加,usermod是修改</span>
+<a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a>
+<a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a>-u   指定要修改用户的UID
+<a id="__codelineno-17-4" name="__codelineno-17-4" href="#__codelineno-17-4"></a>-g   指定要修改用户主组
+<a id="__codelineno-17-5" name="__codelineno-17-5" href="#__codelineno-17-5"></a>-G   !!指定要修改用户附加组,使用逗号隔开多个附加组
+<a id="__codelineno-17-6" name="__codelineno-17-6" href="#__codelineno-17-6"></a>-a   !!仅与-G选项一起使用,修改附加组. 加-a添加,不加-a代表覆盖
+<a id="__codelineno-17-7" name="__codelineno-17-7" href="#__codelineno-17-7"></a>-d   指定要修改用户家目录
+<a id="__codelineno-17-8" name="__codelineno-17-8" href="#__codelineno-17-8"></a>-c   指定要修改用户注释信息
+<a id="__codelineno-17-9" name="__codelineno-17-9" href="#__codelineno-17-9"></a>-s   指定要修改用户的bash shell
+<a id="__codelineno-17-10" name="__codelineno-17-10" href="#__codelineno-17-10"></a>-e   修改过期时间
+<a id="__codelineno-17-11" name="__codelineno-17-11" href="#__codelineno-17-11"></a>
+<a id="__codelineno-17-12" name="__codelineno-17-12" href="#__codelineno-17-12"></a>-l   指定要修改用户的登陆名
+<a id="__codelineno-17-13" name="__codelineno-17-13" href="#__codelineno-17-13"></a>-L   指定要锁定的用户,效果 -- 无法登录
+<a id="__codelineno-17-14" name="__codelineno-17-14" href="#__codelineno-17-14"></a>-U   指定要解锁的用户
+<a id="__codelineno-17-15" name="__codelineno-17-15" href="#__codelineno-17-15"></a>
+<a id="__codelineno-17-16" name="__codelineno-17-16" href="#__codelineno-17-16"></a>▲ 创建tom用户,主组为tom,附加组为it、sala、hr
+<a id="__codelineno-17-17" name="__codelineno-17-17" href="#__codelineno-17-17"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># useradd tom</span>
+<a id="__codelineno-17-18" name="__codelineno-17-18" href="#__codelineno-17-18"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># id tom</span>
+<a id="__codelineno-17-19" name="__codelineno-17-19" href="#__codelineno-17-19"></a><span class="nv">uid</span><span class="o">=</span><span class="m">2002</span><span class="o">(</span>tom<span class="o">)</span> <span class="nv">gid</span><span class="o">=</span><span class="m">2002</span><span class="o">(</span>tom<span class="o">)</span> <span class="nv">组</span><span class="o">=</span><span class="m">2002</span><span class="o">(</span>tom<span class="o">)</span>
+<a id="__codelineno-17-20" name="__codelineno-17-20" href="#__codelineno-17-20"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># groupadd it</span>
+<a id="__codelineno-17-21" name="__codelineno-17-21" href="#__codelineno-17-21"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># groupadd sale</span>
+<a id="__codelineno-17-22" name="__codelineno-17-22" href="#__codelineno-17-22"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># groupadd hr</span>
+<a id="__codelineno-17-23" name="__codelineno-17-23" href="#__codelineno-17-23"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># usermod -a -G it,sale,hr tom</span>
+<a id="__codelineno-17-24" name="__codelineno-17-24" href="#__codelineno-17-24"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># id tom</span>
+<a id="__codelineno-17-25" name="__codelineno-17-25" href="#__codelineno-17-25"></a><span class="nv">uid</span><span class="o">=</span><span class="m">2002</span><span class="o">(</span>tom<span class="o">)</span> <span class="nv">gid</span><span class="o">=</span><span class="m">2002</span><span class="o">(</span>tom<span class="o">)</span> <span class="nv">组</span><span class="o">=</span><span class="m">2002</span><span class="o">(</span>tom<span class="o">)</span>,2003<span class="o">(</span>it<span class="o">)</span>,2004<span class="o">(</span>sale<span class="o">)</span>,2005<span class="o">(</span>hr<span class="o">)</span>
+<a id="__codelineno-17-26" name="__codelineno-17-26" href="#__codelineno-17-26"></a><span class="c1">## 直接干文件也阔以！也能达到同样的效果.</span>
+<a id="__codelineno-17-27" name="__codelineno-17-27" href="#__codelineno-17-27"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># grep tom /etc/group</span>
+<a id="__codelineno-17-28" name="__codelineno-17-28" href="#__codelineno-17-28"></a>tom:x:2002:
+<a id="__codelineno-17-29" name="__codelineno-17-29" href="#__codelineno-17-29"></a>it:x:2003:tom
+<a id="__codelineno-17-30" name="__codelineno-17-30" href="#__codelineno-17-30"></a>sale:x:2004:tom
+<a id="__codelineno-17-31" name="__codelineno-17-31" href="#__codelineno-17-31"></a>hr:x:2005:tom
+<a id="__codelineno-17-32" name="__codelineno-17-32" href="#__codelineno-17-32"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># grep tom /etc/gshadow</span>
+<a id="__codelineno-17-33" name="__codelineno-17-33" href="#__codelineno-17-33"></a>tom:!::
+<a id="__codelineno-17-34" name="__codelineno-17-34" href="#__codelineno-17-34"></a>it:!::tom
+<a id="__codelineno-17-35" name="__codelineno-17-35" href="#__codelineno-17-35"></a>sale:!::tom
+<a id="__codelineno-17-36" name="__codelineno-17-36" href="#__codelineno-17-36"></a>hr:!::tom
+<a id="__codelineno-17-37" name="__codelineno-17-37" href="#__codelineno-17-37"></a>
+<a id="__codelineno-17-38" name="__codelineno-17-38" href="#__codelineno-17-38"></a>
+<a id="__codelineno-17-39" name="__codelineno-17-39" href="#__codelineno-17-39"></a>▲ 修改tom用户的用户名为TOM
+<a id="__codelineno-17-40" name="__codelineno-17-40" href="#__codelineno-17-40"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># usermod -l TOM tom</span>
+<a id="__codelineno-17-41" name="__codelineno-17-41" href="#__codelineno-17-41"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># id TOM</span>
+<a id="__codelineno-17-42" name="__codelineno-17-42" href="#__codelineno-17-42"></a><span class="nv">uid</span><span class="o">=</span><span class="m">2002</span><span class="o">(</span>TOM<span class="o">)</span> <span class="nv">gid</span><span class="o">=</span><span class="m">2002</span><span class="o">(</span>tom<span class="o">)</span> <span class="nv">组</span><span class="o">=</span><span class="m">2002</span><span class="o">(</span>tom<span class="o">)</span>,2003<span class="o">(</span>it<span class="o">)</span>,2004<span class="o">(</span>sale<span class="o">)</span>,2005<span class="o">(</span>hr<span class="o">)</span>
+<a id="__codelineno-17-43" name="__codelineno-17-43" href="#__codelineno-17-43"></a>
+<a id="__codelineno-17-44" name="__codelineno-17-44" href="#__codelineno-17-44"></a>
+<a id="__codelineno-17-45" name="__codelineno-17-45" href="#__codelineno-17-45"></a>▲ 给TOM用户设置密码为123456. 并锁定TOM用户<span class="o">(</span>效果:登录不上<span class="o">)</span>/解锁TOM用户
+<a id="__codelineno-17-46" name="__codelineno-17-46" href="#__codelineno-17-46"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># passwd TOM</span>
+<a id="__codelineno-17-47" name="__codelineno-17-47" href="#__codelineno-17-47"></a>更改用户TOM的密码
+<a id="__codelineno-17-48" name="__codelineno-17-48" href="#__codelineno-17-48"></a>新的密码:
+<a id="__codelineno-17-49" name="__codelineno-17-49" href="#__codelineno-17-49"></a>无效的密码:密码少于8个字符
+<a id="__codelineno-17-50" name="__codelineno-17-50" href="#__codelineno-17-50"></a>重新输入新的密码:
+<a id="__codelineno-17-51" name="__codelineno-17-51" href="#__codelineno-17-51"></a>passwd:所有的身份验证令牌已经成功更新
+<a id="__codelineno-17-52" name="__codelineno-17-52" href="#__codelineno-17-52"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># usermod -L TOM</span>
+<a id="__codelineno-17-53" name="__codelineno-17-53" href="#__codelineno-17-53"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># usermod -U TOM</span>
+</code></pre></div>
+<hr />
+<h2 id="_10">组管理命令<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h2>
+<h3 id="groupadd"><font color='orange'>groupadd</font><a class="headerlink" href="#groupadd" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p><strong>创建组</strong></p>
+</blockquote>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>groupadd 组名              -- 创建基本组,不指定GID
+<a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a>groupadd -r 组名           -- 创建系统组,GID范围201-999
+<a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a>groupadd -g GID号 组名      -- 创建基本组,指定GID号
+<a id="__codelineno-18-4" name="__codelineno-18-4" href="#__codelineno-18-4"></a>
+<a id="__codelineno-18-5" name="__codelineno-18-5" href="#__codelineno-18-5"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># groupadd gg1</span>
+<a id="__codelineno-18-6" name="__codelineno-18-6" href="#__codelineno-18-6"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># groupadd -r gg2</span>
+<a id="__codelineno-18-7" name="__codelineno-18-7" href="#__codelineno-18-7"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># groupadd -g 5555 gg3</span>
+<a id="__codelineno-18-8" name="__codelineno-18-8" href="#__codelineno-18-8"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># tail -3 /etc/group</span>
+<a id="__codelineno-18-9" name="__codelineno-18-9" href="#__codelineno-18-9"></a>gg1:x:2006:
+<a id="__codelineno-18-10" name="__codelineno-18-10" href="#__codelineno-18-10"></a>gg2:x:981:
+<a id="__codelineno-18-11" name="__codelineno-18-11" href="#__codelineno-18-11"></a>gg3:x:5555:
+</code></pre></div>
+<h3 id="groupmod"><font color='orange'>groupmod</font><a class="headerlink" href="#groupmod" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p><strong>修改组</strong></p>
+</blockquote>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a>groupmod -g GID号 组名     -- 修改组的GID号
+<a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a>groupmod -n 新组名 旧组名   -- 修改组的组名
+<a id="__codelineno-19-3" name="__codelineno-19-3" href="#__codelineno-19-3"></a>
+<a id="__codelineno-19-4" name="__codelineno-19-4" href="#__codelineno-19-4"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># groupmod -g 1111 gg3</span>
+<a id="__codelineno-19-5" name="__codelineno-19-5" href="#__codelineno-19-5"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># grep gg3 /etc/group</span>
+<a id="__codelineno-19-6" name="__codelineno-19-6" href="#__codelineno-19-6"></a>gg3:x:1111:
+<a id="__codelineno-19-7" name="__codelineno-19-7" href="#__codelineno-19-7"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># groupmod -n new_gg3 gg3</span>
+<a id="__codelineno-19-8" name="__codelineno-19-8" href="#__codelineno-19-8"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># grep new_gg3 /etc/group</span>
+<a id="__codelineno-19-9" name="__codelineno-19-9" href="#__codelineno-19-9"></a>new_gg3:x:1111:
+</code></pre></div>
+<h3 id="groupdel"><font color='orange'>groupdel</font><a class="headerlink" href="#groupdel" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p><strong>删除组</strong></p>
+</blockquote>
+<p><font color='brown'>如果一个组是一个用户的主组,那么该组不能被删除,删掉用户会默认一起删掉它的主组</font> <br />
+即一个用户必须有一个主组,groupdel删除的组不能是任何用户的主组</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># useradd egon1</span>
+<a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># groupadd devops</span>
+<a id="__codelineno-20-3" name="__codelineno-20-3" href="#__codelineno-20-3"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># usermod -G devops egon1</span>
+<a id="__codelineno-20-4" name="__codelineno-20-4" href="#__codelineno-20-4"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># id egon1</span>
+<a id="__codelineno-20-5" name="__codelineno-20-5" href="#__codelineno-20-5"></a><span class="nv">uid</span><span class="o">=</span><span class="m">2003</span><span class="o">(</span>egon1<span class="o">)</span> <span class="nv">gid</span><span class="o">=</span><span class="m">2007</span><span class="o">(</span>egon1<span class="o">)</span> <span class="nv">组</span><span class="o">=</span><span class="m">2007</span><span class="o">(</span>egon1<span class="o">)</span>,2008<span class="o">(</span>devops<span class="o">)</span>
+<a id="__codelineno-20-6" name="__codelineno-20-6" href="#__codelineno-20-6"></a>
+<a id="__codelineno-20-7" name="__codelineno-20-7" href="#__codelineno-20-7"></a><span class="s2">&quot;&quot;&quot;</span>
+<a id="__codelineno-20-8" name="__codelineno-20-8" href="#__codelineno-20-8"></a><span class="s2">附加组可以删除(有个前提,此附加组不属于任何用户的主组!)</span>
+<a id="__codelineno-20-9" name="__codelineno-20-9" href="#__codelineno-20-9"></a><span class="s2">无法删除组egon1,因为组egon1属于egon1用户的主组.</span>
+<a id="__codelineno-20-10" name="__codelineno-20-10" href="#__codelineno-20-10"></a><span class="s2">&quot;&quot;&quot;</span>
+<a id="__codelineno-20-11" name="__codelineno-20-11" href="#__codelineno-20-11"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># groupdel devops</span>
+<a id="__codelineno-20-12" name="__codelineno-20-12" href="#__codelineno-20-12"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># id egon1</span>
+<a id="__codelineno-20-13" name="__codelineno-20-13" href="#__codelineno-20-13"></a><span class="nv">uid</span><span class="o">=</span><span class="m">2003</span><span class="o">(</span>egon1<span class="o">)</span> <span class="nv">gid</span><span class="o">=</span><span class="m">2007</span><span class="o">(</span>egon1<span class="o">)</span> <span class="nv">组</span><span class="o">=</span><span class="m">2007</span><span class="o">(</span>egon1<span class="o">)</span>
+<a id="__codelineno-20-14" name="__codelineno-20-14" href="#__codelineno-20-14"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># groupdel egon1</span>
+<a id="__codelineno-20-15" name="__codelineno-20-15" href="#__codelineno-20-15"></a>groupdel：不能移除用户“egon1”的主组
+</code></pre></div>
+<h3 id="gpasswd"><font color='orange'>gpasswd</font><a class="headerlink" href="#gpasswd" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p>给用户添加附加组/给组添加组成员 有三种途径:<br />
+1&gt; <code>usermod  -a -G  附加组名/附加组id,组2,组3  用户</code>     --  将一个用户添加到多个组里面<br />
+2&gt; 修改<code>/etc/group</code>文件<br />
+3&gt; gpasswd</p>
+</blockquote>
+<p><font color='purple' size=4>选项</font></p>
+<p>○   <code>gpasswd -a  用户 附加组名</code>   --  将某个用户加入到某个组<br />
+○   <code>gpasswd -M  用户1,用户2,用户3 组名</code>    --  将多个用户添加到一个组里面<br />
+○   <code>gpasswd -A 组内某个用户 组名</code>  --  将组内某个用户指定为组长, <strong>组长可以往组里添加删除成员 </strong><br />
+○   <code>gpasswd -d 组内某个用户 组名</code>   -- 删除组内某个成员 </p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># grep gg[1-9] /etc/group</span>
+<a id="__codelineno-21-2" name="__codelineno-21-2" href="#__codelineno-21-2"></a>gg1:x:2006:
+<a id="__codelineno-21-3" name="__codelineno-21-3" href="#__codelineno-21-3"></a>gg2:x:981:
+<a id="__codelineno-21-4" name="__codelineno-21-4" href="#__codelineno-21-4"></a>new_gg3:x:1111:
+<a id="__codelineno-21-5" name="__codelineno-21-5" href="#__codelineno-21-5"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># grep egon1 /etc/passwd</span>
+<a id="__codelineno-21-6" name="__codelineno-21-6" href="#__codelineno-21-6"></a>egon1:x:2003:2007::/home/egon1:/bin/bash
+<a id="__codelineno-21-7" name="__codelineno-21-7" href="#__codelineno-21-7"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># id egon1</span>
+<a id="__codelineno-21-8" name="__codelineno-21-8" href="#__codelineno-21-8"></a><span class="nv">uid</span><span class="o">=</span><span class="m">2003</span><span class="o">(</span>egon1<span class="o">)</span> <span class="nv">gid</span><span class="o">=</span><span class="m">2007</span><span class="o">(</span>egon1<span class="o">)</span> <span class="nv">组</span><span class="o">=</span><span class="m">2007</span><span class="o">(</span>egon1<span class="o">)</span>
+<a id="__codelineno-21-9" name="__codelineno-21-9" href="#__codelineno-21-9"></a>
+<a id="__codelineno-21-10" name="__codelineno-21-10" href="#__codelineno-21-10"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># usermod -a -G gg1 egon1</span>
+<a id="__codelineno-21-11" name="__codelineno-21-11" href="#__codelineno-21-11"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># gpasswd -a egon1 gg2</span>
+<a id="__codelineno-21-12" name="__codelineno-21-12" href="#__codelineno-21-12"></a>正在将用户“egon1”加入到“gg2”组中
+<a id="__codelineno-21-13" name="__codelineno-21-13" href="#__codelineno-21-13"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># id egon1</span>
+<a id="__codelineno-21-14" name="__codelineno-21-14" href="#__codelineno-21-14"></a><span class="nv">uid</span><span class="o">=</span><span class="m">2003</span><span class="o">(</span>egon1<span class="o">)</span> <span class="nv">gid</span><span class="o">=</span><span class="m">2007</span><span class="o">(</span>egon1<span class="o">)</span> <span class="nv">组</span><span class="o">=</span><span class="m">2007</span><span class="o">(</span>egon1<span class="o">)</span>,2006<span class="o">(</span>gg1<span class="o">)</span>,981<span class="o">(</span>gg2<span class="o">)</span>
+</code></pre></div>
+<p><font color='purple' size=4>补充: 命令行切换用户</font></p>
+<p>在一个终端,root切换到普通用户不需要输入密码;普通用户切换到root用户需要密码.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a><span class="c1">## 提前说一点,`-`即切换到指定用户的家目录下,意味着至少得保证用户对 /home/dc 有x可执行权限</span>
+<a id="__codelineno-22-2" name="__codelineno-22-2" href="#__codelineno-22-2"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># su - dc</span>
+<a id="__codelineno-22-3" name="__codelineno-22-3" href="#__codelineno-22-3"></a>上一次登录：一 7月 <span class="m">25</span> <span class="m">10</span>:55:14 CST 2022从 <span class="m">172</span>.16.150.1pts/3 上
+<a id="__codelineno-22-4" name="__codelineno-22-4" href="#__codelineno-22-4"></a><span class="o">[</span>dc@localhost ~<span class="o">]</span>$ su - root
+<a id="__codelineno-22-5" name="__codelineno-22-5" href="#__codelineno-22-5"></a>密码：
+<a id="__codelineno-22-6" name="__codelineno-22-6" href="#__codelineno-22-6"></a>上一次登录：一 7月 <span class="m">25</span> <span class="m">10</span>:54:06 CST 2022从 <span class="m">172</span>.16.150.1pts/2 上
+<a id="__codelineno-22-7" name="__codelineno-22-7" href="#__codelineno-22-7"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># exit</span>
+<a id="__codelineno-22-8" name="__codelineno-22-8" href="#__codelineno-22-8"></a>登出
+<a id="__codelineno-22-9" name="__codelineno-22-9" href="#__codelineno-22-9"></a><span class="o">[</span>dc@localhost ~<span class="o">]</span>$ <span class="nb">exit</span>
+<a id="__codelineno-22-10" name="__codelineno-22-10" href="#__codelineno-22-10"></a>登出
+<a id="__codelineno-22-11" name="__codelineno-22-11" href="#__codelineno-22-11"></a><span class="c1">## -c选项 以某一用户的身份执行某条命令 不用真的切换过去.. </span>
+<a id="__codelineno-22-12" name="__codelineno-22-12" href="#__codelineno-22-12"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># su - dc -c &quot;cat /opt/a.txt&quot;</span>
+<a id="__codelineno-22-13" name="__codelineno-22-13" href="#__codelineno-22-13"></a><span class="m">123</span>
+<a id="__codelineno-22-14" name="__codelineno-22-14" href="#__codelineno-22-14"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># exit</span>
+<a id="__codelineno-22-15" name="__codelineno-22-15" href="#__codelineno-22-15"></a>登出
+<a id="__codelineno-22-16" name="__codelineno-22-16" href="#__codelineno-22-16"></a>Connection to <span class="m">172</span>.16.150.131 closed.
+<a id="__codelineno-22-17" name="__codelineno-22-17" href="#__codelineno-22-17"></a>One_Piece@DCdeMacBook-Air ~ % 
+</code></pre></div>
+<p><font color='purple' size=4>临时获取组权限  newgrp</font></p>
+<p>我们可以为组设置密码.<br />
+然后让一些非组成员的用户通过命令 <code>newgrp 组名</code> 临时切换到组内并输入密码的方式获取用户组的权限和特性.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a><span class="s2">&quot;&quot;&quot;</span>
+<a id="__codelineno-23-2" name="__codelineno-23-2" href="#__codelineno-23-2"></a><span class="s2">创建了一个用户newuser,并从root切换到newuser用户</span>
+<a id="__codelineno-23-3" name="__codelineno-23-3" href="#__codelineno-23-3"></a><span class="s2">因为用户newuser不是文件/tmp/a.txt的拥有者,也不是文件的属组..只能是文件的其他人.</span>
+<a id="__codelineno-23-4" name="__codelineno-23-4" href="#__codelineno-23-4"></a><span class="s2">所以用户newuser对文件/tmp/a.txt只有读权限</span>
+<a id="__codelineno-23-5" name="__codelineno-23-5" href="#__codelineno-23-5"></a><span class="s2">&quot;&quot;&quot;</span>
+<a id="__codelineno-23-6" name="__codelineno-23-6" href="#__codelineno-23-6"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># useradd newuser</span>
+<a id="__codelineno-23-7" name="__codelineno-23-7" href="#__codelineno-23-7"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># echo 111 &gt; /tmp/a.txt</span>
+<a id="__codelineno-23-8" name="__codelineno-23-8" href="#__codelineno-23-8"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># ll /tmp/a.txt</span>
+<a id="__codelineno-23-9" name="__codelineno-23-9" href="#__codelineno-23-9"></a>-rw-r--r-- <span class="m">1</span> root root <span class="m">4</span> 7月  <span class="m">25</span> <span class="m">17</span>:51 /tmp/a.txt
+<a id="__codelineno-23-10" name="__codelineno-23-10" href="#__codelineno-23-10"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># </span>
+<a id="__codelineno-23-11" name="__codelineno-23-11" href="#__codelineno-23-11"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># su - newuser</span>
+<a id="__codelineno-23-12" name="__codelineno-23-12" href="#__codelineno-23-12"></a><span class="o">[</span>newuser@localhost ~<span class="o">]</span>$ cat /tmp/a.txt 
+<a id="__codelineno-23-13" name="__codelineno-23-13" href="#__codelineno-23-13"></a><span class="m">111</span>
+<a id="__codelineno-23-14" name="__codelineno-23-14" href="#__codelineno-23-14"></a><span class="o">[</span>newuser@localhost ~<span class="o">]</span>$ <span class="nb">echo</span> <span class="m">123</span> &gt;&gt; /tmp/a.txt 
+<a id="__codelineno-23-15" name="__codelineno-23-15" href="#__codelineno-23-15"></a>-bash: /tmp/a.txt: 权限不够
+<a id="__codelineno-23-16" name="__codelineno-23-16" href="#__codelineno-23-16"></a>
+<a id="__codelineno-23-17" name="__codelineno-23-17" href="#__codelineno-23-17"></a>
+<a id="__codelineno-23-18" name="__codelineno-23-18" href="#__codelineno-23-18"></a><span class="s2">&quot;&quot;&quot;</span>
+<a id="__codelineno-23-19" name="__codelineno-23-19" href="#__codelineno-23-19"></a><span class="s2">现在想要让用户newuser能修改a.txt文件,即让用户newuser对a.txt文件有写权限</span>
+<a id="__codelineno-23-20" name="__codelineno-23-20" href="#__codelineno-23-20"></a><span class="s2">&quot;&quot;&quot;</span>
+<a id="__codelineno-23-21" name="__codelineno-23-21" href="#__codelineno-23-21"></a>【方案一】: 将文件的拥有者改为newuser
+<a id="__codelineno-23-22" name="__codelineno-23-22" href="#__codelineno-23-22"></a>
+<a id="__codelineno-23-23" name="__codelineno-23-23" href="#__codelineno-23-23"></a>【方案二】: 给其他人一个w写权限
+<a id="__codelineno-23-24" name="__codelineno-23-24" href="#__codelineno-23-24"></a><span class="o">[</span>newuser@localhost ~<span class="o">]</span>$ <span class="nb">exit</span>
+<a id="__codelineno-23-25" name="__codelineno-23-25" href="#__codelineno-23-25"></a>登出
+<a id="__codelineno-23-26" name="__codelineno-23-26" href="#__codelineno-23-26"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># chmod o+w /tmp/a.txt </span>
+<a id="__codelineno-23-27" name="__codelineno-23-27" href="#__codelineno-23-27"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># ll /tmp/a.txt </span>
+<a id="__codelineno-23-28" name="__codelineno-23-28" href="#__codelineno-23-28"></a>-rw-r--rw- <span class="m">1</span> root root <span class="m">4</span> 7月  <span class="m">25</span> <span class="m">17</span>:51 /tmp/a.txt
+<a id="__codelineno-23-29" name="__codelineno-23-29" href="#__codelineno-23-29"></a>
+<a id="__codelineno-23-30" name="__codelineno-23-30" href="#__codelineno-23-30"></a>【方案三】: 给文件的组添加w写权限,并将用户newuser添加到这个组里
+<a id="__codelineno-23-31" name="__codelineno-23-31" href="#__codelineno-23-31"></a><span class="c1"># !!!注意哦,root组单纯的只是一个组,而root用户才是超级用户不受权限压制.别搞混了.</span>
+<a id="__codelineno-23-32" name="__codelineno-23-32" href="#__codelineno-23-32"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># chmod o-w /tmp/a.txt </span>
+<a id="__codelineno-23-33" name="__codelineno-23-33" href="#__codelineno-23-33"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># ll /tmp/a.txt </span>
+<a id="__codelineno-23-34" name="__codelineno-23-34" href="#__codelineno-23-34"></a>-rw-r--r-- <span class="m">1</span> root root <span class="m">4</span> 7月  <span class="m">25</span> <span class="m">17</span>:51 /tmp/a.txt
+<a id="__codelineno-23-35" name="__codelineno-23-35" href="#__codelineno-23-35"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1">#</span>
+<a id="__codelineno-23-36" name="__codelineno-23-36" href="#__codelineno-23-36"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># chmod g+w /tmp/a.txt</span>
+<a id="__codelineno-23-37" name="__codelineno-23-37" href="#__codelineno-23-37"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># ll /tmp/a.txt </span>
+<a id="__codelineno-23-38" name="__codelineno-23-38" href="#__codelineno-23-38"></a>-rw-rw-r-- <span class="m">1</span> root root <span class="m">4</span> 7月  <span class="m">25</span> <span class="m">17</span>:51 /tmp/a.txt
+<a id="__codelineno-23-39" name="__codelineno-23-39" href="#__codelineno-23-39"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># </span>
+<a id="__codelineno-23-40" name="__codelineno-23-40" href="#__codelineno-23-40"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># gpasswd -a newuser root</span>
+<a id="__codelineno-23-41" name="__codelineno-23-41" href="#__codelineno-23-41"></a>正在将用户“newuser”加入到“root”组中
+<a id="__codelineno-23-42" name="__codelineno-23-42" href="#__codelineno-23-42"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># id newuser</span>
+<a id="__codelineno-23-43" name="__codelineno-23-43" href="#__codelineno-23-43"></a><span class="nv">uid</span><span class="o">=</span><span class="m">2005</span><span class="o">(</span>newuser<span class="o">)</span> <span class="nv">gid</span><span class="o">=</span><span class="m">2009</span><span class="o">(</span>newuser<span class="o">)</span> <span class="nv">组</span><span class="o">=</span><span class="m">2009</span><span class="o">(</span>newuser<span class="o">)</span>,0<span class="o">(</span>root<span class="o">)</span>
+<a id="__codelineno-23-44" name="__codelineno-23-44" href="#__codelineno-23-44"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># </span>
+<a id="__codelineno-23-45" name="__codelineno-23-45" href="#__codelineno-23-45"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># su - newuser</span>
+<a id="__codelineno-23-46" name="__codelineno-23-46" href="#__codelineno-23-46"></a>上一次登录：一 7月 <span class="m">25</span> <span class="m">17</span>:52:00 CST 2022pts/0 上
+<a id="__codelineno-23-47" name="__codelineno-23-47" href="#__codelineno-23-47"></a><span class="o">[</span>newuser@localhost ~<span class="o">]</span>$ cat /tmp/a.txt
+<a id="__codelineno-23-48" name="__codelineno-23-48" href="#__codelineno-23-48"></a><span class="m">111</span>
+<a id="__codelineno-23-49" name="__codelineno-23-49" href="#__codelineno-23-49"></a><span class="o">[</span>newuser@localhost ~<span class="o">]</span>$ <span class="nb">echo</span> <span class="m">123</span> &gt;&gt; /tmp/a.txt 
+<a id="__codelineno-23-50" name="__codelineno-23-50" href="#__codelineno-23-50"></a><span class="o">[</span>newuser@localhost ~<span class="o">]</span>$ cat /tmp/a.txt
+<a id="__codelineno-23-51" name="__codelineno-23-51" href="#__codelineno-23-51"></a><span class="m">111</span>
+<a id="__codelineno-23-52" name="__codelineno-23-52" href="#__codelineno-23-52"></a><span class="m">123</span>
+<a id="__codelineno-23-53" name="__codelineno-23-53" href="#__codelineno-23-53"></a>
+<a id="__codelineno-23-54" name="__codelineno-23-54" href="#__codelineno-23-54"></a>【方案四】:让用户newuser临时获取文件属组的权限,前提需要给组设置密码<span class="o">(</span>这里设置的密码是123456<span class="o">)</span>
+<a id="__codelineno-23-55" name="__codelineno-23-55" href="#__codelineno-23-55"></a><span class="o">[</span>newuser@localhost ~<span class="o">]</span>$ <span class="nb">exit</span>
+<a id="__codelineno-23-56" name="__codelineno-23-56" href="#__codelineno-23-56"></a>登出
+<a id="__codelineno-23-57" name="__codelineno-23-57" href="#__codelineno-23-57"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># gpasswd -d newuser root</span>
+<a id="__codelineno-23-58" name="__codelineno-23-58" href="#__codelineno-23-58"></a>正在将用户“newuser”从“root”组中删除
+<a id="__codelineno-23-59" name="__codelineno-23-59" href="#__codelineno-23-59"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># id newuser</span>
+<a id="__codelineno-23-60" name="__codelineno-23-60" href="#__codelineno-23-60"></a><span class="nv">uid</span><span class="o">=</span><span class="m">2005</span><span class="o">(</span>newuser<span class="o">)</span> <span class="nv">gid</span><span class="o">=</span><span class="m">2009</span><span class="o">(</span>newuser<span class="o">)</span> <span class="nv">组</span><span class="o">=</span><span class="m">2009</span><span class="o">(</span>newuser<span class="o">)</span>
+<a id="__codelineno-23-61" name="__codelineno-23-61" href="#__codelineno-23-61"></a><span class="o">[</span>newuser@localhost ~<span class="o">]</span>$  ll /tmp/a.txt 
+<a id="__codelineno-23-62" name="__codelineno-23-62" href="#__codelineno-23-62"></a>-rw-rw-r-- <span class="m">1</span> root root <span class="m">8</span> 7月  <span class="m">25</span> <span class="m">18</span>:11 /tmp/a.txt
+<a id="__codelineno-23-63" name="__codelineno-23-63" href="#__codelineno-23-63"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># </span>
+<a id="__codelineno-23-64" name="__codelineno-23-64" href="#__codelineno-23-64"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># gpasswd root</span>
+<a id="__codelineno-23-65" name="__codelineno-23-65" href="#__codelineno-23-65"></a>正在修改 root 组的密码
+<a id="__codelineno-23-66" name="__codelineno-23-66" href="#__codelineno-23-66"></a>新密码：
+<a id="__codelineno-23-67" name="__codelineno-23-67" href="#__codelineno-23-67"></a>请重新输入新密码：
+<a id="__codelineno-23-68" name="__codelineno-23-68" href="#__codelineno-23-68"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># su - newuser</span>
+<a id="__codelineno-23-69" name="__codelineno-23-69" href="#__codelineno-23-69"></a>上一次登录：一 7月 <span class="m">25</span> <span class="m">18</span>:10:47 CST 2022pts/0 上
+<a id="__codelineno-23-70" name="__codelineno-23-70" href="#__codelineno-23-70"></a><span class="o">[</span>newuser@localhost ~<span class="o">]</span>$ <span class="nb">echo</span> <span class="m">666</span> &gt;&gt; /tmp/a.txt 
+<a id="__codelineno-23-71" name="__codelineno-23-71" href="#__codelineno-23-71"></a>-bash: /tmp/a.txt: 权限不够
+<a id="__codelineno-23-72" name="__codelineno-23-72" href="#__codelineno-23-72"></a><span class="o">[</span>newuser@localhost ~<span class="o">]</span>$ 
+<a id="__codelineno-23-73" name="__codelineno-23-73" href="#__codelineno-23-73"></a><span class="o">[</span>newuser@localhost ~<span class="o">]</span>$ newgrp root    <span class="c1">## 用户newuser临时切到root组下,获取root组的权限</span>
+<a id="__codelineno-23-74" name="__codelineno-23-74" href="#__codelineno-23-74"></a>密码：
+<a id="__codelineno-23-75" name="__codelineno-23-75" href="#__codelineno-23-75"></a><span class="o">[</span>newuser@localhost ~<span class="o">]</span>$ id newuser     <span class="c1">## 验证下是临时的!</span>
+<a id="__codelineno-23-76" name="__codelineno-23-76" href="#__codelineno-23-76"></a><span class="nv">uid</span><span class="o">=</span><span class="m">2005</span><span class="o">(</span>newuser<span class="o">)</span> <span class="nv">gid</span><span class="o">=</span><span class="m">2009</span><span class="o">(</span>newuser<span class="o">)</span> <span class="nv">组</span><span class="o">=</span><span class="m">2009</span><span class="o">(</span>newuser<span class="o">)</span>
+<a id="__codelineno-23-77" name="__codelineno-23-77" href="#__codelineno-23-77"></a><span class="o">[</span>newuser@localhost ~<span class="o">]</span>$ <span class="nb">echo</span> <span class="m">666</span> &gt;&gt; /tmp/a.txt 
+<a id="__codelineno-23-78" name="__codelineno-23-78" href="#__codelineno-23-78"></a><span class="o">[</span>newuser@localhost ~<span class="o">]</span>$ cat /tmp/a.txt
+<a id="__codelineno-23-79" name="__codelineno-23-79" href="#__codelineno-23-79"></a><span class="m">111</span>
+<a id="__codelineno-23-80" name="__codelineno-23-80" href="#__codelineno-23-80"></a><span class="m">123</span>
+<a id="__codelineno-23-81" name="__codelineno-23-81" href="#__codelineno-23-81"></a><span class="m">666</span>
+<a id="__codelineno-23-82" name="__codelineno-23-82" href="#__codelineno-23-82"></a><span class="o">[</span>newuser@localhost ~<span class="o">]</span>$ <span class="nb">exit</span>           <span class="c1">## 用户newuser退出临时加入的root组</span>
+<a id="__codelineno-23-83" name="__codelineno-23-83" href="#__codelineno-23-83"></a><span class="nb">exit</span>
+<a id="__codelineno-23-84" name="__codelineno-23-84" href="#__codelineno-23-84"></a><span class="o">[</span>newuser@localhost ~<span class="o">]</span>$ <span class="nb">echo</span> <span class="m">777</span> &gt;&gt; /tmp/a.txt 
+<a id="__codelineno-23-85" name="__codelineno-23-85" href="#__codelineno-23-85"></a>-bash: /tmp/a.txt: 权限不够
+</code></pre></div>
+<hr />
+<h2 id="_11">补充<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># openssl passwd -1 -salt &#39;i have a dream&#39;</span>
+<a id="__codelineno-24-2" name="__codelineno-24-2" href="#__codelineno-24-2"></a>Password:  <span class="c1">## 123456</span>
+<a id="__codelineno-24-3" name="__codelineno-24-3" href="#__codelineno-24-3"></a><span class="nv">$1$i</span> have a<span class="nv">$UEsc7yzrB5DWmTvxRpTsp</span>.
+<a id="__codelineno-24-4" name="__codelineno-24-4" href="#__codelineno-24-4"></a>
+<a id="__codelineno-24-5" name="__codelineno-24-5" href="#__codelineno-24-5"></a><span class="c1">## 算文件的hash值</span>
+<a id="__codelineno-24-6" name="__codelineno-24-6" href="#__codelineno-24-6"></a><span class="o">[</span>root@localhost opt<span class="o">]</span><span class="c1"># md5sum /etc/bashrc </span>
+<a id="__codelineno-24-7" name="__codelineno-24-7" href="#__codelineno-24-7"></a>3f48a33cc1fce59ff2df86429151c0e0  /etc/bashrc
+</code></pre></div>
+<h3 id="_12"><font color='orange'>哈希算法</font><a class="headerlink" href="#_12" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p>可以把一串内容(文本文件--字符;视频文件--二进制)计算成一串hash值.</p>
+</blockquote>
+<p>根据复杂度不同常见的哈希算法有: md5、sha512、sha256<br />
+<font color='gray'><strong>注意:</strong> 我们无需研究hash算法的原理,只需要掌握hash值的特点即可.</font></p>
+<p><strong>hash值有三大特点:</strong><br />
+&nbsp;&nbsp;&nbsp;&nbsp; 1&gt; 输入的内容一样,并且采用的hash算法一样,得到的hash值一定一样！<br />
+&nbsp;&nbsp;&nbsp;&nbsp; 2&gt; hash值不可逆推: 不能通过hash值反推出明文   <font color='gray'>其实现目前已经可以逆推了,需要一些技术手段.. </font><br />
+&nbsp;&nbsp;&nbsp;&nbsp; 3&gt; hash值的长度取决于采用的hash算法,与传入的内容多少无关.</p>
+<p><strong>hash值的用途:</strong>
+&nbsp;&nbsp;&nbsp;&nbsp; ○  结合特点1和2,可用于加密.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a>用户注册后,服务端是有一份正确的用户名和对应的用哈希算法(假设是md5)加密后的密码的;
+<a id="__codelineno-25-2" name="__codelineno-25-2" href="#__codelineno-25-2"></a>客户端用户在登录界面输入密码后,会用md5进行加密,并将用户名与加密后的密码传到服务端进行比对..
+<a id="__codelineno-25-3" name="__codelineno-25-3" href="#__codelineno-25-3"></a>
+<a id="__codelineno-25-4" name="__codelineno-25-4" href="#__codelineno-25-4"></a>哪怕中间人截获了C传给S的数据包,拿到加密后的hash值也反推不了密码明文.
+<a id="__codelineno-25-5" name="__codelineno-25-5" href="#__codelineno-25-5"></a>但中间人可以进行 **撞库** (抓包 + 猜到用的hash算法 + 常用的密码字典),通俗点就是蒙,蒙你的密码是多少.. 
+<a id="__codelineno-25-6" name="__codelineno-25-6" href="#__codelineno-25-6"></a>一旦密码字典中的某个value通过相同的hash算法算出的hash值与抓包截获的一致.. 那么也就破解密码成功了.
+<a id="__codelineno-25-7" name="__codelineno-25-7" href="#__codelineno-25-7"></a>
+<a id="__codelineno-25-8" name="__codelineno-25-8" href="#__codelineno-25-8"></a>Ps: 一般来说,大型互联网公司会对常见的加密算法进行一点加工..
+<a id="__codelineno-25-9" name="__codelineno-25-9" href="#__codelineno-25-9"></a>
+<a id="__codelineno-25-10" name="__codelineno-25-10" href="#__codelineno-25-10"></a>没有绝对的安全,黑客需要衡量的是攻击成本与收益..
+</code></pre></div>
+<p>&nbsp;&nbsp;&nbsp;&nbsp; ○  结合特点1和3,可用于文件完整性校验.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a>客户端从服务端下载一个文件
+<a id="__codelineno-26-2" name="__codelineno-26-2" href="#__codelineno-26-2"></a>S传输给C文件的同时,会传给C一个文件加密后得到的hash值.传输完毕,C同样对文件进行加密,比对hash值是否相同..
+<a id="__codelineno-26-3" name="__codelineno-26-3" href="#__codelineno-26-3"></a>相同则证明文件是完整的,没有被篡改过..
+<a id="__codelineno-26-4" name="__codelineno-26-4" href="#__codelineno-26-4"></a>
+<a id="__codelineno-26-5" name="__codelineno-26-5" href="#__codelineno-26-5"></a>中间人怎么攻击呢？
+<a id="__codelineno-26-6" name="__codelineno-26-6" href="#__codelineno-26-6"></a>它需要得到所有的数据包,(因为文件是一段一段传输的),并且篡改加入攻击代码,给一个新的hash值.
+<a id="__codelineno-26-7" name="__codelineno-26-7" href="#__codelineno-26-7"></a>这样客户端才发觉不到异常.. 但凡某一环节出现问题,攻击都会失败..不用担心.
+</code></pre></div>
+<h3 id="_13"><font color='orange'>密码加盐</font><a class="headerlink" href="#_13" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p>增强了密码的复杂度.</p>
+</blockquote>
+<p>"盐"相当于C与S的一个暗号,中间人撞库的时候还得猜到加的“盐”是什么,加在密码的哪个位置/哪几个位置..<br />
+<font color='gray'>eg: 明文 -- 123   加盐后 -- 天王12暗3地虎</font></p>
+<hr />
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+          <a href="#" class="md-top md-icon" data-md-component="top" hidden>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
+            回到页面顶部
+          </a>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+    <nav class="md-footer__inner md-grid" aria-label="页脚" >
+      
+        
+        <a href="../5_%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86%E4%B9%8B%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/" class="md-footer__link md-footer__link--prev" aria-label="上一页: 文件管理之文件系统" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                上一页
+              </span>
+              文件管理之文件系统
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="../7_%E6%9D%83%E9%99%90%E7%AE%A1%E7%90%86%E4%B9%8B%E6%96%87%E4%BB%B6%E6%9D%83%E9%99%90/" class="md-footer__link md-footer__link--next" aria-label="下一页: 权限管理之文件权限" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                下一页
+              </span>
+              权限管理之文件权限
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright © 2023 from Dc_OnePiece
+    </div>
+  
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "navigation.top", "navigation.expand", "navigation.instant", "navigation.tracking", "search.suggest", "search.highlight", "search.share"], "search": "../../assets/javascripts/workers/search.5bf1dace.min.js", "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.config.lang": "ja", "search.config.pipeline": "trimmer, stemmer", "search.config.separator": "[\\s\\-\uff0c\u3002]+", "search.placeholder": "\u641c\u7d22", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version.title": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.37e9125f.min.js"></script>
+      
+        <script src="../../resources/js/extra.js"></script>
+      
+    
+  </body>
+</html>

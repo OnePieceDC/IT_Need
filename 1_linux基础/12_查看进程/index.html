@@ -1,0 +1,2488 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="These are my study notes.">
+      
+      
+        <meta name="author" content="DC">
+      
+      
+      <link rel="icon" href="../../resources/images/favicon.ico">
+      <meta name="generator" content="mkdocs-1.3.1, mkdocs-material-8.5.3">
+    
+    
+      
+        <title>查看进程 - IT必备知识</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.7a952b86.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.cbb835fc.min.css">
+        
+      
+      
+
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../resources/css/extra.css">
+    
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lxgw-wenkai-webfont@1.1.0/style.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="blue-grey" data-md-color-accent="amber">
+  
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#_1" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../.." title="IT必备知识" class="md-header__button md-logo" aria-label="IT必备知识" data-md-component="logo">
+      
+  <img src="../../resources/images/favicon.ico" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            IT必备知识
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              查看进程
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      <form class="md-header__option" data-md-component="palette">
+        
+          
+          
+          <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="blue-grey" data-md-color-accent="amber"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+          
+            <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"/></svg>
+            </label>
+          
+        
+          
+          
+          <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="blue-grey" data-md-color-accent="amber"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_2">
+          
+            <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12c0-2.42-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"/></svg>
+            </label>
+          
+        
+      </form>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="分享" aria-label="分享" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7 0-.24-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91 1.61 0 2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08Z"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="标签" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../0_%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/0_%E5%89%8D%E5%A5%8F%28%E4%BB%8B%E7%BB%8D%29/" class="md-tabs__link">
+        计算机基础(8)
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+    
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../0_%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C/" class="md-tabs__link md-tabs__link--active">
+        linux基础(20)
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../5_db/0_%E5%9F%BA%E7%A1%80/0_install_db/" class="md-tabs__link">
+        mysql(19)
+      </a>
+    </li>
+  
+
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../9_git/0_git%E7%94%9F%E6%B4%BB%E7%89%88/" class="md-tabs__link">
+        git(2)
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../13_%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/0_%E9%80%92%E5%BD%92_%E6%9F%A5%E6%89%BE/" class="md-tabs__link">
+        查找排序算法(5)
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="IT必备知识" class="md-nav__button md-logo" aria-label="IT必备知识" data-md-component="logo">
+      
+  <img src="../../resources/images/favicon.ico" alt="logo">
+
+    </a>
+    IT必备知识
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" data-md-toggle="__nav_1" type="checkbox" id="__nav_1" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_1">
+          计算机基础(8)
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="计算机基础(8)" data-md-level="1">
+        <label class="md-nav__title" for="__nav_1">
+          <span class="md-nav__icon md-icon"></span>
+          计算机基础(8)
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../0_%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/0_%E5%89%8D%E5%A5%8F%28%E4%BB%8B%E7%BB%8D%29/" class="md-nav__link">
+        前奏(介绍)
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../0_%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/1_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A1%AC%E4%BB%B6%E7%BB%84%E6%88%90/" class="md-nav__link">
+        计算机硬件组成
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../0_%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/2_%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" class="md-nav__link">
+        操作系统
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../0_%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/3_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E6%A6%82%E8%A7%88/" class="md-nav__link">
+        计算机网络概览
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../0_%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/4_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E4%B9%8B%E7%BD%91%E7%BB%9C%E6%8E%A5%E5%8F%A3%E5%B1%82/" class="md-nav__link">
+        网络接口层
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../0_%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/5_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E4%B9%8B%E7%BD%91%E7%BB%9C%E5%B1%82/" class="md-nav__link">
+        网络层
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../0_%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/6_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E4%B9%8B%E4%BC%A0%E8%BE%93%E5%B1%82/" class="md-nav__link">
+        传输层
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../0_%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/7_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%A1%A5%E5%85%85/" class="md-nav__link">
+        补充
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2">
+          linux基础(20)
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="linux基础(20)" data-md-level="1">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          linux基础(20)
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0_%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C/" class="md-nav__link">
+        准备工作
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../1_%E5%88%9D%E8%AF%86shell%E4%B8%8E%E5%9F%BA%E7%A1%80%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" class="md-nav__link">
+        初识shell与基础常用命令
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../2_%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86%E4%B9%8B%E5%9F%BA%E7%A1%80%E5%91%BD%E4%BB%A4/" class="md-nav__link">
+        文件管理之基础命令
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../3_%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86%E4%B9%8B%E5%9B%9B%E5%A4%A7%E6%A8%A1%E5%BC%8F/" class="md-nav__link">
+        文件管理之四大模式
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../4_%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86%E4%B9%8B%E5%91%BD%E4%BB%A4%E8%A1%A5%E5%85%85/" class="md-nav__link">
+        文件管理之命令补充
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../5_%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86%E4%B9%8B%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/" class="md-nav__link">
+        文件管理之文件系统
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../6_%E6%9D%83%E9%99%90%E7%AE%A1%E7%90%86%E4%B9%8B%E7%94%A8%E6%88%B7%E4%B8%8E%E7%BB%84/" class="md-nav__link">
+        权限管理之用户与组
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../7_%E6%9D%83%E9%99%90%E7%AE%A1%E7%90%86%E4%B9%8B%E6%96%87%E4%BB%B6%E6%9D%83%E9%99%90/" class="md-nav__link">
+        权限管理之文件权限
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../8_%E6%9D%83%E9%99%90%E7%AE%A1%E7%90%86%E4%B9%8BACL/" class="md-nav__link">
+        权限管理之ACL
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../9_%E6%9D%83%E9%99%90%E7%AE%A1%E7%90%86%E4%B9%8Bsu%E4%B8%8Esudo/" class="md-nav__link">
+        权限管理之su与sudo
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../10_%E8%BD%AF%E4%BB%B6%E5%8C%85%E7%AE%A1%E7%90%86%E4%B9%8Brpm/" class="md-nav__link">
+        软件包管理之rpm
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../11_%E8%BD%AF%E4%BB%B6%E5%8C%85%E7%AE%A1%E7%90%86%E4%B9%8Byum/" class="md-nav__link">
+        软件包管理之yum
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          查看进程
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        查看进程
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    进程回顾!!
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    查看进程信息
+  </a>
+  
+    <nav class="md-nav" aria-label="查看进程信息">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ps-aux" class="md-nav__link">
+    ps aux
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pstree" class="md-nav__link">
+    pstree
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ppid" class="md-nav__link">
+    ppid
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pgrep" class="md-nav__link">
+    pgrep
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#stat" class="md-nav__link">
+    详解进程的状态STAT
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#top" class="md-nav__link">
+    动态查看top
+  </a>
+  
+    <nav class="md-nav" aria-label="动态查看top">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    命令行选项
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    显示内容解释
+  </a>
+  
+    <nav class="md-nav" aria-label="显示内容解释">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    [系统整体统计信息]
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    [进程信息]
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    显示内容的操作
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    网络有关的查看
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    查看系统状态
+  </a>
+  
+    <nav class="md-nav" aria-label="查看系统状态">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    硬盘
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    内存!!
+  </a>
+  
+    <nav class="md-nav" aria-label="内存!!">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#free" class="md-nav__link">
+    [free结果的字段]
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#buffcache" class="md-nav__link">
+    [释放buff/cache] 
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    [虚拟文件系统]
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cpu" class="md-nav__link">
+    CPU
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../13_%E7%AE%A1%E7%90%86%E8%BF%9B%E7%A8%8B/" class="md-nav__link">
+        管理进程
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../14_%E5%AD%98%E5%82%A8%E7%AE%A1%E7%90%86%E4%B9%8B%E4%BC%A0%E7%BB%9F%E7%A3%81%E7%9B%98%E7%AE%A1%E7%90%86/" class="md-nav__link">
+        存储管理之传统磁盘管理
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../15_%E5%AD%98%E5%82%A8%E7%AE%A1%E7%90%86%E4%B9%8BLVM/" class="md-nav__link">
+        存储管理之LVM
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../16_%E7%BD%91%E7%BB%9C%E7%AE%A1%E7%90%86/" class="md-nav__link">
+        网络管理
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../17_shell%E5%9F%BA%E7%A1%80/" class="md-nav__link">
+        shell基础
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../18_crond%E8%AE%A1%E5%88%92%E4%BB%BB%E5%8A%A1/" class="md-nav__link">
+        crond计划任务
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../19_%E7%B3%BB%E7%BB%9F%E4%BC%98%E5%8C%96/" class="md-nav__link">
+        系统优化
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3">
+          mysql(19)
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="mysql(19)" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          mysql(19)
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" data-md-toggle="__nav_3_1" type="checkbox" id="__nav_3_1" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3_1">
+          基础
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="基础" data-md-level="2">
+        <label class="md-nav__title" for="__nav_3_1">
+          <span class="md-nav__icon md-icon"></span>
+          基础
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../5_db/0_%E5%9F%BA%E7%A1%80/0_install_db/" class="md-nav__link">
+        数据库安装
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../5_db/0_%E5%9F%BA%E7%A1%80/1_db_command/" class="md-nav__link">
+        sql命令总结
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../5_db/0_%E5%9F%BA%E7%A1%80/2_imp_knowledge/" class="md-nav__link">
+        imp_knowledge
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../5_db/0_%E5%9F%BA%E7%A1%80/3_table_field/" class="md-nav__link">
+        字段的约束和类型
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../5_db/0_%E5%9F%BA%E7%A1%80/4_table_relation/" class="md-nav__link">
+        表关系
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../5_db/0_%E5%9F%BA%E7%A1%80/5_permissions/" class="md-nav__link">
+        权限管理
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../5_db/0_%E5%9F%BA%E7%A1%80/6_single_query/" class="md-nav__link">
+        单表查询
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../5_db/0_%E5%9F%BA%E7%A1%80/7_multi_query/" class="md-nav__link">
+        多表查询
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../5_db/0_%E5%9F%BA%E7%A1%80/8_query_practice/" class="md-nav__link">
+        query_practice
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../5_db/0_%E5%9F%BA%E7%A1%80/9_pymysql/" class="md-nav__link">
+        pymysql
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../5_db/0_%E5%9F%BA%E7%A1%80/10_just_know/" class="md-nav__link">
+        just_know
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../5_db/0_%E5%9F%BA%E7%A1%80/other/01_to_11/" class="md-nav__link">
+        other1
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../5_db/0_%E5%9F%BA%E7%A1%80/other/05/" class="md-nav__link">
+        other2
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" data-md-toggle="__nav_3_2" type="checkbox" id="__nav_3_2" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3_2">
+          进阶
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="进阶" data-md-level="2">
+        <label class="md-nav__title" for="__nav_3_2">
+          <span class="md-nav__icon md-icon"></span>
+          进阶
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../5_db/1_%E8%BF%9B%E9%98%B6/0_index/" class="md-nav__link">
+        索引
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../5_db/1_%E8%BF%9B%E9%98%B6/1_explain/" class="md-nav__link">
+        执行计划
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../5_db/1_%E8%BF%9B%E9%98%B6/2_transaction/" class="md-nav__link">
+        事务
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../5_db/1_%E8%BF%9B%E9%98%B6/3_db_readPhenomenon/" class="md-nav__link">
+        读现象
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../5_db/1_%E8%BF%9B%E9%98%B6/4_lock/" class="md-nav__link">
+        锁
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../5_db/1_%E8%BF%9B%E9%98%B6/other/" class="md-nav__link">
+        数据库连接池
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4">
+          git(2)
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="git(2)" data-md-level="1">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          git(2)
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../9_git/0_git%E7%94%9F%E6%B4%BB%E7%89%88/" class="md-nav__link">
+        git生活版
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../9_git/1_git%E7%A0%94%E7%A9%B6%E7%89%88/" class="md-nav__link">
+        git研究版
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" data-md-toggle="__nav_5" type="checkbox" id="__nav_5" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_5">
+          查找排序算法(5)
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="查找排序算法(5)" data-md-level="1">
+        <label class="md-nav__title" for="__nav_5">
+          <span class="md-nav__icon md-icon"></span>
+          查找排序算法(5)
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../13_%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/0_%E9%80%92%E5%BD%92_%E6%9F%A5%E6%89%BE/" class="md-nav__link">
+        查找
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../13_%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/1_LowB%E4%B8%89%E4%BA%BA%E7%BB%84/" class="md-nav__link">
+        LowB三人组
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../13_%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/2_NB%E4%B8%89%E4%BA%BA%E7%BB%84/" class="md-nav__link">
+        NB三人组
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../13_%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/3_%E5%85%B6%E5%AE%83%E6%8E%92%E5%BA%8F/" class="md-nav__link">
+        其它排序
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../13_%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/4_%E6%9F%A5%E6%89%BE%E4%B9%A0%E9%A2%98/" class="md-nav__link">
+        查找习题
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    进程回顾!!
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    查看进程信息
+  </a>
+  
+    <nav class="md-nav" aria-label="查看进程信息">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ps-aux" class="md-nav__link">
+    ps aux
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pstree" class="md-nav__link">
+    pstree
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ppid" class="md-nav__link">
+    ppid
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pgrep" class="md-nav__link">
+    pgrep
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#stat" class="md-nav__link">
+    详解进程的状态STAT
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#top" class="md-nav__link">
+    动态查看top
+  </a>
+  
+    <nav class="md-nav" aria-label="动态查看top">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    命令行选项
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    显示内容解释
+  </a>
+  
+    <nav class="md-nav" aria-label="显示内容解释">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    [系统整体统计信息]
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    [进程信息]
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    显示内容的操作
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    网络有关的查看
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    查看系统状态
+  </a>
+  
+    <nav class="md-nav" aria-label="查看系统状态">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    硬盘
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    内存!!
+  </a>
+  
+    <nav class="md-nav" aria-label="内存!!">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#free" class="md-nav__link">
+    [free结果的字段]
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#buffcache" class="md-nav__link">
+    [释放buff/cache] 
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    [虚拟文件系统]
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cpu" class="md-nav__link">
+    CPU
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  <h1>查看进程</h1>
+
+<h2 id="_1">进程回顾!!<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<blockquote>
+<p><font color='red'>&lt;进程&gt;是 <strong>操作系统分配资源</strong> 的最小单位; &lt;线程&gt;是程序执行/ <strong>cpu调度</strong> 的最小单位</font></p>
+</blockquote>
+<p>程序&nbsp;&nbsp;&nbsp;&nbsp; -- 一堆代码文件<br />
+进程&nbsp;&nbsp;&nbsp;&nbsp; -- <code>进程 = 资源申请(开辟内存空间) + 程序执行(运行代码)</code><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; 一般会笼统的说是程序的运行过程; <font color='orange'>严谨点这种说法指的是线程 即<strong>进程 = 资源申请 + 多个线程执行</strong></font><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; 亦或者说是操作系统控制着硬件去运行程序的过程;<br />
+&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <font color='gray'><strong>进程是操作系统最核心的概念,没有之一!</strong></font><br />
+并发&nbsp;&nbsp;&nbsp;&nbsp; -- <em>多个</em> <font color='brown'>任务</font> <font color='green'>看起来</font> 是 <strong>同时运行</strong> 的即可.<br />
+&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; OS的多道技术实现并发: (这里讨论一个cpu的情况下),先将多个任务读到内存里,<br />
+&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; 实现空间上的复用 -- 任务跟任务之间内存空间上实现物理(<em>即硬件</em>)层面的互相隔离;<br />
+&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; <font color='gray'>详细来说,就涉及到虚拟内存,虚拟地址,内存分页等OS内存管理的知识啦..不必深究!!</font><br />
+&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 实现时间上的复用 -- 简单来说, <strong>cpu在多个任务之间快速来回切换..</strong>        <br />
+&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; <font color='gray'>通常采用的是时间片轮转的抢占式调度方式..由于CPU的执行效率非常高,时间片非常短,</font> <br />
+&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; <font color='gray'>在各个任务之间快速地切换，给人的感觉就是多个任务在"同时进行" </font><br />
+&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; <font color='gray'>Ps: cpu的性能很强,能快速在上万个任务之间切换,但也要受限于内存能装下上万个任务.. </font><br />
+                     <font color='gray'> 提升计算机的性能 -- 加内存条;提升软件的启动速度,IO相关 -- 用固态硬盘..</font> <br />
+并行&nbsp;&nbsp;&nbsp;&nbsp; -- <em>多个</em> <font color='brown'>任务</font> 是 <font color='green'>真正的</font> <strong>同时运行</strong> 的. <font color='red'>只有 <strong>多核</strong> 才能实现并行..</font> <br />
+&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <font color='gray'>4核8线程, 比纯8核性能低一些,比纯4核要强一些.. </font><br />
+&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; <font color='gray'>4核 -- 不管真实情况下有多个cpu,但4个核心就相当于4个cpu;</font>
+&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; <font color='gray'>8线程 -- 每一个核可以同时运行两条流水线; 4X2=8;</font> <br />
+线程  -- 随着计算机的发展, 对CPU的要求越来越高, 进程之间的切换开销较大, 已经无法满足越来越复杂的程序的&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 要求,于是就发明了线程.它是从进程里剥离出的一个概念. 单指进程概念里 代码的执行过程. <br />
+&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; <strong>一个进程内至少有一个线程..</strong> 线程才是cpu上的执行单位(<font color='brown'>即上文的任务严谨点指的就是线程</font>)<br />
+&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;<font color='gray'><strong>强调!</strong> cpu是运行代码的,硬盘、内存、网卡等硬件设备才是做IO的</font>         <br />
+多线程&nbsp;&nbsp;&nbsp;&nbsp; -- <strong>一个进程内开多个线程</strong>, <font color='brown'>注意哦 是 <strong>一个</strong> 进程 </font><br />
+&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; <font color='gray'>打个比方,OS是一个工厂,一个进程就是该工厂的一个车间,<strong>车间是一个资源单位</strong>;</font><br />
+&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;  <font color='gray'>一个车间里面可以有用于加工的一条或多条流水线(线程)</font> <br />
+&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; <font color='red'><strong>特点:</strong> </font>一个进程里的多个线程可以 <strong>共享</strong> 该进程的内存资源!!    <br />
+&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <font color='gray'>当然线程拥有属于自己的一小部分资源, 就是栈空间, 保存其运行状态和局部自动变量的 </font> <br />
+&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 不同进程里的多个线程的内存资源 <strong>互相隔离</strong> !!     <br />
+任务的三种运行状态   -- 非阻塞态(运行态 就绪态)、阻塞态<br />
+提交任务的方式 -- 同步、异步 <br />
+<font color='blue'>Ps: 提交任务的方式与任务的三种运行状态<strong>不能混为一谈</strong>!!尽管同步跟阻塞都会有一种让人等待的感觉... </font><br />
+&nbsp;&nbsp;&nbsp;&nbsp; <font color='gray'>以同步提交的方式提交的任务,会在原地等待,在此期间任务可能会进入阻塞态或非阻塞态.. </font>    </p>
+<p>Q: 若需要 <strong>并发</strong> 10个任务,如何实现？<br />
+&nbsp;&nbsp;&nbsp;&nbsp; <font color='gray'>并发第一反应是cpu会在10个任务之间不停调度,跟4核8线程什么的并行没直接关系.. </font> <br />
+A: 方案一:一个车间里开10条流水线; 方案二: 有10个车间,每个车间都只有一条流水线.. <br />
+&nbsp;&nbsp;&nbsp;&nbsp; 前者肯定优于后者,因为启用进程的开销比线程大. <strong>启动进程涉及到非常耗费资源的申请内存空间的IO操作. </strong><br />
+&nbsp;&nbsp;&nbsp;&nbsp; 启用线程就是开一条流水线,就只需要通知操作系统一声,叫OS帮忙调度下此流水线..<br />
+<font color='brown'>So, 若只是并发的话,推荐一个进程里开多个线程..</font> <br />
+<font color='gray'>Ps: nginx不是单纯使用方案一,假设cpu是4核的,就会开启4个进程,若每个进程里有20个线程,就可以并发80个任务..</font></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>乘上启下:
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>    先理清几个说法
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>    <span class="m">1</span>&gt; 因为一个进程内至少有一个线程,so,我们说cpu调度进程,准确点是指cpu调度进程内的那个线程..
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>    <span class="m">2</span>&gt; 并行只适用于多核,若是4核,意味着可以并行4个线程.
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>       每个核不可能长时间固定调度同一个线程,核就需要在多个线程之间切换,方式之一就是时间片..
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>    <span class="sb">`</span>ps aux<span class="sb">`</span>查看进程信息,没有特殊指明多线程的话,可以简单理解成查看进程里那一个线程的信息.
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>    <span class="sb">`</span>任务的三种运行状态<span class="sb">`</span>之间的切换同理.此处的任务可以简单理解成线程.
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>补充几个知识点<span class="o">(</span>自己理解的很笼统,不是很准确,但大体意思到差不差的<span class="o">)</span>:
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>    作业、程序、进程之间的关系 详见0_计算机基础/2_操作系统.md 多道技术!!! -- 并发 这部分的内容
+<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>    ▲ 父子进程
+<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>      同一个程序可能对应多个进程
+<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>      父进程:程序运行时产生的第一个进程 
+<a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>      子进程:由父进程衍生fork<span class="o">()</span>出来的进程,子进程几乎是父进程的完全复制<span class="o">(</span>PID肯定是不一样的<span class="o">)</span>
+<a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>            子进程再调用exec把自身替换为新的进程,PID与PPID是不变的
+<a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a>            但原来子进程的代码段、堆栈段、数据段会被新的内容取代,用来执行新的程序
+<a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a>            这样fork和exec就成为一种组合,虽然这种组合会造成较大负担
+<a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a>          注意:如果父进程终止,子进程也会随之被终止
+<a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a>       fork的用途:在许多客户-服务器C/S应用程序中,会有许多fork执行同一个程序的进程,
+<a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a>                用fork函数创建多个子进程来实现客户端的请求业务,因此用fork方式可以实现服务器端的并发应用
+<a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a>                服务器端可以消除客户端请求所要创建新进程的开销
+<a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a>       Ps:可能现目前看来不合理,但这样设计有历史遗留,刚开始时内存很小等导致的.
+<a id="__codelineno-0-23" name="__codelineno-0-23" href="#__codelineno-0-23"></a>          <span class="o">(</span>具体的暂且不想深入研究了..<span class="o">)</span>
+<a id="__codelineno-0-24" name="__codelineno-0-24" href="#__codelineno-0-24"></a>          fork-exec的由来可参考 https://www.zhihu.com/question/66902460
+</code></pre></div>
+<hr />
+<h2 id="_2">查看进程信息<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<h3 id="ps-aux"><font color='orange'>ps aux</font><a class="headerlink" href="#ps-aux" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p><strong>ps aux</strong>    查看操作系统中 <font color='brown'><strong>那一时刻</strong></font>  所有运行的进程( <em><strong>前后台</strong>的都有</em> )信息 不具备实时性.</p>
+</blockquote>
+<p>选项:<br />
+&nbsp;&nbsp;&nbsp;&nbsp; -a &nbsp;&nbsp;&nbsp;&nbsp; 该终端所有进程;  <br />
+&nbsp;&nbsp;&nbsp;&nbsp; -u &nbsp;&nbsp;&nbsp;&nbsp; 显示用户 ; <br />
+&nbsp;&nbsp;&nbsp;&nbsp; -x &nbsp;&nbsp;&nbsp;&nbsp; 显示命令的绝对路径.</p>
+<p><font color='gray'>Ps: windows上有实现类似功能的命令 <code>tasklist | findstr 具体某一个进程</code></font></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># ps aux | head -n 3</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>USER        PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>root          <span class="m">1</span>  <span class="m">0</span>.0  <span class="m">0</span>.3 <span class="m">199756</span>  <span class="m">3036</span> ?        Ss   8月05   <span class="m">4</span>:55 /usr/lib/systemd/systemd..
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>root          <span class="m">2</span>  <span class="m">0</span>.0  <span class="m">0</span>.0      <span class="m">0</span>     <span class="m">0</span> ?        S    8月05   <span class="m">0</span>:00 <span class="o">[</span>kthreadd<span class="o">]</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>Ps:PID为1的进程是个软件,详细介绍详见1_linux基础/0_准备工作.md Linux启动流程这一小节的内容!!
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="s2">&quot;&quot;&quot;</span>
+<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="s2">USER      运行进程的用户</span>
+<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="s2">PID       进程的ID号</span>
+<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a><span class="s2">%CPU      CPU占用率,该进程占用CPU的百分比</span>
+<a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a><span class="s2">%MEM      内存占用率</span>
+<a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a><span class="s2">VSZ       占用虚拟内存的大小(单位字节Kb)</span>
+<a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a><span class="s2">          简单的来说,进程在启动时会预先申请好一块线性空间,分配好后,不一定会全用</span>
+<a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a><span class="s2">          内存映射、共享的动态库、或者向系统申请了更多的堆等,都会扩展线性空间大小TnT</span>
+<a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a><span class="s2">          注意!!! </span>
+<a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a><span class="s2">              这里的虚拟内存不是指swap分区虚拟内存的大小!!两者没有关系.</span>
+<a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a><span class="s2">              我觉得VSZ是指进程需要的线性地址空间的大小..Hhhh</span>
+<a id="__codelineno-1-19" name="__codelineno-1-19" href="#__codelineno-1-19"></a><span class="s2">RSS       进程实际占用的物理内存大小(单位字节Kb)</span>
+<a id="__codelineno-1-20" name="__codelineno-1-20" href="#__codelineno-1-20"></a><span class="s2">TTY       该进程在哪个终端运行的   </span>
+<a id="__codelineno-1-21" name="__codelineno-1-21" href="#__codelineno-1-21"></a><span class="s2">          `？` 问号代表没有在任何一个终端提交,代表开机自动启动起来的</span>
+<a id="__codelineno-1-22" name="__codelineno-1-22" href="#__codelineno-1-22"></a><span class="s2">          终端？CTTS -- MULTICS -- unix -- minix -- linux -- linux发行版:redhat、centos</span>
+<a id="__codelineno-1-23" name="__codelineno-1-23" href="#__codelineno-1-23"></a><span class="s2">             linux继承了MULTICS,自动保留几个联机终端.. </span>
+<a id="__codelineno-1-24" name="__codelineno-1-24" href="#__codelineno-1-24"></a><span class="s2">                 6个真实的终端 /dev/tty1 ... /dev/tty6</span>
+<a id="__codelineno-1-25" name="__codelineno-1-25" href="#__codelineno-1-25"></a><span class="s2">             xshell远程连接看到的终端是预留的终端以外通过ssh虚拟模拟出来的终端,不是真实的终端.</span>
+<a id="__codelineno-1-26" name="__codelineno-1-26" href="#__codelineno-1-26"></a><span class="s2">                 /dev/pts/0 /dev/pts/1 0代表第一个虚拟的Bash Shell终端 1代表第2个 以此类推..</span>
+<a id="__codelineno-1-27" name="__codelineno-1-27" href="#__codelineno-1-27"></a><span class="s2">          [root@localhost ~]# tty</span>
+<a id="__codelineno-1-28" name="__codelineno-1-28" href="#__codelineno-1-28"></a><span class="s2">          /dev/pts/0</span>
+<a id="__codelineno-1-29" name="__codelineno-1-29" href="#__codelineno-1-29"></a><span class="s2">★STAT     进程的状态 (最好记住!!) R、S、D、T、Z、X        </span>
+<a id="__codelineno-1-30" name="__codelineno-1-30" href="#__codelineno-1-30"></a><span class="s2">START     进程的启动时间</span>
+<a id="__codelineno-1-31" name="__codelineno-1-31" href="#__codelineno-1-31"></a><span class="s2">TIME      进程占用CPU的总时间</span>
+<a id="__codelineno-1-32" name="__codelineno-1-32" href="#__codelineno-1-32"></a><span class="s2">COMMAND   进程的绝对路径,当然有些没有绝对路径 </span>
+<a id="__codelineno-1-33" name="__codelineno-1-33" href="#__codelineno-1-33"></a><span class="s2">          用[]包裹起来的代表内核态(运行操作系统的代码)的进程</span>
+<a id="__codelineno-1-34" name="__codelineno-1-34" href="#__codelineno-1-34"></a><span class="s2">          不带[]号的代表用户态(运行应用程序代码)进程</span>
+<a id="__codelineno-1-35" name="__codelineno-1-35" href="#__codelineno-1-35"></a><span class="s2">&quot;&quot;&quot;</span>
+</code></pre></div>
+<h3 id="pstree"><font color='orange'>pstree</font><a class="headerlink" href="#pstree" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p>查看进程树</p>
+</blockquote>
+<p>查看某一个进程的进程树: <code>pstree 进程PID</code></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># ps aux | grep nginx</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>root      <span class="m">56062</span>  <span class="m">0</span>.0  <span class="m">0</span>.0 <span class="m">112824</span>   <span class="m">988</span> pts/1    S+   <span class="m">18</span>:21   <span class="m">0</span>:00 grep --color<span class="o">=</span>auto nginx
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>root      <span class="m">75065</span>  <span class="m">0</span>.0  <span class="m">0</span>.0  <span class="m">20576</span>     <span class="m">8</span> ?        Ss   8月21   <span class="m">0</span>:00 nginx: master process /usr/local/nginx-1.22.0/sbin/nginx
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>nobody    <span class="m">75066</span>  <span class="m">0</span>.0  <span class="m">0</span>.0  <span class="m">23104</span>     <span class="m">8</span> ?        S    8月21   <span class="m">0</span>:00 nginx: worker process
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># pstree 75065</span>
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>nginx───nginx
+<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>
+<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>注意哦!若是最小化安装,没有pstree命令,安装下即可 rpm -qf <span class="sb">`</span>which pstree<span class="sb">`</span>
+</code></pre></div>
+<h3 id="ppid"><font color='orange'>ppid</font><a class="headerlink" href="#ppid" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p>ppid 即parent pid..  代表这个进程是由哪个进程发展衍生而来的, 即查看父进程PID</p>
+</blockquote>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># ps -elf | head -1</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>F S UID         PID   PPID  C PRI  NI ADDR SZ WCHAN  STIME TTY          TIME CMD
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># ps -elf | grep [n]ginx</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="m">1</span> S root      <span class="m">75065</span>      <span class="m">1</span>  <span class="m">0</span>  <span class="m">80</span>   <span class="m">0</span> -  <span class="m">5144</span> sigsus 8月21 ?       <span class="m">00</span>:00:00 nginx: master process /usr/local/nginx-1.22.0/sbin/nginx
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="c1">## 可以发现 75066进程的父进程是75065</span>
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="m">5</span> S nobody    <span class="m">75066</span>  <span class="m">75065</span>  <span class="m">0</span>  <span class="m">80</span>   <span class="m">0</span> -  <span class="m">5776</span> ep_pol 8月21 ?       <span class="m">00</span>:00:00 nginx: worker process
+</code></pre></div>
+<h3 id="pgrep"><font color='orange'>pgrep</font><a class="headerlink" href="#pgrep" title="Permanent link">&para;</a></h3>
+<p><code>pgrep 进程名</code></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># pgrep nginx</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="m">75065</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="m">75066</span>
+</code></pre></div>
+<p>查看由某个用户开启的进程 <code>pgrep -l -u 用户名</code></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># pgrep -l -u root | head -5</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="m">1</span> systemd
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="m">2</span> kthreadd
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="m">4</span> kworker/0:0H
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="m">6</span> ksoftirqd/0
+<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="m">7</span> migration/0
+<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a>
+<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># id dc</span>
+<a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a><span class="nv">uid</span><span class="o">=</span><span class="m">1001</span><span class="o">(</span>dc<span class="o">)</span> <span class="nv">gid</span><span class="o">=</span><span class="m">1001</span><span class="o">(</span>dc<span class="o">)</span> <span class="nv">组</span><span class="o">=</span><span class="m">1001</span><span class="o">(</span>dc<span class="o">)</span>
+<a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># su - dc -c &quot;sleep 10000&quot; &amp;</span>
+<a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a><span class="o">[</span><span class="m">2</span><span class="o">]</span> <span class="m">57035</span>
+<a id="__codelineno-5-12" name="__codelineno-5-12" href="#__codelineno-5-12"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># pgrep -l -u dc</span>
+<a id="__codelineno-5-13" name="__codelineno-5-13" href="#__codelineno-5-13"></a><span class="m">57037</span> sleep
+<a id="__codelineno-5-14" name="__codelineno-5-14" href="#__codelineno-5-14"></a><span class="c1">## 这种方式的话,就需要看第一列是dc</span>
+<a id="__codelineno-5-15" name="__codelineno-5-15" href="#__codelineno-5-15"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># ps aux | grep dc</span>
+<a id="__codelineno-5-16" name="__codelineno-5-16" href="#__codelineno-5-16"></a>root       <span class="m">1987</span>  <span class="m">0</span>.0  <span class="m">0</span>.0 <span class="m">376184</span>   <span class="m">176</span> ?        Sl   8月14   <span class="m">0</span>:00 /usr/libexec/ibus-dconf
+<a id="__codelineno-5-17" name="__codelineno-5-17" href="#__codelineno-5-17"></a>root       <span class="m">2018</span>  <span class="m">0</span>.0  <span class="m">0</span>.0 <span class="m">187400</span>   <span class="m">356</span> ?        Sl   8月14   <span class="m">0</span>:00 /usr/libexec/dconf-service
+<a id="__codelineno-5-18" name="__codelineno-5-18" href="#__codelineno-5-18"></a>root      <span class="m">57035</span>  <span class="m">0</span>.0  <span class="m">0</span>.3 <span class="m">231964</span>  <span class="m">3456</span> pts/1    S    <span class="m">18</span>:38   <span class="m">0</span>:00 su - dc -c sleep <span class="m">10000</span>
+<a id="__codelineno-5-19" name="__codelineno-5-19" href="#__codelineno-5-19"></a>dc        <span class="m">57037</span>  <span class="m">0</span>.0  <span class="m">0</span>.0 <span class="m">108052</span>   <span class="m">360</span> ?        Ss   <span class="m">18</span>:38   <span class="m">0</span>:00 sleep <span class="m">10000</span>
+<a id="__codelineno-5-20" name="__codelineno-5-20" href="#__codelineno-5-20"></a>root      <span class="m">57196</span>  <span class="m">0</span>.0  <span class="m">0</span>.0 <span class="m">112828</span>   <span class="m">984</span> pts/1    S+   <span class="m">18</span>:40   <span class="m">0</span>:00 grep --color<span class="o">=</span>auto dc
+<a id="__codelineno-5-21" name="__codelineno-5-21" href="#__codelineno-5-21"></a><span class="s2">&quot;&quot;&quot;</span>
+<a id="__codelineno-5-22" name="__codelineno-5-22" href="#__codelineno-5-22"></a><span class="s2">`su - dc -c &quot;</span>sleep <span class="m">10000</span><span class="s2">&quot; &amp;`这条命令启动了两个进程 </span>
+<a id="__codelineno-5-23" name="__codelineno-5-23" href="#__codelineno-5-23"></a><span class="s2">一个是su进程,一个是切换用户后以dc用户运行的sleep进程...</span>
+<a id="__codelineno-5-24" name="__codelineno-5-24" href="#__codelineno-5-24"></a><span class="s2">第一个是PID为 57035 的进程;另一个是PID为 57037 的子进程.</span>
+<a id="__codelineno-5-25" name="__codelineno-5-25" href="#__codelineno-5-25"></a><span class="s2">&quot;&quot;&quot;</span>
+<a id="__codelineno-5-26" name="__codelineno-5-26" href="#__codelineno-5-26"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># ps -elf | grep dc</span>
+<a id="__codelineno-5-27" name="__codelineno-5-27" href="#__codelineno-5-27"></a><span class="m">0</span> S root       <span class="m">1987</span>   <span class="m">1983</span>  <span class="m">0</span>  <span class="m">80</span>   <span class="m">0</span> - <span class="m">94046</span> poll_s 8月14 ?       <span class="m">00</span>:00:00 /usr/libexec/ibus-dconf
+<a id="__codelineno-5-28" name="__codelineno-5-28" href="#__codelineno-5-28"></a><span class="m">0</span> S root       <span class="m">2018</span>      <span class="m">1</span>  <span class="m">0</span>  <span class="m">80</span>   <span class="m">0</span> - <span class="m">46850</span> poll_s 8月14 ?       <span class="m">00</span>:00:00 /usr/libexec/dconf-service
+<a id="__codelineno-5-29" name="__codelineno-5-29" href="#__codelineno-5-29"></a><span class="m">4</span> S root      <span class="m">57035</span>  <span class="m">52706</span>  <span class="m">0</span>  <span class="m">80</span>   <span class="m">0</span> - <span class="m">57991</span> do_wai <span class="m">18</span>:38 pts/1    <span class="m">00</span>:00:00 su - dc -c sleep <span class="m">10000</span>
+<a id="__codelineno-5-30" name="__codelineno-5-30" href="#__codelineno-5-30"></a><span class="m">4</span> S dc        <span class="m">57037</span>  <span class="m">57035</span>  <span class="m">0</span>  <span class="m">80</span>   <span class="m">0</span> - <span class="m">27013</span> hrtime <span class="m">18</span>:38 ?        <span class="m">00</span>:00:00 sleep <span class="m">10000</span>
+<a id="__codelineno-5-31" name="__codelineno-5-31" href="#__codelineno-5-31"></a><span class="m">0</span> R root      <span class="m">57382</span>  <span class="m">52706</span>  <span class="m">0</span>  <span class="m">80</span>   <span class="m">0</span> - <span class="m">28207</span> -      <span class="m">18</span>:43 pts/1    <span class="m">00</span>:00:00 grep --color<span class="o">=</span>auto dc
+</code></pre></div>
+<hr />
+<h2 id="stat">详解进程的状态STAT<a class="headerlink" href="#stat" title="Permanent link">&para;</a></h2>
+<blockquote>
+<p>进程是一种动态描述, 并不代表所有的进程都在运行.<br />
+这就可以引入<code>进程状态</code>, 进程在内存中会因为各种策略或调度需求处于不同的状态..</p>
+<p><strong>R、S、D、T、Z、X</strong></p>
+<p><strong>&lt;&nbsp;&nbsp;&nbsp;&nbsp; N &nbsp;&nbsp;&nbsp;&nbsp; s &nbsp;&nbsp;&nbsp;&nbsp; + &nbsp;&nbsp;&nbsp;&nbsp; ｜ &nbsp;&nbsp;&nbsp;&nbsp; l  </strong>(这里是小写的英文字母l,不是数字1) &nbsp;&nbsp;&nbsp;&nbsp; 这6个符号可与上面6个状态组合搭配使用!!</p>
+</blockquote>
+<p><font color='red'><strong>R</strong></font> &nbsp;&nbsp;&nbsp;&nbsp; 运行, 该进程正在使用cpu</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="c1"># -- 第一个终端上运行</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># tty</span>
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>/dev/pts/0
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># vim 1.sh</span>
+<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># cat 1.sh</span>
+<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a><span class="k">while</span> true<span class="p">;</span><span class="k">do</span> <span class="o">((</span><span class="m">1</span>+1<span class="o">))</span><span class="p">;</span><span class="k">done</span>
+<a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># bash 1.sh</span>
+<a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a>
+<a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a><span class="c1"># -- 第二个终端上查看</span>
+<a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># tty</span>
+<a id="__codelineno-6-11" name="__codelineno-6-11" href="#__codelineno-6-11"></a>/dev/pts/1
+<a id="__codelineno-6-12" name="__codelineno-6-12" href="#__codelineno-6-12"></a><span class="c1">## R+ +号代表前台(意味着占用着终端呢)运行</span>
+<a id="__codelineno-6-13" name="__codelineno-6-13" href="#__codelineno-6-13"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># ps aux | grep 1.sh | grep -v grep</span>
+<a id="__codelineno-6-14" name="__codelineno-6-14" href="#__codelineno-6-14"></a>root      <span class="m">44419</span> <span class="m">99</span>.8  <span class="m">0</span>.1 <span class="m">113280</span>  <span class="m">1208</span> pts/0    R+   <span class="m">16</span>:06   <span class="m">1</span>:14 bash <span class="m">1</span>.sh
+<a id="__codelineno-6-15" name="__codelineno-6-15" href="#__codelineno-6-15"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># ps aux | grep 1.sh | grep -v grep</span>
+<a id="__codelineno-6-16" name="__codelineno-6-16" href="#__codelineno-6-16"></a>root      <span class="m">44419</span>  <span class="m">100</span>  <span class="m">0</span>.1 <span class="m">113280</span>  <span class="m">1208</span> pts/0    R+   <span class="m">16</span>:06   <span class="m">1</span>:45 bash <span class="m">1</span>.sh
+<a id="__codelineno-6-17" name="__codelineno-6-17" href="#__codelineno-6-17"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># ps aux | grep 1.sh | grep -v grep</span>
+<a id="__codelineno-6-18" name="__codelineno-6-18" href="#__codelineno-6-18"></a>root      <span class="m">44419</span> <span class="m">99</span>.7  <span class="m">0</span>.1 <span class="m">113280</span>  <span class="m">1208</span> pts/0    R+   <span class="m">16</span>:06   <span class="m">1</span>:46 bash <span class="m">1</span>.sh
+</code></pre></div>
+<p><font color='red'><strong>S</strong></font> &nbsp;&nbsp;&nbsp;&nbsp; 可中断睡眠 Sleep  =&gt;  遇到IO啦, <em>可正常的处理IO</em> ,执行的IO操作可以得到硬件设备的响应</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>绝大多数软件的大多数时候的状态都处于S状态,why? 因为现在的软件都离不开网络,有网络就会有网络IO..
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>像比特币的运算程序就非常耗费cpu的资源,一直在算..就像是死循环一样.cpu直接裂开..
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>注意哦!
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a>    这里进程的<span class="sb">`</span>S状态<span class="sb">`</span>别跟linux命令<span class="sb">`</span>sleep<span class="sb">`</span>混为一谈,sleep命令比较憨就是纯粹的休眠指定时间<span class="p">;</span>
+<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a>    但可以用sleep命令模拟IO行为.
+<a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a>
+<a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a><span class="c1"># -- 第一个终端上运行 让其运算中途停止1秒</span>
+<a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># vim 2.sh</span>
+<a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># cat 2.sh</span>
+<a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a><span class="k">while</span> true<span class="p">;</span><span class="k">do</span> <span class="o">((</span><span class="m">1</span>+1<span class="o">))</span><span class="p">;</span>sleep <span class="m">1</span><span class="p">;</span><span class="k">done</span>
+<a id="__codelineno-7-11" name="__codelineno-7-11" href="#__codelineno-7-11"></a>
+<a id="__codelineno-7-12" name="__codelineno-7-12" href="#__codelineno-7-12"></a><span class="c1"># -- 第二个终端上查看 监测不到R状态是因为 1+1的运算几乎没有耗时 极难捕捉到</span>
+<a id="__codelineno-7-13" name="__codelineno-7-13" href="#__codelineno-7-13"></a><span class="c1"># 试着捕捉下:(不要纠结!)</span>
+<a id="__codelineno-7-14" name="__codelineno-7-14" href="#__codelineno-7-14"></a>  <span class="m">1</span>&gt; <span class="sb">`</span>top -p <span class="m">44615</span><span class="sb">`</span>
+<a id="__codelineno-7-15" name="__codelineno-7-15" href="#__codelineno-7-15"></a>     使用top命令也监测不到 top命令的本质就是默认3秒执行一次ps aux命令,实时性也不是很高.
+<a id="__codelineno-7-16" name="__codelineno-7-16" href="#__codelineno-7-16"></a>  <span class="m">2</span>&gt; <span class="sb">`</span><span class="k">while</span> true<span class="p">;</span><span class="k">do</span> ps aux <span class="p">|</span> grep <span class="m">2</span>.sh <span class="p">|</span> grep -v grep<span class="p">;</span><span class="k">done</span><span class="sb">`</span>
+<a id="__codelineno-7-17" name="__codelineno-7-17" href="#__codelineno-7-17"></a>     使用死循环,也捕捉不到,1+1运算耗时太短了
+<a id="__codelineno-7-18" name="__codelineno-7-18" href="#__codelineno-7-18"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># ps aux | grep 2.sh | grep -v grep</span>
+<a id="__codelineno-7-19" name="__codelineno-7-19" href="#__codelineno-7-19"></a>root      <span class="m">44615</span>  <span class="m">0</span>.0  <span class="m">0</span>.1 <span class="m">113280</span>  <span class="m">1388</span> pts/0    S+   <span class="m">16</span>:09   <span class="m">0</span>:00 bash <span class="m">2</span>.sh
+<a id="__codelineno-7-20" name="__codelineno-7-20" href="#__codelineno-7-20"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># ps aux | grep 2.sh | grep -v grep</span>
+<a id="__codelineno-7-21" name="__codelineno-7-21" href="#__codelineno-7-21"></a>root      <span class="m">44615</span>  <span class="m">0</span>.0  <span class="m">0</span>.1 <span class="m">113280</span>  <span class="m">1388</span> pts/0    S+   <span class="m">16</span>:09   <span class="m">0</span>:00 bash <span class="m">2</span>.sh
+<a id="__codelineno-7-22" name="__codelineno-7-22" href="#__codelineno-7-22"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># ps aux | grep 2.sh | grep -v grep</span>
+<a id="__codelineno-7-23" name="__codelineno-7-23" href="#__codelineno-7-23"></a>root      <span class="m">44615</span>  <span class="m">0</span>.0  <span class="m">0</span>.1 <span class="m">113280</span>  <span class="m">1388</span> pts/0    S+   <span class="m">16</span>:09   <span class="m">0</span>:00 bash <span class="m">2</span>.sh
+</code></pre></div>
+<p><font color='red'><strong>D</strong></font> &nbsp;&nbsp;&nbsp;&nbsp; 不可中断睡眠<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 遇到IO啦, <em>想要处理IO</em>, 但执行的IO操作得不到硬件设备的响应,硬件设备压根儿不鸟你..<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 意味着硬件设备此时的压力太大了,忙活不过来啦!!没空搭理你.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <font color='gray'>Ps:一旦进程处于这个状态,杀都杀不掉 Hhh</font></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>解决方案:<span class="o">(</span>现目前只能这么做<span class="o">)</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>    一旦进程状态出现D,降低下硬盘的压力,将一些不必要的写操作干掉,让关键的写操作能得到响应.
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>
+<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="c1"># -- 第一个终端上运行 从硬盘上将指定的内容读出来写到指定的地方去</span>
+<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># tar czf /root/egon.tar.gz /etc/ /usr/ /tmp/ /boot/ </span>
+<a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a>tar: 从成员名中删除开头的“/”
+<a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a>tar: 从硬连接目标中删除开头的“/”
+<a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a>
+<a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a><span class="c1"># -- 第二个终端上查看 有运行(R+);有正常的IO(S+);也有可能硬盘压力过大响应不过来(D+)</span>
+<a id="__codelineno-8-10" name="__codelineno-8-10" href="#__codelineno-8-10"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># ps aux | grep [c]zf</span>
+<a id="__codelineno-8-11" name="__codelineno-8-11" href="#__codelineno-8-11"></a>root      <span class="m">49735</span>  <span class="m">2</span>.4  <span class="m">0</span>.1 <span class="m">124132</span>  <span class="m">1932</span> pts/0    S+   <span class="m">16</span>:39   <span class="m">0</span>:00 tar czf /root/egon.tar...
+<a id="__codelineno-8-12" name="__codelineno-8-12" href="#__codelineno-8-12"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># ps aux | grep [c]zf</span>
+<a id="__codelineno-8-13" name="__codelineno-8-13" href="#__codelineno-8-13"></a>root      <span class="m">49735</span>  <span class="m">2</span>.4  <span class="m">0</span>.1 <span class="m">124132</span>  <span class="m">1932</span> pts/0    S+   <span class="m">16</span>:39   <span class="m">0</span>:00 tar czf /root/egon.tar...
+<a id="__codelineno-8-14" name="__codelineno-8-14" href="#__codelineno-8-14"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># ps aux | grep [c]zf</span>
+<a id="__codelineno-8-15" name="__codelineno-8-15" href="#__codelineno-8-15"></a>root      <span class="m">49735</span>  <span class="m">2</span>.6  <span class="m">0</span>.1 <span class="m">124132</span>  <span class="m">1932</span> pts/0    R+   <span class="m">16</span>:39   <span class="m">0</span>:00 tar czf /root/egon.tar...
+<a id="__codelineno-8-16" name="__codelineno-8-16" href="#__codelineno-8-16"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># ps aux | grep [c]zf</span>
+<a id="__codelineno-8-17" name="__codelineno-8-17" href="#__codelineno-8-17"></a>root      <span class="m">49735</span>  <span class="m">2</span>.9  <span class="m">0</span>.1 <span class="m">124132</span>  <span class="m">1932</span> pts/0    D+   <span class="m">16</span>:39   <span class="m">0</span>:00 tar czf /root/egon.tar...
+<a id="__codelineno-8-18" name="__codelineno-8-18" href="#__codelineno-8-18"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># ps aux | grep [c]zf</span>
+<a id="__codelineno-8-19" name="__codelineno-8-19" href="#__codelineno-8-19"></a>root      <span class="m">49735</span>  <span class="m">3</span>.0  <span class="m">0</span>.1 <span class="m">124132</span>  <span class="m">1932</span> pts/0    S+   <span class="m">16</span>:39   <span class="m">0</span>:00 tar czf /root/egon.tar...
+</code></pre></div>
+<p><font color='red'><strong>T</strong></font> &nbsp;&nbsp;&nbsp;&nbsp; 停止/中止的进程</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="c1"># -- 第一个终端上运行 进入vim编辑界面后 control+z停止</span>
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># vim a.txt</span>
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>
+<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="o">[</span><span class="m">2</span><span class="o">]</span>+  已停止               vim a.txt
+<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a>
+<a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a><span class="c1"># -- 第二个终端上查看</span>
+<a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a><span class="c1">## 这个是第一个终端在vim界面时</span>
+<a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># ps aux | grep [v]im</span>
+<a id="__codelineno-9-9" name="__codelineno-9-9" href="#__codelineno-9-9"></a>root      <span class="m">48892</span>  <span class="m">0</span>.2  <span class="m">0</span>.5 <span class="m">149820</span>  <span class="m">5436</span> pts/0    S+   <span class="m">16</span>:26   <span class="m">0</span>:00 vim a.txt
+<a id="__codelineno-9-10" name="__codelineno-9-10" href="#__codelineno-9-10"></a><span class="c1">## 这个是第一个终端control+z停止,退出vim界面后</span>
+<a id="__codelineno-9-11" name="__codelineno-9-11" href="#__codelineno-9-11"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># ps aux | grep [v]im</span>
+<a id="__codelineno-9-12" name="__codelineno-9-12" href="#__codelineno-9-12"></a>root      <span class="m">48892</span>  <span class="m">0</span>.0  <span class="m">0</span>.5 <span class="m">149820</span>  <span class="m">5436</span> pts/0    T    <span class="m">16</span>:26   <span class="m">0</span>:00 vim a.txt
+</code></pre></div>
+<p><font color='red'><strong>Z</strong></font> &nbsp;&nbsp;&nbsp;&nbsp; 僵尸进程, 处于该状态的进程同样杀不死!!!</p>
+<p><font color='red'><strong>X</strong></font> &nbsp;&nbsp;&nbsp;&nbsp; 死掉的进程(几乎看不见,因为死了就立即回收了)</p>
+<p><font color='blue'><strong>&lt;</strong> </font> &nbsp;&nbsp;&nbsp;&nbsp; 标注了&lt;小于号代表优先级较高的进程</p>
+<p><font color='blue'><strong>N</strong> </font> &nbsp;&nbsp;&nbsp;&nbsp; N代表优先级较低的进程</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>进程的优先级涉及到nice值<span class="o">(</span>也叫做好心值<span class="o">)</span>:
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>    好心值越低优先级越高<span class="o">(</span>妥妥的欺负老实人呗<span class="o">)</span> 
+<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>    nice值的范围<span class="o">[</span>-20,19<span class="o">]</span>
+<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a>
+<a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a><span class="c1">## &amp; 代表后台运行</span>
+<a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># nice -n -20 sleep 3000 &amp;</span>
+<a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a><span class="o">[</span><span class="m">3</span><span class="o">]</span> <span class="m">51827</span>
+<a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># nice -n 19 sleep 5000 &amp;</span>
+<a id="__codelineno-10-9" name="__codelineno-10-9" href="#__codelineno-10-9"></a><span class="o">[</span><span class="m">4</span><span class="o">]</span> <span class="m">51835</span>
+<a id="__codelineno-10-10" name="__codelineno-10-10" href="#__codelineno-10-10"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># ps aux | grep [s]leep</span>
+<a id="__codelineno-10-11" name="__codelineno-10-11" href="#__codelineno-10-11"></a>root      <span class="m">51797</span>  <span class="m">0</span>.0  <span class="m">0</span>.0 <span class="m">108052</span>   <span class="m">360</span> ?        S    <span class="m">17</span>:12   <span class="m">0</span>:00 sleep <span class="m">60</span>
+<a id="__codelineno-10-12" name="__codelineno-10-12" href="#__codelineno-10-12"></a>root      <span class="m">51827</span>  <span class="m">0</span>.0  <span class="m">0</span>.0 <span class="m">108052</span>   <span class="m">360</span> pts/0    S&lt;   <span class="m">17</span>:13   <span class="m">0</span>:00 sleep <span class="m">3000</span>
+<a id="__codelineno-10-13" name="__codelineno-10-13" href="#__codelineno-10-13"></a>root      <span class="m">51835</span>  <span class="m">0</span>.0  <span class="m">0</span>.0 <span class="m">108052</span>   <span class="m">356</span> pts/0    SN   <span class="m">17</span>:13   <span class="m">0</span>:00 sleep <span class="m">5000</span>
+</code></pre></div>
+<p><font color='blue'><strong>s</strong> </font> &nbsp;&nbsp;&nbsp;&nbsp; 包含子进程</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># ps aux | grep nginx | grep -v grep</span>
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="c1">## 此处的Ss 小写s指的就是PID为75066的子进程</span>
+<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a>root      <span class="m">75065</span>  <span class="m">0</span>.0  <span class="m">0</span>.0  <span class="m">20576</span>     <span class="m">8</span> ?        Ss   8月21   <span class="m">0</span>:00 nginx: master process /usr/local/nginx-1.22.0/sbin/nginx
+<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a>nobody    <span class="m">75066</span>  <span class="m">0</span>.0  <span class="m">0</span>.0  <span class="m">23104</span>     <span class="m">8</span> ?        S    8月21   <span class="m">0</span>:00 nginx: worker process
+</code></pre></div>
+<p><font color='blue'><strong>+</strong> </font> &nbsp;&nbsp;&nbsp;&nbsp; +表示进程是在前台运行(占着终端屏幕..)</p>
+<p><font color='blue'><strong>l</strong> </font> &nbsp;&nbsp;&nbsp;&nbsp; 小写字母l, 代表以线程的方式运行,即多线程</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="c1"># -- 第一个终端上运行</span>
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># vim a.py</span>
+<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># cat a.py</span>
+<a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a>from threading import Thread
+<a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a>import <span class="nb">time</span>
+<a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a>import os
+<a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a>
+<a id="__codelineno-12-8" name="__codelineno-12-8" href="#__codelineno-12-8"></a>def task<span class="o">()</span>:
+<a id="__codelineno-12-9" name="__codelineno-12-9" href="#__codelineno-12-9"></a>    time.sleep<span class="o">(</span><span class="m">100</span><span class="o">)</span>
+<a id="__codelineno-12-10" name="__codelineno-12-10" href="#__codelineno-12-10"></a>
+<a id="__codelineno-12-11" name="__codelineno-12-11" href="#__codelineno-12-11"></a><span class="k">if</span> <span class="nv">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span>:
+<a id="__codelineno-12-12" name="__codelineno-12-12" href="#__codelineno-12-12"></a>    print<span class="o">(</span>os.getpid<span class="o">())</span>
+<a id="__codelineno-12-13" name="__codelineno-12-13" href="#__codelineno-12-13"></a>    <span class="k">for</span> i <span class="k">in</span> range<span class="o">(</span><span class="m">10</span><span class="o">)</span>:
+<a id="__codelineno-12-14" name="__codelineno-12-14" href="#__codelineno-12-14"></a>        <span class="nv">t</span> <span class="o">=</span> Thread<span class="o">(</span><span class="nv">target</span><span class="o">=</span>task<span class="o">)</span>
+<a id="__codelineno-12-15" name="__codelineno-12-15" href="#__codelineno-12-15"></a>    t.start<span class="o">()</span>
+<a id="__codelineno-12-16" name="__codelineno-12-16" href="#__codelineno-12-16"></a>
+<a id="__codelineno-12-17" name="__codelineno-12-17" href="#__codelineno-12-17"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># python a.py</span>
+<a id="__codelineno-12-18" name="__codelineno-12-18" href="#__codelineno-12-18"></a><span class="m">54844</span>
+<a id="__codelineno-12-19" name="__codelineno-12-19" href="#__codelineno-12-19"></a>
+<a id="__codelineno-12-20" name="__codelineno-12-20" href="#__codelineno-12-20"></a><span class="c1"># -- 第二个终端上查看 在py程序还在运行的时候查看!!</span>
+<a id="__codelineno-12-21" name="__codelineno-12-21" href="#__codelineno-12-21"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># ps aux | grep 54844 | grep -v grep</span>
+<a id="__codelineno-12-22" name="__codelineno-12-22" href="#__codelineno-12-22"></a>root      <span class="m">54844</span>  <span class="m">0</span>.0  <span class="m">0</span>.5 <span class="m">740392</span>  <span class="m">5048</span> pts/1    Sl+  <span class="m">18</span>:02   <span class="m">0</span>:00 python a.py
+</code></pre></div>
+<p><font color='blue'><strong>|</strong> </font>    管道符号代表多进程     </p>
+<hr />
+<h2 id="top">动态查看top<a class="headerlink" href="#top" title="Permanent link">&para;</a></h2>
+<h3 id="_3"><font color='orange'>命令行选项</font><a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p>-d ; -p ; -u</p>
+</blockquote>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># sleep 1000 &amp;</span>
+<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="o">[</span><span class="m">1</span><span class="o">]</span> <span class="m">68309</span>
+<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># pgrep nginx</span>
+<a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a><span class="m">75065</span>
+<a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a><span class="m">75066</span>
+<a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a>
+<a id="__codelineno-13-7" name="__codelineno-13-7" href="#__codelineno-13-7"></a><span class="c1">## -d 指定几秒刷新一次; -p 指定动态刷新的进程</span>
+<a id="__codelineno-13-8" name="__codelineno-13-8" href="#__codelineno-13-8"></a>top -d <span class="m">1</span> -p <span class="m">68309</span>   
+<a id="__codelineno-13-9" name="__codelineno-13-9" href="#__codelineno-13-9"></a><span class="c1">## pgrep nginx结果是进程PID,用head过滤第一个,用逗号连接表示一连串的进程</span>
+<a id="__codelineno-13-10" name="__codelineno-13-10" href="#__codelineno-13-10"></a><span class="c1">## 查看nginx以及pid为68309的进程</span>
+<a id="__codelineno-13-11" name="__codelineno-13-11" href="#__codelineno-13-11"></a>top -d <span class="m">1</span> -p <span class="sb">`</span>pgrep nginx <span class="p">|</span> head -1<span class="sb">`</span>,68309 
+<a id="__codelineno-13-12" name="__codelineno-13-12" href="#__codelineno-13-12"></a><span class="c1">## 查看egon用户开启的进程</span>
+<a id="__codelineno-13-13" name="__codelineno-13-13" href="#__codelineno-13-13"></a>top -d <span class="m">1</span> -u egon
+</code></pre></div>
+<h3 id="_4"><font color='orange'>显示内容解释</font><a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p>关注: up 、<strong>load average</strong>、Tasks、%Cpu的us sy id、KiB Mem、KiB Swap<br />
+&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; PID、USER、NI、VIRT、RES、SHR、S<br />
+Ps: 只看 <strong>load average</strong> 那一行的命令 -- <code>uptime</code></p>
+</blockquote>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>top - <span class="m">10</span>:34:42 up <span class="m">8</span> days, <span class="m">16</span>:10,  <span class="m">4</span> users,  load average: <span class="m">0</span>.00, <span class="m">0</span>.02, <span class="m">0</span>.05
+<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>Tasks: <span class="m">213</span> total,   <span class="m">1</span> running, <span class="m">211</span> sleeping,   <span class="m">1</span> stopped,   <span class="m">0</span> zombie
+<a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a>%Cpu<span class="o">(</span>s<span class="o">)</span>:  <span class="m">1</span>.0 us,  <span class="m">1</span>.0 sy,  <span class="m">0</span>.0 ni, <span class="m">98</span>.0 id,  <span class="m">0</span>.0 wa,  <span class="m">0</span>.0 hi,  <span class="m">0</span>.0 si,  <span class="m">0</span>.0 st
+<a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a>KiB Mem :   <span class="m">995640</span> total,   <span class="m">173984</span> free,   <span class="m">558128</span> used,   <span class="m">263528</span> buff/cache
+<a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a>KiB Swap:  <span class="m">2097148</span> total,  <span class="m">1706236</span> free,   <span class="m">390912</span> used.   <span class="m">257816</span> avail Mem 
+<a id="__codelineno-14-6" name="__codelineno-14-6" href="#__codelineno-14-6"></a>
+<a id="__codelineno-14-7" name="__codelineno-14-7" href="#__codelineno-14-7"></a>   PID USER      PR  NI    VIRT    RES    SHR S %CPU %MEM     TIME+ COMMAND                 
+<a id="__codelineno-14-8" name="__codelineno-14-8" href="#__codelineno-14-8"></a> <span class="m">72062</span> dc        <span class="m">20</span>   <span class="m">0</span>  <span class="m">116960</span>   <span class="m">3328</span>   <span class="m">1708</span> S  <span class="m">0</span>.0  <span class="m">0</span>.3   <span class="m">0</span>:00.09 bash                    
+<a id="__codelineno-14-9" name="__codelineno-14-9" href="#__codelineno-14-9"></a> <span class="m">73191</span> dc        <span class="m">20</span>   <span class="m">0</span>  <span class="m">108052</span>    <span class="m">360</span>    <span class="m">284</span> S  <span class="m">0</span>.0  <span class="m">0</span>.0   <span class="m">0</span>:00.00 sleep  
+</code></pre></div>
+<h5 id="_5"><font color='purple' size=4>[系统整体统计信息]</font><a class="headerlink" href="#_5" title="Permanent link">&para;</a></h5>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="c1">## -- 这里的平均负载是将所有cpu资源都涵盖在内 当前时间点往过去1min内/5min内/15min内的平均负载</span>
+<a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a>top - 当前系统时间 up 运行了多长时间, 4个用户<span class="o">(</span>本机和远程登录的<span class="o">)</span> , CPU平均负载 1分钟的,5分钟的,15分钟的
+<a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a><span class="c1">## -- 处于sleeping的进程数越多 cpu就越轻松 系统越健康; running比较多 反应正在大忙活..</span>
+<a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a><span class="c1">## -- 处于T状态的,若不需要,可以考虑把它干掉..(占用空间又不干事)  </span>
+<a id="__codelineno-15-5" name="__codelineno-15-5" href="#__codelineno-15-5"></a><span class="c1">## -- D和Z状态的进程kill -9也杀不死;只能曲线救国,比如D等硬件设备响应</span>
+<a id="__codelineno-15-6" name="__codelineno-15-6" href="#__codelineno-15-6"></a>任务: 总共运行了213个进程, 有一个正在运行<span class="o">(</span>R<span class="o">)</span>, <span class="m">211</span> 个在睡眠<span class="o">(</span>S<span class="o">)</span>, 有一个被停止<span class="o">(</span>T<span class="o">)</span>, 有0个僵尸进程
+<a id="__codelineno-15-7" name="__codelineno-15-7" href="#__codelineno-15-7"></a>%Cpu<span class="o">(</span>s<span class="o">)</span>: <span class="c1">## -- 罗列的是所有cpu的平均情况   %Cpu0 %Cpu1 %Cpu2</span>
+<a id="__codelineno-15-8" name="__codelineno-15-8" href="#__codelineno-15-8"></a><span class="s2">&quot;&quot;&quot;</span>
+<a id="__codelineno-15-9" name="__codelineno-15-9" href="#__codelineno-15-9"></a><span class="s2">us  用户态进程(即应用程序)占用cpu时间的百分比</span>
+<a id="__codelineno-15-10" name="__codelineno-15-10" href="#__codelineno-15-10"></a><span class="s2">sy  内核态进程(即操作系统)占用cpu时间的百分比</span>
+<a id="__codelineno-15-11" name="__codelineno-15-11" href="#__codelineno-15-11"></a><span class="s2">ni  代表优先被调度的进程占cpu时间的百分比</span>
+<a id="__codelineno-15-12" name="__codelineno-15-12" href="#__codelineno-15-12"></a><span class="s2">id  cpu空闲的百分比</span>
+<a id="__codelineno-15-13" name="__codelineno-15-13" href="#__codelineno-15-13"></a><span class="s2">wa  cpu等待进程将io做完的百分比 此值较高的话代表计算机IO比较繁忙</span>
+<a id="__codelineno-15-14" name="__codelineno-15-14" href="#__codelineno-15-14"></a><span class="s2">hi  硬件中断,处理硬件中断所占用CPU的时间 此值大的话,表明硬件在不断忙活</span>
+<a id="__codelineno-15-15" name="__codelineno-15-15" href="#__codelineno-15-15"></a><span class="s2">si  软件中断,处理软件中断所占用CPU的时间</span>
+<a id="__codelineno-15-16" name="__codelineno-15-16" href="#__codelineno-15-16"></a><span class="s2">st  被偷走的cpu,跟虚拟化有关</span>
+<a id="__codelineno-15-17" name="__codelineno-15-17" href="#__codelineno-15-17"></a><span class="s2">&quot;&quot;&quot;</span>
+<a id="__codelineno-15-18" name="__codelineno-15-18" href="#__codelineno-15-18"></a><span class="c1">## -- buff/cache linux的内存优化机制,自作主张的将闲着的内存来做优化 优化读写</span>
+<a id="__codelineno-15-19" name="__codelineno-15-19" href="#__codelineno-15-19"></a><span class="c1">## -- 详见 0_计算机基础/1_计算机硬件组成.md中 软件与三大核心的关系 这部分内容</span>
+<a id="__codelineno-15-20" name="__codelineno-15-20" href="#__codelineno-15-20"></a>物理内存空间<span class="o">(</span>单位kb<span class="o">)</span>: 总计 <span class="m">995640</span>,   空闲 <span class="m">173984</span>,   已使用 <span class="m">558128</span>,   <span class="m">263528</span> buff/cache
+<a id="__codelineno-15-21" name="__codelineno-15-21" href="#__codelineno-15-21"></a><span class="c1">## -- 此处的used 已使用的值大于0,代表物理内存不够用了,开始swap out啦!</span>
+<a id="__codelineno-15-22" name="__codelineno-15-22" href="#__codelineno-15-22"></a><span class="c1">## -- 占用物理内存多少百分比后开始使用swap分区当临时内存 可以设置 `cat  /proc/sys/vm/swappiness`</span>
+<a id="__codelineno-15-23" name="__codelineno-15-23" href="#__codelineno-15-23"></a><span class="c1">## -- 详见 0_计算机基础/1_计算机硬件组成.md中 [虚拟内存] 这部分内容</span>
+<a id="__codelineno-15-24" name="__codelineno-15-24" href="#__codelineno-15-24"></a>交换区/虚拟内存空间<span class="o">(</span>单位kb<span class="o">)</span>: 总计 <span class="m">2097148</span>,  空闲 <span class="m">1706236</span>,  已使用 <span class="m">390912</span>,  <span class="m">257816</span> avail Mem 
+<a id="__codelineno-15-25" name="__codelineno-15-25" href="#__codelineno-15-25"></a>
+<a id="__codelineno-15-26" name="__codelineno-15-26" href="#__codelineno-15-26"></a>SWAP OUT: 当某进程向OS请求内存发现不足时,OS会把内存中暂时不用的数据交换出去,放在SWAP分区中<span class="p">;</span>
+<a id="__codelineno-15-27" name="__codelineno-15-27" href="#__codelineno-15-27"></a>SWAP IN:  当某进程又需要这些数据且OS发现还有空闲物理内存时,又会把SWAP分区中的数据交换回物理内存中.
+<a id="__codelineno-15-28" name="__codelineno-15-28" href="#__codelineno-15-28"></a>Ps: buff、cache、swap还可参考 <span class="sb">`</span>https://blog.csdn.net/dingding_ting/article/details/86495076<span class="sb">`</span>
+<a id="__codelineno-15-29" name="__codelineno-15-29" href="#__codelineno-15-29"></a>
+<a id="__codelineno-15-30" name="__codelineno-15-30" href="#__codelineno-15-30"></a>中断是一个异步的事件处理机制,可以提高操作系统处理并发的能力.
+<a id="__codelineno-15-31" name="__codelineno-15-31" href="#__codelineno-15-31"></a>中断参考链接: <span class="sb">`</span>https://www.cnblogs.com/linhaifeng/articles/13916102.html<span class="sb">`</span>
+<a id="__codelineno-15-32" name="__codelineno-15-32" href="#__codelineno-15-32"></a>硬件中断相当于硬性打断你手中的活,去干指派的活,然后又来其他活了,又打断手中的活,最后啥也做不成...
+<a id="__codelineno-15-33" name="__codelineno-15-33" href="#__codelineno-15-33"></a>软件中断相当于来活了,ok,我记录了下来,合适的时候,会去执行它...
+</code></pre></div>
+<p><strong>Q1:</strong> what <font color='red'><strong>平均负载</strong></font>？<br />
+A1: 平均负载是指, 单位时间内系统处于可运行状态和不可中断状态的平均进程数, 也就是平均活跃进程数..</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># uptime</span>
+<a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a><span class="m">10</span>:34:42 up <span class="m">8</span> days, <span class="m">16</span>:10,  <span class="m">4</span> users,  load average: <span class="m">0</span>.00, <span class="m">0</span>.02, <span class="m">0</span>.05
+</code></pre></div>
+<p><strong>Q2:</strong> <font color='green'>平均负载多少合理? </font><br />
+A2: 如下</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>  <span class="o">------------------------------------------------</span>
+<a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a>  <span class="n">核心数</span>      <span class="n">平均负载</span>        <span class="n">含义</span>
+<a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a>  <span class="o">------------------------------------------------</span>
+<a id="__codelineno-17-4" name="__codelineno-17-4" href="#__codelineno-17-4"></a>  <span class="mi">4</span>             <span class="mi">4</span>         <span class="n">每个cpu</span><span class="p">(</span><span class="n">核</span><span class="p">)</span><span class="n">都在满负载运行</span>
+<a id="__codelineno-17-5" name="__codelineno-17-5" href="#__codelineno-17-5"></a>  <span class="mi">4</span>                      <span class="o">&lt;</span> <span class="mi">4</span>        <span class="n">还有空闲</span><span class="p">,</span><span class="n">问题不大</span>
+<a id="__codelineno-17-6" name="__codelineno-17-6" href="#__codelineno-17-6"></a>  <span class="mi">4</span>                      <span class="o">&gt;</span> <span class="mi">4</span>        <span class="n">超负荷运行</span>
+<a id="__codelineno-17-7" name="__codelineno-17-7" href="#__codelineno-17-7"></a>  <span class="o">--</span>           <span class="o">---</span>        <span class="o">---</span> <span class="o">---</span> <span class="o">---</span> <span class="o">---</span> <span class="o">---</span> <span class="o">---</span>
+<a id="__codelineno-17-8" name="__codelineno-17-8" href="#__codelineno-17-8"></a>  <span class="mi">4</span>             <span class="mi">2</span>         <span class="n">有一半</span><span class="p">(</span><span class="mi">50</span><span class="o">%</span><span class="p">)</span><span class="n">的CPU是空闲状态</span>
+<a id="__codelineno-17-9" name="__codelineno-17-9" href="#__codelineno-17-9"></a>  <span class="mi">2</span>             <span class="mi">2</span>         <span class="n">CPU刚好完全被占用</span>
+<a id="__codelineno-17-10" name="__codelineno-17-10" href="#__codelineno-17-10"></a>  <span class="mi">1</span>             <span class="mi">2</span>         <span class="n">至少一半的进程是抢不到CPU</span>
+<a id="__codelineno-17-11" name="__codelineno-17-11" href="#__codelineno-17-11"></a>  <span class="o">------------------------------------------------</span>
+</code></pre></div>
+<p><strong>Q3:</strong> <font color='green'>平均负载的三个数值如何看？</font><br />
+A3:  三个值相当于三个样本, 我们应该统筹的看<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 1&gt; 若1分钟,5分钟,15分钟的负载数值相差不大. 并且都没有满负荷, 则代表系统的负载很'稳定'<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2&gt; 若1分钟(<font color='gray'>当前时间往过去推1分钟</font>)的负载值远小于15分钟(<font color='gray'>当前时间往过去推15分钟</font>)的.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; 那么证明过去系统经受了高并发,但现目前的压力降下来了.. <br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; 不必紧张,但15分钟区间内,系统负载上升的原因,还需要我们认真查明 <br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 3&gt; 若1分钟的负载值远超过15分钟的. 那么证明过去没有高并发,但是此刻正在经受高并发..需要分析处理..<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 4&gt; 一旦1分钟的平均负载接近或超过了CPU的个数, 就意味着系统正在发生过载的问题, 这时候就得分析优化..</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a><span class="k">while</span> true<span class="p">;</span><span class="k">do</span> <span class="o">((</span><span class="m">1</span>+1<span class="o">))</span><span class="p">;</span><span class="k">done</span> <span class="p">&amp;</span>    <span class="c1"># -- 无任何的IO,休眠行为 纯计算型</span>
+<a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a><span class="k">while</span> true<span class="p">;</span><span class="k">do</span> <span class="o">((</span><span class="m">1</span>+1<span class="o">))</span><span class="p">;</span>sleep <span class="m">0</span>.1<span class="p">;</span><span class="k">done</span> <span class="p">&amp;</span>  <span class="c1"># -- 此进程启动后,后台运行,大部分时间都在睡 IO密集型</span>
+<a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a>
+<a id="__codelineno-18-4" name="__codelineno-18-4" href="#__codelineno-18-4"></a>IO密集型:  该进程大量的时间在做IO, 做IO的时间远大于计算的时间
+<a id="__codelineno-18-5" name="__codelineno-18-5" href="#__codelineno-18-5"></a>          对cpu的影响不大,但架不住量多!!!
+<a id="__codelineno-18-6" name="__codelineno-18-6" href="#__codelineno-18-6"></a>计算密集型:  该进程大量的时间在做运算, 计算的时间远大于做IO的时间
+<a id="__codelineno-18-7" name="__codelineno-18-7" href="#__codelineno-18-7"></a>
+<a id="__codelineno-18-8" name="__codelineno-18-8" href="#__codelineno-18-8"></a><span class="s2">&quot;&quot;&quot;</span>
+<a id="__codelineno-18-9" name="__codelineno-18-9" href="#__codelineno-18-9"></a><span class="s2">补充两工具(了解即可)</span>
+<a id="__codelineno-18-10" name="__codelineno-18-10" href="#__codelineno-18-10"></a><span class="s2">&quot;&quot;&quot;</span>
+<a id="__codelineno-18-11" name="__codelineno-18-11" href="#__codelineno-18-11"></a>▲ <span class="sb">`</span>yum install stress -y<span class="sb">`</span>
+<a id="__codelineno-18-12" name="__codelineno-18-12" href="#__codelineno-18-12"></a>stress是Linux系统压力测试工具,可用作异常进程模拟平均负载升高的场景
+<a id="__codelineno-18-13" name="__codelineno-18-13" href="#__codelineno-18-13"></a>需要安装  stress本质就是就是进行计算密集型的死循环
+<a id="__codelineno-18-14" name="__codelineno-18-14" href="#__codelineno-18-14"></a>    <span class="c1"># -- 4代表4个核 3000代表持续加压3000秒 执行此命令后会瞬间将4个cpu占满</span>
+<a id="__codelineno-18-15" name="__codelineno-18-15" href="#__codelineno-18-15"></a>    stress --cpu <span class="m">4</span> --timeout <span class="m">3000</span> 
+<a id="__codelineno-18-16" name="__codelineno-18-16" href="#__codelineno-18-16"></a>
+<a id="__codelineno-18-17" name="__codelineno-18-17" href="#__codelineno-18-17"></a>▲ <span class="sb">`</span>yum install sysstat -y<span class="sb">`</span> 会得到下述两个命令
+<a id="__codelineno-18-18" name="__codelineno-18-18" href="#__codelineno-18-18"></a>mpstat  是多核CPU性能分析工具,用来实时检查每个CPU的性能指标,以及所有CPU的平均指标.
+<a id="__codelineno-18-19" name="__codelineno-18-19" href="#__codelineno-18-19"></a>    mpstat -P ALL <span class="m">3</span> <span class="c1"># -- 输出全部cpu所有指标,以3秒为间隔不间断刷</span>
+<a id="__codelineno-18-20" name="__codelineno-18-20" href="#__codelineno-18-20"></a>pidstat 是一个常用的进程性能分析工具,用来实时查看进程的CPU、内存、IO以及上下文切换等性能指标.
+<a id="__codelineno-18-21" name="__codelineno-18-21" href="#__codelineno-18-21"></a>    pidstat -u <span class="m">1</span> <span class="m">5</span>  <span class="c1"># -- 1秒一次,总共输出5次</span>
+</code></pre></div>
+<h5 id="_6"><font color='purple' size=4>[进程信息]</font><a class="headerlink" href="#_6" title="Permanent link">&para;</a></h5>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a>PID USER      PR  NI    VIRT    RES    SHR S %CPU %MEM     TIME+ COMMAND   
+<a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a>
+<a id="__codelineno-19-3" name="__codelineno-19-3" href="#__codelineno-19-3"></a>TIME:       进程使用的CPU时间总计,单位秒
+<a id="__codelineno-19-4" name="__codelineno-19-4" href="#__codelineno-19-4"></a>TIME+:  进程使用的CPU时间总计,单位1/100秒
+</code></pre></div>
+<p>VIRT:&nbsp;&nbsp;&nbsp;&nbsp; virtual memory usage 虚拟内存 <br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 1&gt; 预先分配给该进程这么多,但不代表实际占用这么多.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2&gt; 是指该进程“需要的”虚拟内存大小,包括进程使用的库、代码、数据等.. <br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 3&gt; 跟swap分区没有关系！！</p>
+<p>RES:&nbsp;&nbsp;&nbsp;&nbsp; resident memory usage 常驻内存<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 1&gt; 进程当前使用/占用的内存大小, 但不包括swap out<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2&gt; RES包含了SHR共享空间</p>
+<p>SHR:&nbsp;&nbsp;&nbsp;&nbsp; shared memory 共享内存<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 当内存不够用时,此值会增大,挤一挤嘛; <br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 当KiB Swap交换区的used值降下来了,代表物理内存在恢复正常,SHR会降低.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <font color='gray'>计算一个进程实际占用物理内存的大小 <code>RES – SHR</code> </font></p>
+<h3 id="_7"><font color='orange'>显示内容的操作</font><a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p>下述的每一个操作都会刷新下top显示的内容</p>
+</blockquote>
+<p><code>上下键</code>&nbsp;&nbsp;&nbsp;&nbsp; 往上往下的翻看所有进程<br />
+<code>h</code> or <code>?</code> &nbsp;&nbsp;&nbsp;&nbsp; 查看帮助信息</p>
+<p><code>q</code>  or <code>control + c</code>  &nbsp;&nbsp;&nbsp;&nbsp; 退出<br />
+<code>s</code>  &nbsp;&nbsp;&nbsp;&nbsp; 改变刷新的时间频率,默认是3.0秒<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;<font color='gray'>Ps: 刷新频率别设置的太高 例如0.001s,因为很消耗cpu的资源..</font></p>
+<p><code>M</code> &nbsp;&nbsp;&nbsp;&nbsp; 按照占用内存进行排序<br />
+<code>P</code> &nbsp;&nbsp;&nbsp;&nbsp; 按照cpu的占用率进行排序 <br />
+<code>N</code> &nbsp;&nbsp;&nbsp;&nbsp; 按照PID进行排序<br />
+&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; <font color='gray'>Ps: 排序的结果<strong>默认</strong>都是<strong>从高到低</strong></font></p>
+<p><code>shift + &gt;</code> <code>shift + &lt;</code>    向右、向左  <font color='gray'>吐槽下: 没有明确提示对哪个字段排序 </font> <br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 即将排序作用于当前排序字段 右边/左边 的字段</p>
+<p><code>R</code> &nbsp;&nbsp;&nbsp;&nbsp; 将当前排序的字段结果进行反转</p>
+<p><code>f</code> &nbsp;&nbsp;&nbsp;&nbsp; *标记的是界面上会显示的字段  按空格选择/取消 新选择的会在界面最右边显示<br />
+<code>z</code> &nbsp;&nbsp;&nbsp;&nbsp; 彩色界面 <font color='gray'>芜湖～</font></p>
+<p><code>k</code> &nbsp;&nbsp;&nbsp;&nbsp; 给进程发送信号</p>
+<p><img alt="" src="../assets/top_k.jpeg" /></p>
+<p><code>1</code> &nbsp;&nbsp;&nbsp;&nbsp; 按下数字1会显示所有CPU的负载</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a>%Cpu<span class="o">(</span>s<span class="o">)</span>:  <span class="m">1</span>.0 us,  <span class="m">2</span>.0 sy,  <span class="m">0</span>.0 ni, <span class="m">97</span>.0 id,  <span class="m">0</span>.0 wa,  <span class="m">0</span>.0 hi,  <span class="m">0</span>.0 si,  <span class="m">0</span>.0 st
+<a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a>
+<a id="__codelineno-20-3" name="__codelineno-20-3" href="#__codelineno-20-3"></a>%Cpu0  :  <span class="m">1</span>.0 us,  <span class="m">1</span>.0 sy,  <span class="m">0</span>.0 ni, <span class="m">98</span>.0 id,  <span class="m">0</span>.0 wa,  <span class="m">0</span>.0 hi,  <span class="m">0</span>.0 si,  <span class="m">0</span>.0 st
+<a id="__codelineno-20-4" name="__codelineno-20-4" href="#__codelineno-20-4"></a><span class="c1">## -- 多个核的话 %Cpu0、%Cpu1、%Cpu2...</span>
+</code></pre></div>
+<p><code>r</code> &nbsp;&nbsp;&nbsp;&nbsp; 调整进程的优先级(即修改该进程的nice值)&nbsp;&nbsp;&nbsp;&nbsp; 越小优先级越高</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a>PID to renice <span class="o">[</span>default <span class="nv">pid</span> <span class="o">=</span> <span class="m">2216</span><span class="o">]</span>  <span class="m">72122</span>
+<a id="__codelineno-21-2" name="__codelineno-21-2" href="#__codelineno-21-2"></a>Renice PID <span class="m">72122</span> to value  -10
+<a id="__codelineno-21-3" name="__codelineno-21-3" href="#__codelineno-21-3"></a>
+<a id="__codelineno-21-4" name="__codelineno-21-4" href="#__codelineno-21-4"></a><span class="c1">## -- PR值与NI值是相对应的 PR会在NI值上加20</span>
+<a id="__codelineno-21-5" name="__codelineno-21-5" href="#__codelineno-21-5"></a>   PID USER      PR  NI    VIRT    RES    SHR S %CPU %MEM     TIME+ COMMAND                 
+<a id="__codelineno-21-6" name="__codelineno-21-6" href="#__codelineno-21-6"></a> <span class="m">72062</span> dc        <span class="m">20</span>   <span class="m">0</span>  <span class="m">116960</span>   <span class="m">3328</span>   <span class="m">1708</span> S  <span class="m">0</span>.0  <span class="m">0</span>.3   <span class="m">0</span>:00.09 bash                    
+<a id="__codelineno-21-7" name="__codelineno-21-7" href="#__codelineno-21-7"></a> <span class="m">72122</span> dc        <span class="m">10</span> -10  <span class="m">108052</span>    <span class="m">356</span>    <span class="m">284</span> S  <span class="m">0</span>.0  <span class="m">0</span>.0   <span class="m">0</span>:00.00 sleep                   
+<a id="__codelineno-21-8" name="__codelineno-21-8" href="#__codelineno-21-8"></a> <span class="m">73191</span> dc        <span class="m">20</span>   <span class="m">0</span>  <span class="m">108052</span>    <span class="m">360</span>    <span class="m">284</span> S  <span class="m">0</span>.0  <span class="m">0</span>.0   <span class="m">0</span>:00.00 sleep
+</code></pre></div>
+<hr />
+<h2 id="_8">网络有关的查看<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a>▲ 查看网络状态
+<a id="__codelineno-22-2" name="__codelineno-22-2" href="#__codelineno-22-2"></a><span class="s2">&quot;&quot;&quot;</span>
+<a id="__codelineno-22-3" name="__codelineno-22-3" href="#__codelineno-22-3"></a><span class="s2">-t   tcp协议</span>
+<a id="__codelineno-22-4" name="__codelineno-22-4" href="#__codelineno-22-4"></a><span class="s2">-u   udp协议</span>
+<a id="__codelineno-22-5" name="__codelineno-22-5" href="#__codelineno-22-5"></a><span class="s2">-n   不反解,不将IP地址解析为主机名,不将端口号解析成协议名</span>
+<a id="__codelineno-22-6" name="__codelineno-22-6" href="#__codelineno-22-6"></a><span class="s2">         eg:不加此选项 127.0.0.1 --&gt; localhost   22端口 --&gt; ssh</span>
+<a id="__codelineno-22-7" name="__codelineno-22-7" href="#__codelineno-22-7"></a><span class="s2">-a   全部</span>
+<a id="__codelineno-22-8" name="__codelineno-22-8" href="#__codelineno-22-8"></a><span class="s2">-l   listen</span>
+<a id="__codelineno-22-9" name="__codelineno-22-9" href="#__codelineno-22-9"></a><span class="s2">-p   PID/Program name</span>
+<a id="__codelineno-22-10" name="__codelineno-22-10" href="#__codelineno-22-10"></a><span class="s2">&quot;&quot;&quot;</span>
+<a id="__codelineno-22-11" name="__codelineno-22-11" href="#__codelineno-22-11"></a>netstat -tunalp  
+<a id="__codelineno-22-12" name="__codelineno-22-12" href="#__codelineno-22-12"></a>netstat -an <span class="p">|</span>grep :22
+<a id="__codelineno-22-13" name="__codelineno-22-13" href="#__codelineno-22-13"></a>netstat -an <span class="p">|</span>grep :80
+<a id="__codelineno-22-14" name="__codelineno-22-14" href="#__codelineno-22-14"></a>lsof -i:22  <span class="c1">## -- 可用于快速验证某个端口是否开启</span>
+<a id="__codelineno-22-15" name="__codelineno-22-15" href="#__codelineno-22-15"></a>
+<a id="__codelineno-22-16" name="__codelineno-22-16" href="#__codelineno-22-16"></a>▲ 查看网关
+<a id="__codelineno-22-17" name="__codelineno-22-17" href="#__codelineno-22-17"></a>route -n
+<a id="__codelineno-22-18" name="__codelineno-22-18" href="#__codelineno-22-18"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># route -n</span>
+<a id="__codelineno-22-19" name="__codelineno-22-19" href="#__codelineno-22-19"></a>Kernel IP routing table
+<a id="__codelineno-22-20" name="__codelineno-22-20" href="#__codelineno-22-20"></a>Destination     Gateway         Genmask         Flags Metric Ref    Use Iface
+<a id="__codelineno-22-21" name="__codelineno-22-21" href="#__codelineno-22-21"></a><span class="c1">## 0.0.0.0指代所有的IP地址 去往所有的IP地址都通过172.16.150.2网关进行转发</span>
+<a id="__codelineno-22-22" name="__codelineno-22-22" href="#__codelineno-22-22"></a><span class="m">0</span>.0.0.0         <span class="m">172</span>.16.150.2    <span class="m">0</span>.0.0.0         UG    <span class="m">0</span>      <span class="m">0</span>        <span class="m">0</span> ens33
+<a id="__codelineno-22-23" name="__codelineno-22-23" href="#__codelineno-22-23"></a><span class="m">172</span>.16.150.0    <span class="m">0</span>.0.0.0         <span class="m">255</span>.255.255.0   U     <span class="m">0</span>      <span class="m">0</span>        <span class="m">0</span> ens33
+</code></pre></div>
+<hr />
+<h2 id="_9">查看系统状态<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h2>
+<blockquote>
+<p>围绕三大核心硬件 -- cpu、内存、硬盘</p>
+<p>cpu:&nbsp;&nbsp;&nbsp;&nbsp; /proc/cpuinfo
+内存:&nbsp;&nbsp;&nbsp;&nbsp; /proc/meminfo</p>
+</blockquote>
+<h3 id="_10"><font color='orange'>硬盘</font><a class="headerlink" href="#_10" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p>详见 5_文件管理之文件系统.md</p>
+</blockquote>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a>du -sh /etc <span class="c1"># -- 统计某个文件夹所包含的所有内容的大小</span>
+<a id="__codelineno-23-2" name="__codelineno-23-2" href="#__codelineno-23-2"></a>
+<a id="__codelineno-23-3" name="__codelineno-23-3" href="#__codelineno-23-3"></a>df
+<a id="__codelineno-23-4" name="__codelineno-23-4" href="#__codelineno-23-4"></a>df -h   <span class="c1">## 带单位</span>
+<a id="__codelineno-23-5" name="__codelineno-23-5" href="#__codelineno-23-5"></a>df -T <span class="c1">## 带文件系统类型</span>
+</code></pre></div>
+<h3 id="_11"><font color='orange'>内存!!</font><a class="headerlink" href="#_11" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p><code>top</code>命令显示的系统整体统计信息里就有内存的信息<br />
+也可以通过 <code>free</code> 命令直接查看</p>
+</blockquote>
+<h5 id="free"><font color='purple' size=4>[free结果的字段]</font><a class="headerlink" href="#free" title="Permanent link">&para;</a></h5>
+<p><font color='blue'>「total = used + free + buffers + cache 」</font><br />
+  <font color='blue'>So, Linux的内存大体可分为三部分, 应用程序占用的,空闲的,操作系统对读写做优化的</font></p>
+<p><strong>注意!</strong> 查看真正有多少物理内存可以用(不考虑swap分区),看free不准确,看available字段最准确..<br />
+available值是大于free值的... 多的那部分是buff/cache可释放的空间..<br />
+即 <font color='blue'>available = free + 可释放的buff/cache</font>   So, 物理内存还有多少可以用(百分比) = available / total</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a><span class="c1">## -- free命令显示了系统中内存的剩余量和使用量</span>
+<a id="__codelineno-24-2" name="__codelineno-24-2" href="#__codelineno-24-2"></a><span class="s2">&quot;&quot;&quot;</span>
+<a id="__codelineno-24-3" name="__codelineno-24-3" href="#__codelineno-24-3"></a><span class="s2">命令选项</span>
+<a id="__codelineno-24-4" name="__codelineno-24-4" href="#__codelineno-24-4"></a><span class="s2">-b 字节为单位 </span>
+<a id="__codelineno-24-5" name="__codelineno-24-5" href="#__codelineno-24-5"></a><span class="s2">-k kb为单位(默认) </span>
+<a id="__codelineno-24-6" name="__codelineno-24-6" href="#__codelineno-24-6"></a><span class="s2">-m M为单位 注意哦,转换单位后会进行四舍五入,不是严丝合缝一样的,大体上一样</span>
+<a id="__codelineno-24-7" name="__codelineno-24-7" href="#__codelineno-24-7"></a><span class="s2">-w buffer跟cache分开显示</span>
+<a id="__codelineno-24-8" name="__codelineno-24-8" href="#__codelineno-24-8"></a>
+<a id="__codelineno-24-9" name="__codelineno-24-9" href="#__codelineno-24-9"></a><span class="s2">显示结果字段</span>
+<a id="__codelineno-24-10" name="__codelineno-24-10" href="#__codelineno-24-10"></a><span class="s2">total:      安装的内存大小,即内存条总共的大小</span>
+<a id="__codelineno-24-11" name="__codelineno-24-11" href="#__codelineno-24-11"></a><span class="s2">used:       使用的内存大小,准确点来说指的是在内存中跑的应用程序占用的空间</span>
+<a id="__codelineno-24-12" name="__codelineno-24-12" href="#__codelineno-24-12"></a><span class="s2">free:       空闲的,used可以用,buff/cache也可以用</span>
+<a id="__codelineno-24-13" name="__codelineno-24-13" href="#__codelineno-24-13"></a><span class="s2">shared:     共享的内存,指used中有部分内存是进程们共享的 这与前面进程信息部分`RES – SHR`呼应上啦..</span>
+<a id="__codelineno-24-14" name="__codelineno-24-14" href="#__codelineno-24-14"></a><span class="s2">buff/cache: buff/cache释放后给了free</span>
+<a id="__codelineno-24-15" name="__codelineno-24-15" href="#__codelineno-24-15"></a><span class="s2">available:  表明目前可以提供给新启动的应用程序使用的内存</span>
+<a id="__codelineno-24-16" name="__codelineno-24-16" href="#__codelineno-24-16"></a><span class="s2">&quot;&quot;&quot;</span>
+<a id="__codelineno-24-17" name="__codelineno-24-17" href="#__codelineno-24-17"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># free -wm</span>
+<a id="__codelineno-24-18" name="__codelineno-24-18" href="#__codelineno-24-18"></a>         total        used        free      shared     buffers       cache   available
+<a id="__codelineno-24-19" name="__codelineno-24-19" href="#__codelineno-24-19"></a>Mem:      <span class="m">972</span>         <span class="m">634</span>          <span class="m">84</span>          <span class="m">17</span>           <span class="m">0</span>         <span class="m">253</span>         <span class="m">165</span>
+<a id="__codelineno-24-20" name="__codelineno-24-20" href="#__codelineno-24-20"></a>Swap:    <span class="m">2047</span>          <span class="m">80</span>        <span class="m">1967</span>
+</code></pre></div>
+<h5 id="buffcache"><font color='purple' size=4>[释放buff/cache] </font><a class="headerlink" href="#buffcache" title="Permanent link">&para;</a></h5>
+<blockquote>
+<p>sync<br />
+echo 3 &gt; /proc/sys/vm/drop_caches</p>
+</blockquote>
+<p><font color='gray'>buffer优化写,cache优化读,我们没使用,但操作系统在使用,是种优化机制</font></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># free -w</span>
+<a id="__codelineno-25-2" name="__codelineno-25-2" href="#__codelineno-25-2"></a>              total        used        free      shared     buffers       cache   available
+<a id="__codelineno-25-3" name="__codelineno-25-3" href="#__codelineno-25-3"></a>Mem:         <span class="m">995640</span>      <span class="m">654476</span>       <span class="m">81872</span>       <span class="m">17576</span>           <span class="m">0</span>      <span class="m">259292</span>      <span class="m">164964</span>
+<a id="__codelineno-25-4" name="__codelineno-25-4" href="#__codelineno-25-4"></a>Swap:       <span class="m">2097148</span>       <span class="m">82688</span>     <span class="m">2014460</span>
+<a id="__codelineno-25-5" name="__codelineno-25-5" href="#__codelineno-25-5"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># du -sh /etc/passwd</span>
+<a id="__codelineno-25-6" name="__codelineno-25-6" href="#__codelineno-25-6"></a><span class="m">4</span>.0K    /etc/passwd
+<a id="__codelineno-25-7" name="__codelineno-25-7" href="#__codelineno-25-7"></a><span class="c1">## -- 在另一个终端执行命令 vim /etc/passwd</span>
+<a id="__codelineno-25-8" name="__codelineno-25-8" href="#__codelineno-25-8"></a><span class="c1">## 可以发现cache值变大了,是为了下次打开该文件时候,能更快速的打开..</span>
+<a id="__codelineno-25-9" name="__codelineno-25-9" href="#__codelineno-25-9"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># free -w</span>
+<a id="__codelineno-25-10" name="__codelineno-25-10" href="#__codelineno-25-10"></a>              total        used        free      shared     buffers       cache   available
+<a id="__codelineno-25-11" name="__codelineno-25-11" href="#__codelineno-25-11"></a>Mem:         <span class="m">995640</span>      <span class="m">657212</span>       <span class="m">76876</span>       <span class="m">17576</span>           <span class="m">0</span>      <span class="m">261552</span>      <span class="m">162228</span>
+<a id="__codelineno-25-12" name="__codelineno-25-12" href="#__codelineno-25-12"></a>Swap:       <span class="m">2097148</span>       <span class="m">82688</span>     <span class="m">2014460</span>
+<a id="__codelineno-25-13" name="__codelineno-25-13" href="#__codelineno-25-13"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># </span>
+<a id="__codelineno-25-14" name="__codelineno-25-14" href="#__codelineno-25-14"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># ## 此处的释放是buffer和cache一起释放</span>
+<a id="__codelineno-25-15" name="__codelineno-25-15" href="#__codelineno-25-15"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># ## 释放之前若有写行为,写的内容都在buffers里存着呢!</span>
+<a id="__codelineno-25-16" name="__codelineno-25-16" href="#__codelineno-25-16"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># ## So,在释放之前需要多执行几次sync命令,告诉OS将buffer缓冲区里的数据写入硬盘</span>
+<a id="__codelineno-25-17" name="__codelineno-25-17" href="#__codelineno-25-17"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># sync</span>
+<a id="__codelineno-25-18" name="__codelineno-25-18" href="#__codelineno-25-18"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># sync</span>
+<a id="__codelineno-25-19" name="__codelineno-25-19" href="#__codelineno-25-19"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># sync</span>
+<a id="__codelineno-25-20" name="__codelineno-25-20" href="#__codelineno-25-20"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># ## OS会定期扫描/proc/sys/vm/drop_caches文件</span>
+<a id="__codelineno-25-21" name="__codelineno-25-21" href="#__codelineno-25-21"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># ## 该文件可以设置值0(默认)、1、2、3  0代表不清理 3代表清理</span>
+<a id="__codelineno-25-22" name="__codelineno-25-22" href="#__codelineno-25-22"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># cat /proc/sys/vm/drop_caches </span>
+<a id="__codelineno-25-23" name="__codelineno-25-23" href="#__codelineno-25-23"></a><span class="m">0</span>
+<a id="__codelineno-25-24" name="__codelineno-25-24" href="#__codelineno-25-24"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># ## 注意哦,操作系统扫描时发现该文件未修改的话,是不会读取里面的内容的</span>
+<a id="__codelineno-25-25" name="__codelineno-25-25" href="#__codelineno-25-25"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># ## So,想要释放时,就得执行一次 echo 3 &gt; /proc/sys/vm/drop_caches 这条命令</span>
+<a id="__codelineno-25-26" name="__codelineno-25-26" href="#__codelineno-25-26"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># echo 3 &gt; /proc/sys/vm/drop_caches</span>
+<a id="__codelineno-25-27" name="__codelineno-25-27" href="#__codelineno-25-27"></a><span class="c1">## -- 可以前后对比发现cache值明显下降啦,free值明显提升了...</span>
+<a id="__codelineno-25-28" name="__codelineno-25-28" href="#__codelineno-25-28"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># free -w</span>
+<a id="__codelineno-25-29" name="__codelineno-25-29" href="#__codelineno-25-29"></a>              total        used        free      shared     buffers       cache   available
+<a id="__codelineno-25-30" name="__codelineno-25-30" href="#__codelineno-25-30"></a>Mem:         <span class="m">995640</span>      <span class="m">601396</span>      <span class="m">303444</span>       <span class="m">17568</span>           <span class="m">0</span>       <span class="m">90800</span>      <span class="m">268660</span>
+<a id="__codelineno-25-31" name="__codelineno-25-31" href="#__codelineno-25-31"></a>Swap:       <span class="m">2097148</span>       <span class="m">82688</span>     <span class="m">2014460</span>
+</code></pre></div>
+<h5 id="_12"><font color='purple' size=4>[虚拟文件系统]</font><a class="headerlink" href="#_12" title="Permanent link">&para;</a></h5>
+<p>要知道free是从文件<code>/proc/meminfo</code> 里采集获取的信息, 而 /proc文件夹是proc虚拟文件系统的挂载点..<br />
+<font color='red'>何为 <strong>虚拟的文件系统</strong> ？</font>代表它的数据不在硬盘里,而是在内存里,挂载点里的数据是系统生成的..</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a><span class="c1"># mount命令可查看挂载的所有文件系统信息</span>
+<a id="__codelineno-26-2" name="__codelineno-26-2" href="#__codelineno-26-2"></a><span class="c1"># 像/dev/sda1文件系统(通俗点就是指硬盘分区)的挂载点是/boot</span>
+<a id="__codelineno-26-3" name="__codelineno-26-3" href="#__codelineno-26-3"></a><span class="c1"># 硬盘分区/真实的文件系统是可通过df命令查看到的,但虚拟的文件系统df命令看不到</span>
+<a id="__codelineno-26-4" name="__codelineno-26-4" href="#__codelineno-26-4"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># mount | grep -E &quot;/dev/sda1|/proc &quot;</span>
+<a id="__codelineno-26-5" name="__codelineno-26-5" href="#__codelineno-26-5"></a>proc on /proc <span class="nb">type</span> proc <span class="o">(</span>rw,nosuid,nodev,noexec,relatime<span class="o">)</span>
+<a id="__codelineno-26-6" name="__codelineno-26-6" href="#__codelineno-26-6"></a>/dev/sda1 on /boot <span class="nb">type</span> xfs <span class="o">(</span>rw,relatime,attr2,inode64,noquota<span class="o">)</span>
+</code></pre></div>
+<p>若卸载掉proc这个虚拟文件系统, free命令就不能使用啦!!<br />
+反向验证了free命令的结果都是从proc这个虚拟的文件系统中得到的!!</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># umount /proc -l</span>
+<a id="__codelineno-27-2" name="__codelineno-27-2" href="#__codelineno-27-2"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># free</span>
+<a id="__codelineno-27-3" name="__codelineno-27-3" href="#__codelineno-27-3"></a>Error: /proc must be mounted
+<a id="__codelineno-27-4" name="__codelineno-27-4" href="#__codelineno-27-4"></a>  To mount /proc at boot you need an /etc/fstab line like:
+<a id="__codelineno-27-5" name="__codelineno-27-5" href="#__codelineno-27-5"></a>      proc   /proc   proc    defaults
+<a id="__codelineno-27-6" name="__codelineno-27-6" href="#__codelineno-27-6"></a>  In the meantime, run <span class="s2">&quot;mount proc /proc -t proc&quot;</span>
+<a id="__codelineno-27-7" name="__codelineno-27-7" href="#__codelineno-27-7"></a>
+<a id="__codelineno-27-8" name="__codelineno-27-8" href="#__codelineno-27-8"></a><span class="s2">&quot;&quot;&quot;</span>
+<a id="__codelineno-27-9" name="__codelineno-27-9" href="#__codelineno-27-9"></a><span class="s2">mount -t 指定文件系统 虚拟文件系统 挂载点</span>
+<a id="__codelineno-27-10" name="__codelineno-27-10" href="#__codelineno-27-10"></a><span class="s2">Ps: mount -t xfs /dev/sda1 /boot</span>
+<a id="__codelineno-27-11" name="__codelineno-27-11" href="#__codelineno-27-11"></a><span class="s2">&quot;&quot;&quot;</span>
+<a id="__codelineno-27-12" name="__codelineno-27-12" href="#__codelineno-27-12"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># mount -t proc proc /proc/</span>
+<a id="__codelineno-27-13" name="__codelineno-27-13" href="#__codelineno-27-13"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># free -m</span>
+<a id="__codelineno-27-14" name="__codelineno-27-14" href="#__codelineno-27-14"></a>              total        used        free      shared  buff/cache   available
+<a id="__codelineno-27-15" name="__codelineno-27-15" href="#__codelineno-27-15"></a>Mem:            <span class="m">972</span>         <span class="m">633</span>          <span class="m">85</span>          <span class="m">17</span>         <span class="m">253</span>         <span class="m">166</span>
+<a id="__codelineno-27-16" name="__codelineno-27-16" href="#__codelineno-27-16"></a>Swap:          <span class="m">2047</span>          <span class="m">80</span>        <span class="m">1967</span>
+</code></pre></div>
+<h3 id="cpu"><font color='orange'>CPU</font><a class="headerlink" href="#cpu" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p>top命令的结果里包含了cpu工作状况(特别是负载)<br />
+通过查看/proc/cpuinfo文件也可以得到cpu相关的硬件信息..</p>
+</blockquote>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-28-1" name="__codelineno-28-1" href="#__codelineno-28-1"></a><span class="c1">## -- 文件中有多少个processor,就有多少个核(逻辑cpu)</span>
+<a id="__codelineno-28-2" name="__codelineno-28-2" href="#__codelineno-28-2"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># grep &quot;processor&quot; /proc/cpuinfo </span>
+<a id="__codelineno-28-3" name="__codelineno-28-3" href="#__codelineno-28-3"></a>processor   : <span class="m">0</span>
+<a id="__codelineno-28-4" name="__codelineno-28-4" href="#__codelineno-28-4"></a>processor   : <span class="m">1</span>
+<a id="__codelineno-28-5" name="__codelineno-28-5" href="#__codelineno-28-5"></a>processor   : <span class="m">2</span>
+<a id="__codelineno-28-6" name="__codelineno-28-6" href="#__codelineno-28-6"></a><span class="c1">## -- 文件中有多少个physical id,就有多少物理cpu</span>
+<a id="__codelineno-28-7" name="__codelineno-28-7" href="#__codelineno-28-7"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># grep &quot;physical id&quot; /proc/cpuinfo</span>
+<a id="__codelineno-28-8" name="__codelineno-28-8" href="#__codelineno-28-8"></a>physical id : 0xx
+<a id="__codelineno-28-9" name="__codelineno-28-9" href="#__codelineno-28-9"></a><span class="c1">## -- cpu核数</span>
+<a id="__codelineno-28-10" name="__codelineno-28-10" href="#__codelineno-28-10"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># grep &quot;cpu cores&quot; /proc/cpuinfo</span>
+<a id="__codelineno-28-11" name="__codelineno-28-11" href="#__codelineno-28-11"></a>cpu cores   : <span class="m">1</span>
+<a id="__codelineno-28-12" name="__codelineno-28-12" href="#__codelineno-28-12"></a>
+<a id="__codelineno-28-13" name="__codelineno-28-13" href="#__codelineno-28-13"></a><span class="s2">&quot;&quot;&quot;</span>
+<a id="__codelineno-28-14" name="__codelineno-28-14" href="#__codelineno-28-14"></a><span class="s2">flags 该核所支持的功能</span>
+<a id="__codelineno-28-15" name="__codelineno-28-15" href="#__codelineno-28-15"></a><span class="s2">    lm（64位）</span>
+<a id="__codelineno-28-16" name="__codelineno-28-16" href="#__codelineno-28-16"></a><span class="s2">    vmx 支持虚拟化 Intel</span>
+<a id="__codelineno-28-17" name="__codelineno-28-17" href="#__codelineno-28-17"></a><span class="s2">    svm 支持虚拟化 AMD</span>
+<a id="__codelineno-28-18" name="__codelineno-28-18" href="#__codelineno-28-18"></a><span class="s2">&quot;&quot;&quot;</span>
+<a id="__codelineno-28-19" name="__codelineno-28-19" href="#__codelineno-28-19"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># grep flags /proc/cpuinfo</span>
+<a id="__codelineno-28-20" name="__codelineno-28-20" href="#__codelineno-28-20"></a>flags       : fpu  【vme】  de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ss syscall nx pdpe1gb rdtscp lm constant_tsc arch_perfmon nopl xtopology ... ... ...
+<a id="__codelineno-28-21" name="__codelineno-28-21" href="#__codelineno-28-21"></a>
+<a id="__codelineno-28-22" name="__codelineno-28-22" href="#__codelineno-28-22"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># lscpu</span>
+<a id="__codelineno-28-23" name="__codelineno-28-23" href="#__codelineno-28-23"></a>Architecture:          x86_64
+<a id="__codelineno-28-24" name="__codelineno-28-24" href="#__codelineno-28-24"></a>CPU op-mode<span class="o">(</span>s<span class="o">)</span>:        <span class="m">32</span>-bit, <span class="m">64</span>-bit
+<a id="__codelineno-28-25" name="__codelineno-28-25" href="#__codelineno-28-25"></a>Byte Order:            Little Endian
+<a id="__codelineno-28-26" name="__codelineno-28-26" href="#__codelineno-28-26"></a>CPU<span class="o">(</span>s<span class="o">)</span>:                <span class="m">1</span>
+<a id="__codelineno-28-27" name="__codelineno-28-27" href="#__codelineno-28-27"></a>On-line CPU<span class="o">(</span>s<span class="o">)</span> list:   <span class="m">0</span>
+<a id="__codelineno-28-28" name="__codelineno-28-28" href="#__codelineno-28-28"></a>... ... ...
+</code></pre></div>
+<hr />
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+          <a href="#" class="md-top md-icon" data-md-component="top" hidden>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
+            回到页面顶部
+          </a>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+    <nav class="md-footer__inner md-grid" aria-label="页脚" >
+      
+        
+        <a href="../11_%E8%BD%AF%E4%BB%B6%E5%8C%85%E7%AE%A1%E7%90%86%E4%B9%8Byum/" class="md-footer__link md-footer__link--prev" aria-label="上一页: 软件包管理之yum" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                上一页
+              </span>
+              软件包管理之yum
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="../13_%E7%AE%A1%E7%90%86%E8%BF%9B%E7%A8%8B/" class="md-footer__link md-footer__link--next" aria-label="下一页: 管理进程" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                下一页
+              </span>
+              管理进程
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright © 2023 from Dc_OnePiece
+    </div>
+  
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "navigation.top", "navigation.expand", "navigation.instant", "navigation.tracking", "search.suggest", "search.highlight", "search.share"], "search": "../../assets/javascripts/workers/search.5bf1dace.min.js", "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.config.lang": "ja", "search.config.pipeline": "trimmer, stemmer", "search.config.separator": "[\\s\\-\uff0c\u3002]+", "search.placeholder": "\u641c\u7d22", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version.title": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.37e9125f.min.js"></script>
+      
+        <script src="../../resources/js/extra.js"></script>
+      
+    
+  </body>
+</html>

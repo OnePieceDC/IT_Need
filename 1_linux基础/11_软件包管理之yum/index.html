@@ -1,0 +1,2341 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="These are my study notes.">
+      
+      
+        <meta name="author" content="DC">
+      
+      
+      <link rel="icon" href="../../resources/images/favicon.ico">
+      <meta name="generator" content="mkdocs-1.3.1, mkdocs-material-8.5.3">
+    
+    
+      
+        <title>软件包管理之yum - IT必备知识</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.7a952b86.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.cbb835fc.min.css">
+        
+      
+      
+
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../resources/css/extra.css">
+    
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lxgw-wenkai-webfont@1.1.0/style.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="blue-grey" data-md-color-accent="amber">
+  
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#yum" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../.." title="IT必备知识" class="md-header__button md-logo" aria-label="IT必备知识" data-md-component="logo">
+      
+  <img src="../../resources/images/favicon.ico" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            IT必备知识
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              软件包管理之yum
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      <form class="md-header__option" data-md-component="palette">
+        
+          
+          
+          <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="blue-grey" data-md-color-accent="amber"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+          
+            <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"/></svg>
+            </label>
+          
+        
+          
+          
+          <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="blue-grey" data-md-color-accent="amber"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_2">
+          
+            <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12c0-2.42-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"/></svg>
+            </label>
+          
+        
+      </form>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="分享" aria-label="分享" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7 0-.24-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91 1.61 0 2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08Z"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="标签" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../0_%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/0_%E5%89%8D%E5%A5%8F%28%E4%BB%8B%E7%BB%8D%29/" class="md-tabs__link">
+        计算机基础(8)
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+    
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../0_%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C/" class="md-tabs__link md-tabs__link--active">
+        linux基础(20)
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../5_db/0_%E5%9F%BA%E7%A1%80/0_install_db/" class="md-tabs__link">
+        mysql(19)
+      </a>
+    </li>
+  
+
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../9_git/0_git%E7%94%9F%E6%B4%BB%E7%89%88/" class="md-tabs__link">
+        git(2)
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../13_%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/0_%E9%80%92%E5%BD%92_%E6%9F%A5%E6%89%BE/" class="md-tabs__link">
+        查找排序算法(5)
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="IT必备知识" class="md-nav__button md-logo" aria-label="IT必备知识" data-md-component="logo">
+      
+  <img src="../../resources/images/favicon.ico" alt="logo">
+
+    </a>
+    IT必备知识
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" data-md-toggle="__nav_1" type="checkbox" id="__nav_1" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_1">
+          计算机基础(8)
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="计算机基础(8)" data-md-level="1">
+        <label class="md-nav__title" for="__nav_1">
+          <span class="md-nav__icon md-icon"></span>
+          计算机基础(8)
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../0_%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/0_%E5%89%8D%E5%A5%8F%28%E4%BB%8B%E7%BB%8D%29/" class="md-nav__link">
+        前奏(介绍)
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../0_%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/1_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A1%AC%E4%BB%B6%E7%BB%84%E6%88%90/" class="md-nav__link">
+        计算机硬件组成
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../0_%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/2_%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" class="md-nav__link">
+        操作系统
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../0_%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/3_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E6%A6%82%E8%A7%88/" class="md-nav__link">
+        计算机网络概览
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../0_%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/4_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E4%B9%8B%E7%BD%91%E7%BB%9C%E6%8E%A5%E5%8F%A3%E5%B1%82/" class="md-nav__link">
+        网络接口层
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../0_%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/5_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E4%B9%8B%E7%BD%91%E7%BB%9C%E5%B1%82/" class="md-nav__link">
+        网络层
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../0_%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/6_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E4%B9%8B%E4%BC%A0%E8%BE%93%E5%B1%82/" class="md-nav__link">
+        传输层
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../0_%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/7_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%A1%A5%E5%85%85/" class="md-nav__link">
+        补充
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2">
+          linux基础(20)
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="linux基础(20)" data-md-level="1">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          linux基础(20)
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0_%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C/" class="md-nav__link">
+        准备工作
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../1_%E5%88%9D%E8%AF%86shell%E4%B8%8E%E5%9F%BA%E7%A1%80%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" class="md-nav__link">
+        初识shell与基础常用命令
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../2_%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86%E4%B9%8B%E5%9F%BA%E7%A1%80%E5%91%BD%E4%BB%A4/" class="md-nav__link">
+        文件管理之基础命令
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../3_%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86%E4%B9%8B%E5%9B%9B%E5%A4%A7%E6%A8%A1%E5%BC%8F/" class="md-nav__link">
+        文件管理之四大模式
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../4_%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86%E4%B9%8B%E5%91%BD%E4%BB%A4%E8%A1%A5%E5%85%85/" class="md-nav__link">
+        文件管理之命令补充
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../5_%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86%E4%B9%8B%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/" class="md-nav__link">
+        文件管理之文件系统
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../6_%E6%9D%83%E9%99%90%E7%AE%A1%E7%90%86%E4%B9%8B%E7%94%A8%E6%88%B7%E4%B8%8E%E7%BB%84/" class="md-nav__link">
+        权限管理之用户与组
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../7_%E6%9D%83%E9%99%90%E7%AE%A1%E7%90%86%E4%B9%8B%E6%96%87%E4%BB%B6%E6%9D%83%E9%99%90/" class="md-nav__link">
+        权限管理之文件权限
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../8_%E6%9D%83%E9%99%90%E7%AE%A1%E7%90%86%E4%B9%8BACL/" class="md-nav__link">
+        权限管理之ACL
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../9_%E6%9D%83%E9%99%90%E7%AE%A1%E7%90%86%E4%B9%8Bsu%E4%B8%8Esudo/" class="md-nav__link">
+        权限管理之su与sudo
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../10_%E8%BD%AF%E4%BB%B6%E5%8C%85%E7%AE%A1%E7%90%86%E4%B9%8Brpm/" class="md-nav__link">
+        软件包管理之rpm
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          软件包管理之yum
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        软件包管理之yum
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#yum" class="md-nav__link">
+    yum命令
+  </a>
+  
+    <nav class="md-nav" aria-label="yum命令">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    选项
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    实验验证
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#yum_1" class="md-nav__link">
+    yum源分类
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    镜像文件作为本地源
+  </a>
+  
+    <nav class="md-nav" aria-label="镜像文件作为本地源">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#step1" class="md-nav__link">
+    step1: 准备工作
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step2" class="md-nav__link">
+    step2: 挂载镜像
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step3-repo" class="md-nav__link">
+    step3: 编辑repo文件
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step4" class="md-nav__link">
+    step4: 查询可用仓库
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#yum_2" class="md-nav__link">
+    开源的yum源/网络源
+  </a>
+  
+    <nav class="md-nav" aria-label="开源的yum源/网络源">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#base" class="md-nav__link">
+    Base基础源
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#epel" class="md-nav__link">
+    epel扩展源
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#nginx" class="md-nav__link">
+    配置nginx官网源
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#yum_3" class="md-nav__link">
+    制作yum本地源
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    本地源共享
+  </a>
+  
+    <nav class="md-nav" aria-label="本地源共享">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    服务端上的操作
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    客户端上的操作
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    源码包
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../12_%E6%9F%A5%E7%9C%8B%E8%BF%9B%E7%A8%8B/" class="md-nav__link">
+        查看进程
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../13_%E7%AE%A1%E7%90%86%E8%BF%9B%E7%A8%8B/" class="md-nav__link">
+        管理进程
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../14_%E5%AD%98%E5%82%A8%E7%AE%A1%E7%90%86%E4%B9%8B%E4%BC%A0%E7%BB%9F%E7%A3%81%E7%9B%98%E7%AE%A1%E7%90%86/" class="md-nav__link">
+        存储管理之传统磁盘管理
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../15_%E5%AD%98%E5%82%A8%E7%AE%A1%E7%90%86%E4%B9%8BLVM/" class="md-nav__link">
+        存储管理之LVM
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../16_%E7%BD%91%E7%BB%9C%E7%AE%A1%E7%90%86/" class="md-nav__link">
+        网络管理
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../17_shell%E5%9F%BA%E7%A1%80/" class="md-nav__link">
+        shell基础
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../18_crond%E8%AE%A1%E5%88%92%E4%BB%BB%E5%8A%A1/" class="md-nav__link">
+        crond计划任务
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../19_%E7%B3%BB%E7%BB%9F%E4%BC%98%E5%8C%96/" class="md-nav__link">
+        系统优化
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3">
+          mysql(19)
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="mysql(19)" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          mysql(19)
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" data-md-toggle="__nav_3_1" type="checkbox" id="__nav_3_1" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3_1">
+          基础
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="基础" data-md-level="2">
+        <label class="md-nav__title" for="__nav_3_1">
+          <span class="md-nav__icon md-icon"></span>
+          基础
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../5_db/0_%E5%9F%BA%E7%A1%80/0_install_db/" class="md-nav__link">
+        数据库安装
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../5_db/0_%E5%9F%BA%E7%A1%80/1_db_command/" class="md-nav__link">
+        sql命令总结
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../5_db/0_%E5%9F%BA%E7%A1%80/2_imp_knowledge/" class="md-nav__link">
+        imp_knowledge
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../5_db/0_%E5%9F%BA%E7%A1%80/3_table_field/" class="md-nav__link">
+        字段的约束和类型
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../5_db/0_%E5%9F%BA%E7%A1%80/4_table_relation/" class="md-nav__link">
+        表关系
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../5_db/0_%E5%9F%BA%E7%A1%80/5_permissions/" class="md-nav__link">
+        权限管理
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../5_db/0_%E5%9F%BA%E7%A1%80/6_single_query/" class="md-nav__link">
+        单表查询
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../5_db/0_%E5%9F%BA%E7%A1%80/7_multi_query/" class="md-nav__link">
+        多表查询
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../5_db/0_%E5%9F%BA%E7%A1%80/8_query_practice/" class="md-nav__link">
+        query_practice
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../5_db/0_%E5%9F%BA%E7%A1%80/9_pymysql/" class="md-nav__link">
+        pymysql
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../5_db/0_%E5%9F%BA%E7%A1%80/10_just_know/" class="md-nav__link">
+        just_know
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../5_db/0_%E5%9F%BA%E7%A1%80/other/01_to_11/" class="md-nav__link">
+        other1
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../5_db/0_%E5%9F%BA%E7%A1%80/other/05/" class="md-nav__link">
+        other2
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" data-md-toggle="__nav_3_2" type="checkbox" id="__nav_3_2" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3_2">
+          进阶
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="进阶" data-md-level="2">
+        <label class="md-nav__title" for="__nav_3_2">
+          <span class="md-nav__icon md-icon"></span>
+          进阶
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../5_db/1_%E8%BF%9B%E9%98%B6/0_index/" class="md-nav__link">
+        索引
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../5_db/1_%E8%BF%9B%E9%98%B6/1_explain/" class="md-nav__link">
+        执行计划
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../5_db/1_%E8%BF%9B%E9%98%B6/2_transaction/" class="md-nav__link">
+        事务
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../5_db/1_%E8%BF%9B%E9%98%B6/3_db_readPhenomenon/" class="md-nav__link">
+        读现象
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../5_db/1_%E8%BF%9B%E9%98%B6/4_lock/" class="md-nav__link">
+        锁
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../5_db/1_%E8%BF%9B%E9%98%B6/other/" class="md-nav__link">
+        数据库连接池
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4">
+          git(2)
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="git(2)" data-md-level="1">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          git(2)
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../9_git/0_git%E7%94%9F%E6%B4%BB%E7%89%88/" class="md-nav__link">
+        git生活版
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../9_git/1_git%E7%A0%94%E7%A9%B6%E7%89%88/" class="md-nav__link">
+        git研究版
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" data-md-toggle="__nav_5" type="checkbox" id="__nav_5" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_5">
+          查找排序算法(5)
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="查找排序算法(5)" data-md-level="1">
+        <label class="md-nav__title" for="__nav_5">
+          <span class="md-nav__icon md-icon"></span>
+          查找排序算法(5)
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../13_%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/0_%E9%80%92%E5%BD%92_%E6%9F%A5%E6%89%BE/" class="md-nav__link">
+        查找
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../13_%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/1_LowB%E4%B8%89%E4%BA%BA%E7%BB%84/" class="md-nav__link">
+        LowB三人组
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../13_%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/2_NB%E4%B8%89%E4%BA%BA%E7%BB%84/" class="md-nav__link">
+        NB三人组
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../13_%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/3_%E5%85%B6%E5%AE%83%E6%8E%92%E5%BA%8F/" class="md-nav__link">
+        其它排序
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../13_%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/4_%E6%9F%A5%E6%89%BE%E4%B9%A0%E9%A2%98/" class="md-nav__link">
+        查找习题
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#yum" class="md-nav__link">
+    yum命令
+  </a>
+  
+    <nav class="md-nav" aria-label="yum命令">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    选项
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    实验验证
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#yum_1" class="md-nav__link">
+    yum源分类
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    镜像文件作为本地源
+  </a>
+  
+    <nav class="md-nav" aria-label="镜像文件作为本地源">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#step1" class="md-nav__link">
+    step1: 准备工作
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step2" class="md-nav__link">
+    step2: 挂载镜像
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step3-repo" class="md-nav__link">
+    step3: 编辑repo文件
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step4" class="md-nav__link">
+    step4: 查询可用仓库
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#yum_2" class="md-nav__link">
+    开源的yum源/网络源
+  </a>
+  
+    <nav class="md-nav" aria-label="开源的yum源/网络源">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#base" class="md-nav__link">
+    Base基础源
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#epel" class="md-nav__link">
+    epel扩展源
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#nginx" class="md-nav__link">
+    配置nginx官网源
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#yum_3" class="md-nav__link">
+    制作yum本地源
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    本地源共享
+  </a>
+  
+    <nav class="md-nav" aria-label="本地源共享">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    服务端上的操作
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    客户端上的操作
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    源码包
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  <h1>软件包管理之yum</h1>
+
+<h2 id="yum">yum命令<a class="headerlink" href="#yum" title="Permanent link">&para;</a></h2>
+<blockquote>
+<p>基于RPM包管理, 能够从指定的服务器自动下载RPM包并且安装, 可以自动处理依赖性关系, 并且一次安装所有依赖的软件包, 无须繁琐地一次次下载、安装.</p>
+</blockquote>
+<p>yum命令相较于rpm命令,<strong>yum可以自动解决依赖性的问题</strong>.<br />
+其原理在于:<br />
+&nbsp;&nbsp;&nbsp;&nbsp; 使用yum安装软件包时,会去某个仓库找软件包,此仓库已经事先将该软件包以及相关依赖全都准备好了..<br />
+&nbsp;&nbsp;&nbsp;&nbsp; <font color='gray'><strong>仓库:</strong> 本质上就是存放所有相关软件包的一个文件夹.. </font><br />
+&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; 该文件夹下必定有个名为<strong>repodata</strong>的文件夹记录了文件夹所包含软件包之间的依赖关系..</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1">## yum命令来自于哪个软件包</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># rpm -qf /usr/bin/yum</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>yum-3.4.3-168.el7.centos.noarch
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="c1">## 安装yum软件包后生成的配置文件</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># rpm -qc yum</span>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>/etc/logrotate.d/yum
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>/etc/yum.conf
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>/etc/yum/version-groups.conf
+</code></pre></div>
+<h3 id="_1"><font color='orange'>选项</font><a class="headerlink" href="#_1" title="Permanent link">&para;</a></h3>
+<p><strong>查询仓库:</strong>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  <code>yum repolist</code> -- 查看可用仓库<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  <code>yum repolist all</code> -- 查看所有仓库(包含启用的与禁用的)   </p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <code>yum-config-manager --disable 仓库名</code>   -- 关闭指定仓库<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <code>yum-config-manager --enable 仓库名</code>      -- 开启指定仓库<br />
+​&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; <font color='gray'> 去掉.repo后缀就是仓库名 <code>ls /etc/yum.repos.d/</code></font><br />
+​&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; <font color='green'>本质是将 <code>/etc/yum.repos.d/CentOS-Base.repo</code>文件中对应仓库的<strong>enabled</strong>值进行更改</font> <br />
+​&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; <font color='green'>enabled默认值为1    0关闭) 1(开启)</font> <br />
+<strong>查询软件包: </strong><br />
+​&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <code>yum list</code> -- 列出所有可用仓库里的所有软件包( <strong>包括 <em>已经安装的</em> 和 <em>可以安装的</em> </strong> ) <br />
+​&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <font color='gray'>可结合管道与查看文件的一些命令一起使用 eg: <code>yum list|less</code> ; <code>yum list|more</code></font> <br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <code>yum grouplist</code>  -- 列出所有可用仓库中的软件包组<br />
+​&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <font color='gray'>eg: 软件包组之一的 安全性工具 里就包含了一堆相关的软件包 </font><br />
+​&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <code>yum provides 文件路径</code> -- 查看某个文件由哪个软件包产生的  <br />
+​&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <font color='gray'>可用于查看命令来自哪个软件包  等同于 rpm -qf</font></p>
+<p><font color=blue>提一嘴,加 -y 选项 (表明yes) 可以非交互式的进行安装、卸载、重装、更新..</font>  <br />
+<strong>安装: </strong> <br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <code>yum install 软件包名 -y</code>    -- 安装软件包 <br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <font color='gray'>若已经安装啦,会在现有的仓库里面看看有无更高的版本,有的话会进行升级处理.. <strong>最好卸载后装新的!! </strong></font><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; <font color='gray'>eg: <code>yum remove nginx-* -y</code></font><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <code>yum groupinstall "软件包组名字" -y</code>  or  <code>yum groups install "软件包组名字" -y</code> -- 安装软件组<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; <font color='gray'>注意: 软件组名字需要加双引号 </font><br />
+<strong>卸载:</strong><br />
+<code>yum remove 软件包名 -y</code>    -- 卸载软件包<br />
+<code>yum groupremove "软件组名字" -y</code>  or  <code>yum groups remove "软件组名字" -y</code>    -- 卸载软件组 <br />
+<strong>重装:</strong> <code>yum reinstall 软件包名 -y</code>    -- 不小心删除了配置文件的时,可以reinstall一下,会补充没有的部分<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <font color='gray'>Ps: 晓得预期的结果的前提下,不打印结果 <code>yum reinstall httpd -y &amp;&gt;/dev/null</code></font> <br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; <font color='brown'>注意: reinstall仅限于在测试环境中搞,生产环境别轻易这样做!!!容易出问题. </font><br />
+<strong>更新:</strong> &nbsp;&nbsp;&nbsp;&nbsp; <font color='red'>不要作死,不要作死,不要轻易更新..</font><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; <code>yum update -y</code>     -- 会更新所有软件包,包括OS内核,<font color='brown'>通常只在刚装完系统时执行</font><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; <code>yum update 软件包名 -y</code>    -- 更新某个软件包<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; <code>yum check-update</code> -- 检查有哪些可以更新的软件包<br />
+<font color='gray'>通常要更新时,测试环境、与线上1比1的环境都要实验下,没问题后, 再更新线上几台机器试试,观察几周时间,再将集群慢慢的更新...保证业务能正常运行的情况下,缓慢的从局部到全体更新...</font></p>
+<p><strong>缓存: </strong><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  <code>yum makecache</code> -- 制作元数据缓存<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  <code>yum clean all</code>    -- 清除元数据缓存</p>
+<p><strong>历史记录:</strong><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <code>yum history</code>    -- 查看执行过的yum命令历史记录<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <code>yum history info ID号</code>  -- 查看具体某一条yum命令的详细信息,干了什么事<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <code>yum history undo ID号</code>   -- <strong>撤销</strong>执行过的某条yum命令,即相当于没有执行这条yum命令..<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <font color='gray'>eg: 某条yum命令是卸载某个软件包,那么执行undo后,会重新下载这个软件包..</font></p>
+<p><font color='blue'><strong>注意:</strong> 无论yum安装的软件来自何方 <code>yum install rpm包网络地址</code> , 遇到依赖问题, yum都会以自己仓库中的repodata存储的依赖关系为准.. 多个仓库的话, 会依次检索..</font></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nv">文件</span> <span class="o">=</span> 文件元数据 + 实际内容
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>安装软件包就是在安装一堆文件,<span class="sb">`</span>yum makecache<span class="sb">`</span>缓存的是文件的元数据<span class="o">(</span>权限、大小、时间、此文件与其它文件的关联等<span class="o">)</span>.. 执行<span class="sb">`</span>yum makecache<span class="sb">`</span>后,可以提速,提的是yum命令的查询速度<span class="sb">`</span>yum list<span class="sb">`</span>,并没有提升软件包的下载速度..
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>Q:能否缓存软件包呢？？
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>A:若yum的仓库在网上的话,yum发请求将软件包下载到本地,安装完成后,默认情况yum会自动将软件包删除..
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>  下次还想安装同一软件包,就得重复这个请求下载的过程..
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>默认软件包下载安装后会自动删除这一操作是跟<span class="sb">`</span>/etc/yum.conf<span class="sb">`</span>文件有关的..
+<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>可以看到keepcache默认等于0,若<span class="sb">`</span><span class="nv">keepcache</span><span class="o">=</span><span class="m">1</span><span class="sb">`</span>就代表yum会将rpm包安装后丢到cachedir属性指定的文件夹下..
+<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>
+<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a><span class="o">[</span>root@localhost yum.repos.d<span class="o">]</span><span class="c1"># vim /etc/yum.conf   </span>
+<a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a><span class="o">[</span>main<span class="o">]</span>
+<a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a><span class="nv">cachedir</span><span class="o">=</span>/var/cache/yum/<span class="nv">$basearch</span>/<span class="nv">$releasever</span>
+<a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a><span class="nv">keepcache</span><span class="o">=</span><span class="m">0</span>
+<a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a><span class="nv">debuglevel</span><span class="o">=</span><span class="m">2</span>
+<a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a><span class="nv">logfile</span><span class="o">=</span>/var/log/yum.log
+<a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a><span class="nv">exactarch</span><span class="o">=</span><span class="m">1</span>
+<a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a><span class="nv">obsoletes</span><span class="o">=</span><span class="m">1</span>
+<a id="__codelineno-1-19" name="__codelineno-1-19" href="#__codelineno-1-19"></a><span class="nv">gpgcheck</span><span class="o">=</span><span class="m">1</span>
+<a id="__codelineno-1-20" name="__codelineno-1-20" href="#__codelineno-1-20"></a><span class="nv">plugins</span><span class="o">=</span><span class="m">1</span>
+<a id="__codelineno-1-21" name="__codelineno-1-21" href="#__codelineno-1-21"></a><span class="nv">installonly_limit</span><span class="o">=</span><span class="m">5</span>
+<a id="__codelineno-1-22" name="__codelineno-1-22" href="#__codelineno-1-22"></a><span class="nv">bugtracker_url</span><span class="o">=</span>http://bugs.centos.org/set_project.php?project_id<span class="o">=</span><span class="m">23</span><span class="p">&amp;</span><span class="nv">ref</span><span class="o">=</span>http://bugs.centos.org/bug_report_page.php?category<span class="o">=</span>yum
+<a id="__codelineno-1-23" name="__codelineno-1-23" href="#__codelineno-1-23"></a><span class="nv">distroverpkg</span><span class="o">=</span>centos-release
+<a id="__codelineno-1-24" name="__codelineno-1-24" href="#__codelineno-1-24"></a>... ... ...
+</code></pre></div>
+<h3 id="_2"><font color='orange'>实验验证</font><a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
+<p><font color='gray'>Ps: shell远程连接开了两个窗口,第一个窗口的yum命令正在执行,第二个窗口使用yum时会提示yum对应的进程正在运行,<strong>即同一时间在一台机器上只能有一个yum命令运行...</strong> </font><br />
+当我们确定后台运行的yum没用时,那么运行命令 <code>pkill -9 yum</code> 可干掉后台正在运行的那个yum..</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="c1">## 观察结果,可以看到当前可以的仓库有三个 Base、Extras、Updates</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># yum repolist</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>已加载插件：fastestmirror, langpacks
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>Loading mirror speeds from cached hostfile
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a> * base: mirrors.nju.edu.cn
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a> * extras: mirrors.163.com
+<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a> * updates: mirrors.nju.edu.cn
+<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>源标识                       源名称                                     状态
+<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a>!base/7/x86_64           CentOS-7 - Base                            <span class="m">10</span>,072
+<a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a>!extras/7/x86_64         CentOS-7 - Extras                             <span class="m">512</span>
+<a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a>!updates/7/x86_64        CentOS-7 - Updates                          <span class="m">4</span>,101
+<a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a>repolist: <span class="m">14</span>,685
+<a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a><span class="c1">## 关闭与启动仓库 Base</span>
+<a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a>yum-config-manager --disable Base
+<a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a>yum-config-manager --enable Base
+<a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a>
+<a id="__codelineno-2-17" name="__codelineno-2-17" href="#__codelineno-2-17"></a><span class="o">[</span>root@localhost yum.repos.d<span class="o">]</span><span class="c1"># which ifconfig</span>
+<a id="__codelineno-2-18" name="__codelineno-2-18" href="#__codelineno-2-18"></a>/usr/sbin/ifconfig
+<a id="__codelineno-2-19" name="__codelineno-2-19" href="#__codelineno-2-19"></a><span class="o">[</span>root@localhost yum.repos.d<span class="o">]</span><span class="c1"># yum provides /usr/sbin/ifconfig</span>
+<a id="__codelineno-2-20" name="__codelineno-2-20" href="#__codelineno-2-20"></a>已加载插件：fastestmirror, langpacks
+<a id="__codelineno-2-21" name="__codelineno-2-21" href="#__codelineno-2-21"></a>Loading mirror speeds from cached hostfile
+<a id="__codelineno-2-22" name="__codelineno-2-22" href="#__codelineno-2-22"></a> * base: mirrors.nju.edu.cn
+<a id="__codelineno-2-23" name="__codelineno-2-23" href="#__codelineno-2-23"></a> * extras: mirrors.nju.edu.cn
+<a id="__codelineno-2-24" name="__codelineno-2-24" href="#__codelineno-2-24"></a> * updates: mirrors.nju.edu.cn
+<a id="__codelineno-2-25" name="__codelineno-2-25" href="#__codelineno-2-25"></a>net-tools-2.0-0.25.20131004git.el7.x86_64 : Basic networking tools
+<a id="__codelineno-2-26" name="__codelineno-2-26" href="#__codelineno-2-26"></a>源    :@anaconda
+<a id="__codelineno-2-27" name="__codelineno-2-27" href="#__codelineno-2-27"></a>匹配来源：
+<a id="__codelineno-2-28" name="__codelineno-2-28" href="#__codelineno-2-28"></a>文件名    :/usr/sbin/ifconfig
+<a id="__codelineno-2-29" name="__codelineno-2-29" href="#__codelineno-2-29"></a>
+<a id="__codelineno-2-30" name="__codelineno-2-30" href="#__codelineno-2-30"></a><span class="c1">## 安装软件包 以及 软件组</span>
+<a id="__codelineno-2-31" name="__codelineno-2-31" href="#__codelineno-2-31"></a>yum install httpd -y
+<a id="__codelineno-2-32" name="__codelineno-2-32" href="#__codelineno-2-32"></a>yum groupinstall <span class="s2">&quot;开发工具&quot;</span> -y
+<a id="__codelineno-2-33" name="__codelineno-2-33" href="#__codelineno-2-33"></a>
+<a id="__codelineno-2-34" name="__codelineno-2-34" href="#__codelineno-2-34"></a><span class="c1">## 卸载</span>
+<a id="__codelineno-2-35" name="__codelineno-2-35" href="#__codelineno-2-35"></a>yum remove httpd -y
+<a id="__codelineno-2-36" name="__codelineno-2-36" href="#__codelineno-2-36"></a>yum groupremove <span class="s2">&quot;开发工具&quot;</span> -y
+<a id="__codelineno-2-37" name="__codelineno-2-37" href="#__codelineno-2-37"></a>
+<a id="__codelineno-2-38" name="__codelineno-2-38" href="#__codelineno-2-38"></a><span class="c1">## 更新</span>
+<a id="__codelineno-2-39" name="__codelineno-2-39" href="#__codelineno-2-39"></a>yum update httpd -y
+</code></pre></div>
+<hr />
+<h2 id="yum_1">yum源分类<a class="headerlink" href="#yum_1" title="Permanent link">&para;</a></h2>
+<blockquote>
+<p>要使用yum前,需要准备一个yum源/仓库, 可以是一个互联网上的仓库,也可以是本地自己搭建的仓库.<br />
+仓库里面有什么呢?里面全部都是.rpm的软件包.<br />
+一台linux,可以添加N多个yum源, 能搜索的软件包数量就是N个yum源之和..</p>
+</blockquote>
+<p>1&gt; <strong>本地源:</strong> 把本地的文件夹做成了yum源<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 方式一: 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; step1: 采集一系列相关的软件包放在本地某一个目录下;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; step2: <code>yum install createrepo -y</code>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; <code>createrepo 目录路径</code> 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -- 创建仓库,会在该目录下生成一个名为repodata的文件夹..用于存放依赖关系.
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; step3: 修改配置
+&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; <code>vim /etc/yum.repo.d/仓库名.repo</code>   --- 必须以<code>.repo</code>结尾
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 方式二:  将镜像文件作为本地源
+2&gt; <strong>网络源:</strong> <br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; base基础源 -- 放置的是一些常用的软件包;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; epel扩展源  -- 放置的是一些扩展/额外的软件包; <br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 与服务相关的源(官网) -- 某一个软件包所在官网提供的源.. <font color='gray'>eg: <strong>nginx官网</strong>的软件包源</font></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>注意,能作为yum仓库必须具备两个前提:
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>    该目录下存放了所有相关的软件包<span class="p">;</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>    该目录下必须有一个文件夹repodata记录该目录所包含软件包之间的依赖关系..便于yum解决依赖性问题.
+</code></pre></div>
+<hr />
+<h2 id="_3">镜像文件作为本地源<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
+<h3 id="step1"><font color='orange'>step1: 准备工作</font><a class="headerlink" href="#step1" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p>干掉系统默认的yum源</p>
+</blockquote>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="s2">&quot;&quot;&quot;</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="s2">`/etc/yum.repos.d/`目录下全是以`.repo`结尾的yum仓库配置文件..</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="s2">yum命令在运行时会去检索这些配置文件..</span>
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="s2">&quot;&quot;&quot;</span>
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># cd /etc/yum.repos.d/</span>
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="o">[</span>root@localhost yum.repos.d<span class="o">]</span><span class="c1"># ls</span>
+<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>CentOS-Base.repo  CentOS-Debuginfo.repo  CentOS-Media.repo    CentOS-Vault.repo
+<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>CentOS-CR.repo    CentOS-fasttrack.repo  CentOS-Sources.repo  CentOS-x86_64-kernel.repo
+<a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a>
+<a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a><span class="s2">&quot;&quot;&quot;</span>
+<a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a><span class="s2">我们通常不会使用系统默认的这些yum仓库</span>
+<a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a><span class="s2">但删除不是好习惯.. 我们选择使用mv命令移动下.让yum命令找不到就可以啦.</span>
+<a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a>
+<a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a><span class="s2">Ps: mv后,`yum list`还有结果,列出的只是已经安装了的软件包.. 若安装未安装的软件包肯定是安装不了的!!</span>
+<a id="__codelineno-4-15" name="__codelineno-4-15" href="#__codelineno-4-15"></a><span class="s2">&quot;&quot;&quot;</span>
+<a id="__codelineno-4-16" name="__codelineno-4-16" href="#__codelineno-4-16"></a><span class="o">[</span>root@localhost yum.repos.d<span class="o">]</span><span class="c1"># mkdir bak</span>
+<a id="__codelineno-4-17" name="__codelineno-4-17" href="#__codelineno-4-17"></a><span class="c1">## 在yum.repos.d目录下执行命令 `mv bak/* .` 就可以还原回来啦</span>
+<a id="__codelineno-4-18" name="__codelineno-4-18" href="#__codelineno-4-18"></a><span class="o">[</span>root@localhost yum.repos.d<span class="o">]</span><span class="c1"># mv *.repo bak/</span>
+<a id="__codelineno-4-19" name="__codelineno-4-19" href="#__codelineno-4-19"></a><span class="o">[</span>root@localhost yum.repos.d<span class="o">]</span><span class="c1"># ls</span>
+<a id="__codelineno-4-20" name="__codelineno-4-20" href="#__codelineno-4-20"></a>bak
+<a id="__codelineno-4-21" name="__codelineno-4-21" href="#__codelineno-4-21"></a><span class="o">[</span>root@localhost yum.repos.d<span class="o">]</span><span class="c1"># pwd</span>
+<a id="__codelineno-4-22" name="__codelineno-4-22" href="#__codelineno-4-22"></a>/etc/yum.repos.d
+<a id="__codelineno-4-23" name="__codelineno-4-23" href="#__codelineno-4-23"></a><span class="o">[</span>root@localhost yum.repos.d<span class="o">]</span><span class="c1"># yum repolist</span>
+<a id="__codelineno-4-24" name="__codelineno-4-24" href="#__codelineno-4-24"></a>已加载插件：fastestmirror, langpacks
+<a id="__codelineno-4-25" name="__codelineno-4-25" href="#__codelineno-4-25"></a>Loading mirror speeds from cached hostfile
+<a id="__codelineno-4-26" name="__codelineno-4-26" href="#__codelineno-4-26"></a>repolist: <span class="m">0</span>   <span class="c1">## 验证结果不为0的话 yum clean all 清除下元数据缓存</span>
+</code></pre></div>
+<h3 id="step2"><font color='orange'>step2: 挂载镜像</font><a class="headerlink" href="#step2" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p>详见 <code>10_软件包管理之rpm.md</code> 中挂载镜像这一部分内容..</p>
+</blockquote>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="o">[</span>root@localhost opt<span class="o">]</span><span class="c1"># df</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>文件系统                   1K-块    已用     可用 已用% 挂载点
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>devtmpfs                  <span class="m">480924</span>       <span class="m">0</span>   <span class="m">480924</span>    <span class="m">0</span>% /dev
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>tmpfs                     <span class="m">497820</span>       <span class="m">0</span>   <span class="m">497820</span>    <span class="m">0</span>% /dev/shm
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>tmpfs                     <span class="m">497820</span>   <span class="m">27432</span>   <span class="m">470388</span>    <span class="m">6</span>% /run
+<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>tmpfs                     <span class="m">497820</span>       <span class="m">0</span>   <span class="m">497820</span>    <span class="m">0</span>% /sys/fs/cgroup
+<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a>/dev/mapper/centos-root <span class="m">17811456</span> <span class="m">5243408</span> <span class="m">12568048</span>   <span class="m">30</span>% /
+<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a>/dev/sda1                <span class="m">1038336</span>  <span class="m">258412</span>   <span class="m">779924</span>   <span class="m">25</span>% /boot
+<a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a>tmpfs                      <span class="m">99564</span>      <span class="m">36</span>    <span class="m">99528</span>    <span class="m">1</span>% /run/user/0
+<a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a>tmpfs                      <span class="m">99564</span>       <span class="m">0</span>    <span class="m">99564</span>    <span class="m">0</span>% /run/user/1001
+<a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a>/dev/sr0                 <span class="m">4600876</span> <span class="m">4600876</span>        <span class="m">0</span>  <span class="m">100</span>% /opt
+<a id="__codelineno-5-12" name="__codelineno-5-12" href="#__codelineno-5-12"></a><span class="o">[</span>root@localhost opt<span class="o">]</span><span class="c1"># ls</span>
+<a id="__codelineno-5-13" name="__codelineno-5-13" href="#__codelineno-5-13"></a>CentOS_BuildTag  EULA  images   LiveOS   repodata    RPM-GPG-KEY-CentOS-Testing-7
+<a id="__codelineno-5-14" name="__codelineno-5-14" href="#__codelineno-5-14"></a>EFI    GPL   isolinux  Packages  RPM-GPG-KEY-CentOS-7  TRANS.TBL
+</code></pre></div>
+<h3 id="step3-repo"><font color='orange'>step3: 编辑repo文件</font><a class="headerlink" href="#step3-repo" title="Permanent link">&para;</a></h3>
+<p>仓库配置文件叫啥名并不重要,但后缀必须得是<code>.repo</code><br />
+仓库配置文件里的baseurl属性值 <strong><em>指定到repodata文件夹的父亲目录即可</em></strong> ..跟rpm包在哪无关..<br />
+<font color='gray'>因为yum命令在执行时,会通过repodata里面的数据来找到软件包的位置及相关依赖..</font></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="o">[</span>root@localhost yum.repos.d<span class="o">]</span><span class="c1"># cd /etc/yum.repos.d/</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="o">[</span>root@localhost yum.repos.d<span class="o">]</span><span class="c1"># ls</span>
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>bak
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="o">[</span>root@localhost yum.repos.d<span class="o">]</span><span class="c1"># vim local.repo</span>
+<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="s2">&quot;&quot;&quot;</span>
+<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a><span class="s2">[local]                     # 仓库的实际名字,任意</span>
+<a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a><span class="s2">name=&quot;</span>this is <span class="nb">local</span> repo<span class="s2">&quot;   # 仓库的描述,任意</span>
+<a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a><span class="s2">baseurl=file:///opt         # 仓库位置,一般会出现四种前缀 http:// https:// ftp:// file://</span>
+<a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a><span class="s2">enabled=1                   # 启用仓库, 默认enabled=1 不写也可以 </span>
+<a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a><span class="s2">gpgcheck=0                  # 检查安装的rpm是否是合法的,通常设置为0,0表示不检验</span>
+<a id="__codelineno-6-11" name="__codelineno-6-11" href="#__codelineno-6-11"></a>
+<a id="__codelineno-6-12" name="__codelineno-6-12" href="#__codelineno-6-12"></a><span class="s2">Ps: 配置本地源,`file://`是固定开头,代表是从本地找.往后再跟repodata的父级目录路径 `file:///opt`</span>
+<a id="__codelineno-6-13" name="__codelineno-6-13" href="#__codelineno-6-13"></a><span class="s2">&quot;&quot;&quot;</span>
+<a id="__codelineno-6-14" name="__codelineno-6-14" href="#__codelineno-6-14"></a><span class="o">[</span>root@localhost yum.repos.d<span class="o">]</span><span class="c1"># cat local.repo </span>
+<a id="__codelineno-6-15" name="__codelineno-6-15" href="#__codelineno-6-15"></a><span class="o">[</span>local<span class="o">]</span>
+<a id="__codelineno-6-16" name="__codelineno-6-16" href="#__codelineno-6-16"></a><span class="nv">name</span><span class="o">=</span><span class="s2">&quot;this is local repo&quot;</span>
+<a id="__codelineno-6-17" name="__codelineno-6-17" href="#__codelineno-6-17"></a><span class="nv">baseurl</span><span class="o">=</span>file:///opt
+<a id="__codelineno-6-18" name="__codelineno-6-18" href="#__codelineno-6-18"></a><span class="nv">enabled</span><span class="o">=</span><span class="m">1</span>
+<a id="__codelineno-6-19" name="__codelineno-6-19" href="#__codelineno-6-19"></a><span class="nv">gpgcheck</span><span class="o">=</span><span class="m">0</span>
+</code></pre></div>
+<h3 id="step4"><font color='orange'>step4: 查询可用仓库</font><a class="headerlink" href="#step4" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="c1">## 进行验证</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># yum repolist</span>
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>已加载插件：fastestmirror, langpacks
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a>Loading mirror speeds from cached hostfile
+<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="nb">local</span>                                 <span class="p">|</span> <span class="m">3</span>.6 kB  <span class="m">00</span>:00:00     
+<a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a><span class="o">(</span><span class="m">1</span>/2<span class="o">)</span>: local/group_gz                 <span class="p">|</span> <span class="m">153</span> kB  <span class="m">00</span>:00:00     
+<a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a><span class="o">(</span><span class="m">2</span>/2<span class="o">)</span>: local/primary_db               <span class="p">|</span> <span class="m">3</span>.3 MB  <span class="m">00</span>:00:00     
+<a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a>源标识            源名称                状态
+<a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a><span class="nb">local</span>        <span class="s2">&quot;this is local repo&quot;</span>     <span class="m">4</span>,070
+<a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a>repolist: <span class="m">4</span>,070
+</code></pre></div>
+<h2 id="yum_2">开源的yum源/网络源<a class="headerlink" href="#yum_2" title="Permanent link">&para;</a></h2>
+<h3 id="base"><font color='orange'>Base基础源</font><a class="headerlink" href="#base" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="s2">&quot;&quot;&quot;▲ Base基础源</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="s2">阿里云的Base基础源:</span>
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="s2">  `wget -O /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-7.repo`</span>
+<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="s2">163的Base基础源:</span>
+<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="s2">  `wget -O /etc/yum.repos.d/CentOS-Base.repo http://mirrors.163.com/.help/CentOS7-Base-163.repo`</span>
+<a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a><span class="s2">&quot;&quot;&quot;</span>
+<a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># wget -O /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-7.repo</span>
+<a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a>... ... ...
+<a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a><span class="m">2022</span>-08-11 <span class="m">06</span>:42:38 <span class="o">(</span><span class="m">54</span>.8 KB/s<span class="o">)</span> - 已保存 “/etc/yum.repos.d/CentOS-Base.repo” <span class="o">[</span><span class="m">2523</span>/2523<span class="o">])</span>
+<a id="__codelineno-8-10" name="__codelineno-8-10" href="#__codelineno-8-10"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># cd /etc/yum.repos.d/</span>
+<a id="__codelineno-8-11" name="__codelineno-8-11" href="#__codelineno-8-11"></a><span class="o">[</span>root@localhost yum.repos.d<span class="o">]</span><span class="c1"># ls</span>
+<a id="__codelineno-8-12" name="__codelineno-8-12" href="#__codelineno-8-12"></a>bak  CentOS-Base.repo  local.repo
+</code></pre></div>
+<h3 id="epel"><font color='orange'>epel扩展源</font><a class="headerlink" href="#epel" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p>EPEL是由 Fedora 社区打造, 为 RHEL 及衍生发行版如 CentOS、Scientific Linux 等提供高质量软件包的项目.  装上了 EPEL之后,就相当于添加了一个第三方源.  但提供的版本往往是很滞后的,因为安全稳定是重点..</p>
+</blockquote>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="s2">&quot;&quot;&quot;▲ epel扩展源</span>
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="s2">阿里云的epel扩展源如下:(用wget命令也可以)</span>
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="s2">  `curl -o /etc/yum.repos.d/epel.repo http://mirrors.aliyun.com/repo/epel-7.repo`</span>
+<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="s2">也可以通过安装epel-release软件包来自动生成扩展源:</span>
+<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a><span class="s2">  `yum install epel-release -y`</span>
+<a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a><span class="s2">&quot;&quot;&quot;</span>
+<a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a><span class="o">[</span>root@localhost yum.repos.d<span class="o">]</span><span class="c1"># yum install epel-release -y </span>
+<a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a>... ... ...
+<a id="__codelineno-9-9" name="__codelineno-9-9" href="#__codelineno-9-9"></a><span class="o">[</span>root@localhost yum.repos.d<span class="o">]</span><span class="c1"># ls</span>
+<a id="__codelineno-9-10" name="__codelineno-9-10" href="#__codelineno-9-10"></a>bak  CentOS-Base.repo  epel.repo  epel-testing.repo  local.repo
+</code></pre></div>
+<h3 id="nginx"><font color='orange'>配置nginx官网源</font><a class="headerlink" href="#nginx" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="c1"># 可以看到epel扩展源里也提供了nginx的软件包 </span>
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="c1"># 但版本1.20.1也不是nginx稳定版最新的(epel源提供的版本往往会比较滞后 当前官网最新的稳定版本是1.22.0)..</span>
+<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="o">[</span>root@localhost yum.repos.d<span class="o">]</span><span class="c1"># yum list | grep nginx.x86_64</span>
+<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a>collectd-nginx.x86_64                    <span class="m">5</span>.8.1-1.el7                   epel     
+<a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a>nginx.x86_64                             <span class="m">1</span>:1.20.1-9.el7                epel     
+<a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a>pcp-pmda-nginx.x86_64                    <span class="m">4</span>.3.2-13.el7_9                updates  
+<a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a>sympa-nginx.x86_64                       <span class="m">6</span>.2.68-1.el7                  epel 
+</code></pre></div>
+<p>从官网配置nginx的rpm源的步骤解析如下:<br />
+1&gt; 输入网址<code>https://nginx.org/</code>,点击右边栏中的<code>download</code><br />
+2&gt; Mainline version 官方维护版本; Stable version 稳定版本; Legacy versions历史版本;<br />
+&nbsp;&nbsp;&nbsp;&nbsp; Source Code 源代码; Pre-Built Packages 预构建包.. <strong>点击 Pre-Built Packages</strong><br />
+&nbsp;&nbsp;&nbsp;&nbsp; <font color='gray'>Mainline、Stable、Legacy下载的都是源码包!! </font><br />
+3&gt; 往下滑, 直到 RHEL/CentOS 小节.. 按照官方提示进行操作..</p>
+<p><img alt="" src="../assets/nginx_rpm.jpeg" /></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="s2">&quot;&quot;&quot;</span>
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="s2">[nginx-stable] 稳定版本; [nginx-mainline] 维护版本</span>
+<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="s2">我们通常会使用稳定版本!所以前者enabled的值为1,后者为0.</span>
+<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a>
+<a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a><span class="s2">http://nginx.org/packages/centos/</span><span class="nv">$releasever</span><span class="s2">/</span><span class="nv">$basearch</span><span class="s2">/</span>
+<a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a><span class="nv">$releasever</span><span class="s2"> 系统的发行版本(当前环境是7)</span>
+<a id="__codelineno-11-7" name="__codelineno-11-7" href="#__codelineno-11-7"></a><span class="nv">$basearch</span><span class="s2">   架构(当前环境是x86_64)</span>
+<a id="__codelineno-11-8" name="__codelineno-11-8" href="#__codelineno-11-8"></a><span class="s2">两个变量都根据所在平台不同动态获取值!!!</span>
+<a id="__codelineno-11-9" name="__codelineno-11-9" href="#__codelineno-11-9"></a>
+<a id="__codelineno-11-10" name="__codelineno-11-10" href="#__codelineno-11-10"></a><span class="s2">Ps:输入网址`http://nginx.org/packages/centos/7/x86_64/`可以发现当前路径下有repodata文件夹!!!</span>
+<a id="__codelineno-11-11" name="__codelineno-11-11" href="#__codelineno-11-11"></a><span class="s2">   佐证了 baseurl属性值指定到repodata文件夹的父亲目录即可 这一结论!!!</span>
+<a id="__codelineno-11-12" name="__codelineno-11-12" href="#__codelineno-11-12"></a><span class="s2">&quot;&quot;&quot;</span>
+<a id="__codelineno-11-13" name="__codelineno-11-13" href="#__codelineno-11-13"></a><span class="o">[</span>root@localhost yum.repos.d<span class="o">]</span><span class="c1"># ls</span>
+<a id="__codelineno-11-14" name="__codelineno-11-14" href="#__codelineno-11-14"></a>bak  CentOS-Base.repo  epel.repo  epel-testing.repo  local.repo
+<a id="__codelineno-11-15" name="__codelineno-11-15" href="#__codelineno-11-15"></a><span class="o">[</span>root@localhost yum.repos.d<span class="o">]</span><span class="c1"># vim nginx.repo</span>
+<a id="__codelineno-11-16" name="__codelineno-11-16" href="#__codelineno-11-16"></a><span class="o">[</span>root@localhost yum.repos.d<span class="o">]</span><span class="c1"># cat nginx.repo </span>
+<a id="__codelineno-11-17" name="__codelineno-11-17" href="#__codelineno-11-17"></a><span class="o">[</span>nginx-stable<span class="o">]</span> 
+<a id="__codelineno-11-18" name="__codelineno-11-18" href="#__codelineno-11-18"></a><span class="nv">name</span><span class="o">=</span>nginx stable repo 
+<a id="__codelineno-11-19" name="__codelineno-11-19" href="#__codelineno-11-19"></a><span class="nv">baseurl</span><span class="o">=</span>http://nginx.org/packages/centos/<span class="nv">$releasever</span>/<span class="nv">$basearch</span>/ 
+<a id="__codelineno-11-20" name="__codelineno-11-20" href="#__codelineno-11-20"></a><span class="nv">gpgcheck</span><span class="o">=</span><span class="m">1</span> 
+<a id="__codelineno-11-21" name="__codelineno-11-21" href="#__codelineno-11-21"></a><span class="nv">enabled</span><span class="o">=</span><span class="m">1</span> 
+<a id="__codelineno-11-22" name="__codelineno-11-22" href="#__codelineno-11-22"></a><span class="nv">gpgkey</span><span class="o">=</span>https://nginx.org/keys/nginx_signinz.key 
+<a id="__codelineno-11-23" name="__codelineno-11-23" href="#__codelineno-11-23"></a><span class="nv">module_hotfixes</span><span class="o">=</span><span class="nb">true</span> 
+<a id="__codelineno-11-24" name="__codelineno-11-24" href="#__codelineno-11-24"></a>
+<a id="__codelineno-11-25" name="__codelineno-11-25" href="#__codelineno-11-25"></a><span class="o">[</span>nginx-mainline<span class="o">]</span> 
+<a id="__codelineno-11-26" name="__codelineno-11-26" href="#__codelineno-11-26"></a><span class="nv">name</span><span class="o">=</span>nginx mainline repo 
+<a id="__codelineno-11-27" name="__codelineno-11-27" href="#__codelineno-11-27"></a><span class="nv">baseurl</span><span class="o">=</span>http://nginx.org/packages/mainline/centos/<span class="nv">$releasever</span>/<span class="nv">$basearch</span>/ 
+<a id="__codelineno-11-28" name="__codelineno-11-28" href="#__codelineno-11-28"></a><span class="nv">gpgcheck</span><span class="o">=</span><span class="m">1</span> 
+<a id="__codelineno-11-29" name="__codelineno-11-29" href="#__codelineno-11-29"></a><span class="nv">enabled</span><span class="o">=</span><span class="m">0</span> 
+<a id="__codelineno-11-30" name="__codelineno-11-30" href="#__codelineno-11-30"></a><span class="nv">gpgkey</span><span class="o">=</span>https://nginx.org/keys/nginx_signing.key 
+<a id="__codelineno-11-31" name="__codelineno-11-31" href="#__codelineno-11-31"></a><span class="nv">module_hotfixes</span><span class="o">=</span><span class="nb">true</span>
+<a id="__codelineno-11-32" name="__codelineno-11-32" href="#__codelineno-11-32"></a>
+<a id="__codelineno-11-33" name="__codelineno-11-33" href="#__codelineno-11-33"></a><span class="o">[</span>root@localhost yum.repos.d<span class="o">]</span><span class="c1">#</span>
+<a id="__codelineno-11-34" name="__codelineno-11-34" href="#__codelineno-11-34"></a><span class="o">[</span>root@localhost yum.repos.d<span class="o">]</span><span class="c1"># yum repolist | grep nginx</span>
+<a id="__codelineno-11-35" name="__codelineno-11-35" href="#__codelineno-11-35"></a>nginx-stable/7/x86_64   nginx stable repo     <span class="m">280</span>
+<a id="__codelineno-11-36" name="__codelineno-11-36" href="#__codelineno-11-36"></a>
+<a id="__codelineno-11-37" name="__codelineno-11-37" href="#__codelineno-11-37"></a><span class="s2">&quot;&quot;&quot;</span>
+<a id="__codelineno-11-38" name="__codelineno-11-38" href="#__codelineno-11-38"></a><span class="s2">若安装nginx过程中,出错提示 获取 GPG 密钥失败</span>
+<a id="__codelineno-11-39" name="__codelineno-11-39" href="#__codelineno-11-39"></a><span class="s2">执行命令`rpm --import https://nginx.org/keys/nginx_signing.key`后再安装..</span>
+<a id="__codelineno-11-40" name="__codelineno-11-40" href="#__codelineno-11-40"></a><span class="s2">&quot;&quot;&quot;</span>
+<a id="__codelineno-11-41" name="__codelineno-11-41" href="#__codelineno-11-41"></a>yum remove nginx-* -y  <span class="c1">## 保持环境的干净</span>
+<a id="__codelineno-11-42" name="__codelineno-11-42" href="#__codelineno-11-42"></a>yum install nginx -y   <span class="c1">## 安装的是nginx官网源里的(因为nginx官网源里的版本比epel源里的高)</span>
+</code></pre></div>
+<p><strong>补充:</strong> 执行<code>yum install nginx-* -y</code>, 试图下载nginx官方源里相关安装包, 在此过程中报错的解决...</p>
+<p><font color='blue'>简单来说,epel源与官方源冲突,干掉epel源再安装; 官方源安装过程中缺少的依赖通过epel源下载安装..Hhhh.</font></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="s2">&quot;&quot;&quot;</span>
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="s2">当前有阿里云的Base基础源、阿里云的epel源、镜像文件的本地源、nginx的官方源</span>
+<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span class="s2">&quot;&quot;&quot;</span>
+<a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a><span class="o">[</span>root@localhost yum.repos.d<span class="o">]</span><span class="c1"># ls</span>
+<a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a>bak  bak1  CentOS-Base.repo  epel.repo  epel.repo.rpmsave local.repo  nginx.repo
+<a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a>
+<a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a><span class="s2">&quot;&quot;&quot;▲ 做了个实验,只留下nginx的官方源</span>
+<a id="__codelineno-12-8" name="__codelineno-12-8" href="#__codelineno-12-8"></a><span class="s2">(1)执行`yum install nginx -y`命令</span>
+<a id="__codelineno-12-9" name="__codelineno-12-9" href="#__codelineno-12-9"></a><span class="s2">   只下载了安装nginx-1.22.0-1.el7.ngx.x86_64.rpm包.. </span>
+<a id="__codelineno-12-10" name="__codelineno-12-10" href="#__codelineno-12-10"></a><span class="s2">   不是废话嘛,指定下载的软件包名就是nginx,只不过该软件包没有依赖罢了..</span>
+<a id="__codelineno-12-11" name="__codelineno-12-11" href="#__codelineno-12-11"></a><span class="s2">(2))执行`yum install nginx* -y`命令</span>
+<a id="__codelineno-12-12" name="__codelineno-12-12" href="#__codelineno-12-12"></a><span class="s2">   理论上会下载nginx的官方源中所有的最新版本的rpm包</span>
+<a id="__codelineno-12-13" name="__codelineno-12-13" href="#__codelineno-12-13"></a><span class="s2">   (举个抽象的例子 有四个rpm包 A-1.0.1 A.1.0.2 B-1.1.2 B-1.1.3 最终只会下载A.1.0.2和B-1.1.3)</span>
+<a id="__codelineno-12-14" name="__codelineno-12-14" href="#__codelineno-12-14"></a><span class="s2">   试着执行命令,但中途报错啦!!报错如下:</span>
+<a id="__codelineno-12-15" name="__codelineno-12-15" href="#__codelineno-12-15"></a><span class="s2">   `nginx-nr-agent-2.0.0-12.el7.ngx.noarch (nginx-stable)软件包需要依赖 python-daemon`</span>
+<a id="__codelineno-12-16" name="__codelineno-12-16" href="#__codelineno-12-16"></a><span class="s2">   python-daemon包nginx的官方源没有..</span>
+<a id="__codelineno-12-17" name="__codelineno-12-17" href="#__codelineno-12-17"></a><span class="s2">   (可以访问http://nginx.org/packages/centos/7/x86_64/RPMS/,下面全是nginx开头的rpm包,没有其他的)</span>
+<a id="__codelineno-12-18" name="__codelineno-12-18" href="#__codelineno-12-18"></a><span class="s2">解决的话就需要epel扩展源的帮忙..</span>
+<a id="__codelineno-12-19" name="__codelineno-12-19" href="#__codelineno-12-19"></a><span class="s2">&quot;&quot;&quot;</span>
+<a id="__codelineno-12-20" name="__codelineno-12-20" href="#__codelineno-12-20"></a>
+<a id="__codelineno-12-21" name="__codelineno-12-21" href="#__codelineno-12-21"></a><span class="s2">&quot;&quot;&quot;▲ 不动yum源 包含epel源和nginx官方源</span>
+<a id="__codelineno-12-22" name="__codelineno-12-22" href="#__codelineno-12-22"></a><span class="s2">&quot;&quot;&quot;</span>
+<a id="__codelineno-12-23" name="__codelineno-12-23" href="#__codelineno-12-23"></a>执行<span class="sb">`</span>yum install nginx* -y<span class="sb">`</span>命令,依旧会下载nginx官方源那个软件包,报那个错误,所以先解决下..
+<a id="__codelineno-12-24" name="__codelineno-12-24" href="#__codelineno-12-24"></a><span class="sb">`</span>yum install python-daemon<span class="sb">`</span>通过epel扩展源解决了依赖包的下载安装
+<a id="__codelineno-12-25" name="__codelineno-12-25" href="#__codelineno-12-25"></a>
+<a id="__codelineno-12-26" name="__codelineno-12-26" href="#__codelineno-12-26"></a>继续满怀期望的执行<span class="sb">`</span>yum install nginx* -y<span class="sb">`</span>发现,冲突啦!!
+<a id="__codelineno-12-27" name="__codelineno-12-27" href="#__codelineno-12-27"></a>epel源里的软件包版本跟nginx官方源里软件包版本依赖相关冲突导致的..阿巴阿巴,反正就是冲突啦.
+<a id="__codelineno-12-28" name="__codelineno-12-28" href="#__codelineno-12-28"></a>
+<a id="__codelineno-12-29" name="__codelineno-12-29" href="#__codelineno-12-29"></a>解决:
+<a id="__codelineno-12-30" name="__codelineno-12-30" href="#__codelineno-12-30"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># cd /etc/yum.repos.d/</span>
+<a id="__codelineno-12-31" name="__codelineno-12-31" href="#__codelineno-12-31"></a><span class="o">[</span>root@localhost yum.repos.d<span class="o">]</span><span class="c1"># ls</span>
+<a id="__codelineno-12-32" name="__codelineno-12-32" href="#__codelineno-12-32"></a>bak  bak1  CentOS-Base.repo  epel.repo  epel.repo.rpmsave  local.repo  nginx.repo
+<a id="__codelineno-12-33" name="__codelineno-12-33" href="#__codelineno-12-33"></a><span class="c1">## 其实也可以使用命令 `yum-config-manager --disable 仓库名` 关闭指定仓库..</span>
+<a id="__codelineno-12-34" name="__codelineno-12-34" href="#__codelineno-12-34"></a><span class="o">[</span>root@localhost yum.repos.d<span class="o">]</span><span class="c1"># mv epel* bak1</span>
+<a id="__codelineno-12-35" name="__codelineno-12-35" href="#__codelineno-12-35"></a><span class="o">[</span>root@localhost yum.repos.d<span class="o">]</span><span class="c1"># ls</span>
+<a id="__codelineno-12-36" name="__codelineno-12-36" href="#__codelineno-12-36"></a>bak  bak1  CentOS-Base.repo  local.repo  nginx.repo
+<a id="__codelineno-12-37" name="__codelineno-12-37" href="#__codelineno-12-37"></a>
+<a id="__codelineno-12-38" name="__codelineno-12-38" href="#__codelineno-12-38"></a>再执行<span class="sb">`</span>yum install nginx* -y<span class="sb">`</span>将nginx官方源里的软件包全部下载下来.
+</code></pre></div>
+<hr />
+<h2 id="yum_3">制作yum本地源<a class="headerlink" href="#yum_3" title="Permanent link">&para;</a></h2>
+<blockquote>
+<p>前面我们实现了将镜像文件作为本地源,因为镜像文件里有repodata文件夹,所以省去了一些步骤..<br />
+因为制作个yum本地源这是个<strong>重点</strong>,所以这里单独进行阐述!</p>
+</blockquote>
+<p>在生产环境中,通常会自己做一个yum源!! 保证集群中每台机器的软件包版本的高度一致!<br />
+<font color='gray'>集群的每台机子的网络源一样也不好使.. 因为网络源在别个手中,一改动.. 添加新机子的时候, 就容易出问题.</font></p>
+<p>前文在yum命令那里提到了元数据缓存跟软件包内容的缓存..<br />
+将<code>/etc/yum.conf</code>的keepcache属性值改为1后, 软件包安装完成yum不再自动删除软件包,会缓存到指定路径..</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="o">[</span>root@localhost yum.repos.d<span class="o">]</span><span class="c1"># vim /etc/yum.conf</span>
+<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="o">[</span>main<span class="o">]</span>
+<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a><span class="nv">cachedir</span><span class="o">=</span>/var/cache/yum/<span class="nv">$basearch</span>/<span class="nv">$releasever</span>   <span class="c1">## -- 默认的软件包缓存路径 可改</span>
+<a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a><span class="nv">keepcache</span><span class="o">=</span><span class="m">1</span>
+<a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a>... ... ...
+<a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a>
+<a id="__codelineno-13-7" name="__codelineno-13-7" href="#__codelineno-13-7"></a><span class="s2">&quot;&quot;&quot;</span>
+<a id="__codelineno-13-8" name="__codelineno-13-8" href="#__codelineno-13-8"></a><span class="s2">本地源的好处:将软件包的版本牢牢的控制到了自己的手里;速度也会快一些.</span>
+<a id="__codelineno-13-9" name="__codelineno-13-9" href="#__codelineno-13-9"></a><span class="s2">&quot;&quot;&quot;</span>
+</code></pre></div>
+<p>假设要在一套测试环境中要部署k8s docker集群架构..具体操作如下:<br />
+&nbsp;&nbsp;&nbsp;&nbsp; 1.给测试环境中每台机子用同一个镜像安装OS系统.保证os的一致.<br />
+&nbsp;&nbsp;&nbsp;&nbsp; 2.刚安装完os系统时,每台机子都统一执行 <code>yum update -y</code> 操作..<br />
+&nbsp;&nbsp;&nbsp;&nbsp; 3.将测试环境中的每台机子/每个节点的keepcache属性值都设置为1,即开启软件包缓存.<br />
+&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <code>rm -rf /var/cache/yum/*</code>  -- 保持环境的干净<br />
+&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <code>vim /etc/yum.conf</code> 设置 keepcache=1<br />
+&nbsp;&nbsp;&nbsp;&nbsp; 4.配置网络源(bash+epel+官方),部署过程中安装的软件包会全部缓存到本地..<br />
+&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 等整套测试环境都调试ok啦..<br />
+&nbsp;&nbsp;&nbsp;&nbsp; 5.将测试环境中每台机子上缓存好的软件包全都采集到一起.<br />
+&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 假设放到名为/soft的文件夹下,有重复的就覆盖.  以一台机子为例..<br />
+&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <code>find /var/cache/yum -type f -name "*.rpm" | xargs -I {} mv {} /soft/</code><br />
+&nbsp;&nbsp;&nbsp;&nbsp; 6.最后针对这个文件夹做<code>createrepo /soft</code>建立依赖性关系. 在<code>/soft</code>下会生成<code>repodata</code>文件夹..</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>后续在完成yum本地源共享后,在线上的机子<span class="sb">`</span>/etc/yum.repos.d/<span class="sb">`</span>下配置 .repo结尾的本地源..
+<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a><span class="o">(</span>配置时注意repodata目录的位置以便于设置正确的baseurl属性值<span class="o">)</span>
+<a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a>
+<a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a>/soft文件夹作为线上环境的一个yum源!!!不要轻易升级,不要滥用yum源,这样可以严格控制好各个服务的版本
+</code></pre></div>
+<hr />
+<h2 id="_4">本地源共享<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
+<blockquote>
+<p>有两种方式 <strong>http://</strong> 和 <strong>ftp://</strong> 完成文件的上传和下载, 这里以ftp为例.. <br />
+Ps: http超文本传输协议; ftp文件传输协议</p>
+</blockquote>
+<h3 id="_5"><font color='orange'>服务端上的操作</font><a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="s2">&quot;&quot;&quot;环境准备</span>
+<a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a><span class="s2">&quot;&quot;&quot;</span>
+<a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># systemctl stop firewalld      ## -- 关闭防火墙</span>
+<a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># systemctl disable firewalld   ## -- 开机不启动防火墙</span>
+<a id="__codelineno-15-5" name="__codelineno-15-5" href="#__codelineno-15-5"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># setenforce 0        ## -- 临时关闭SElinux 配置文件里是没有修改的!</span>
+<a id="__codelineno-15-6" name="__codelineno-15-6" href="#__codelineno-15-6"></a>setenforce: SELinux is disabled     <span class="c1">## -- 这里提示selinux目前是禁用状态,不必关闭</span>
+<a id="__codelineno-15-7" name="__codelineno-15-7" href="#__codelineno-15-7"></a><span class="c1">## 当然可以用 vim /etc/sysconfig/selinux 在文件中修改 SELINUX=disabled</span>
+<a id="__codelineno-15-8" name="__codelineno-15-8" href="#__codelineno-15-8"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># sed -i &#39;s#^SELINUX=.*#SELINUX=disabled#g&#39; /etc/selinux/config   </span>
+<a id="__codelineno-15-9" name="__codelineno-15-9" href="#__codelineno-15-9"></a>
+<a id="__codelineno-15-10" name="__codelineno-15-10" href="#__codelineno-15-10"></a>
+<a id="__codelineno-15-11" name="__codelineno-15-11" href="#__codelineno-15-11"></a><span class="s2">&quot;&quot;&quot;安装ftp服务</span>
+<a id="__codelineno-15-12" name="__codelineno-15-12" href="#__codelineno-15-12"></a><span class="s2">&quot;&quot;&quot;</span>
+<a id="__codelineno-15-13" name="__codelineno-15-13" href="#__codelineno-15-13"></a><span class="c1">## 在挂载的镜像文件里就有vsftpd</span>
+<a id="__codelineno-15-14" name="__codelineno-15-14" href="#__codelineno-15-14"></a><span class="c1">## 当然可通过命令 yum install vsftpd -y 下载安装</span>
+<a id="__codelineno-15-15" name="__codelineno-15-15" href="#__codelineno-15-15"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># rpm -ivh /opt/Packages/vsftpd-3.0.2-28.el7.x86_64.rpm </span>
+<a id="__codelineno-15-16" name="__codelineno-15-16" href="#__codelineno-15-16"></a>准备中...                          <span class="c1">################################# [100%]</span>
+<a id="__codelineno-15-17" name="__codelineno-15-17" href="#__codelineno-15-17"></a>正在升级/安装...
+<a id="__codelineno-15-18" name="__codelineno-15-18" href="#__codelineno-15-18"></a>   <span class="m">1</span>:vsftpd-3.0.2-28.el7              <span class="c1">################################# [100%]</span>
+<a id="__codelineno-15-19" name="__codelineno-15-19" href="#__codelineno-15-19"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># systemctl start vsftpd      ## -- 开启ftp服务</span>
+<a id="__codelineno-15-20" name="__codelineno-15-20" href="#__codelineno-15-20"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># systemctl status vsftpd     ## -- 查看ftp服务状态</span>
+<a id="__codelineno-15-21" name="__codelineno-15-21" href="#__codelineno-15-21"></a>● vsftpd.service - Vsftpd ftp daemon
+<a id="__codelineno-15-22" name="__codelineno-15-22" href="#__codelineno-15-22"></a>   Loaded: loaded <span class="o">(</span>/usr/lib/systemd/system/vsftpd.service<span class="p">;</span> disabled<span class="p">;</span>...
+<a id="__codelineno-15-23" name="__codelineno-15-23" href="#__codelineno-15-23"></a>   Active: active <span class="o">(</span>running<span class="o">)</span> since 四 <span class="m">2022</span>-08-11 <span class="m">15</span>:13:49 CST<span class="p">;</span> 8s ago
+<a id="__codelineno-15-24" name="__codelineno-15-24" href="#__codelineno-15-24"></a>... ... ...
+<a id="__codelineno-15-25" name="__codelineno-15-25" href="#__codelineno-15-25"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># systemctl enable vsftpd     ## -- 设置开机自启动</span>
+<a id="__codelineno-15-26" name="__codelineno-15-26" href="#__codelineno-15-26"></a>Created symlink from /etc/systemd/system/multi-user.target.wants/vsftpd.service to /usr/lib/systemd/system/vsftpd.service.
+<a id="__codelineno-15-27" name="__codelineno-15-27" href="#__codelineno-15-27"></a>
+<a id="__codelineno-15-28" name="__codelineno-15-28" href="#__codelineno-15-28"></a>
+<a id="__codelineno-15-29" name="__codelineno-15-29" href="#__codelineno-15-29"></a><span class="s2">&quot;&quot;&quot;制作yum源</span>
+<a id="__codelineno-15-30" name="__codelineno-15-30" href="#__codelineno-15-30"></a><span class="s2">&quot;&quot;&quot;</span>
+<a id="__codelineno-15-31" name="__codelineno-15-31" href="#__codelineno-15-31"></a>在前面我们成功执行<span class="sb">`</span>yum install nginx* -y<span class="sb">`</span>将nginx官方源里的软件包全部下载下来.
+<a id="__codelineno-15-32" name="__codelineno-15-32" href="#__codelineno-15-32"></a>并成功缓存到了路径<span class="sb">`</span>/var/cache/yum<span class="sb">`</span>下. 在根目录下建立 <span class="sb">`</span>mkdir /soft<span class="sb">`</span> 文件夹
+<a id="__codelineno-15-33" name="__codelineno-15-33" href="#__codelineno-15-33"></a>执行<span class="sb">`</span>find /var/cache/yum -type f -name <span class="s2">&quot;*.rpm&quot;</span> <span class="p">|</span> xargs -I <span class="o">{}</span> mv <span class="o">{}</span> /soft/<span class="sb">`</span>命令
+<a id="__codelineno-15-34" name="__codelineno-15-34" href="#__codelineno-15-34"></a>成功将缓存的软件包采集到了 /soft目录下
+<a id="__codelineno-15-35" name="__codelineno-15-35" href="#__codelineno-15-35"></a>执行<span class="sb">`</span>createrepo /soft<span class="sb">`</span>命令建立依赖性关系.在<span class="sb">`</span>/soft<span class="sb">`</span>下会生成了<span class="sb">`</span>repodata<span class="sb">`</span>文件夹.
+<a id="__codelineno-15-36" name="__codelineno-15-36" href="#__codelineno-15-36"></a>
+<a id="__codelineno-15-37" name="__codelineno-15-37" href="#__codelineno-15-37"></a><span class="s2">&quot;&quot;&quot;ftp服务共享文件夹</span>
+<a id="__codelineno-15-38" name="__codelineno-15-38" href="#__codelineno-15-38"></a><span class="s2">!!! ftp://172.16.150.131 指向的就是 /var/ftp</span>
+<a id="__codelineno-15-39" name="__codelineno-15-39" href="#__codelineno-15-39"></a><span class="s2">&quot;&quot;&quot;</span>
+<a id="__codelineno-15-40" name="__codelineno-15-40" href="#__codelineno-15-40"></a><span class="c1">## 将/soft文件夹移动到ftp服务自带的共享文件夹里  本质就是通过套接字程序共享</span>
+<a id="__codelineno-15-41" name="__codelineno-15-41" href="#__codelineno-15-41"></a><span class="c1">## 实际上严谨点,缓存的软件包通过find命令找到后应该xargs到/var/ftp/pub目录下</span>
+<a id="__codelineno-15-42" name="__codelineno-15-42" href="#__codelineno-15-42"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># mv /soft/ /var/ftp</span>
+<a id="__codelineno-15-43" name="__codelineno-15-43" href="#__codelineno-15-43"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># ls /var/ftp</span>
+<a id="__codelineno-15-44" name="__codelineno-15-44" href="#__codelineno-15-44"></a>pub  soft
+<a id="__codelineno-15-45" name="__codelineno-15-45" href="#__codelineno-15-45"></a>
+<a id="__codelineno-15-46" name="__codelineno-15-46" href="#__codelineno-15-46"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># ifconfig ens33 | grep inet</span>
+<a id="__codelineno-15-47" name="__codelineno-15-47" href="#__codelineno-15-47"></a>        inet <span class="m">172</span>.16.150.131  netmask <span class="m">255</span>.255.255.0  broadcast <span class="m">172</span>.16.150.255
+<a id="__codelineno-15-48" name="__codelineno-15-48" href="#__codelineno-15-48"></a>        inet6 fe80::20c:29ff:fe90:303e  prefixlen <span class="m">64</span>  scopeid 0x20&lt;link&gt;
+</code></pre></div>
+<h3 id="_6"><font color='orange'>客户端上的操作</font><a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p>主要两点, 客户端要跟服务端的OS版本以及架构一致;ftp服务要ping通!!!</p>
+</blockquote>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="s2">&quot;&quot;&quot;</span>
+<a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a><span class="s2">同理,关防火墙关selinux</span>
+<a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a><span class="s2">ping一下服务端的ip地址,保证网络畅通!!!这很重要.</span>
+<a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a><span class="s2">(实际上因为vm虚拟机与主机桥接模式的缘故,能ping通 在同一个网段应该能互ping 在此不深究啦)</span>
+<a id="__codelineno-16-5" name="__codelineno-16-5" href="#__codelineno-16-5"></a><span class="s2">&quot;&quot;&quot;</span>
+<a id="__codelineno-16-6" name="__codelineno-16-6" href="#__codelineno-16-6"></a>One_Piece@DCdeMacBook-Air ~ % ping <span class="m">172</span>.16.150.131
+<a id="__codelineno-16-7" name="__codelineno-16-7" href="#__codelineno-16-7"></a>PING <span class="m">172</span>.16.150.131 <span class="o">(</span><span class="m">172</span>.16.150.131<span class="o">)</span>: <span class="m">56</span> data bytes
+<a id="__codelineno-16-8" name="__codelineno-16-8" href="#__codelineno-16-8"></a><span class="m">64</span> bytes from <span class="m">172</span>.16.150.131: <span class="nv">icmp_seq</span><span class="o">=</span><span class="m">0</span> <span class="nv">ttl</span><span class="o">=</span><span class="m">64</span> <span class="nv">time</span><span class="o">=</span><span class="m">0</span>.650 ms
+<a id="__codelineno-16-9" name="__codelineno-16-9" href="#__codelineno-16-9"></a><span class="m">64</span> bytes from <span class="m">172</span>.16.150.131: <span class="nv">icmp_seq</span><span class="o">=</span><span class="m">1</span> <span class="nv">ttl</span><span class="o">=</span><span class="m">64</span> <span class="nv">time</span><span class="o">=</span><span class="m">0</span>.604 ms
+<a id="__codelineno-16-10" name="__codelineno-16-10" href="#__codelineno-16-10"></a><span class="m">64</span> bytes from <span class="m">172</span>.16.150.131: <span class="nv">icmp_seq</span><span class="o">=</span><span class="m">2</span> <span class="nv">ttl</span><span class="o">=</span><span class="m">64</span> <span class="nv">time</span><span class="o">=</span><span class="m">0</span>.648 ms
+<a id="__codelineno-16-11" name="__codelineno-16-11" href="#__codelineno-16-11"></a>^C
+<a id="__codelineno-16-12" name="__codelineno-16-12" href="#__codelineno-16-12"></a>--- <span class="m">172</span>.16.150.131 ping statistics ---
+<a id="__codelineno-16-13" name="__codelineno-16-13" href="#__codelineno-16-13"></a><span class="m">3</span> packets transmitted, <span class="m">3</span> packets received, <span class="m">0</span>.0% packet loss
+<a id="__codelineno-16-14" name="__codelineno-16-14" href="#__codelineno-16-14"></a>round-trip min/avg/max/stddev <span class="o">=</span> <span class="m">0</span>.604/0.634/0.650/0.021 ms
+<a id="__codelineno-16-15" name="__codelineno-16-15" href="#__codelineno-16-15"></a>
+<a id="__codelineno-16-16" name="__codelineno-16-16" href="#__codelineno-16-16"></a><span class="sb">`</span><span class="nb">cd</span> /etc/yum.repos.d/<span class="sb">`</span>
+<a id="__codelineno-16-17" name="__codelineno-16-17" href="#__codelineno-16-17"></a><span class="sb">`</span>vim ftp.repo<span class="sb">`</span> 写入以下内容..  就可以使用yum命令使用该源里面的包啦
+<a id="__codelineno-16-18" name="__codelineno-16-18" href="#__codelineno-16-18"></a><span class="o">[</span>ftp_repo<span class="o">]</span>
+<a id="__codelineno-16-19" name="__codelineno-16-19" href="#__codelineno-16-19"></a><span class="nv">name</span> <span class="o">=</span> This is Ftp Share Repo
+<a id="__codelineno-16-20" name="__codelineno-16-20" href="#__codelineno-16-20"></a><span class="nv">baseurl</span> <span class="o">=</span> ftp://172.16.150.131/soft  <span class="c1">## 该路径下有个repodata文件夹</span>
+<a id="__codelineno-16-21" name="__codelineno-16-21" href="#__codelineno-16-21"></a><span class="nv">enabled</span> <span class="o">=</span> <span class="m">1</span>
+<a id="__codelineno-16-22" name="__codelineno-16-22" href="#__codelineno-16-22"></a><span class="nv">gpgcheck</span> <span class="o">=</span> <span class="m">0</span>
+<a id="__codelineno-16-23" name="__codelineno-16-23" href="#__codelineno-16-23"></a>
+<a id="__codelineno-16-24" name="__codelineno-16-24" href="#__codelineno-16-24"></a>此时这台机器就可以使用共享的源安装nginx..
+<a id="__codelineno-16-25" name="__codelineno-16-25" href="#__codelineno-16-25"></a>但要注意,若集群中的这台机器跟共享本地源的那台机器的os版本、架构不一样的话..会安装失败!!!
+<a id="__codelineno-16-26" name="__codelineno-16-26" href="#__codelineno-16-26"></a>因为共享源的那台机器是根据它自身的情况缓存的软件包..<span class="nv">$releasever</span> OS版本 <span class="nv">$basearch</span> 架构
+</code></pre></div>
+<hr />
+<h2 id="_7">源码包<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h2>
+<p>以nginx源码包的安装为例, 依次进行以下步骤:</p>
+<p><img alt="" src="../assets/nginx.jpeg" /></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>▲ <span class="m">1</span>&gt; 安装源码包对应的编译器以及相关依赖库
+<a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a><span class="sb">`</span>yum grouplist<span class="sb">`</span> 看一下是否支持中文
+<a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a><span class="sb">`</span>yum groupinstall <span class="s2">&quot;Development tools&quot;</span> -y<span class="sb">`</span>   <span class="p">;</span> yum groupinstall <span class="s2">&quot;开发工具&quot;</span> -y
+<a id="__codelineno-17-4" name="__codelineno-17-4" href="#__codelineno-17-4"></a>保险起见,怕<span class="s2">&quot;开发工具&quot;</span>里没包含这些依赖包,再执行下下面两条命令
+<a id="__codelineno-17-5" name="__codelineno-17-5" href="#__codelineno-17-5"></a>yum -y install gcc gcc-c++ autoconf automake make
+<a id="__codelineno-17-6" name="__codelineno-17-6" href="#__codelineno-17-6"></a>yum -y install zlib zlib-devel openssl openssl-devel pcre pcre-devel
+<a id="__codelineno-17-7" name="__codelineno-17-7" href="#__codelineno-17-7"></a>
+<a id="__codelineno-17-8" name="__codelineno-17-8" href="#__codelineno-17-8"></a>▲ <span class="m">2</span>&gt; 下载源码包
+<a id="__codelineno-17-9" name="__codelineno-17-9" href="#__codelineno-17-9"></a><span class="nb">cd</span> ~
+<a id="__codelineno-17-10" name="__codelineno-17-10" href="#__codelineno-17-10"></a>wget https://nginx.org/download/nginx-1.22.0.tar.gz
+<a id="__codelineno-17-11" name="__codelineno-17-11" href="#__codelineno-17-11"></a>
+<a id="__codelineno-17-12" name="__codelineno-17-12" href="#__codelineno-17-12"></a>▲ <span class="m">3</span>&gt; 解压
+<a id="__codelineno-17-13" name="__codelineno-17-13" href="#__codelineno-17-13"></a>tar xvf nginx-1.22.0.tar.gz -C /tmp/
+<a id="__codelineno-17-14" name="__codelineno-17-14" href="#__codelineno-17-14"></a>
+<a id="__codelineno-17-15" name="__codelineno-17-15" href="#__codelineno-17-15"></a>▲ <span class="m">4</span>&gt; 进行编译 -- 生成makefile文件
+<a id="__codelineno-17-16" name="__codelineno-17-16" href="#__codelineno-17-16"></a><span class="nb">cd</span> /tmp/nginx-1.22.0/  <span class="c1"># 该目录下有个configure程序可以进行配置</span>
+<a id="__codelineno-17-17" name="__codelineno-17-17" href="#__codelineno-17-17"></a><span class="s2">&quot;&quot;&quot;./configure </span>
+<a id="__codelineno-17-18" name="__codelineno-17-18" href="#__codelineno-17-18"></a><span class="s2">参考地址: https://nginx.org/en/docs/configure.html</span>
+<a id="__codelineno-17-19" name="__codelineno-17-19" href="#__codelineno-17-19"></a><span class="s2">--prefix 指定安装的目录</span>
+<a id="__codelineno-17-20" name="__codelineno-17-20" href="#__codelineno-17-20"></a><span class="s2">                 这里指定的路径是 /usr/local/nginx-1.22.0,最终会在此目录下包含一堆可执行的二进制命令</span>
+<a id="__codelineno-17-21" name="__codelineno-17-21" href="#__codelineno-17-21"></a><span class="s2">...</span>
+<a id="__codelineno-17-22" name="__codelineno-17-22" href="#__codelineno-17-22"></a><span class="s2">这儿笼统的将所以的配置都放到/usr/local/nginx-1.22.0下,不分那么的细了..</span>
+<a id="__codelineno-17-23" name="__codelineno-17-23" href="#__codelineno-17-23"></a><span class="s2">&quot;&quot;&quot;</span>
+<a id="__codelineno-17-24" name="__codelineno-17-24" href="#__codelineno-17-24"></a><span class="c1">## 若此命令报错,只可能是因为缺少依赖库</span>
+<a id="__codelineno-17-25" name="__codelineno-17-25" href="#__codelineno-17-25"></a><span class="c1">## 报错后,一定要先执行命令 make clean all,再解决依赖包的问题 于此往复,直至不报错</span>
+<a id="__codelineno-17-26" name="__codelineno-17-26" href="#__codelineno-17-26"></a><span class="o">[</span>root@localhost nginx-1.22.0<span class="o">]</span><span class="c1">#./configure  --prefix=/usr/local/nginx-1.22.0</span>
+<a id="__codelineno-17-27" name="__codelineno-17-27" href="#__codelineno-17-27"></a>... ... ...
+<a id="__codelineno-17-28" name="__codelineno-17-28" href="#__codelineno-17-28"></a>Configuration summary
+<a id="__codelineno-17-29" name="__codelineno-17-29" href="#__codelineno-17-29"></a>  + using system PCRE library
+<a id="__codelineno-17-30" name="__codelineno-17-30" href="#__codelineno-17-30"></a>  + OpenSSL library is not used
+<a id="__codelineno-17-31" name="__codelineno-17-31" href="#__codelineno-17-31"></a>  + using system zlib library
+<a id="__codelineno-17-32" name="__codelineno-17-32" href="#__codelineno-17-32"></a>  nginx path prefix: <span class="s2">&quot;/usr/local/nginx-1.22.0&quot;</span>  <span class="c1">## -- 安装路径</span>
+<a id="__codelineno-17-33" name="__codelineno-17-33" href="#__codelineno-17-33"></a>  nginx binary file: <span class="s2">&quot;/usr/local/nginx-1.22.0/sbin/nginx&quot;</span>   <span class="c1">## -- nginx程序</span>
+<a id="__codelineno-17-34" name="__codelineno-17-34" href="#__codelineno-17-34"></a>  nginx modules path: <span class="s2">&quot;/usr/local/nginx-1.22.0/modules&quot;</span> <span class="c1">## -- 模块路径</span>
+<a id="__codelineno-17-35" name="__codelineno-17-35" href="#__codelineno-17-35"></a>  nginx configuration prefix: <span class="s2">&quot;/usr/local/nginx-1.22.0/conf&quot;</span>    <span class="c1">## -- 配置文件</span>
+<a id="__codelineno-17-36" name="__codelineno-17-36" href="#__codelineno-17-36"></a>  nginx configuration file: <span class="s2">&quot;/usr/local/nginx-1.22.0/conf/nginx.conf&quot;</span>   <span class="c1">## -- 主配置文件</span>
+<a id="__codelineno-17-37" name="__codelineno-17-37" href="#__codelineno-17-37"></a>  nginx pid file: <span class="s2">&quot;/usr/local/nginx-1.22.0/logs/nginx.pid&quot;</span>  <span class="c1">## -- pid</span>
+<a id="__codelineno-17-38" name="__codelineno-17-38" href="#__codelineno-17-38"></a>  nginx error log file: <span class="s2">&quot;/usr/local/nginx-1.22.0/logs/error.log&quot;</span>    <span class="c1">## -- 错误日志</span>
+<a id="__codelineno-17-39" name="__codelineno-17-39" href="#__codelineno-17-39"></a>  nginx http access log file: <span class="s2">&quot;/usr/local/nginx-1.22.0/logs/access.log&quot;</span> <span class="c1">## -- 访问日志</span>
+<a id="__codelineno-17-40" name="__codelineno-17-40" href="#__codelineno-17-40"></a>  nginx http client request body temporary files: <span class="s2">&quot;client_body_temp&quot;</span>    <span class="c1">## -- 临时文件</span>
+<a id="__codelineno-17-41" name="__codelineno-17-41" href="#__codelineno-17-41"></a>  nginx http proxy temporary files: <span class="s2">&quot;proxy_temp&quot;</span>
+<a id="__codelineno-17-42" name="__codelineno-17-42" href="#__codelineno-17-42"></a>  nginx http fastcgi temporary files: <span class="s2">&quot;fastcgi_temp&quot;</span>
+<a id="__codelineno-17-43" name="__codelineno-17-43" href="#__codelineno-17-43"></a>  nginx http uwsgi temporary files: <span class="s2">&quot;uwsgi_temp&quot;</span>
+<a id="__codelineno-17-44" name="__codelineno-17-44" href="#__codelineno-17-44"></a>  nginx http scgi temporary files: <span class="s2">&quot;scgi_temp&quot;</span>
+<a id="__codelineno-17-45" name="__codelineno-17-45" href="#__codelineno-17-45"></a><span class="c1">## 生成了Makefile编译文件</span>
+<a id="__codelineno-17-46" name="__codelineno-17-46" href="#__codelineno-17-46"></a><span class="o">[</span>root@localhost nginx-1.22.0<span class="o">]</span><span class="c1"># ls</span>
+<a id="__codelineno-17-47" name="__codelineno-17-47" href="#__codelineno-17-47"></a>auto  CHANGES  CHANGES.ru  conf  configure  contrib  html  LICENSE  Makefile  man  objs  README  src
+<a id="__codelineno-17-48" name="__codelineno-17-48" href="#__codelineno-17-48"></a>
+<a id="__codelineno-17-49" name="__codelineno-17-49" href="#__codelineno-17-49"></a>▲ 安装
+<a id="__codelineno-17-50" name="__codelineno-17-50" href="#__codelineno-17-50"></a>make <span class="o">&amp;&amp;</span> make install
+<a id="__codelineno-17-51" name="__codelineno-17-51" href="#__codelineno-17-51"></a>rm -rf /tmp/nginx-1.22.0/  <span class="c1"># 清理安装包</span>
+<a id="__codelineno-17-52" name="__codelineno-17-52" href="#__codelineno-17-52"></a>
+<a id="__codelineno-17-53" name="__codelineno-17-53" href="#__codelineno-17-53"></a>▲ 运行
+<a id="__codelineno-17-54" name="__codelineno-17-54" href="#__codelineno-17-54"></a><span class="nb">cd</span> /usr/local/nginx-1.22.0
+<a id="__codelineno-17-55" name="__codelineno-17-55" href="#__codelineno-17-55"></a><span class="o">[</span>root@localhost nginx-1.22.0<span class="o">]</span><span class="c1"># ps aux | grep nginx</span>
+<a id="__codelineno-17-56" name="__codelineno-17-56" href="#__codelineno-17-56"></a>root      <span class="m">75065</span>  <span class="m">0</span>.0  <span class="m">0</span>.0  <span class="m">20576</span>   <span class="m">616</span> ?        Ss   <span class="m">18</span>:33   <span class="m">0</span>:00 nginx: master process /usr/local/nginx-1.22.0/sbin/nginx
+<a id="__codelineno-17-57" name="__codelineno-17-57" href="#__codelineno-17-57"></a>nobody    <span class="m">75066</span>  <span class="m">0</span>.0  <span class="m">0</span>.1  <span class="m">23104</span>  <span class="m">1372</span> ?        S    <span class="m">18</span>:33   <span class="m">0</span>:00 nginx: worker process
+<a id="__codelineno-17-58" name="__codelineno-17-58" href="#__codelineno-17-58"></a>root      <span class="m">75153</span>  <span class="m">0</span>.0  <span class="m">0</span>.0 <span class="m">112824</span>   <span class="m">988</span> pts/0    R+   <span class="m">18</span>:35   <span class="m">0</span>:00 grep --color<span class="o">=</span>auto nginx
+</code></pre></div>
+<p><font color='brown'>源码安装后,做一点点优化!</font></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># mkdir /soft/</span>
+<a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># ln -s /usr/local/nginx-1.22.0/ /soft/nginx</span>
+<a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># ll -d /soft/nginx/</span>
+<a id="__codelineno-18-4" name="__codelineno-18-4" href="#__codelineno-18-4"></a>drwxr-xr-x <span class="m">11</span> root root <span class="m">151</span> 8月  <span class="m">11</span> <span class="m">18</span>:33 /soft/nginx/
+<a id="__codelineno-18-5" name="__codelineno-18-5" href="#__codelineno-18-5"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># ll -d /soft/nginx</span>
+<a id="__codelineno-18-6" name="__codelineno-18-6" href="#__codelineno-18-6"></a>lrwxrwxrwx <span class="m">1</span> root root <span class="m">24</span> 8月  <span class="m">22</span> <span class="m">17</span>:43 /soft/nginx -&gt; /usr/local/nginx-1.22.0/
+<a id="__codelineno-18-7" name="__codelineno-18-7" href="#__codelineno-18-7"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># ls /soft/nginx/</span>
+<a id="__codelineno-18-8" name="__codelineno-18-8" href="#__codelineno-18-8"></a>client_body_temp  conf  fastcgi_temp  html  logs  proxy_temp  sbin  scgi_temp  uwsgi_temp
+<a id="__codelineno-18-9" name="__codelineno-18-9" href="#__codelineno-18-9"></a>
+<a id="__codelineno-18-10" name="__codelineno-18-10" href="#__codelineno-18-10"></a>用软链接一通操作,便于以后的升级!!!具体操作如下:
+<a id="__codelineno-18-11" name="__codelineno-18-11" href="#__codelineno-18-11"></a><span class="m">1</span>&gt; 原来安装的是nginx1.22的版本,并软链接到了 /soft/nginx目录下..
+<a id="__codelineno-18-12" name="__codelineno-18-12" href="#__codelineno-18-12"></a><span class="m">2</span>&gt; 现在要升级nginx,先安装nginx1.3的版本到默认路径/usr/local下
+<a id="__codelineno-18-13" name="__codelineno-18-13" href="#__codelineno-18-13"></a><span class="m">3</span>&gt; 删除软链接/soft/nginx/下的内容
+<a id="__codelineno-18-14" name="__codelineno-18-14" href="#__codelineno-18-14"></a><span class="m">4</span>&gt; 将新安装的nginx与/soft/nginx建立软链接
+<a id="__codelineno-18-15" name="__codelineno-18-15" href="#__codelineno-18-15"></a>这样的话,系统中关于nginx的配置文件,要用nginx的地方路径依旧是 /soft/nginx/... 没必要更改!!!!!
+</code></pre></div>
+<hr />
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+          <a href="#" class="md-top md-icon" data-md-component="top" hidden>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
+            回到页面顶部
+          </a>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+    <nav class="md-footer__inner md-grid" aria-label="页脚" >
+      
+        
+        <a href="../10_%E8%BD%AF%E4%BB%B6%E5%8C%85%E7%AE%A1%E7%90%86%E4%B9%8Brpm/" class="md-footer__link md-footer__link--prev" aria-label="上一页: 软件包管理之rpm" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                上一页
+              </span>
+              软件包管理之rpm
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="../12_%E6%9F%A5%E7%9C%8B%E8%BF%9B%E7%A8%8B/" class="md-footer__link md-footer__link--next" aria-label="下一页: 查看进程" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                下一页
+              </span>
+              查看进程
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright © 2023 from Dc_OnePiece
+    </div>
+  
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "navigation.top", "navigation.expand", "navigation.instant", "navigation.tracking", "search.suggest", "search.highlight", "search.share"], "search": "../../assets/javascripts/workers/search.5bf1dace.min.js", "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.config.lang": "ja", "search.config.pipeline": "trimmer, stemmer", "search.config.separator": "[\\s\\-\uff0c\u3002]+", "search.placeholder": "\u641c\u7d22", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version.title": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.37e9125f.min.js"></script>
+      
+        <script src="../../resources/js/extra.js"></script>
+      
+    
+  </body>
+</html>

@@ -1,0 +1,2233 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="These are my study notes.">
+      
+      
+        <meta name="author" content="DC">
+      
+      
+      <link rel="icon" href="../../resources/images/favicon.ico">
+      <meta name="generator" content="mkdocs-1.3.1, mkdocs-material-8.5.3">
+    
+    
+      
+        <title>文件管理之文件系统 - IT必备知识</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.7a952b86.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.cbb835fc.min.css">
+        
+      
+      
+
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../resources/css/extra.css">
+    
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lxgw-wenkai-webfont@1.1.0/style.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="blue-grey" data-md-color-accent="amber">
+  
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#_1" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../.." title="IT必备知识" class="md-header__button md-logo" aria-label="IT必备知识" data-md-component="logo">
+      
+  <img src="../../resources/images/favicon.ico" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            IT必备知识
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              文件管理之文件系统
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      <form class="md-header__option" data-md-component="palette">
+        
+          
+          
+          <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="blue-grey" data-md-color-accent="amber"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+          
+            <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"/></svg>
+            </label>
+          
+        
+          
+          
+          <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="blue-grey" data-md-color-accent="amber"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_2">
+          
+            <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12c0-2.42-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"/></svg>
+            </label>
+          
+        
+      </form>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="分享" aria-label="分享" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7 0-.24-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91 1.61 0 2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08Z"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="标签" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../0_%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/0_%E5%89%8D%E5%A5%8F%28%E4%BB%8B%E7%BB%8D%29/" class="md-tabs__link">
+        计算机基础(8)
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+    
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../0_%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C/" class="md-tabs__link md-tabs__link--active">
+        linux基础(20)
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../5_db/0_%E5%9F%BA%E7%A1%80/0_install_db/" class="md-tabs__link">
+        mysql(19)
+      </a>
+    </li>
+  
+
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../9_git/0_git%E7%94%9F%E6%B4%BB%E7%89%88/" class="md-tabs__link">
+        git(2)
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../13_%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/0_%E9%80%92%E5%BD%92_%E6%9F%A5%E6%89%BE/" class="md-tabs__link">
+        查找排序算法(5)
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="IT必备知识" class="md-nav__button md-logo" aria-label="IT必备知识" data-md-component="logo">
+      
+  <img src="../../resources/images/favicon.ico" alt="logo">
+
+    </a>
+    IT必备知识
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" data-md-toggle="__nav_1" type="checkbox" id="__nav_1" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_1">
+          计算机基础(8)
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="计算机基础(8)" data-md-level="1">
+        <label class="md-nav__title" for="__nav_1">
+          <span class="md-nav__icon md-icon"></span>
+          计算机基础(8)
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../0_%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/0_%E5%89%8D%E5%A5%8F%28%E4%BB%8B%E7%BB%8D%29/" class="md-nav__link">
+        前奏(介绍)
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../0_%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/1_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A1%AC%E4%BB%B6%E7%BB%84%E6%88%90/" class="md-nav__link">
+        计算机硬件组成
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../0_%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/2_%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" class="md-nav__link">
+        操作系统
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../0_%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/3_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E6%A6%82%E8%A7%88/" class="md-nav__link">
+        计算机网络概览
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../0_%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/4_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E4%B9%8B%E7%BD%91%E7%BB%9C%E6%8E%A5%E5%8F%A3%E5%B1%82/" class="md-nav__link">
+        网络接口层
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../0_%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/5_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E4%B9%8B%E7%BD%91%E7%BB%9C%E5%B1%82/" class="md-nav__link">
+        网络层
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../0_%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/6_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E4%B9%8B%E4%BC%A0%E8%BE%93%E5%B1%82/" class="md-nav__link">
+        传输层
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../0_%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/7_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%A1%A5%E5%85%85/" class="md-nav__link">
+        补充
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2">
+          linux基础(20)
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="linux基础(20)" data-md-level="1">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          linux基础(20)
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0_%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C/" class="md-nav__link">
+        准备工作
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../1_%E5%88%9D%E8%AF%86shell%E4%B8%8E%E5%9F%BA%E7%A1%80%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" class="md-nav__link">
+        初识shell与基础常用命令
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../2_%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86%E4%B9%8B%E5%9F%BA%E7%A1%80%E5%91%BD%E4%BB%A4/" class="md-nav__link">
+        文件管理之基础命令
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../3_%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86%E4%B9%8B%E5%9B%9B%E5%A4%A7%E6%A8%A1%E5%BC%8F/" class="md-nav__link">
+        文件管理之四大模式
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../4_%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86%E4%B9%8B%E5%91%BD%E4%BB%A4%E8%A1%A5%E5%85%85/" class="md-nav__link">
+        文件管理之命令补充
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          文件管理之文件系统
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        文件管理之文件系统
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    文件系统介绍
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    文件系统工作原理
+  </a>
+  
+    <nav class="md-nav" aria-label="文件系统工作原理">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#block" class="md-nav__link">
+    block的分类
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    文件的查找
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    文件的删除
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    文件系统扩展
+  </a>
+  
+    <nav class="md-nav" aria-label="文件系统扩展">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#inode" class="md-nav__link">
+    inode信息
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fat" class="md-nav__link">
+    FAT文件系统
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    磁盘满的两种情况
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    软硬链接
+  </a>
+  
+    <nav class="md-nav" aria-label="软硬链接">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    硬链接
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    软链接
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#qa" class="md-nav__link">
+    Q/A
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    软链接解决磁盘满
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../6_%E6%9D%83%E9%99%90%E7%AE%A1%E7%90%86%E4%B9%8B%E7%94%A8%E6%88%B7%E4%B8%8E%E7%BB%84/" class="md-nav__link">
+        权限管理之用户与组
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../7_%E6%9D%83%E9%99%90%E7%AE%A1%E7%90%86%E4%B9%8B%E6%96%87%E4%BB%B6%E6%9D%83%E9%99%90/" class="md-nav__link">
+        权限管理之文件权限
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../8_%E6%9D%83%E9%99%90%E7%AE%A1%E7%90%86%E4%B9%8BACL/" class="md-nav__link">
+        权限管理之ACL
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../9_%E6%9D%83%E9%99%90%E7%AE%A1%E7%90%86%E4%B9%8Bsu%E4%B8%8Esudo/" class="md-nav__link">
+        权限管理之su与sudo
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../10_%E8%BD%AF%E4%BB%B6%E5%8C%85%E7%AE%A1%E7%90%86%E4%B9%8Brpm/" class="md-nav__link">
+        软件包管理之rpm
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../11_%E8%BD%AF%E4%BB%B6%E5%8C%85%E7%AE%A1%E7%90%86%E4%B9%8Byum/" class="md-nav__link">
+        软件包管理之yum
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../12_%E6%9F%A5%E7%9C%8B%E8%BF%9B%E7%A8%8B/" class="md-nav__link">
+        查看进程
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../13_%E7%AE%A1%E7%90%86%E8%BF%9B%E7%A8%8B/" class="md-nav__link">
+        管理进程
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../14_%E5%AD%98%E5%82%A8%E7%AE%A1%E7%90%86%E4%B9%8B%E4%BC%A0%E7%BB%9F%E7%A3%81%E7%9B%98%E7%AE%A1%E7%90%86/" class="md-nav__link">
+        存储管理之传统磁盘管理
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../15_%E5%AD%98%E5%82%A8%E7%AE%A1%E7%90%86%E4%B9%8BLVM/" class="md-nav__link">
+        存储管理之LVM
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../16_%E7%BD%91%E7%BB%9C%E7%AE%A1%E7%90%86/" class="md-nav__link">
+        网络管理
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../17_shell%E5%9F%BA%E7%A1%80/" class="md-nav__link">
+        shell基础
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../18_crond%E8%AE%A1%E5%88%92%E4%BB%BB%E5%8A%A1/" class="md-nav__link">
+        crond计划任务
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../19_%E7%B3%BB%E7%BB%9F%E4%BC%98%E5%8C%96/" class="md-nav__link">
+        系统优化
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3">
+          mysql(19)
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="mysql(19)" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          mysql(19)
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" data-md-toggle="__nav_3_1" type="checkbox" id="__nav_3_1" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3_1">
+          基础
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="基础" data-md-level="2">
+        <label class="md-nav__title" for="__nav_3_1">
+          <span class="md-nav__icon md-icon"></span>
+          基础
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../5_db/0_%E5%9F%BA%E7%A1%80/0_install_db/" class="md-nav__link">
+        数据库安装
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../5_db/0_%E5%9F%BA%E7%A1%80/1_db_command/" class="md-nav__link">
+        sql命令总结
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../5_db/0_%E5%9F%BA%E7%A1%80/2_imp_knowledge/" class="md-nav__link">
+        imp_knowledge
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../5_db/0_%E5%9F%BA%E7%A1%80/3_table_field/" class="md-nav__link">
+        字段的约束和类型
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../5_db/0_%E5%9F%BA%E7%A1%80/4_table_relation/" class="md-nav__link">
+        表关系
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../5_db/0_%E5%9F%BA%E7%A1%80/5_permissions/" class="md-nav__link">
+        权限管理
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../5_db/0_%E5%9F%BA%E7%A1%80/6_single_query/" class="md-nav__link">
+        单表查询
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../5_db/0_%E5%9F%BA%E7%A1%80/7_multi_query/" class="md-nav__link">
+        多表查询
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../5_db/0_%E5%9F%BA%E7%A1%80/8_query_practice/" class="md-nav__link">
+        query_practice
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../5_db/0_%E5%9F%BA%E7%A1%80/9_pymysql/" class="md-nav__link">
+        pymysql
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../5_db/0_%E5%9F%BA%E7%A1%80/10_just_know/" class="md-nav__link">
+        just_know
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../5_db/0_%E5%9F%BA%E7%A1%80/other/01_to_11/" class="md-nav__link">
+        other1
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../5_db/0_%E5%9F%BA%E7%A1%80/other/05/" class="md-nav__link">
+        other2
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" data-md-toggle="__nav_3_2" type="checkbox" id="__nav_3_2" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3_2">
+          进阶
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="进阶" data-md-level="2">
+        <label class="md-nav__title" for="__nav_3_2">
+          <span class="md-nav__icon md-icon"></span>
+          进阶
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../5_db/1_%E8%BF%9B%E9%98%B6/0_index/" class="md-nav__link">
+        索引
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../5_db/1_%E8%BF%9B%E9%98%B6/1_explain/" class="md-nav__link">
+        执行计划
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../5_db/1_%E8%BF%9B%E9%98%B6/2_transaction/" class="md-nav__link">
+        事务
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../5_db/1_%E8%BF%9B%E9%98%B6/3_db_readPhenomenon/" class="md-nav__link">
+        读现象
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../5_db/1_%E8%BF%9B%E9%98%B6/4_lock/" class="md-nav__link">
+        锁
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../5_db/1_%E8%BF%9B%E9%98%B6/other/" class="md-nav__link">
+        数据库连接池
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4">
+          git(2)
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="git(2)" data-md-level="1">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          git(2)
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../9_git/0_git%E7%94%9F%E6%B4%BB%E7%89%88/" class="md-nav__link">
+        git生活版
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../9_git/1_git%E7%A0%94%E7%A9%B6%E7%89%88/" class="md-nav__link">
+        git研究版
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" data-md-toggle="__nav_5" type="checkbox" id="__nav_5" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_5">
+          查找排序算法(5)
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="查找排序算法(5)" data-md-level="1">
+        <label class="md-nav__title" for="__nav_5">
+          <span class="md-nav__icon md-icon"></span>
+          查找排序算法(5)
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../13_%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/0_%E9%80%92%E5%BD%92_%E6%9F%A5%E6%89%BE/" class="md-nav__link">
+        查找
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../13_%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/1_LowB%E4%B8%89%E4%BA%BA%E7%BB%84/" class="md-nav__link">
+        LowB三人组
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../13_%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/2_NB%E4%B8%89%E4%BA%BA%E7%BB%84/" class="md-nav__link">
+        NB三人组
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../13_%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/3_%E5%85%B6%E5%AE%83%E6%8E%92%E5%BA%8F/" class="md-nav__link">
+        其它排序
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../13_%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/4_%E6%9F%A5%E6%89%BE%E4%B9%A0%E9%A2%98/" class="md-nav__link">
+        查找习题
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    文件系统介绍
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    文件系统工作原理
+  </a>
+  
+    <nav class="md-nav" aria-label="文件系统工作原理">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#block" class="md-nav__link">
+    block的分类
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    文件的查找
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    文件的删除
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    文件系统扩展
+  </a>
+  
+    <nav class="md-nav" aria-label="文件系统扩展">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#inode" class="md-nav__link">
+    inode信息
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fat" class="md-nav__link">
+    FAT文件系统
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    磁盘满的两种情况
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    软硬链接
+  </a>
+  
+    <nav class="md-nav" aria-label="软硬链接">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    硬链接
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    软链接
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#qa" class="md-nav__link">
+    Q/A
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    软链接解决磁盘满
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  <h1>文件管理之文件系统</h1>
+
+<h2 id="_1">文件系统介绍<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<blockquote>
+<p>文件系统filesystem是操作系统内核中负责组织管理磁盘的程序. 是OS的一部分.</p>
+</blockquote>
+<p>在起初给vm虚机安装centos操作系统时,我们对硬盘进行了分区  <font color='gray'>eg /   /boot   swap</font><br />
+每一个分区/分隔槽都需要文件系统进行管理. 常见的 <strong>文件系统</strong> 有 <strong>xfs</strong>、ext4 和 btrfs.<br />
+<font color='gray'>可以每个分区都用不同的文件系统,但通常都是一样的.. <strong>centos7里用的是xfs</strong>; centos6及以前用的是ext4.</font></p>
+<p><font color='brown'><strong>xfs、ext4都支持日志</strong></font></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>[了解知识]
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>吐槽: 听到egon说他以前做过cf,别懵逼了..就是指日志文件系统CLFS!(´▽｀) Please be professional！
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>xfs、ext4都支持日志,日志用于记录操作.内存往磁盘里写数据的时候,会先将相应的操作记录在日志里.
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>Q:如何打造一个极致的CLFS日志文件系统？
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>  日志文件系统先记录操作,再完成数据的写入..断电后可根据日志继续未完成的操作..
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>A:准备多块盘,做RAID(前文&quot;计算机硬件组成&quot;部分有介绍).用两三块固态做日志,其他盘存数据.
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>  CLFS的特点是写数据先往做日志的固态里写,日志里会记录相应的操作,再根据这些操作往其他盘里写真正的数据.
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>  正因为日志里有相应的操作记录,所以可通过日志来完成数据的回复.(解决系统崩溃或者掉电数据丢失的问题)
+<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>Ps: 提一嘴,做raid将多块磁盘合成一块,对inode的总量没有影响,inode归文件系统管,是一定的.
+<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>
+<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>xfs为啥是现在的主流？
+<a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>1&gt; xfs的底层效率比ext4高;
+<a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>2&gt; xfs支持大而多的文件!
+<a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a>3&gt; btrfs(B-tree文件系统)的读写速度是最快的,但它对cpu内存的占用非常大.而且极不稳定.
+</code></pre></div>
+<p><img alt="" src="../assets/%E5%88%86%E5%8C%BA.jpeg" /></p>
+<p><font color='gray'>Ps: 作为专业人士,提分区的概念比较少,都是说哪哪个文件系统,要知道,<strong>每个文件系统一定是关联一个具体的分区.</strong></font></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="s2">&quot;&quot;&quot;</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="s2">文件系统       文件系统       文件系统</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="s2"> 分区1         分区2          分区3</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="s2">&quot;&quot;&quot;</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="o">[</span>root@localhost opt<span class="o">]</span><span class="c1"># ll /dev/sda</span>
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>brw-rw---- <span class="m">1</span> root disk <span class="m">8</span>, <span class="m">0</span> 7月   <span class="m">4</span> <span class="m">22</span>:54 /dev/sda
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="o">[</span>root@localhost opt<span class="o">]</span><span class="c1"># ll /dev/sda1</span>
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>brw-rw---- <span class="m">1</span> root disk <span class="m">8</span>, <span class="m">1</span> 7月   <span class="m">4</span> <span class="m">22</span>:54 /dev/sda1
+<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="o">[</span>root@localhost opt<span class="o">]</span><span class="c1"># ll /dev/sda2</span>
+<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>brw-rw---- <span class="m">1</span> root disk <span class="m">8</span>, <span class="m">2</span> 7月   <span class="m">4</span> <span class="m">22</span>:54 /dev/sda2
+<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>
+<a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a><span class="s2">&quot;&quot;&quot;</span>
+<a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a><span class="s2">df 即disk filesystem之意 查看的是硬盘的文件系统</span>
+<a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a><span class="s2">注意观察结果,/dev/sda1这一分区是在文件系统这一列下面的!</span>
+<a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a><span class="s2">    /dev/sda1占在《硬盘的角度》指的是第1个分隔槽.</span>
+<a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a><span class="s2">    /dev/sda1占在《软件的角度》是一个文件系统.</span>
+<a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a><span class="s2">挂载点打个比方,硬盘是个水桶,用木板进行了隔断,划分出每个区域都安装了个水龙头用于出水.</span>
+<a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a><span class="s2">通俗点来讲挂载点就是指每个分区最上层的那个文件夹.. 就是分区关联的文件夹 eg: / /boot ..</span>
+<a id="__codelineno-1-19" name="__codelineno-1-19" href="#__codelineno-1-19"></a>
+<a id="__codelineno-1-20" name="__codelineno-1-20" href="#__codelineno-1-20"></a><span class="s2">-h 磁盘容量,以M、G..更美观</span>
+<a id="__codelineno-1-21" name="__codelineno-1-21" href="#__codelineno-1-21"></a><span class="s2">-i 磁盘inode号使用情况</span>
+<a id="__codelineno-1-22" name="__codelineno-1-22" href="#__codelineno-1-22"></a><span class="s2">-T 多加一列 文件系统的类型</span>
+<a id="__codelineno-1-23" name="__codelineno-1-23" href="#__codelineno-1-23"></a>
+<a id="__codelineno-1-24" name="__codelineno-1-24" href="#__codelineno-1-24"></a><span class="s2">ps: mount命令可查看挂载的所有文件系统信息..</span>
+<a id="__codelineno-1-25" name="__codelineno-1-25" href="#__codelineno-1-25"></a><span class="s2">&quot;&quot;&quot;</span>
+<a id="__codelineno-1-26" name="__codelineno-1-26" href="#__codelineno-1-26"></a><span class="o">[</span>root@localhost opt<span class="o">]</span><span class="c1"># df -h -T</span>
+<a id="__codelineno-1-27" name="__codelineno-1-27" href="#__codelineno-1-27"></a>文件系统                类型      容量  已用  可用 已用% 挂载点
+<a id="__codelineno-1-28" name="__codelineno-1-28" href="#__codelineno-1-28"></a>devtmpfs                devtmpfs  470M     <span class="m">0</span>  470M    <span class="m">0</span>% /dev
+<a id="__codelineno-1-29" name="__codelineno-1-29" href="#__codelineno-1-29"></a>tmpfs                   tmpfs     487M     <span class="m">0</span>  487M    <span class="m">0</span>% /dev/shm
+<a id="__codelineno-1-30" name="__codelineno-1-30" href="#__codelineno-1-30"></a>tmpfs                   tmpfs     487M   15M  472M    <span class="m">4</span>% /run
+<a id="__codelineno-1-31" name="__codelineno-1-31" href="#__codelineno-1-31"></a>tmpfs                   tmpfs     487M     <span class="m">0</span>  487M    <span class="m">0</span>% /sys/fs/cgroup
+<a id="__codelineno-1-32" name="__codelineno-1-32" href="#__codelineno-1-32"></a>/dev/mapper/centos-root xfs        17G  <span class="m">4</span>.6G   13G   <span class="m">27</span>% /
+<a id="__codelineno-1-33" name="__codelineno-1-33" href="#__codelineno-1-33"></a>/dev/sda1               xfs      1014M  212M  803M   <span class="m">21</span>% /boot
+<a id="__codelineno-1-34" name="__codelineno-1-34" href="#__codelineno-1-34"></a>tmpfs                   tmpfs      98M   40K   98M    <span class="m">1</span>% /run/user/0
+<a id="__codelineno-1-35" name="__codelineno-1-35" href="#__codelineno-1-35"></a><span class="o">[</span>root@localhost opt<span class="o">]</span><span class="c1"># df -i -T</span>
+<a id="__codelineno-1-36" name="__codelineno-1-36" href="#__codelineno-1-36"></a>文件系统                类型       Inode 已用<span class="o">(</span>I<span class="o">)</span> 可用<span class="o">(</span>I<span class="o">)</span> 已用<span class="o">(</span>I<span class="o">)</span>% 挂载点
+<a id="__codelineno-1-37" name="__codelineno-1-37" href="#__codelineno-1-37"></a>devtmpfs                devtmpfs  <span class="m">120231</span>     <span class="m">401</span>  <span class="m">119830</span>       <span class="m">1</span>% /dev
+<a id="__codelineno-1-38" name="__codelineno-1-38" href="#__codelineno-1-38"></a>tmpfs                   tmpfs     <span class="m">124455</span>       <span class="m">1</span>  <span class="m">124454</span>       <span class="m">1</span>% /dev/shm
+<a id="__codelineno-1-39" name="__codelineno-1-39" href="#__codelineno-1-39"></a>tmpfs                   tmpfs     <span class="m">124455</span>     <span class="m">961</span>  <span class="m">123494</span>       <span class="m">1</span>% /run
+<a id="__codelineno-1-40" name="__codelineno-1-40" href="#__codelineno-1-40"></a>tmpfs                   tmpfs     <span class="m">124455</span>      <span class="m">16</span>  <span class="m">124439</span>       <span class="m">1</span>% /sys/fs/cgroup
+<a id="__codelineno-1-41" name="__codelineno-1-41" href="#__codelineno-1-41"></a>/dev/mapper/centos-root xfs      <span class="m">8910848</span>  <span class="m">139846</span> <span class="m">8771002</span>       <span class="m">2</span>% /
+<a id="__codelineno-1-42" name="__codelineno-1-42" href="#__codelineno-1-42"></a>/dev/sda1               xfs       <span class="m">524288</span>     <span class="m">347</span>  <span class="m">523941</span>       <span class="m">1</span>% /boot
+<a id="__codelineno-1-43" name="__codelineno-1-43" href="#__codelineno-1-43"></a>tmpfs                   tmpfs     <span class="m">124455</span>      <span class="m">23</span>  <span class="m">124432</span>       <span class="m">1</span>% /run/user/0
+</code></pre></div>
+<hr />
+<h2 id="_2">文件系统工作原理<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<blockquote>
+<p><font color='brown'>文件 = 文件元数据 + 实际内容</font></p>
+</blockquote>
+<h3 id="block"><font color='orange' size=4>block的分类</font><a class="headerlink" href="#block" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>硬盘的最小存取单位 -- 扇区(512kb)
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>操作系统的最小存取单位 -- block块(4k)
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>Ps:操作系统中的文件系统负责将磁盘的多扇区组织成一个个的block块,这样OS就可以一次性读取一个&quot;块&quot;(block);
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>   即一次性连续读取多个扇区. &quot;块&quot;的大小,最常见的是4KB,即连续八个sector组成一个block.
+</code></pre></div>
+<p>在文件系统眼里,一个分区就是一堆block块！文件系统将它们进行了分类: <br />
+1&gt; <strong>superblock</strong> 超级区块 <font color='blue'>一个</font>: 记录整个档案系统的整体信息,包括inode与block的总量、使用量、剩余量等 <br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 创建文件时,会跟superblock申请inode和data block. <br />
+2&gt; <strong>inode</strong>区块 <font color='blue'>多个</font>: 放置文件的 <em>元信息</em> <br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <font color='gray'>元数据 - 权限(rwx)、拥有者、群组、时间参数等. </font><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <font color='green'>包括一个文件被分配的一个inode号以及该文件对应的一个或多个data block块号码; </font> <br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <font color='gray'>Ps:说在前面,一个文件只能有一个inode号,但多个文件的inode号可以相同 -- 硬链接</font>  <br />
+3&gt; <strong>data block</strong>区块 <font color='blue'>剩下的</font> :  <br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 若是文件夹 放置子文件名或者子文件夹名的 <em>inode号</em>; <br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 若是文件 放置文件的  <em>实际内容</em> ;  <br />
+<font color='gray'>Ps: <strong>每个inode 与data block 都有自己的编号</strong></font></p>
+<p><strong>一个文件</strong>(<font color='gray'><strong>不管是文件还是目录</strong></font>)<strong>占用一个inode块以及一个或者多个data block块! </strong><br />
+<strong>注意哦!</strong> <font color='green'><strong>一个文件夹/目录也算是一个文件! 里面存储的是子文件名和子文件夹名的inode编号!</strong></font></p>
+<p>So, 在linux里根本就没有文件夹一说,是为了方便阐述才这样说的,实际上应该叫做 <font color='red'><strong>目录文件</strong></font>!<br />
+<font color='gray'>这样称呼是因为文件夹里存放的是子文件的inode编号,就像是书的目录一样！</font></p>
+<h3 id="_3"><font color='orange' size=4>文件的查找</font><a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
+<p><code>cat /etc/passwd</code> 的整体过程如下:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="o">[</span>root@localhost opt<span class="o">]</span><span class="c1"># ls -i /</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>   <span class="m">78150</span> bin   <span class="m">50331763</span> home   <span class="m">16778318</span> mnt       <span class="m">8877</span> run   <span class="m">16777288</span> tmp
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>      <span class="m">64</span> boot        <span class="m">81</span> lib    <span class="m">33746122</span> opt      <span class="m">78154</span> sbin  <span class="m">33732779</span> usr
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>       <span class="m">3</span> dev         <span class="m">83</span> lib64         <span class="m">1</span> proc  <span class="m">50331764</span> srv   <span class="m">50331713</span> var
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="m">16777281</span> etc         <span class="m">84</span> media  <span class="m">33574977</span> root         <span class="m">1</span> sys
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="o">[</span>root@localhost opt<span class="o">]</span><span class="c1"># ls -di /</span>
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="m">64</span> /
+<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="o">[</span>root@localhost opt<span class="o">]</span><span class="c1"># ls -di /etc/</span>
+<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="m">16777281</span> /etc/
+<a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a><span class="o">[</span>root@localhost opt<span class="o">]</span><span class="c1"># ls -i /etc/passwd</span>
+<a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a><span class="m">17500057</span> /etc/passwd
+</code></pre></div>
+<p><img alt="" src="../assets/%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F.png" /></p>
+<p><font color='gray'>Ps: 这张逻辑图中inode块的block编号是假设的,对整体的推导流程没有影响..</font></p>
+<p>step 1&gt; 首先, 系统找到这个文件名对应的inode号码;<br />
+step 2&gt; 其次, 通过inode号码,获取inode信息;<br />
+step 3&gt; 最后, 根据inode信息, 找到文件数据所在的block,读出数据</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>cat /etc/passwd 查找的整体过程  根文件夹/  ; 文件夹/etc ; 文件/etc/passwd
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>1&gt; OS的文件系统先去问问super block,知道了根目录/的inode编号是64,
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>   找到编号为64的inode块,在该元信息里看到其对应的data block编号是555;
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>   找到根目录/对应编号为555的data block,里面/etc文件夹对应的inode号是16777281;
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>2&gt; 文件系统找到编号为16777281的inode块,查询到其对应的data block编号是666,
+<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>   在编号为666的data block,查询到/etc/passwd文件对应的inode号是17500057;
+<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>3&gt; 文件系统找到编号为17500057的inode块,查询到其对应的data block编号是666、777、888,
+<a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a>   进而读出数据..
+<a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a>Ps: 查找的过程实际上还要考虑有无权限哦(´▽｀)!!
+</code></pre></div>
+<p>不管是xfs还是ext,底层的原理都是这样的,只不过,xfs在此之上做了一些优化提高了读写效率.. <br />
+xfs、ext文件系统都被称作 <font color='red'><strong>索引式文件系统</strong></font>(indexed allocation)！</p>
+<h3 id="_4"><font color='orange' size=4>文件的删除</font><a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
+<p><font color='gray'><strong>Q:</strong> 若需要删除 /etc/passwd 文件,删除过程是怎样的呢？</font> <br />
+<strong>A:</strong> 实际上没有删除这一说, <font color='red'><strong>硬盘的所有操作都是覆盖! </strong></font> <br />
+&nbsp;&nbsp;&nbsp;&nbsp; "删除"此文件,会导致该文件对应的inode号17500057,以及对应的data block块777 888 999在superblock里都标记为free自由空闲状态;表明当有其他数据文件往硬盘中写的时候,free状态的inode号和data block块可以分别存其他文件的元数据和内容.  <br />
+&nbsp;&nbsp;&nbsp;&nbsp; 也就是说,删除一个文件时,文件的元数据和内容都还在硬盘里！<br />
+&nbsp;&nbsp;&nbsp;&nbsp; 还会将目录文件/etc的data block里面, /etc/passwd文件与对应的inode号17500057的绑定关系清理掉!<br />
+&nbsp;&nbsp;&nbsp;&nbsp; So,回复数据的原理,就是将未删除之前的绑定关系进行恢复.<br />
+&nbsp;&nbsp;&nbsp;&nbsp; 数据回复一定能回复回来吗？不一定! 因为被标记为free的块被分配走了就没办法啦.数据被覆盖了.<br />
+&nbsp;&nbsp;&nbsp;&nbsp; 所以数据回复时会问,删除有多久啦,在此之间有没有做其他操作..</p>
+<hr />
+<h2 id="_5">文件系统扩展<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
+<h3 id="inode"><font color='orange' size=4>inode信息</font><a class="headerlink" href="#inode" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p>文件的 <strong>inode</strong> 中文译名为 <strong>"索引节点"</strong> , 是UNIX 操作系统中的一种数据结构, 其本质是结构体.</p>
+</blockquote>
+<p><font color='blue'><strong>[stat命令]</strong></font></p>
+<p>可以用 <code>stat</code> 命令, 查看某个文件的inode信息!</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="o">[</span>root@localhost opt<span class="o">]</span><span class="c1"># stat /etc/</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>  文件：<span class="s2">&quot;/etc/&quot;</span>
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>  大小：8192       块：24         IO 块：4096   目录
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>设备：fd00h/64768d Inode：16777281    硬链接：144
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>权限：<span class="o">(</span><span class="m">0755</span>/drwxr-xr-x<span class="o">)</span>  Uid：<span class="o">(</span>    <span class="m">0</span>/    root<span class="o">)</span>   Gid：<span class="o">(</span>    <span class="m">0</span>/    root<span class="o">)</span>
+<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>最近访问：2022-07-18 <span class="m">09</span>:44:50.868295267 +0800
+<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a>最近更改：2022-07-15 <span class="m">22</span>:22:00.039036820 +0800
+<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a>最近改动：2022-07-15 <span class="m">22</span>:22:00.039036820 +0800
+<a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a>创建时间：-
+<a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a><span class="o">[</span>root@localhost opt<span class="o">]</span><span class="c1"># stat /etc/passwd</span>
+<a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a>  文件：<span class="s2">&quot;/etc/passwd&quot;</span>
+<a id="__codelineno-5-12" name="__codelineno-5-12" href="#__codelineno-5-12"></a>  大小：2351       块：8          IO 块：4096   普通文件
+<a id="__codelineno-5-13" name="__codelineno-5-13" href="#__codelineno-5-13"></a>设备：fd00h/64768d Inode：17500057    硬链接：1
+<a id="__codelineno-5-14" name="__codelineno-5-14" href="#__codelineno-5-14"></a>权限：<span class="o">(</span><span class="m">0644</span>/-rw-r--r--<span class="o">)</span>  Uid：<span class="o">(</span>    <span class="m">0</span>/    root<span class="o">)</span>   Gid：<span class="o">(</span>    <span class="m">0</span>/    root<span class="o">)</span>
+<a id="__codelineno-5-15" name="__codelineno-5-15" href="#__codelineno-5-15"></a>最近访问：2022-07-18 <span class="m">07</span>:33:46.014207025 +0800
+<a id="__codelineno-5-16" name="__codelineno-5-16" href="#__codelineno-5-16"></a>最近更改：2022-07-15 <span class="m">10</span>:14:51.948530819 +0800
+<a id="__codelineno-5-17" name="__codelineno-5-17" href="#__codelineno-5-17"></a>最近改动：2022-07-15 <span class="m">10</span>:14:51.955530994 +0800
+<a id="__codelineno-5-18" name="__codelineno-5-18" href="#__codelineno-5-18"></a>创建时间：-
+</code></pre></div>
+<p>从根本上讲,inode中存放的是除了文件的名字以及文件真实内容之外所有有关文件的信息/元数据(metadata)!</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>● inode 编号
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>● 用来识别文件类型,以及用于stat C函数的模式信息
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>● 链接数,即有多少文件名指向这个inode
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>● 属主的ID(UID)
+<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>● 属主的组ID(GID)
+<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a>● 文件的字节数
+<a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a>● 文件所使用的磁盘块的实际数目
+<a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a>● 文件的时间戳,共有三个:
+<a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a>  ctime指inode上一次变动的时间;
+<a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a>  mtime指文件内容上一次变动的时间;
+<a id="__codelineno-6-11" name="__codelineno-6-11" href="#__codelineno-6-11"></a>  atime指文件上一次打开的时间。
+<a id="__codelineno-6-12" name="__codelineno-6-12" href="#__codelineno-6-12"></a>● 指向数据块的指针 
+</code></pre></div>
+<p><font color='red'>敲黑板!</font> <strong>Linux系统内部不使用文件名, 而是用inode号码来识别文件.</strong> 每个inode都有一个号码. <br />
+对于系统来说,文件名只是inode号码便于识别的别称或者绰号.</p>
+<p><font color='blue'><strong>[三种时间]</strong></font></p>
+<p><strong>详解,atime、mtime、ctime的区别！</strong></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>1&gt; atime(access time):[访问文件内容]的时间.
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>      对文件进行一次读操作,它的访问时间就会改变.
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>      eg: cat、more等操作,但是像之前的stat还有ls命令对atime是不会有影响的.
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a>      因为stat、ls访问的是文件的元数据,没有访问文件的内容！！
+<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a>2&gt; mtime(modify time):[修改文件内容]的时间.
+<a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a>      文件的内容被最后一次修改的时间,我们经常用的ls -l命令显示出来的文件时间就是这个时间.
+<a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a>      当用vim对文件进行编辑之后保存,它的mtime就会相应的改变;
+<a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a>      eg: echo aa &gt;&gt; a.sh 或vim a.txt 修改内容
+<a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a>3&gt; ctime(change time):[修改文件]的时间.
+<a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a>      通俗点,文件但凡有一点改动,不管是元数据还是内容的改动都会导致ctime的改变.
+<a id="__codelineno-7-11" name="__codelineno-7-11" href="#__codelineno-7-11"></a>      eg: 当使用chmod、chown等改变文件属性的操作是会改变文件的ctime的. chmod +x a.txt
+<a id="__codelineno-7-12" name="__codelineno-7-12" href="#__codelineno-7-12"></a>
+<a id="__codelineno-7-13" name="__codelineno-7-13" href="#__codelineno-7-13"></a>○ 使用cat命令查看文件后,文件atime会变更
+<a id="__codelineno-7-14" name="__codelineno-7-14" href="#__codelineno-7-14"></a>○ 使用vim命令打开文件只要在扩展模式下w后,文件atime、mtime、ctime都会变更.
+<a id="__codelineno-7-15" name="__codelineno-7-15" href="#__codelineno-7-15"></a>  若vim打开后随便咋编辑咋查看只要没有w保存,都只是在对内存里的数据进行操作,没有写入硬盘.
+<a id="__codelineno-7-16" name="__codelineno-7-16" href="#__codelineno-7-16"></a>  即只要在扩展模式下q或q!,只会变更atime.
+<a id="__codelineno-7-17" name="__codelineno-7-17" href="#__codelineno-7-17"></a>
+<a id="__codelineno-7-18" name="__codelineno-7-18" href="#__codelineno-7-18"></a>【冷知识】
+<a id="__codelineno-7-19" name="__codelineno-7-19" href="#__codelineno-7-19"></a>也许你会惊奇的发现第一次后再连续几次cat/vim前后的atime都没有变化,这是因为linux自带的优化机制导致的:
+<a id="__codelineno-7-20" name="__codelineno-7-20" href="#__codelineno-7-20"></a>  cache 缓存 (读) -- 硬盘中的数据在内存中缓存;
+<a id="__codelineno-7-21" name="__codelineno-7-21" href="#__codelineno-7-21"></a>  buffer 缓冲区 (写) -- 攒一波再往硬盘中写.
+<a id="__codelineno-7-22" name="__codelineno-7-22" href="#__codelineno-7-22"></a>  PS:在前文的计算机硬件组成中有阐述.
+<a id="__codelineno-7-23" name="__codelineno-7-23" href="#__codelineno-7-23"></a>
+<a id="__codelineno-7-24" name="__codelineno-7-24" href="#__codelineno-7-24"></a>提一嘴:sync命令会将buffer缓冲区的数据强制往硬盘中写.
+</code></pre></div>
+<p><font color='blue'><strong>[inode大小]</strong></font></p>
+<p>注意哦! inode也会消耗硬盘空间的.</p>
+<p><img alt="" src="../assets/inode%E5%A4%A7%E5%B0%8F.jpeg" /></p>
+<p><font color='blue'><strong>[目录项]</strong></font></p>
+<p>Linux系统中, 目录(directory)也是一种文件. 打开目录,实际上就是打开目录文件.</p>
+<p>目录文件的结构非常简单, 就是一系列目录项(dirent)的列表.  <br />
+每个目录项由两部分组成: 所包含文件的文件名以及该文件名对应的inode号码!</p>
+<h3 id="fat"><font color='orange' size=4>FAT文件系统</font><a class="headerlink" href="#fat" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p>U盘使用的文件/档案系统一般为FAT格式.</p>
+</blockquote>
+<p>它具有以下的特点:<br />
+1&gt; FAT没有区分superblock、inode、data block, 就是一堆简单的block!但依旧会对block进行编号.<br />
+&nbsp;&nbsp;&nbsp;&nbsp; 是没有xfs、ext那样的索引的, 一个block块里存放一堆(名字对应的下一跳的数字)的组合.<br />
+2&gt; 正因为FAT没有inode的存在, 所以FAT没有办法将这个档案的所有block在一开始就读取出来.<br />
+&nbsp;&nbsp;&nbsp;&nbsp; 每个block号码都记录在前一个block当中.只能一跳一跳的查找.太慢太笨拙了 TnT.</p>
+<p><img alt="" src="../assets/FAT.png" /></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>假设档案的资料依序写入 1-&gt;7-&gt;4-&gt;15 这四个block号码中.
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>提一嘴,为啥会这样写入呢？同一时间往硬盘的写操作很多导致的.是按照顺序穿插着来的.
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>
+<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a>这个档案系统没有办法一口气就知道四个block的号码,它得一个一个的将block读出后,才会知道下一个block在何处!
+<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a>如果同一个档案资料写入的block分散的太过厉害跨度太大时,
+<a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a>则我们的磁盘读取头将无法在磁盘转一圈就读到所有的资料.因此磁盘就会多转好几圈才能完整的读取到这个档案的内容!
+<a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a>
+<a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a>【磁盘碎片整理】
+<a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a>正因为档案写入的block太过于离散了,导致文件的读取效率很差,所以需要定期进行碎片整理！
+<a id="__codelineno-8-10" name="__codelineno-8-10" href="#__codelineno-8-10"></a>说白了,就是将文件存的相应的紧凑一点.block块连续一点.
+<a id="__codelineno-8-11" name="__codelineno-8-11" href="#__codelineno-8-11"></a>
+<a id="__codelineno-8-12" name="__codelineno-8-12" href="#__codelineno-8-12"></a>Q: 那么像xfs、ext文件系统需要进行磁盘整理吗？
+<a id="__codelineno-8-13" name="__codelineno-8-13" href="#__codelineno-8-13"></a>A: 它们是索引文件系统,通常是不需要的.
+<a id="__codelineno-8-14" name="__codelineno-8-14" href="#__codelineno-8-14"></a>   但是如果档案系统使用太久,常常删除/编辑/新增档案话,是可能会造成档案资料太过于离散的问题
+<a id="__codelineno-8-15" name="__codelineno-8-15" href="#__codelineno-8-15"></a>   此时就需要进行重整一下！
+</code></pre></div>
+<p><font color='gray'>Ps: windows常见的文件系统 FAT、NTFS、VFAT、MSDOS... </font></p>
+<h3 id="_6"><font color='orange' size=4>磁盘满的两种情况</font><a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p>常识: 只要权限够, 磁盘上有空间一定可以创建文件.  <strong>这个是错的!!  (X)</strong></p>
+</blockquote>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>▲ 文件系统/分区的inode号
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="o">[</span>root@localhost opt<span class="o">]</span><span class="c1"># df -i -T</span>
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>文件系统                类型       Inode 已用<span class="o">(</span>I<span class="o">)</span> 可用<span class="o">(</span>I<span class="o">)</span> 已用<span class="o">(</span>I<span class="o">)</span>% 挂载点
+<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a>devtmpfs                devtmpfs  <span class="m">120231</span>     <span class="m">401</span>  <span class="m">119830</span>       <span class="m">1</span>% /dev
+<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a>tmpfs                   tmpfs     <span class="m">124455</span>       <span class="m">1</span>  <span class="m">124454</span>       <span class="m">1</span>% /dev/shm
+<a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a>tmpfs                   tmpfs     <span class="m">124455</span>     <span class="m">961</span>  <span class="m">123494</span>       <span class="m">1</span>% /run
+<a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a>tmpfs                   tmpfs     <span class="m">124455</span>      <span class="m">16</span>  <span class="m">124439</span>       <span class="m">1</span>% /sys/fs/cgroup
+<a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a>/dev/mapper/centos-root xfs      <span class="m">8910848</span>  <span class="m">139846</span> <span class="m">8771002</span>       <span class="m">2</span>% /
+<a id="__codelineno-9-9" name="__codelineno-9-9" href="#__codelineno-9-9"></a>/dev/sda1               xfs       <span class="m">524288</span>     <span class="m">347</span>  <span class="m">523941</span>       <span class="m">1</span>% /boot
+<a id="__codelineno-9-10" name="__codelineno-9-10" href="#__codelineno-9-10"></a>tmpfs                   tmpfs     <span class="m">124455</span>      <span class="m">23</span>  <span class="m">124432</span>       <span class="m">1</span>% /run/user/0
+<a id="__codelineno-9-11" name="__codelineno-9-11" href="#__codelineno-9-11"></a>
+<a id="__codelineno-9-12" name="__codelineno-9-12" href="#__codelineno-9-12"></a>▲ 文件系统/分区的磁盘容量
+<a id="__codelineno-9-13" name="__codelineno-9-13" href="#__codelineno-9-13"></a><span class="o">[</span>root@localhost opt<span class="o">]</span><span class="c1"># df -h -T</span>
+<a id="__codelineno-9-14" name="__codelineno-9-14" href="#__codelineno-9-14"></a>文件系统                类型      容量  已用  可用 已用% 挂载点
+<a id="__codelineno-9-15" name="__codelineno-9-15" href="#__codelineno-9-15"></a>devtmpfs                devtmpfs  470M     <span class="m">0</span>  470M    <span class="m">0</span>% /dev
+<a id="__codelineno-9-16" name="__codelineno-9-16" href="#__codelineno-9-16"></a>tmpfs                   tmpfs     487M     <span class="m">0</span>  487M    <span class="m">0</span>% /dev/shm
+<a id="__codelineno-9-17" name="__codelineno-9-17" href="#__codelineno-9-17"></a>tmpfs                   tmpfs     487M   15M  472M    <span class="m">4</span>% /run
+<a id="__codelineno-9-18" name="__codelineno-9-18" href="#__codelineno-9-18"></a>tmpfs                   tmpfs     487M     <span class="m">0</span>  487M    <span class="m">0</span>% /sys/fs/cgroup
+<a id="__codelineno-9-19" name="__codelineno-9-19" href="#__codelineno-9-19"></a>/dev/mapper/centos-root xfs        17G  <span class="m">4</span>.6G   13G   <span class="m">27</span>% /
+<a id="__codelineno-9-20" name="__codelineno-9-20" href="#__codelineno-9-20"></a>/dev/sda1               xfs      1014M  212M  803M   <span class="m">21</span>% /boot
+<a id="__codelineno-9-21" name="__codelineno-9-21" href="#__codelineno-9-21"></a>tmpfs                   tmpfs      98M   40K   98M    <span class="m">1</span>% /run/user/0
+</code></pre></div>
+<p><strong>情况一</strong>: 磁盘上还有空间,但磁盘上大量的小文件导致inode号没了.<br />
+&nbsp;&nbsp;&nbsp;&nbsp; <code>i=30000;while true;do touch /boot/$i.txt;echo $i.txt;((i++));done</code><br />
+&nbsp;&nbsp;&nbsp;&nbsp; 当/boot 分区的inode使用完,再创建文件会失败,会提示设备上没有空间.</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp; 黑科技,运行上方的测试后,打开另一个终端,实时监测/boot分区inode号使用情况: <br />
+&nbsp;&nbsp;&nbsp;&nbsp; <code>while true;do df -i;sleep 0.5;clear;done</code> 达到视觉上刷新的效果,实则不是刷新.<br />
+&nbsp;&nbsp;&nbsp;&nbsp; <font color='gray'>Ps: 若不sleep0.5秒, cpu的消耗会很大很大, 得让它休息0.5秒,不然会烧脑 Hhhh.</font></p>
+<p><strong>情况二</strong>: inode号还有很多,但某个文件很大,磁盘的容量被占满了.<br />
+&nbsp;&nbsp;&nbsp;&nbsp; <code>dd if=/dev/zero of=/boot/test.txt bs=300M count=1</code><br />
+&nbsp;&nbsp;&nbsp;&nbsp; <code>dd if=/dev/zero of=/abc.txt bs=10M count=1</code><br />
+&nbsp;&nbsp;&nbsp;&nbsp; <code>cp abc.txt /boot/</code> 失败,会提示设备上没有空间!</p>
+<p><strong>[解决方案]</strong><br />
+1&gt; 大量的小文件问题:可能会使inode耗尽, 使得文件文法创建(磁盘利用率低)<br />
+&nbsp;&nbsp;&nbsp;&nbsp; So,对于小文件比较多的场景,可将inode和data block划分小一点;<br />
+&nbsp;&nbsp;&nbsp;&nbsp; 若innode已经不够用了,可将小文件备份到其他分区...<br />
+2&gt; 大文件问题: 一个文件占用多个data block,使得文件读写速率慢.可将data block划分大点.使用xfs文件系统. <br />
+&nbsp;&nbsp;&nbsp;&nbsp; 若容量已经不够用了. 思路一,将大文件打包备份走;思路二,使用软硬链接!!! </p>
+<hr />
+<h2 id="_7">软硬链接<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h2>
+<h3 id="_8"><font color='orange' size=4>硬链接</font><a class="headerlink" href="#_8" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p>硬链接(Hard Link)相当于给一个文件起了一个 <strong>别名</strong> , 不同的文件名可以操作同一份数据.</p>
+<p><strong>ln [原文件] [目标文件]</strong></p>
+</blockquote>
+<p>1&gt; <strong>对硬链接的源文件或目标文件内容进行修改,会影响到所有文件名</strong>;<br />
+2&gt; 硬链接文件与源文件具有相同inode,但文件名不同:<br />
+&nbsp;&nbsp;&nbsp;&nbsp; 即<strong>一个文件只能有一个inode号,但多个文件的inode号可以相同 </strong> <br />
+3&gt; 删除硬链接或者原文件之一,不影响另一个文件名的访问, 除非所有的都删除掉.<br />
+&nbsp;&nbsp;&nbsp;&nbsp; So,硬连接 <strong>允许一个文件拥有多个有效路径名,这样用户就可以建立硬链接到重要文件,以防止“误删”.</strong> <br />
+4&gt; <strong>删除所有硬链接, 数据会在被磁盘检查或者新数据写入的时候删除回收. </strong><br />
+5&gt; 通过rm –f 删除硬链接<br />
+6&gt; <font color='brown'><strong>目录不可创建硬链接, 并且硬链接无法跨区 </strong></font> </p>
+<p><img alt="" src="../assets/%E7%A1%AC%E9%93%BE%E6%8E%A5.jpg" /></p>
+<p><font color='blue'>Ps: 硬链接有点像python里函数传递中针对可变类型的引用传递...</font></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="s2">&quot;&quot;&quot;</span>
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="s2">a.txt的inode号是35589975,`ll a.txt`可得知它有1个硬链接.</span>
+<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="s2">&quot;&quot;&quot;</span>
+<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="o">[</span>root@localhost opt<span class="o">]</span><span class="c1"># cat a.txt</span>
+<a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a><span class="m">123</span>
+<a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a><span class="o">[</span>root@localhost opt<span class="o">]</span><span class="c1"># ls -i a.txt </span>
+<a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a><span class="m">35589975</span> a.txt
+<a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a><span class="o">[</span>root@localhost opt<span class="o">]</span><span class="c1"># ll a.txt </span>
+<a id="__codelineno-10-9" name="__codelineno-10-9" href="#__codelineno-10-9"></a>-rw-r--r-- <span class="m">1</span> root root <span class="m">4</span> 7月  <span class="m">19</span> <span class="m">10</span>:44 a.txt
+<a id="__codelineno-10-10" name="__codelineno-10-10" href="#__codelineno-10-10"></a>
+<a id="__codelineno-10-11" name="__codelineno-10-11" href="#__codelineno-10-11"></a><span class="s2">&quot;&quot;&quot;</span>
+<a id="__codelineno-10-12" name="__codelineno-10-12" href="#__codelineno-10-12"></a><span class="s2">用`ln`命令为a.txt创建一个硬链接,这样的话,a.txt与b.txt inode号、硬链接数、文件内容都一样！</span>
+<a id="__codelineno-10-13" name="__codelineno-10-13" href="#__codelineno-10-13"></a><span class="s2">即一个inode号关联了两个文件名,代表同一份数据！ </span>
+<a id="__codelineno-10-14" name="__codelineno-10-14" href="#__codelineno-10-14"></a><span class="s2">&quot;&quot;&quot;</span>
+<a id="__codelineno-10-15" name="__codelineno-10-15" href="#__codelineno-10-15"></a><span class="o">[</span>root@localhost opt<span class="o">]</span><span class="c1"># ln a.txt b.txt</span>
+<a id="__codelineno-10-16" name="__codelineno-10-16" href="#__codelineno-10-16"></a><span class="o">[</span>root@localhost opt<span class="o">]</span><span class="c1"># ls -i b.txt</span>
+<a id="__codelineno-10-17" name="__codelineno-10-17" href="#__codelineno-10-17"></a><span class="m">35589975</span> b.txt
+<a id="__codelineno-10-18" name="__codelineno-10-18" href="#__codelineno-10-18"></a><span class="o">[</span>root@localhost opt<span class="o">]</span><span class="c1"># ll a.txt</span>
+<a id="__codelineno-10-19" name="__codelineno-10-19" href="#__codelineno-10-19"></a>-rw-r--r-- <span class="m">2</span> root root <span class="m">4</span> 7月  <span class="m">19</span> <span class="m">10</span>:44 a.txt
+<a id="__codelineno-10-20" name="__codelineno-10-20" href="#__codelineno-10-20"></a><span class="o">[</span>root@localhost opt<span class="o">]</span><span class="c1"># ll b.txt</span>
+<a id="__codelineno-10-21" name="__codelineno-10-21" href="#__codelineno-10-21"></a>-rw-r--r-- <span class="m">2</span> root root <span class="m">4</span> 7月  <span class="m">19</span> <span class="m">10</span>:44 b.txt
+<a id="__codelineno-10-22" name="__codelineno-10-22" href="#__codelineno-10-22"></a><span class="o">[</span>root@localhost opt<span class="o">]</span><span class="c1"># cat b.txt </span>
+<a id="__codelineno-10-23" name="__codelineno-10-23" href="#__codelineno-10-23"></a><span class="m">123</span>
+<a id="__codelineno-10-24" name="__codelineno-10-24" href="#__codelineno-10-24"></a>
+<a id="__codelineno-10-25" name="__codelineno-10-25" href="#__codelineno-10-25"></a><span class="s2">&quot;&quot;&quot;</span>
+<a id="__codelineno-10-26" name="__codelineno-10-26" href="#__codelineno-10-26"></a><span class="s2">对硬链接文件或原文件内容进行修改,会影响到所有文件名</span>
+<a id="__codelineno-10-27" name="__codelineno-10-27" href="#__codelineno-10-27"></a><span class="s2">&quot;&quot;&quot;</span>
+<a id="__codelineno-10-28" name="__codelineno-10-28" href="#__codelineno-10-28"></a><span class="o">[</span>root@localhost opt<span class="o">]</span><span class="c1"># echo 666 &gt;&gt; a.txt</span>
+<a id="__codelineno-10-29" name="__codelineno-10-29" href="#__codelineno-10-29"></a><span class="o">[</span>root@localhost opt<span class="o">]</span><span class="c1"># cat a.txt</span>
+<a id="__codelineno-10-30" name="__codelineno-10-30" href="#__codelineno-10-30"></a><span class="m">123</span>
+<a id="__codelineno-10-31" name="__codelineno-10-31" href="#__codelineno-10-31"></a><span class="m">666</span>
+<a id="__codelineno-10-32" name="__codelineno-10-32" href="#__codelineno-10-32"></a><span class="o">[</span>root@localhost opt<span class="o">]</span><span class="c1"># cat b.txt</span>
+<a id="__codelineno-10-33" name="__codelineno-10-33" href="#__codelineno-10-33"></a><span class="m">123</span>
+<a id="__codelineno-10-34" name="__codelineno-10-34" href="#__codelineno-10-34"></a><span class="m">666</span>
+<a id="__codelineno-10-35" name="__codelineno-10-35" href="#__codelineno-10-35"></a>
+<a id="__codelineno-10-36" name="__codelineno-10-36" href="#__codelineno-10-36"></a><span class="s2">&quot;&quot;&quot;</span>
+<a id="__codelineno-10-37" name="__codelineno-10-37" href="#__codelineno-10-37"></a><span class="s2">删除原文件a.txt, 硬链接文件b.txt还能继续使用</span>
+<a id="__codelineno-10-38" name="__codelineno-10-38" href="#__codelineno-10-38"></a><span class="s2">&quot;&quot;&quot;</span>
+<a id="__codelineno-10-39" name="__codelineno-10-39" href="#__codelineno-10-39"></a><span class="o">[</span>root@localhost opt<span class="o">]</span><span class="c1"># rm -rf a.txt</span>
+<a id="__codelineno-10-40" name="__codelineno-10-40" href="#__codelineno-10-40"></a><span class="o">[</span>root@localhost opt<span class="o">]</span><span class="c1"># ll b.txt</span>
+<a id="__codelineno-10-41" name="__codelineno-10-41" href="#__codelineno-10-41"></a>-rw-r--r-- <span class="m">1</span> root root <span class="m">8</span> 7月  <span class="m">19</span> <span class="m">10</span>:51 b.txt    <span class="c1"># 注意,硬链接数变为了1</span>
+<a id="__codelineno-10-42" name="__codelineno-10-42" href="#__codelineno-10-42"></a>
+<a id="__codelineno-10-43" name="__codelineno-10-43" href="#__codelineno-10-43"></a><span class="s2">&quot;&quot;&quot;</span>
+<a id="__codelineno-10-44" name="__codelineno-10-44" href="#__codelineno-10-44"></a><span class="s2">目录不可创建硬链接</span>
+<a id="__codelineno-10-45" name="__codelineno-10-45" href="#__codelineno-10-45"></a><span class="s2">&quot;&quot;&quot;</span>
+<a id="__codelineno-10-46" name="__codelineno-10-46" href="#__codelineno-10-46"></a><span class="o">[</span>root@localhost opt<span class="o">]</span><span class="c1"># mkdir ./aaa</span>
+<a id="__codelineno-10-47" name="__codelineno-10-47" href="#__codelineno-10-47"></a><span class="o">[</span>root@localhost opt<span class="o">]</span><span class="c1"># ln ./aaa ./bbb</span>
+<a id="__codelineno-10-48" name="__codelineno-10-48" href="#__codelineno-10-48"></a>ln: <span class="s2">&quot;./aaa&quot;</span>: 不允许将硬链接指向目录
+</code></pre></div>
+<h3 id="_9"><font color='orange' size=4>软链接</font><a class="headerlink" href="#_9" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p>软链接(Symbolic Link)文件2相当于是文件1的一个 <strong>快捷方式</strong> . <br />
+文件2指向文件1的路径,而不是文件1的inode号码,文件1的inode"硬链接数"不会因此发生变化.</p>
+<p><strong>ln –s [原文件] [目标文件]</strong></p>
+</blockquote>
+<p>1&gt; <strong>对软链接的源文件或目标文件内容进行修改, 会影响到所有文件名</strong>;<br />
+2&gt; <strong>软链接文件与源文件具有不同的inode号</strong><br />
+3&gt; <strong>删除软连接文件的源文件, 软链接文件将无法使用, 应该也一起删除掉,以便回收 </strong> 
+4&gt; rm –f 删除软链接<br />
+5&gt; <font color='brown'><strong>可以对目录创建软链接, 并且软链接可以跨分区</strong></font></p>
+<p><img alt="" src="../assets/%E8%BD%AF%E9%93%BE%E6%8E%A5.jpg" /></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="s2">&quot;&quot;&quot;</span>
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="s2">使用命令`ln -s`为c.txt文件创建一个软链接d.txt. </span>
+<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="s2">相当于创建了一个快捷方式. 文件d.txt的存在依赖于c.txt</span>
+<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a><span class="s2">&quot;&quot;&quot;</span>
+<a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a><span class="o">[</span>root@localhost opt<span class="o">]</span><span class="c1"># cat c.txt</span>
+<a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a><span class="m">123</span>
+<a id="__codelineno-11-7" name="__codelineno-11-7" href="#__codelineno-11-7"></a><span class="o">[</span>root@localhost opt<span class="o">]</span><span class="c1"># ln -s c.txt d.txt</span>
+<a id="__codelineno-11-8" name="__codelineno-11-8" href="#__codelineno-11-8"></a><span class="o">[</span>root@localhost opt<span class="o">]</span><span class="c1"># ls -i c.txt</span>
+<a id="__codelineno-11-9" name="__codelineno-11-9" href="#__codelineno-11-9"></a><span class="m">34107380</span> c.txt
+<a id="__codelineno-11-10" name="__codelineno-11-10" href="#__codelineno-11-10"></a><span class="o">[</span>root@localhost opt<span class="o">]</span><span class="c1"># ls -i d.txt</span>
+<a id="__codelineno-11-11" name="__codelineno-11-11" href="#__codelineno-11-11"></a><span class="m">35311703</span> d.txt
+<a id="__codelineno-11-12" name="__codelineno-11-12" href="#__codelineno-11-12"></a><span class="o">[</span>root@localhost opt<span class="o">]</span><span class="c1"># ll c.txt</span>
+<a id="__codelineno-11-13" name="__codelineno-11-13" href="#__codelineno-11-13"></a>-rw-r--r-- <span class="m">1</span> root root <span class="m">4</span> 7月  <span class="m">19</span> <span class="m">16</span>:22 c.txt
+<a id="__codelineno-11-14" name="__codelineno-11-14" href="#__codelineno-11-14"></a><span class="o">[</span>root@localhost opt<span class="o">]</span><span class="c1"># ll d.txt</span>
+<a id="__codelineno-11-15" name="__codelineno-11-15" href="#__codelineno-11-15"></a>lrwxrwxrwx <span class="m">1</span> root root <span class="m">5</span> 7月  <span class="m">19</span> <span class="m">16</span>:22 d.txt -&gt; c.txt
+<a id="__codelineno-11-16" name="__codelineno-11-16" href="#__codelineno-11-16"></a>
+<a id="__codelineno-11-17" name="__codelineno-11-17" href="#__codelineno-11-17"></a>
+<a id="__codelineno-11-18" name="__codelineno-11-18" href="#__codelineno-11-18"></a><span class="o">[</span>root@localhost opt<span class="o">]</span><span class="c1"># echo 666 &gt;&gt; c.txt</span>
+<a id="__codelineno-11-19" name="__codelineno-11-19" href="#__codelineno-11-19"></a><span class="o">[</span>root@localhost opt<span class="o">]</span><span class="c1"># cat c.txt</span>
+<a id="__codelineno-11-20" name="__codelineno-11-20" href="#__codelineno-11-20"></a><span class="m">123</span>
+<a id="__codelineno-11-21" name="__codelineno-11-21" href="#__codelineno-11-21"></a><span class="m">666</span>
+<a id="__codelineno-11-22" name="__codelineno-11-22" href="#__codelineno-11-22"></a><span class="o">[</span>root@localhost opt<span class="o">]</span><span class="c1"># cat d.txt</span>
+<a id="__codelineno-11-23" name="__codelineno-11-23" href="#__codelineno-11-23"></a><span class="m">123</span>
+<a id="__codelineno-11-24" name="__codelineno-11-24" href="#__codelineno-11-24"></a><span class="m">666</span>
+<a id="__codelineno-11-25" name="__codelineno-11-25" href="#__codelineno-11-25"></a>
+<a id="__codelineno-11-26" name="__codelineno-11-26" href="#__codelineno-11-26"></a><span class="s2">&quot;&quot;&quot;</span>
+<a id="__codelineno-11-27" name="__codelineno-11-27" href="#__codelineno-11-27"></a><span class="s2">原文件c.txt删掉了,其软链接d.txt就不能用啦</span>
+<a id="__codelineno-11-28" name="__codelineno-11-28" href="#__codelineno-11-28"></a><span class="s2">&quot;&quot;&quot;</span>
+<a id="__codelineno-11-29" name="__codelineno-11-29" href="#__codelineno-11-29"></a><span class="o">[</span>root@localhost opt<span class="o">]</span><span class="c1"># rm -rf c.txt</span>
+<a id="__codelineno-11-30" name="__codelineno-11-30" href="#__codelineno-11-30"></a><span class="o">[</span>root@localhost opt<span class="o">]</span><span class="c1"># cat d.txt</span>
+<a id="__codelineno-11-31" name="__codelineno-11-31" href="#__codelineno-11-31"></a>cat: d.txt: 没有那个文件或目录
+<a id="__codelineno-11-32" name="__codelineno-11-32" href="#__codelineno-11-32"></a>
+<a id="__codelineno-11-33" name="__codelineno-11-33" href="#__codelineno-11-33"></a><span class="s2">&quot;&quot;&quot;</span>
+<a id="__codelineno-11-34" name="__codelineno-11-34" href="#__codelineno-11-34"></a><span class="s2">可以对目录创建软链接</span>
+<a id="__codelineno-11-35" name="__codelineno-11-35" href="#__codelineno-11-35"></a><span class="s2">&quot;&quot;&quot;</span>
+<a id="__codelineno-11-36" name="__codelineno-11-36" href="#__codelineno-11-36"></a><span class="o">[</span>root@localhost opt<span class="o">]</span><span class="c1"># mkdir ./aaa</span>
+<a id="__codelineno-11-37" name="__codelineno-11-37" href="#__codelineno-11-37"></a><span class="o">[</span>root@localhost opt<span class="o">]</span><span class="c1"># echo 111 &gt; ./aaa/1.txt</span>
+<a id="__codelineno-11-38" name="__codelineno-11-38" href="#__codelineno-11-38"></a><span class="o">[</span>root@localhost opt<span class="o">]</span><span class="c1"># ln -s ./aaa ./bbb</span>
+<a id="__codelineno-11-39" name="__codelineno-11-39" href="#__codelineno-11-39"></a><span class="o">[</span>root@localhost opt<span class="o">]</span><span class="c1"># ll</span>
+<a id="__codelineno-11-40" name="__codelineno-11-40" href="#__codelineno-11-40"></a>总用量 <span class="m">0</span>
+<a id="__codelineno-11-41" name="__codelineno-11-41" href="#__codelineno-11-41"></a>drwxr-xr-x <span class="m">2</span> root root <span class="m">19</span> 7月  <span class="m">19</span> <span class="m">17</span>:07 aaa
+<a id="__codelineno-11-42" name="__codelineno-11-42" href="#__codelineno-11-42"></a>lrwxrwxrwx <span class="m">1</span> root root  <span class="m">5</span> 7月  <span class="m">19</span> <span class="m">17</span>:07 bbb -&gt; ./aaa
+<a id="__codelineno-11-43" name="__codelineno-11-43" href="#__codelineno-11-43"></a><span class="o">[</span>root@localhost opt<span class="o">]</span><span class="c1"># cat ./aaa/1.txt </span>
+<a id="__codelineno-11-44" name="__codelineno-11-44" href="#__codelineno-11-44"></a><span class="m">111</span>
+<a id="__codelineno-11-45" name="__codelineno-11-45" href="#__codelineno-11-45"></a><span class="o">[</span>root@localhost opt<span class="o">]</span><span class="c1"># cat ./bbb/1.txt </span>
+<a id="__codelineno-11-46" name="__codelineno-11-46" href="#__codelineno-11-46"></a><span class="m">111</span>
+<a id="__codelineno-11-47" name="__codelineno-11-47" href="#__codelineno-11-47"></a><span class="c1"># 删除软链接/快捷方式bbb目录对aaa目录没有影响</span>
+<a id="__codelineno-11-48" name="__codelineno-11-48" href="#__codelineno-11-48"></a><span class="o">[</span>root@localhost opt<span class="o">]</span><span class="c1"># rm -rf ./bbb</span>
+<a id="__codelineno-11-49" name="__codelineno-11-49" href="#__codelineno-11-49"></a><span class="o">[</span>root@localhost opt<span class="o">]</span><span class="c1"># ls aaa</span>
+<a id="__codelineno-11-50" name="__codelineno-11-50" href="#__codelineno-11-50"></a><span class="m">1</span>.txt
+<a id="__codelineno-11-51" name="__codelineno-11-51" href="#__codelineno-11-51"></a><span class="c1"># 删除软链接/快捷方式bbb下的1.txt文件对aaa目录有影响!!!!!!!!!!!!!!!!!!!!!!!</span>
+<a id="__codelineno-11-52" name="__codelineno-11-52" href="#__codelineno-11-52"></a><span class="o">[</span>root@localhost opt<span class="o">]</span><span class="c1"># ll</span>
+<a id="__codelineno-11-53" name="__codelineno-11-53" href="#__codelineno-11-53"></a>总用量 <span class="m">0</span>
+<a id="__codelineno-11-54" name="__codelineno-11-54" href="#__codelineno-11-54"></a>drwxr-xr-x <span class="m">2</span> root root <span class="m">19</span> 7月  <span class="m">19</span> <span class="m">17</span>:13 aaa
+<a id="__codelineno-11-55" name="__codelineno-11-55" href="#__codelineno-11-55"></a><span class="o">[</span>root@localhost opt<span class="o">]</span><span class="c1"># ln -s ./aaa ./bbb</span>
+<a id="__codelineno-11-56" name="__codelineno-11-56" href="#__codelineno-11-56"></a><span class="o">[</span>root@localhost opt<span class="o">]</span><span class="c1"># rm -rf ./bbb/1.txt </span>
+<a id="__codelineno-11-57" name="__codelineno-11-57" href="#__codelineno-11-57"></a><span class="o">[</span>root@localhost opt<span class="o">]</span><span class="c1"># ll aaa</span>
+<a id="__codelineno-11-58" name="__codelineno-11-58" href="#__codelineno-11-58"></a>总用量 <span class="m">0</span>
+</code></pre></div>
+<h3 id="qa"><font color='orange' size=4>Q/A</font><a class="headerlink" href="#qa" title="Permanent link">&para;</a></h3>
+<p><strong>Q1:</strong> 为啥硬链接不能跨分区,软链接可以？为啥目录文件不能创建硬链接,可以创建软链接?<br />
+<strong>A1:</strong> <font color='brown'>换句话来说,硬链接的创建具有局限性: 同一分区 + 普通文件 </font><br />
+ &nbsp;&nbsp;&nbsp;&nbsp; <font color='gray'>Ps: linux判断某个路径绑定的分区是从右往左找的,直到该目录绑定了分区. </font><br />
+&nbsp;&nbsp;&nbsp;&nbsp;  <code>/etc/sysconfig/network-scripts/ifcfg-ens33</code> <font color='gray'>直到找到关联分区的根/文件夹..</font></p>
+<p>硬链接的本质是大家指向同一个inode号,关联同一份数据;所以硬链接仅限于在同一个分区里分配..<br />
+很容易想到分区1的10号inode与分区2的10号inode指向的data block可不是一样的.. <br />
+而对目录文件创建硬链接意味着对该目录文件的子文件和子目录文件都用创建硬链接,开销很大..<br />
+<font color='gray'>查阅资料,允许目录的硬链接可能会打破文件系统目录的有向无环图结构, 可能创建目录循环, 这可能会导致fsck以及其他一些遍历文件树的软件出错... TnT 可以说人话嘛？听求不懂... 不深究了</font></p>
+<p>而软链接支持跨分区,是因为软链接的本质是指向源文件,不指向inode号... <br />
+源文件与目标文件/软链接文件的inode号不同</p>
+<p><strong>Q2:</strong> 配置文件修改完后,一定要重启对应的软件才能生效,为什么?<br />
+<strong>A2:</strong> 软件启动起来后,需要读取配置文件的信息,以指定的方式去运行.<br />
+&nbsp;&nbsp;&nbsp;&nbsp; 读文件,不是通过文件名读取的,需要通过inode号读取..<br />
+&nbsp;&nbsp;&nbsp;&nbsp;  <em>vim一改动配置文件,inode号就变了..</em>  而正在运行的软件读取的是更改之前的内容..读不到更改的内容.<br />
+&nbsp;&nbsp;&nbsp;&nbsp; So,需要重新启动软件,找到那个新的inode号,读取修改后的数据.<br />
+<font color='gray'> Ps: 有些软件不用重启, 称为"平滑重启". 也就是这个软件整体没有重启,但有一部分是重启重新读取文件了的..</font></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="s2">&quot;&quot;&quot;</span>
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="s2">可以发现,vim修改配置文件后,test.conf的inode号会变!</span>
+<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span class="s2">为什么？vim的原理导致的,具体过程如下:</span>
+<a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a><span class="s2">  1&gt;文件内容一次性读入内存,一边修改会一边将改动写入硬盘上创建的临时文件.test.conf.swp文件里面去</span>
+<a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a><span class="s2">  2&gt;改动完后,:w,文件系统会删除硬盘中的test.conf源文件; .test.conf.swp文件通过cp操作改名为源文件的名字</span>
+<a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a><span class="s2">  3&gt;:q后,临时文件.test.conf.swp删除..</span>
+<a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a><span class="s2">&quot;&quot;&quot;</span>
+<a id="__codelineno-12-8" name="__codelineno-12-8" href="#__codelineno-12-8"></a><span class="o">[</span>root@localhost opt<span class="o">]</span><span class="c1"># vim test.conf </span>
+<a id="__codelineno-12-9" name="__codelineno-12-9" href="#__codelineno-12-9"></a><span class="o">[</span>root@localhost opt<span class="o">]</span><span class="c1"># cat test.conf </span>
+<a id="__codelineno-12-10" name="__codelineno-12-10" href="#__codelineno-12-10"></a><span class="m">123</span>
+<a id="__codelineno-12-11" name="__codelineno-12-11" href="#__codelineno-12-11"></a><span class="o">[</span>root@localhost opt<span class="o">]</span><span class="c1"># ls -i test.conf </span>
+<a id="__codelineno-12-12" name="__codelineno-12-12" href="#__codelineno-12-12"></a><span class="m">34532550</span> test.conf
+<a id="__codelineno-12-13" name="__codelineno-12-13" href="#__codelineno-12-13"></a><span class="o">[</span>root@localhost opt<span class="o">]</span><span class="c1"># vim test.conf </span>
+<a id="__codelineno-12-14" name="__codelineno-12-14" href="#__codelineno-12-14"></a><span class="o">[</span>root@localhost opt<span class="o">]</span><span class="c1"># cat test.conf </span>
+<a id="__codelineno-12-15" name="__codelineno-12-15" href="#__codelineno-12-15"></a><span class="m">123</span>
+<a id="__codelineno-12-16" name="__codelineno-12-16" href="#__codelineno-12-16"></a><span class="m">456</span>
+<a id="__codelineno-12-17" name="__codelineno-12-17" href="#__codelineno-12-17"></a><span class="o">[</span>root@localhost opt<span class="o">]</span><span class="c1"># vim test.conf </span>
+<a id="__codelineno-12-18" name="__codelineno-12-18" href="#__codelineno-12-18"></a><span class="o">[</span>root@localhost opt<span class="o">]</span><span class="c1"># ls -i test.conf </span>
+<a id="__codelineno-12-19" name="__codelineno-12-19" href="#__codelineno-12-19"></a><span class="m">35311703</span> test.conf
+<a id="__codelineno-12-20" name="__codelineno-12-20" href="#__codelineno-12-20"></a>
+<a id="__codelineno-12-21" name="__codelineno-12-21" href="#__codelineno-12-21"></a>【验证vim原理的操作过程】
+<a id="__codelineno-12-22" name="__codelineno-12-22" href="#__codelineno-12-22"></a><span class="s2">&quot;&quot;&quot;</span>
+<a id="__codelineno-12-23" name="__codelineno-12-23" href="#__codelineno-12-23"></a><span class="s2">可以发现test.conf文件前后的inode号是改变了的.</span>
+<a id="__codelineno-12-24" name="__codelineno-12-24" href="#__codelineno-12-24"></a><span class="s2">&quot;&quot;&quot;</span>
+<a id="__codelineno-12-25" name="__codelineno-12-25" href="#__codelineno-12-25"></a><span class="o">[</span>root@localhost opt<span class="o">]</span><span class="c1"># ls -i 1.txt</span>
+<a id="__codelineno-12-26" name="__codelineno-12-26" href="#__codelineno-12-26"></a><span class="m">34107380</span> <span class="m">1</span>.txt
+<a id="__codelineno-12-27" name="__codelineno-12-27" href="#__codelineno-12-27"></a><span class="o">[</span>root@localhost opt<span class="o">]</span><span class="c1"># ls -i test.conf</span>
+<a id="__codelineno-12-28" name="__codelineno-12-28" href="#__codelineno-12-28"></a><span class="m">35311703</span> test.conf
+<a id="__codelineno-12-29" name="__codelineno-12-29" href="#__codelineno-12-29"></a><span class="o">[</span>root@localhost opt<span class="o">]</span><span class="c1"># rm -rf test.conf</span>
+<a id="__codelineno-12-30" name="__codelineno-12-30" href="#__codelineno-12-30"></a><span class="o">[</span>root@localhost opt<span class="o">]</span><span class="c1"># cp 1.txt test.conf </span>
+<a id="__codelineno-12-31" name="__codelineno-12-31" href="#__codelineno-12-31"></a><span class="o">[</span>root@localhost opt<span class="o">]</span><span class="c1"># ls -i test.conf</span>
+<a id="__codelineno-12-32" name="__codelineno-12-32" href="#__codelineno-12-32"></a><span class="m">34532550</span> test.conf
+</code></pre></div>
+<p><strong>Q3:</strong> 总结下软硬链接的异同.<br />
+<strong>A3:</strong>  相同点 - 修改一个文件的内容,其它链接文件都跟着改.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 不同点 - <br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; 1&gt; 硬链接多个文件inode号一样,软链接的多个文件inode号不一样;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; 2&gt; 删除源文件, 硬链接任然可用,但软链接失效 <br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; 3&gt; 硬链接只能对普通文件做,而且不能跨分区.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; 软链接可以对普通文件和目录文件做,而且可以跨分区.</p>
+<h3 id="_10"><font color='orange' size=4>软链接解决磁盘满</font><a class="headerlink" href="#_10" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p>简单理解, 硬盘分区的挂载点就是软链接..</p>
+</blockquote>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># df /dev/sda1</span>
+<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>文件系统         1K-块   已用   可用      已用%   挂载点
+<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a>/dev/sda1      <span class="m">1038336</span> <span class="m">216864</span> <span class="m">821472</span>   <span class="m">21</span>%    /boot
+</code></pre></div>
+<p>假设/boot文件夹满了(准确点说,是<code>/boot</code>挂载点对应的文件系统/分区<code>sda1</code> 的硬盘空间满了).. <br />
+也就是说,创建新文件 /boot/data/a.txt 从右往左找, 该路径应该存放于sda1分区里..<br />
+但是sda1分区满了.. 创建文件失败!</p>
+<p>于是乎, 我们买一块硬盘,分区做好文件系统, 即新建一个分区 <code>sdb1</code>, 其挂载点为 <code>/boot/data</code><br />
+这样的话, /boot/data/a.txt 此路径下的a.txt文件就会存放与 sdb1分区里..<br />
+<font color='gray'>/dev/sda1 -----------  /boot </font><br />
+<font color='gray'>/dev/sdb1 ----------- /boot/data</font></p>
+<p><font color='brown'>文件路径一定要注意辨别在哪个分区!！</font></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>在vm虚机上可以设置新增硬盘..重启生效.
+<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>计算机上是支持热插拔的,计算机开机状态,插入硬盘也能识别!<span class="o">(</span>类似于我通过USB接口插入了一块移动硬盘,能识别成功<span class="o">)</span>
+<a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a>
+<a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a><span class="s2">&quot;&quot;&quot;</span>
+<a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a><span class="s2">可以发现有sda sdb两块硬盘</span>
+<a id="__codelineno-14-6" name="__codelineno-14-6" href="#__codelineno-14-6"></a><span class="s2">○ sda1 sda2 是sda这块硬盘做的两个分区</span>
+<a id="__codelineno-14-7" name="__codelineno-14-7" href="#__codelineno-14-7"></a><span class="s2">○ sdb不分区的话,可以整体算一个分区,但需要对其做文件系统,并对其添加挂载</span>
+<a id="__codelineno-14-8" name="__codelineno-14-8" href="#__codelineno-14-8"></a><span class="s2">&quot;&quot;&quot;</span>
+<a id="__codelineno-14-9" name="__codelineno-14-9" href="#__codelineno-14-9"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># ll /dev/sda  # 连续Tab键提示</span>
+<a id="__codelineno-14-10" name="__codelineno-14-10" href="#__codelineno-14-10"></a>sda   sda1  sda2  sdb
+<a id="__codelineno-14-11" name="__codelineno-14-11" href="#__codelineno-14-11"></a><span class="c1">## centos7里推荐用xfs</span>
+<a id="__codelineno-14-12" name="__codelineno-14-12" href="#__codelineno-14-12"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># mkfs.xfs /dev/sdb</span>
+<a id="__codelineno-14-13" name="__codelineno-14-13" href="#__codelineno-14-13"></a>... ... ...
+<a id="__codelineno-14-14" name="__codelineno-14-14" href="#__codelineno-14-14"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># mount /dev/sdb /boot/data</span>
+<a id="__codelineno-14-15" name="__codelineno-14-15" href="#__codelineno-14-15"></a>
+<a id="__codelineno-14-16" name="__codelineno-14-16" href="#__codelineno-14-16"></a>
+<a id="__codelineno-14-17" name="__codelineno-14-17" href="#__codelineno-14-17"></a>◆ 文件路径一定要区分分区!
+<a id="__codelineno-14-18" name="__codelineno-14-18" href="#__codelineno-14-18"></a><span class="s2">&quot;&quot;&quot;</span>
+<a id="__codelineno-14-19" name="__codelineno-14-19" href="#__codelineno-14-19"></a><span class="s2">sdb硬盘的挂载点为/boot/data文件目录</span>
+<a id="__codelineno-14-20" name="__codelineno-14-20" href="#__codelineno-14-20"></a><span class="s2">往此路径/boot/data/a.txt的a.txt文件里写入内容</span>
+<a id="__codelineno-14-21" name="__codelineno-14-21" href="#__codelineno-14-21"></a><span class="s2">通过umount命令取消挂载</span>
+<a id="__codelineno-14-22" name="__codelineno-14-22" href="#__codelineno-14-22"></a><span class="s2">再cat查看,会发现a.txt的内容消失</span>
+<a id="__codelineno-14-23" name="__codelineno-14-23" href="#__codelineno-14-23"></a><span class="s2">why？挂载取消后,此路径会去/boot挂载点对应的sba1分区中找数据.而不是sdb硬盘分区中找.</span>
+<a id="__codelineno-14-24" name="__codelineno-14-24" href="#__codelineno-14-24"></a><span class="s2">而恰好sba1分区的此路径下有a.txt文件,但此文件的文件大小为0.</span>
+<a id="__codelineno-14-25" name="__codelineno-14-25" href="#__codelineno-14-25"></a><span class="s2">&quot;&quot;&quot;</span>
+<a id="__codelineno-14-26" name="__codelineno-14-26" href="#__codelineno-14-26"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># echo &quot;Hhhhh&quot; &gt; /boot/data/a.txt</span>
+<a id="__codelineno-14-27" name="__codelineno-14-27" href="#__codelineno-14-27"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># cat /boot/data/a.txt</span>
+<a id="__codelineno-14-28" name="__codelineno-14-28" href="#__codelineno-14-28"></a>Hhhhh
+<a id="__codelineno-14-29" name="__codelineno-14-29" href="#__codelineno-14-29"></a><span class="c1"># umount /boot/data 也是一样的效果</span>
+<a id="__codelineno-14-30" name="__codelineno-14-30" href="#__codelineno-14-30"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># umount /dev/sdb</span>
+<a id="__codelineno-14-31" name="__codelineno-14-31" href="#__codelineno-14-31"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># cat /boot/data/a.txt</span>
+<a id="__codelineno-14-32" name="__codelineno-14-32" href="#__codelineno-14-32"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># ll /boot/data/a.txt</span>
+<a id="__codelineno-14-33" name="__codelineno-14-33" href="#__codelineno-14-33"></a>-rw-r--r-- <span class="m">1</span> root root <span class="m">0</span> 7月   <span class="m">20</span> <span class="m">23</span>:30 /boot/data/a.txt
+<a id="__codelineno-14-34" name="__codelineno-14-34" href="#__codelineno-14-34"></a>
+<a id="__codelineno-14-35" name="__codelineno-14-35" href="#__codelineno-14-35"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># echo &quot;123456&quot; &gt; /boot/data/a.txt</span>
+<a id="__codelineno-14-36" name="__codelineno-14-36" href="#__codelineno-14-36"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># cat /boot/data/a.txt</span>
+<a id="__codelineno-14-37" name="__codelineno-14-37" href="#__codelineno-14-37"></a><span class="m">123456</span>
+<a id="__codelineno-14-38" name="__codelineno-14-38" href="#__codelineno-14-38"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># mount /dev/sdb /boot/data</span>
+<a id="__codelineno-14-39" name="__codelineno-14-39" href="#__codelineno-14-39"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># cat /boot/data/a.txt</span>
+<a id="__codelineno-14-40" name="__codelineno-14-40" href="#__codelineno-14-40"></a>Hhhhh
+</code></pre></div>
+<hr />
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+          <a href="#" class="md-top md-icon" data-md-component="top" hidden>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
+            回到页面顶部
+          </a>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+    <nav class="md-footer__inner md-grid" aria-label="页脚" >
+      
+        
+        <a href="../4_%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86%E4%B9%8B%E5%91%BD%E4%BB%A4%E8%A1%A5%E5%85%85/" class="md-footer__link md-footer__link--prev" aria-label="上一页: 文件管理之命令补充" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                上一页
+              </span>
+              文件管理之命令补充
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="../6_%E6%9D%83%E9%99%90%E7%AE%A1%E7%90%86%E4%B9%8B%E7%94%A8%E6%88%B7%E4%B8%8E%E7%BB%84/" class="md-footer__link md-footer__link--next" aria-label="下一页: 权限管理之用户与组" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                下一页
+              </span>
+              权限管理之用户与组
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright © 2023 from Dc_OnePiece
+    </div>
+  
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "navigation.top", "navigation.expand", "navigation.instant", "navigation.tracking", "search.suggest", "search.highlight", "search.share"], "search": "../../assets/javascripts/workers/search.5bf1dace.min.js", "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.config.lang": "ja", "search.config.pipeline": "trimmer, stemmer", "search.config.separator": "[\\s\\-\uff0c\u3002]+", "search.placeholder": "\u641c\u7d22", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version.title": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.37e9125f.min.js"></script>
+      
+        <script src="../../resources/js/extra.js"></script>
+      
+    
+  </body>
+</html>

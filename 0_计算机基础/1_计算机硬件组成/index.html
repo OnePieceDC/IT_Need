@@ -1,0 +1,2423 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="These are my study notes.">
+      
+      
+        <meta name="author" content="DC">
+      
+      
+      <link rel="icon" href="../../resources/images/favicon.ico">
+      <meta name="generator" content="mkdocs-1.3.1, mkdocs-material-8.5.3">
+    
+    
+      
+        <title>计算机硬件组成 - IT必备知识</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.7a952b86.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.cbb835fc.min.css">
+        
+      
+      
+
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../resources/css/extra.css">
+    
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lxgw-wenkai-webfont@1.1.0/style.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="blue-grey" data-md-color-accent="amber">
+  
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#_1" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../.." title="IT必备知识" class="md-header__button md-logo" aria-label="IT必备知识" data-md-component="logo">
+      
+  <img src="../../resources/images/favicon.ico" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            IT必备知识
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              计算机硬件组成
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      <form class="md-header__option" data-md-component="palette">
+        
+          
+          
+          <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="blue-grey" data-md-color-accent="amber"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+          
+            <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"/></svg>
+            </label>
+          
+        
+          
+          
+          <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="blue-grey" data-md-color-accent="amber"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_2">
+          
+            <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12c0-2.42-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"/></svg>
+            </label>
+          
+        
+      </form>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="分享" aria-label="分享" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7 0-.24-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91 1.61 0 2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08Z"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="标签" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+    
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../0_%E5%89%8D%E5%A5%8F%28%E4%BB%8B%E7%BB%8D%29/" class="md-tabs__link md-tabs__link--active">
+        计算机基础(8)
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../1_linux%E5%9F%BA%E7%A1%80/0_%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C/" class="md-tabs__link">
+        linux基础(20)
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../5_db/0_%E5%9F%BA%E7%A1%80/0_install_db/" class="md-tabs__link">
+        mysql(19)
+      </a>
+    </li>
+  
+
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../9_git/0_git%E7%94%9F%E6%B4%BB%E7%89%88/" class="md-tabs__link">
+        git(2)
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../13_%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/0_%E9%80%92%E5%BD%92_%E6%9F%A5%E6%89%BE/" class="md-tabs__link">
+        查找排序算法(5)
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="IT必备知识" class="md-nav__button md-logo" aria-label="IT必备知识" data-md-component="logo">
+      
+  <img src="../../resources/images/favicon.ico" alt="logo">
+
+    </a>
+    IT必备知识
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1" type="checkbox" id="__nav_1" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_1">
+          计算机基础(8)
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="计算机基础(8)" data-md-level="1">
+        <label class="md-nav__title" for="__nav_1">
+          <span class="md-nav__icon md-icon"></span>
+          计算机基础(8)
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0_%E5%89%8D%E5%A5%8F%28%E4%BB%8B%E7%BB%8D%29/" class="md-nav__link">
+        前奏(介绍)
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          计算机硬件组成
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        计算机硬件组成
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    服务器
+  </a>
+  
+    <nav class="md-nav" aria-label="服务器">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    服务器的分类
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ioe" class="md-nav__link">
+    去IOE运动
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    计算机硬件
+  </a>
+  
+    <nav class="md-nav" aria-label="计算机硬件">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    硬件五大组成
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    程序与三大核心的关系
+  </a>
+  
+    <nav class="md-nav" aria-label="程序与三大核心的关系">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    安装、加载
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    缓存、缓冲区
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cpu" class="md-nav__link">
+    cpu详解
+  </a>
+  
+    <nav class="md-nav" aria-label="cpu详解">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#x86-64" class="md-nav__link">
+    x86-64
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cpu_1" class="md-nav__link">
+    cpu指令集
+  </a>
+  
+    <nav class="md-nav" aria-label="cpu指令集">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    简介
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    分类
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cpu_2" class="md-nav__link">
+    cpu寄存器
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    内核态与用户态!!
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    存储器详解
+  </a>
+  
+    <nav class="md-nav" aria-label="存储器详解">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    存储器分类
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_13" class="md-nav__link">
+    内存
+  </a>
+  
+    <nav class="md-nav" aria-label="内存">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#rom" class="md-nav__link">
+    ROM
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cmos" class="md-nav__link">
+    CMOS
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_14" class="md-nav__link">
+    [硬盘接口]
+  </a>
+  
+    <nav class="md-nav" aria-label="[硬盘接口]">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_15" class="md-nav__link">
+    ◎ 接口
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_16" class="md-nav__link">
+    ◎ 硬盘与接口组合
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#raid" class="md-nav__link">
+    ◎ RAID技术
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_17" class="md-nav__link">
+    [机械磁盘]
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_18" class="md-nav__link">
+    [固态硬盘]
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#swap" class="md-nav__link">
+    [swap虚拟内存]
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#io" class="md-nav__link">
+    IO设备
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_19" class="md-nav__link">
+    总线
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_20" class="md-nav__link">
+    计算机启动过程
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#io_1" class="md-nav__link">
+    优化/降低IO
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../2_%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" class="md-nav__link">
+        操作系统
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../3_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E6%A6%82%E8%A7%88/" class="md-nav__link">
+        计算机网络概览
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../4_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E4%B9%8B%E7%BD%91%E7%BB%9C%E6%8E%A5%E5%8F%A3%E5%B1%82/" class="md-nav__link">
+        网络接口层
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../5_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E4%B9%8B%E7%BD%91%E7%BB%9C%E5%B1%82/" class="md-nav__link">
+        网络层
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../6_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E4%B9%8B%E4%BC%A0%E8%BE%93%E5%B1%82/" class="md-nav__link">
+        传输层
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../7_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%A1%A5%E5%85%85/" class="md-nav__link">
+        补充
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2">
+          linux基础(20)
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="linux基础(20)" data-md-level="1">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          linux基础(20)
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../1_linux%E5%9F%BA%E7%A1%80/0_%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C/" class="md-nav__link">
+        准备工作
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../1_linux%E5%9F%BA%E7%A1%80/1_%E5%88%9D%E8%AF%86shell%E4%B8%8E%E5%9F%BA%E7%A1%80%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" class="md-nav__link">
+        初识shell与基础常用命令
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../1_linux%E5%9F%BA%E7%A1%80/2_%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86%E4%B9%8B%E5%9F%BA%E7%A1%80%E5%91%BD%E4%BB%A4/" class="md-nav__link">
+        文件管理之基础命令
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../1_linux%E5%9F%BA%E7%A1%80/3_%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86%E4%B9%8B%E5%9B%9B%E5%A4%A7%E6%A8%A1%E5%BC%8F/" class="md-nav__link">
+        文件管理之四大模式
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../1_linux%E5%9F%BA%E7%A1%80/4_%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86%E4%B9%8B%E5%91%BD%E4%BB%A4%E8%A1%A5%E5%85%85/" class="md-nav__link">
+        文件管理之命令补充
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../1_linux%E5%9F%BA%E7%A1%80/5_%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86%E4%B9%8B%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/" class="md-nav__link">
+        文件管理之文件系统
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../1_linux%E5%9F%BA%E7%A1%80/6_%E6%9D%83%E9%99%90%E7%AE%A1%E7%90%86%E4%B9%8B%E7%94%A8%E6%88%B7%E4%B8%8E%E7%BB%84/" class="md-nav__link">
+        权限管理之用户与组
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../1_linux%E5%9F%BA%E7%A1%80/7_%E6%9D%83%E9%99%90%E7%AE%A1%E7%90%86%E4%B9%8B%E6%96%87%E4%BB%B6%E6%9D%83%E9%99%90/" class="md-nav__link">
+        权限管理之文件权限
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../1_linux%E5%9F%BA%E7%A1%80/8_%E6%9D%83%E9%99%90%E7%AE%A1%E7%90%86%E4%B9%8BACL/" class="md-nav__link">
+        权限管理之ACL
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../1_linux%E5%9F%BA%E7%A1%80/9_%E6%9D%83%E9%99%90%E7%AE%A1%E7%90%86%E4%B9%8Bsu%E4%B8%8Esudo/" class="md-nav__link">
+        权限管理之su与sudo
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../1_linux%E5%9F%BA%E7%A1%80/10_%E8%BD%AF%E4%BB%B6%E5%8C%85%E7%AE%A1%E7%90%86%E4%B9%8Brpm/" class="md-nav__link">
+        软件包管理之rpm
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../1_linux%E5%9F%BA%E7%A1%80/11_%E8%BD%AF%E4%BB%B6%E5%8C%85%E7%AE%A1%E7%90%86%E4%B9%8Byum/" class="md-nav__link">
+        软件包管理之yum
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../1_linux%E5%9F%BA%E7%A1%80/12_%E6%9F%A5%E7%9C%8B%E8%BF%9B%E7%A8%8B/" class="md-nav__link">
+        查看进程
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../1_linux%E5%9F%BA%E7%A1%80/13_%E7%AE%A1%E7%90%86%E8%BF%9B%E7%A8%8B/" class="md-nav__link">
+        管理进程
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../1_linux%E5%9F%BA%E7%A1%80/14_%E5%AD%98%E5%82%A8%E7%AE%A1%E7%90%86%E4%B9%8B%E4%BC%A0%E7%BB%9F%E7%A3%81%E7%9B%98%E7%AE%A1%E7%90%86/" class="md-nav__link">
+        存储管理之传统磁盘管理
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../1_linux%E5%9F%BA%E7%A1%80/15_%E5%AD%98%E5%82%A8%E7%AE%A1%E7%90%86%E4%B9%8BLVM/" class="md-nav__link">
+        存储管理之LVM
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../1_linux%E5%9F%BA%E7%A1%80/16_%E7%BD%91%E7%BB%9C%E7%AE%A1%E7%90%86/" class="md-nav__link">
+        网络管理
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../1_linux%E5%9F%BA%E7%A1%80/17_shell%E5%9F%BA%E7%A1%80/" class="md-nav__link">
+        shell基础
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../1_linux%E5%9F%BA%E7%A1%80/18_crond%E8%AE%A1%E5%88%92%E4%BB%BB%E5%8A%A1/" class="md-nav__link">
+        crond计划任务
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../1_linux%E5%9F%BA%E7%A1%80/19_%E7%B3%BB%E7%BB%9F%E4%BC%98%E5%8C%96/" class="md-nav__link">
+        系统优化
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3">
+          mysql(19)
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="mysql(19)" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          mysql(19)
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" data-md-toggle="__nav_3_1" type="checkbox" id="__nav_3_1" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3_1">
+          基础
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="基础" data-md-level="2">
+        <label class="md-nav__title" for="__nav_3_1">
+          <span class="md-nav__icon md-icon"></span>
+          基础
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../5_db/0_%E5%9F%BA%E7%A1%80/0_install_db/" class="md-nav__link">
+        数据库安装
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../5_db/0_%E5%9F%BA%E7%A1%80/1_db_command/" class="md-nav__link">
+        sql命令总结
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../5_db/0_%E5%9F%BA%E7%A1%80/2_imp_knowledge/" class="md-nav__link">
+        imp_knowledge
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../5_db/0_%E5%9F%BA%E7%A1%80/3_table_field/" class="md-nav__link">
+        字段的约束和类型
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../5_db/0_%E5%9F%BA%E7%A1%80/4_table_relation/" class="md-nav__link">
+        表关系
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../5_db/0_%E5%9F%BA%E7%A1%80/5_permissions/" class="md-nav__link">
+        权限管理
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../5_db/0_%E5%9F%BA%E7%A1%80/6_single_query/" class="md-nav__link">
+        单表查询
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../5_db/0_%E5%9F%BA%E7%A1%80/7_multi_query/" class="md-nav__link">
+        多表查询
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../5_db/0_%E5%9F%BA%E7%A1%80/8_query_practice/" class="md-nav__link">
+        query_practice
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../5_db/0_%E5%9F%BA%E7%A1%80/9_pymysql/" class="md-nav__link">
+        pymysql
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../5_db/0_%E5%9F%BA%E7%A1%80/10_just_know/" class="md-nav__link">
+        just_know
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../5_db/0_%E5%9F%BA%E7%A1%80/other/01_to_11/" class="md-nav__link">
+        other1
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../5_db/0_%E5%9F%BA%E7%A1%80/other/05/" class="md-nav__link">
+        other2
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" data-md-toggle="__nav_3_2" type="checkbox" id="__nav_3_2" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3_2">
+          进阶
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="进阶" data-md-level="2">
+        <label class="md-nav__title" for="__nav_3_2">
+          <span class="md-nav__icon md-icon"></span>
+          进阶
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../5_db/1_%E8%BF%9B%E9%98%B6/0_index/" class="md-nav__link">
+        索引
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../5_db/1_%E8%BF%9B%E9%98%B6/1_explain/" class="md-nav__link">
+        执行计划
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../5_db/1_%E8%BF%9B%E9%98%B6/2_transaction/" class="md-nav__link">
+        事务
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../5_db/1_%E8%BF%9B%E9%98%B6/3_db_readPhenomenon/" class="md-nav__link">
+        读现象
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../5_db/1_%E8%BF%9B%E9%98%B6/4_lock/" class="md-nav__link">
+        锁
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../5_db/1_%E8%BF%9B%E9%98%B6/other/" class="md-nav__link">
+        数据库连接池
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4">
+          git(2)
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="git(2)" data-md-level="1">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          git(2)
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../9_git/0_git%E7%94%9F%E6%B4%BB%E7%89%88/" class="md-nav__link">
+        git生活版
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../9_git/1_git%E7%A0%94%E7%A9%B6%E7%89%88/" class="md-nav__link">
+        git研究版
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" data-md-toggle="__nav_5" type="checkbox" id="__nav_5" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_5">
+          查找排序算法(5)
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="查找排序算法(5)" data-md-level="1">
+        <label class="md-nav__title" for="__nav_5">
+          <span class="md-nav__icon md-icon"></span>
+          查找排序算法(5)
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../13_%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/0_%E9%80%92%E5%BD%92_%E6%9F%A5%E6%89%BE/" class="md-nav__link">
+        查找
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../13_%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/1_LowB%E4%B8%89%E4%BA%BA%E7%BB%84/" class="md-nav__link">
+        LowB三人组
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../13_%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/2_NB%E4%B8%89%E4%BA%BA%E7%BB%84/" class="md-nav__link">
+        NB三人组
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../13_%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/3_%E5%85%B6%E5%AE%83%E6%8E%92%E5%BA%8F/" class="md-nav__link">
+        其它排序
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../13_%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/4_%E6%9F%A5%E6%89%BE%E4%B9%A0%E9%A2%98/" class="md-nav__link">
+        查找习题
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    服务器
+  </a>
+  
+    <nav class="md-nav" aria-label="服务器">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    服务器的分类
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ioe" class="md-nav__link">
+    去IOE运动
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    计算机硬件
+  </a>
+  
+    <nav class="md-nav" aria-label="计算机硬件">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    硬件五大组成
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    程序与三大核心的关系
+  </a>
+  
+    <nav class="md-nav" aria-label="程序与三大核心的关系">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    安装、加载
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    缓存、缓冲区
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cpu" class="md-nav__link">
+    cpu详解
+  </a>
+  
+    <nav class="md-nav" aria-label="cpu详解">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#x86-64" class="md-nav__link">
+    x86-64
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cpu_1" class="md-nav__link">
+    cpu指令集
+  </a>
+  
+    <nav class="md-nav" aria-label="cpu指令集">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    简介
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    分类
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cpu_2" class="md-nav__link">
+    cpu寄存器
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    内核态与用户态!!
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    存储器详解
+  </a>
+  
+    <nav class="md-nav" aria-label="存储器详解">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    存储器分类
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_13" class="md-nav__link">
+    内存
+  </a>
+  
+    <nav class="md-nav" aria-label="内存">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#rom" class="md-nav__link">
+    ROM
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cmos" class="md-nav__link">
+    CMOS
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_14" class="md-nav__link">
+    [硬盘接口]
+  </a>
+  
+    <nav class="md-nav" aria-label="[硬盘接口]">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_15" class="md-nav__link">
+    ◎ 接口
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_16" class="md-nav__link">
+    ◎ 硬盘与接口组合
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#raid" class="md-nav__link">
+    ◎ RAID技术
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_17" class="md-nav__link">
+    [机械磁盘]
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_18" class="md-nav__link">
+    [固态硬盘]
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#swap" class="md-nav__link">
+    [swap虚拟内存]
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#io" class="md-nav__link">
+    IO设备
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_19" class="md-nav__link">
+    总线
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_20" class="md-nav__link">
+    计算机启动过程
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#io_1" class="md-nav__link">
+    优化/降低IO
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  <h1>计算机硬件组成</h1>
+
+<h2 id="_1">服务器<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<blockquote>
+<p>个人电脑跟服务器都是计算机,只不过前者是服务于一个人,后者是服务于多个人..</p>
+</blockquote>
+<h3 id="_2"><font color='orange'>服务器的分类</font><a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
+<p>1&gt; 按照尺寸&nbsp;&nbsp;&nbsp;&nbsp; 1U=4.45cm (<font color='gray'>U表示服务器的厚度</font>)<br />
+2&gt; 按照外形&nbsp;&nbsp;&nbsp;&nbsp; 机架式服务器是放在机架上的; <br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; 刀架服务器 (<font color='gray'>贵 通常用于集群化作业,便于扩展</font>)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; 塔式服务器<br />
+3&gt; 按照品牌&nbsp;&nbsp;&nbsp;&nbsp; 戴尔&nbsp;&nbsp;&nbsp;&nbsp; 惠普&nbsp;&nbsp;&nbsp;&nbsp; IBM</p>
+<p><font color='blue'>服务器最好一直运行着对外提供服务,不要宕机; 但对硬件的损耗很大,要做好对硬件的监控,防范于未然. </font><br />
+有些服务器还有IDRAC管理口,用于配制远程管理卡,可以远程开关机服务器..</p>
+<p><font color='green'><strong>Q: 服务器的安置?</strong></font><br />
+<strong>A:</strong> 机房会提供显示器方便机架式服务器的上架(<font color='gray'>初次会给服务器安装OS,配网络等..</font>);
+&nbsp;&nbsp;&nbsp;&nbsp; 再回到公司,通过xshll远程连接.
+&nbsp;&nbsp;&nbsp;&nbsp; 但现在很多公司都不买服务器,用云服务器..(云主机厂商 -- 阿里云 腾讯云 青云  ucloud)</p>
+<p><font color='green'><strong>Q: 如何保证服务器不断电?</strong> </font><br />
+<strong>A:</strong> 双电源 + ups + 发电机. <br />
+&nbsp;&nbsp;&nbsp;&nbsp; <font color='gray'>ups相当于一块蓄电池.. 市电接到ups上,ups再给服务器供电,一旦断电,ups还可以供电一段时间..</font></p>
+<h3 id="ioe"><font color='orange'>去IOE运动</font><a class="headerlink" href="#ioe" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>去IOE前</th>
+<th>去IOE后</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>IBM: 服务器</td>
+<td>dell服务器</td>
+</tr>
+<tr>
+<td>Oracle: 数据库管理软件</td>
+<td>mysql</td>
+</tr>
+<tr>
+<td>EMC: 数据存储设备</td>
+<td>用普通硬盘构建 ceph块存储、nfs文件存储、swift对象存储</td>
+</tr>
+</tbody>
+</table>
+<p><font color='gray'>Ps: <strong>小型机</strong> 一般会基于Unix定制专门的OS.. 架构也不一样,采用的精简指令集处理器..</font>
+ &nbsp;&nbsp;&nbsp;&nbsp;<font color='gray'>(小型机因为去IOE运动被淘汰了 比较有名的是IBM)</font></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>补充:
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>服务器的集群会有一个带头大哥,负责请求的一些分发,负载均衡<span class="o">(</span>有两种级别:硬件&gt;软件 通常接触的是软件<span class="o">)</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>eg: nginx-7层<span class="p">;</span> lvs-4层
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="o">[</span>网线<span class="o">]</span>  橙白  橙  绿白  蓝  蓝白  绿  棕白  棕
+</code></pre></div>
+<hr />
+<h2 id="_3">计算机硬件<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
+<blockquote>
+<p>摩尔定律: 硬件的性能每隔18个月会更新一倍.. (现在不适用啦Hhh)</p>
+</blockquote>
+<p><font color='gray'>注意,在公司里不建议自己组装电脑,不稳定.. 自个儿买硬件装电脑,若是双cpu,需要装同一型号的.. </font></p>
+<h3 id="_4"><font color='orange'>硬件五大组成</font><a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
+<p>1&gt; <font color='brown'><strong>控制器:</strong></font> 计算机的指挥系统,负责控制其他硬件的运行. --- <font color='lightblue'><strong>大脑的指挥能力</strong></font><br />
+2&gt; <font color='brown'><strong>运算器:</strong></font> 负责运算(数学运算和逻辑运算) --- <font color='lightblue'><strong>大脑的思考能力</strong></font><br />
+3&gt; <font color='brown'><strong>存储器:</strong></font> 负责存储数据<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <strong>内存</strong>: 基于&lt;电&gt;(高低电平)存取数据.. 断电数据全部丢失. --- <font color='lightblue'> <strong>大脑的记忆功能</strong></font><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;只能 <em>临时</em> 保存数据.. 存取速度很 <strong>快</strong>. <br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <strong>外存</strong>: 以磁盘为例.. 基于&lt;磁&gt;存取数据.. 断电数据仍然存在. --- <font color='lightblue'><strong>本子</strong></font> <br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;可以 <em>永久</em> 保存数据,存取速度相对 <strong>慢</strong> 一些.. <br />
+4&gt; <font color='brown'><strong>输入设备:</strong></font> eg 键盘、鼠标 --- <font color='lightblue'><strong>人的眼睛耳朵</strong></font><br />
+5&gt; <font color='brown'><strong>输出设备:</strong></font> eg 显示器、打印机 ---  <font color='lightblue'><strong>面部表情</strong></font></p>
+<p><font color='red'>控制器 + 运算器 = CPU中央处理器</font>   <br />
+<font color='red'> CPU + 内存 ---&gt; 大脑！</font><br />
+<font color='gray'>cpu(x86-64) ; 内存(buffer、cache) ; 硬盘(IDE、SATA、SAS接口; 机械、SSD固态)  </font></p>
+<h3 id="_5"><font color='orange'>程序与三大核心的关系</font><a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p><strong>计算机三大核心</strong>: cpu、内存(主存储器)、硬盘</p>
+</blockquote>
+<h5 id="_6"><font color='purple' size=4>安装、加载</font><a class="headerlink" href="#_6" title="Permanent link">&para;</a></h5>
+<blockquote>
+<p>我们经常提到的&lt;进程&gt;说的就是&lt;内存中的程序&gt;, 即程序从硬盘加载到内存了..</p>
+</blockquote>
+<p>1&gt; 下载安装(就是拷贝文件)的软件(本质上就是一堆代码文件..)会装到硬盘上...<br />
+<font color='blue'>计算机硬盘的大小决定了能够 <strong>安装</strong> 的软件数目</font></p>
+<p>2&gt; 软件的运行会将程序的 [代码和数据] 从硬盘加载到内存中<br />
+<font color='blue'>计算机内存的大小决定了能够 <strong>同时运行</strong> 的软件数目</font></p>
+<p>3&gt; 软件的 <strong>&lt;启动&gt; 速度</strong> 是由硬盘决定的,因为它需要从硬盘读入内存. 固态会比机械快..  <br />
+so,开机速度(会加载操作系统,操作系统也是一个软件)也跟硬盘有关.</p>
+<h5 id="_7"><font color='purple' size=4>缓存、缓冲区</font><a class="headerlink" href="#_7" title="Permanent link">&para;</a></h5>
+<blockquote>
+<p>cpu再从内存中读取数据进行运算以及对其他硬件的控制.
+cpu运算产生的数据往内存、硬盘里面存. </p>
+</blockquote>
+<p><font color='brown'><strong>cache 缓存 (读):</strong></font> linux操作系统对读取数据的优化机制. <br />
+&nbsp;&nbsp;&nbsp;&nbsp; 它会将硬盘数据在内存中先缓存好,cpu取的时候可以直接从内存中去..<br />
+&nbsp;&nbsp;&nbsp;&nbsp; <strong>举例</strong> : 读取硬盘中的某一文件,第一次没啥速度提升.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp; 第二次读取它时就直接读内存里的cache缓存就行.速度提升.<br />
+&nbsp;&nbsp;&nbsp;&nbsp; <strong>注意</strong> : cache不能缓存硬盘所有的数据,它只会缓存常用的,经常访问的数据..<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  <font color='gray'>(怎么判别？linux操作系统说的算) </font>内存不够用了,我们可以将内存中cache缓存空间释放掉...</p>
+<p><font color='brown'><strong>buffer 缓冲区 (写):</strong></font> 不会立马将数据往硬盘里刷,Linux操作系统对此有个优化 <br />
+&nbsp;&nbsp;&nbsp;&nbsp; 当有数据要从内存放到硬盘里时,OS会将数据在内存里缓冲下,攒一大波,再一起往硬盘里面送..</p>
+<p><font color='green'>小提一嘴: cache缓存和buffer缓冲区是linux操作系统自带的优化机制,windows系统是没有的.</font><br />
+<font color='blue'>buffer和cache的空间可以释放掉,但通常释放cache;  buff的释放要谨慎点,避免释放时数据还未写到硬盘..</font></p>
+<hr />
+<h2 id="cpu">cpu详解<a class="headerlink" href="#cpu" title="Permanent link">&para;</a></h2>
+<blockquote>
+<p>两个生产厂商: Intel AMD</p>
+</blockquote>
+<p><img alt="" src="../assets/cpu%E4%B8%8E%E5%86%85%E5%AD%98.jpeg" /></p>
+<h3 id="x86-64"><font color='orange'>x86-64</font><a class="headerlink" href="#x86-64" title="Permanent link">&para;</a></h3>
+<p>计算机是基于电工作的,所以内存里放的是电信号..表示01二进制的高低电平...<br />
+<font color='gray'>硬盘以磁盘为例. 磁的特性跟电也是一样高低变化的.. 从磁盘读数据到内存,就是将磁信号转成电信号.</font></p>
+<p><font color='purple' size=4>32/64位:</font> <font color='blue'>32位/64 <strong>位</strong> cpu分别代表每次(一次性)能从内存里读取的32/64个 <strong>二进制数</strong> </font><br />
+<strong>它们规定32/64位会组成一个完整的指令</strong> .. 换个说法,指的是cpu一次(一个指令)能处理多大的数据..</p>
+<p>学术一点, <strong>32位指的是CPU通用寄存器的数据宽度</strong>,32位处理器一次只能处理32位,也就是4个字节的数据; <br />
+而64位处理器一次就能处理64位, 即8个字节的数据. <br />
+如果将总长128位的指令分别按16位、32位、64位为单位进行编辑的话, 32位的处理器需要4个指令;<br />
+而64位处理器则只要两个指令.显然, 在工作频率相同的情况下, 64位处理器的处理速度比32位的更快...</p>
+<p><font color='purple' size=4>x86架构:</font> <font color='blue'>x86是针对cpu的型号或者说架构的一种统称. 
+最早的那颗由Intel发明出来的CPU代号称为8086,后来在8086的基础上又开发出了80286、80386...., 因此这种架构的CPU就被统称为x86架构啦.</font></p>
+<p>程序员开发出的软件最终都要翻译成cpu的指令集才能运行, 因此软件的版本必须与cpu的架构(eg: x86)契合. 并且, <strong><cpu具有向下兼容性></strong> , 64位的cpu既能运行64位软件,也能运行32位的软件...</p>
+<p><font color='gray'>安装包 <code>mysql-5.7.20-win32.zip</code> 里的32就代表此软件是32位的,能运行在32位和64位的cpu之上.</font><br />
+<font color='gray'> <code>x86-64</code>指运行在<strong>复杂指令集的64位cpu</strong>上.</font> </p>
+<h3 id="cpu_1"><font color='orange'>cpu指令集</font><a class="headerlink" href="#cpu_1" title="Permanent link">&para;</a></h3>
+<h5 id="_8"><font color='purple' size=4>简介</font><a class="headerlink" href="#_8" title="Permanent link">&para;</a></h5>
+<p><strong>注意哦</strong> , <font color='brown'>cpu不会自发的控制其他硬件的运行.因为cpu本身也是硬件, <strong>硬件都会受软件的支配</strong> !!!</font><br />
+<font color='green'>人类</font>通过<font color='green'>编写程序软件</font>来控制<font color='green'>cpu</font>,这些人类的指令指挥cpu<font color='green'>内部集成的二进制指令集</font>来操作<font color='green'>其它计算机硬件</font><br />
+<font color='gray'>而早期的二极管相当于人类直接编写二进制指令来控制计算机硬件..</font><br />
+简单来说:  <strong>取指</strong> (程序指令) -- <strong>解码</strong> (具体的二进制指令) -- <strong>执行</strong> (操作相应硬件) </p>
+<p><img alt="" src="../assets/cpu%E6%B5%81%E6%B0%B4%E7%BA%BF.jpg" /></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>现在的cpu可以有多条这样的流水线(取指--解码--执行) 平常我们说的2核4线程里面的线程指的就是这样的流水线..
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>2核,可以简单理解将2个cpu核心集成到了一个cpu上.
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>2核4线程,指的是2核有4条流水线,即每个核内部有两条流水线..物理层面的2核,假的四核.
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>    性能比较: 纯4核 &gt; 2核4线程 &gt; 纯2核
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>注意哦!
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>多线程运行cpu保持两个不同的线程状态,可以在纳秒级的时间内来回切换,速度快到你看到的结果是并发的,伪并行的.
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>然而多线程不提供真正的并行处理,一个cpu同一时刻只能处理一个进程(一个进程中至少一个线程)
+<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>
+<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>&lt;Inter和AMD在对多核芯片的设计上不同&gt;
+<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>首先要知道,通常说的L1缓存指的就是cpu内部的寄存器,L2缓存(不在cpu里面)是处于内存和寄存器之间的高速存取设备.
+<a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>以4核为例,Inter的4个核共享一个L2缓存;而AMD的每个核都有与自己关联的L2缓存.. 
+<a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a>相比之下,AMD要处理缓存数据同步的问题..Inter要解决缓存数据竞争的问题..
+</code></pre></div>
+<h5 id="_9"><font color='purple' size=4>分类</font><a class="headerlink" href="#_9" title="Permanent link">&para;</a></h5>
+<blockquote>
+<p>cpu内部集成的微指令集分为两类: 精简和复杂..</p>
+</blockquote>
+<p>1&gt; 精简指令集(了解): <br />
+&nbsp;&nbsp;&nbsp;&nbsp; 优: 指令短,每个指令的运行时间都很短, 完成的动作也很单纯,不容易出错; <br />
+&nbsp;&nbsp;&nbsp;&nbsp; 劣: 实现一个功能,所需的指令条数会很多.. 所以设计起来会比较复杂.<br />
+2&gt; <strong>复杂指令集</strong>: <br />
+&nbsp;&nbsp;&nbsp;&nbsp; 每条指令花费的时间较长, 但每条个别指令可以处理的工作较为丰富.. 所以设计起来会比较简单.
+&nbsp;&nbsp;&nbsp;&nbsp; eg: Intel开发的 <strong>x86架构</strong> 的CPU. </p>
+<h3 id="cpu_2"><font color='orange'>cpu寄存器</font><a class="headerlink" href="#cpu_2" title="Permanent link">&para;</a></h3>
+<p><strong>寄存器:</strong> 与cpu一样的材质制成,速度非常快,几乎无延迟.. 不是存储的主力.与内存一样断电无.</p>
+<p>CPU运算过程中产生的数据先放到自己的寄存器中,再放到内存中...为了永久存储再倒腾到硬盘中.<br />
+如何提速,在彼此之间加高速设备!   寄存器 - 内存 - 硬盘 存在即合理..(造价 容量 速度) </p>
+<h3 id="_10"><font color='orange'>内核态与用户态!!</font><a class="headerlink" href="#_10" title="Permanent link">&para;</a></h3>
+<p><font color='blue'>从计算机整体的角度(或说是cpu的视角)</font>:<br />
+<strong>内核态</strong>: 计算机内存正在运行操作系统程序,可以操作硬件<br />
+<strong>用户态</strong>: 计算机内存正在运行应用程序,不能操作计算机硬件</p>
+<p><font color='blue'>从操作系统的角度: </font>操作系统内核运用于内核态、系统调用运用于用户态.</p>
+<p><font color='gray'>内核态和用户态不是新知识点,只是为了便于阐述的两个名词..</font><br />
+应用程序的运行必然涉及到计算机硬件的操作,则需要从用户态转到内核态.<br />
+So, 计算机无时无刻不在发生着内核态和用户态的来回切换..<br />
+<font color='gray'>比如应用程序QQ发送接收一段文字,qq必须通过操作系统来控制网卡这一硬件来发送信息(用户态 --&gt; 内核态),也需要通过操作系统控制网卡接收对方回复的消息数据给qq.(内核态 --&gt; 用户态)</font></p>
+<hr />
+<h2 id="_11">存储器详解<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h2>
+<h3 id="_12"><font color='orange'>存储器分类</font><a class="headerlink" href="#_12" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p>人类现目前无法制造出一种价钱便宜容量大速度超快的存储器... 只能造出不同的硬件做不同的事情.</p>
+</blockquote>
+<p><img alt="" src="../assets/%E5%AD%98%E5%82%A8%E5%99%A8.png" /> </p>
+<p>1&gt; cpu使用某一数据,会依次在 <strong>寄存器</strong> (也称作L1缓存)、 <strong>高速缓存</strong> (L2)、 <strong>内存</strong> (存储的主力)中查找;<br />
+2&gt; 计算机会将cpu立马会用到的数据放寄存器..在内存中经常访问到的数据放到高度缓存里(避免重复寻址).<br />
+3&gt; 我们通常在硬盘(分为机械磁盘和固态硬盘)中放永久存储的数据,磁带中放备份的数据.<br />
+<font color='gray'>Ps: 若在查找的数据在高速缓存中找到了,称为高速缓存命中!  </font> 
+&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; <font color='gray'>磁带在慢慢退出历史舞台,因为磁盘越来越便宜了.</font></p>
+<h3 id="_13"><font color='orange'>内存</font><a class="headerlink" href="#_13" title="Permanent link">&para;</a></h3>
+<h5 id="rom"><font color='purple' size=4>ROM</font><a class="headerlink" href="#rom" title="Permanent link">&para;</a></h5>
+<p><strong>内存(RAM)</strong>: 可读可写,断电数据丢失. <font color='brown'>存放</font>qq、微信、微博等<font color='brown'>cpu要运行的应用程序</font>.<br />
+<strong>只读内存(ROM)</strong>: 存储速度跟RAM一样, <em>只能用于读</em> ,断电数据不丢失.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 存放<font color='blue'>BIOS</font>(Basic Input Output System基本的输入输出操作系统)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <font color='gray'>计算机生产厂商在刚造出计算机的时候,在ROM芯片里把BIOS操作系统的代码就写进去了.. 兜底.</font><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <font color='gray'>Ps: 虽然是只读的,但也可以刷,一般给生产厂商刷,自己刷失败了,这堆硬件就真成废铁啦..(´▽｀)</font></p>
+<p>电脑一开机,cpu会先去ROM里读BIOS系统来接管硬件的运行(在电路上规定死了的).. <br />
+会扫描BIOS设置的启动项, 去启动真正的OS(OS是安装在某一块硬盘之上的 以linux为例) <br />
+将linux从硬盘读到RAM中.. 通过linux系统去接管硬件的运行. <br />
+若在启动项中没有找到操作系统,就需要安装操作系统啦(这就涉及用光盘,U盘启动盘等).<br />
+<font color='gray'>BIOS系统相当于一个过渡的过程, linux和BIOS都能控制硬件的运行,但linux操作系统更强大一些..</font></p>
+<h5 id="cmos"><font color='purple' size=4>CMOS</font><a class="headerlink" href="#cmos" title="Permanent link">&para;</a></h5>
+<p>BIOS系统会修改一些配置(比如启动项优先级的调整,加密设计的密码,计算机的时间..),<br />
+其产生的数据不能直接放到ROM里,因为ROM是只读的;<br />
+这些数据会放到 <strong>CMOS</strong> (断电数据就没,耗电量很低,很小块电池就能使用若干年)里面..<br />
+<font color='green'><em>计算机刚开始启动时的体系</em></font> --- <strong>CPU + ROM + CMOS</strong> (存储BIOS配置数据) <br />
+<font color='green'><em>计算机启动起来以后的体系</em></font> --- <strong>CPU + RAM + 硬盘</strong> <br />
+<font color='gray'>Ps: 断电后,主板上有一块电池在给CMOS和时钟芯片(保证关机后开机时间还是正确的)供电. </font></p>
+<h3 id="_14"><font color='orange'>[硬盘接口]</font><a class="headerlink" href="#_14" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p>硬盘大致分为两类<br />
+&nbsp;&nbsp;&nbsp;&nbsp; 机械磁盘(买的时候主要看转速这一指标)、固态硬盘(简称SSD).. 理论上都是永久存放数据的<br />
+&nbsp;&nbsp;&nbsp;&nbsp; 前者依赖磁存取数据,后者依赖电子存取数据.. 不管怎样都是高低的变化来表示二进制.</p>
+<p>冷知识: 1B/Byte/字节 = 8bit/比特位/位/二进制数&nbsp;&nbsp;&nbsp;&nbsp;1KB = 1024B<br />
+&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; bit B   KB  MB  GB  TB  PB  EB ... ...<br />
+&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; 市面上卖的硬盘都是按照1000来计算的,500G的硬盘=500 x 1000 x 1000 x 1000 字节</p>
+</blockquote>
+<h5 id="_15"><font color='purple' size=4>◎ 接口</font><a class="headerlink" href="#_15" title="Permanent link">&para;</a></h5>
+<p>1&gt; IDE 并口  --  发数据时每个针脚彼此之间会有干扰..会影响传输速度<br />
+2&gt; <strong>SATA</strong> 串口 -- 传输速度、稳定性都强于IDE<br />
+3&gt; SCSI -- 为小型机打造的<br />
+4&gt; <strong>SAS</strong> -- 将SATA与SCSI接口的优势相结合 (服务器硬盘的主流)<br />
+5&gt; 光纤通道  -- 主要用在高端服务器上,比如专业的存储设备</p>
+<h5 id="_16"><font color='purple' size=4>◎ 硬盘与接口组合</font><a class="headerlink" href="#_16" title="Permanent link">&para;</a></h5>
+<blockquote>
+<p><font color='brown'>SSD + SAS <strong>&gt;</strong> &nbsp;&nbsp;SSD + SATA <strong>&gt;</strong> &nbsp;&nbsp;机械磁盘 + SAS <strong>&gt;</strong> &nbsp;&nbsp;机械磁盘 + SATA</font> </p>
+</blockquote>
+<p>服务器在 <strong>高并发场景</strong> 下,有个性价比比较高(就是缺钱..)的方案:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 将 <strong>热数据</strong> (用户经常访问的数据)放到 <strong>SSD+SAS</strong> 上, <strong>冷数据</strong> (不经常访问)放在 <strong>机械硬盘+SAS</strong> 上..<br />
+服务器在常规场景下:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 对速度有特殊要求,选择 <strong>SSD + SATA</strong> ; 比较核心,对速度要求不怎么高的业务用 <strong>机械磁盘 + SAS</strong>.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 而公司内部的服务会用 <strong>机械磁盘 + SATA</strong>.</p>
+<p><font color='gray'>Ps: 现在底层的基础设施都不是一上来就用高端的硬件来堆叠,而是用一些性价比比较高的硬件通过技术手段(比如集群)提高其性能.. 当然不差钱另说..</font></p>
+<h5 id="raid"><font color='purple' size=4>◎ RAID技术</font><a class="headerlink" href="#raid" title="Permanent link">&para;</a></h5>
+<blockquote>
+<p>磁盘阵列 raid  -- 对硬盘做集群. <br />
+Ps: 集群的好处&nbsp;&nbsp;&nbsp;&nbsp; 1. 防止单点故障(实则是为了预留排查纠错时间)&nbsp;&nbsp;&nbsp;&nbsp; 2.提升性能</p>
+</blockquote>
+<p>服务器通常会配置多块硬盘,通过名为RAID的技术手段合成一块硬盘(对外暴露就是一块盘)...<br />
+多块硬盘要连接到 <strong>RAID卡</strong> (阵列卡)上,然后制作raid...<br />
+<font color='gray'>Ps: 硬raid -- 通过raid卡制作的raid; 软raid(<strong>几乎不用</strong>) -- 通过软件制作的raid..   <strong>硬raid更好</strong>.</font></p>
+<p><img alt="" src="../assets/raid.pic" /> </p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>常见的raid有四种..
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>1&gt; raid0: 至少1块盘(若真用一块,凸显不出raid的优势..),通常会大于1块盘.
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>      &lt;将连续的数据分散到多个硬盘上存取.&gt;
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>      容量 -- n块盘合在一起的总容量;硬盘容量不浪费.
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>             具有在所有RAID级别中最高的存储性能,原理是将连续的数据分散到多个硬盘上存取.
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>      性能 -- 理论上是n块盘合在一起的读写速度,实际上要低一些;
+<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>      冗余 -- 不允许坏任何一块盘;(冗余性即考虑单点故障的问题)
+<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>      场合 -- 追求读写性能,但是对数据安全性没有要求. 
+<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a>              eg: 集群服务器 (更推荐用raid5)
+<a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a>                  即集群中的每个服务器中的多个硬盘都做应用程序的raid0
+<a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a>                  不怕应用程序代码没了,因为集群中每台服务器都有
+<a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a>              PS: 数据库从库mysql slave;集群中的节点RS.
+<a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a>      特点 -- 速度快,无冗余,容量无损失.
+<a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a>
+<a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a>2&gt; raid1: 只能2块盘
+<a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a>      &lt;一块盘存数据,另一块盘用来做备份/镜像.&gt;
+<a id="__codelineno-2-17" name="__codelineno-2-17" href="#__codelineno-2-17"></a>      容量 -- 一块盘的容量;
+<a id="__codelineno-2-18" name="__codelineno-2-18" href="#__codelineno-2-18"></a>      性能 -- 几乎就是一块盘的读写速度;
+<a id="__codelineno-2-19" name="__codelineno-2-19" href="#__codelineno-2-19"></a>      冗余 -- 可以坏一块盘,另外一张盘有完整的数据;
+<a id="__codelineno-2-20" name="__codelineno-2-20" href="#__codelineno-2-20"></a>             具有在所有RAID级别中最高的数据安全保障..冗余度百分之百.
+<a id="__codelineno-2-21" name="__codelineno-2-21" href="#__codelineno-2-21"></a>      场合 -- 对数据安全性有要求,对读写速度没有特殊要求;
+<a id="__codelineno-2-22" name="__codelineno-2-22" href="#__codelineno-2-22"></a>             eg: 服务器可以有多块硬盘,抽出两块硬盘做raid1用来装操作系统,保证OS的稳定..
+<a id="__codelineno-2-23" name="__codelineno-2-23" href="#__codelineno-2-23"></a>             (实际情况下,会用两块固态做系统盘的raid1,保证安全的同时兼顾速度)
+<a id="__codelineno-2-24" name="__codelineno-2-24" href="#__codelineno-2-24"></a>             当然网络的可靠,硬件的稳定也是要考虑的,这里单单侧重操作系统..
+<a id="__codelineno-2-25" name="__codelineno-2-25" href="#__codelineno-2-25"></a>      特点 -- 百分之百冗余,容量损失一半.
+<a id="__codelineno-2-26" name="__codelineno-2-26" href="#__codelineno-2-26"></a>
+<a id="__codelineno-2-27" name="__codelineno-2-27" href="#__codelineno-2-27"></a>综合raid0和raid1,若服务器上插了10块物理硬盘,两块做成raid1放操作系统,剩余8块做成raid0放应用程序.
+<a id="__codelineno-2-28" name="__codelineno-2-28" href="#__codelineno-2-28"></a>对外看起来就会只有两个盘啦..(raid0通常会涉及到服务器集群,一台服务器的应用程序出问题了,其他服务器上还有..)
+<a id="__codelineno-2-29" name="__codelineno-2-29" href="#__codelineno-2-29"></a>我们不会这么做!最直观的解释8块中有一块坏了,这8块盘全都不能用了..radi0无冗余.很浪费.
+<a id="__codelineno-2-30" name="__codelineno-2-30" href="#__codelineno-2-30"></a>真实情况下,通常系统盘做radi1,其他盘做radi5..
+<a id="__codelineno-2-31" name="__codelineno-2-31" href="#__codelineno-2-31"></a>
+<a id="__codelineno-2-32" name="__codelineno-2-32" href="#__codelineno-2-32"></a>3&gt; raid5(介于raid0和raid1之间,是一种折中的方案): 至少3块盘
+<a id="__codelineno-2-33" name="__codelineno-2-33" href="#__codelineno-2-33"></a>      &lt;
+<a id="__codelineno-2-34" name="__codelineno-2-34" href="#__codelineno-2-34"></a>      采用奇偶校验,本质就是做异或运算(相同结果为0,不同结果为1)
+<a id="__codelineno-2-35" name="__codelineno-2-35" href="#__codelineno-2-35"></a>      只有同时损坏两块盘时,数据才会损坏,只损坏一块盘时,系统会根据存储的奇偶校验位重建数据,临时提供服务.
+<a id="__codelineno-2-36" name="__codelineno-2-36" href="#__codelineno-2-36"></a>      &gt;
+<a id="__codelineno-2-37" name="__codelineno-2-37" href="#__codelineno-2-37"></a>      容量 -- 废掉一块盘的容量,等量盘的情况下,容量低于raid0;
+<a id="__codelineno-2-38" name="__codelineno-2-38" href="#__codelineno-2-38"></a>      性能 -- 读写速度低于raid0,高于raid1;
+<a id="__codelineno-2-39" name="__codelineno-2-39" href="#__codelineno-2-39"></a>      冗余 -- 可以坏一块盘,剩下的盘可以通过奇偶校验推倒出坏盘的数据.
+<a id="__codelineno-2-40" name="__codelineno-2-40" href="#__codelineno-2-40"></a>      场合 -- 一般场合都可以使用.适用于对性能和冗余都有一定要求,又都不是十分高的情况..
+<a id="__codelineno-2-41" name="__codelineno-2-41" href="#__codelineno-2-41"></a>      特点 -- raid0和raid1的折中方案.
+<a id="__codelineno-2-42" name="__codelineno-2-42" href="#__codelineno-2-42"></a>
+<a id="__codelineno-2-43" name="__codelineno-2-43" href="#__codelineno-2-43"></a>4&gt; raid10: 至少4块盘
+<a id="__codelineno-2-44" name="__codelineno-2-44" href="#__codelineno-2-44"></a>      两两之间先做raid1,再做raid0;
+<a id="__codelineno-2-45" name="__codelineno-2-45" href="#__codelineno-2-45"></a>      raid1和raid0整合的产物,兼顾了raid1的安全性与raid0的速度,但成本大幅度提升.
+<a id="__codelineno-2-46" name="__codelineno-2-46" href="#__codelineno-2-46"></a>      通常用于数据库服务器.
+<a id="__codelineno-2-47" name="__codelineno-2-47" href="#__codelineno-2-47"></a>
+<a id="__codelineno-2-48" name="__codelineno-2-48" href="#__codelineno-2-48"></a>冗余从好到坏: raid1 == raid10 &gt; raid5 &gt; raid0
+<a id="__codelineno-2-49" name="__codelineno-2-49" href="#__codelineno-2-49"></a>读写性能从好到坏: raid0 == raid10 &gt; raid5 &gt; raid1
+<a id="__codelineno-2-50" name="__codelineno-2-50" href="#__codelineno-2-50"></a>成本从高到低: raid10 &gt; raid1 &gt; raid5 &gt; raid0
+</code></pre></div>
+<p>运维生产环境常用的四种RAID级别优缺点对比.</p>
+<table>
+<thead>
+<tr>
+<th>级别</th>
+<th>最少磁盘要求</th>
+<th>关键优点</th>
+<th>关键缺点</th>
+<th>实际应用场景</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>RAID0</td>
+<td>1块</td>
+<td>读写速度快</td>
+<td>没有任何冗余</td>
+<td>Mysql Slave, 集群中的节点RS</td>
+</tr>
+<tr>
+<td>RAID1</td>
+<td>2块(只能)</td>
+<td>100%冗余,镜像</td>
+<td>读写性能一般,成本较高</td>
+<td>单独的,数据很重要且不能宕机的业务监控,<strong>系统盘</strong></td>
+</tr>
+<tr>
+<td>RAID5</td>
+<td>3块</td>
+<td>具有一定的性能和冗余, 可以坏一块硬盘</td>
+<td>写入性能不高</td>
+<td>一般业务都可以用,<strong>常规</strong></td>
+</tr>
+<tr>
+<td>RAID10</td>
+<td>4块</td>
+<td>读写速度快,100%冗余</td>
+<td>成本高, 土豪</td>
+<td>性能和冗余要求很好的业务. eg: <strong>数据库 </strong>主库,存储的主节点.</td>
+</tr>
+</tbody>
+</table>
+<p><font color='red'><strong>综合应用场景</strong></font><br />
+假设有10台服务器,其中有一台服务器是来做数据的.此数据库/存储服务器先用两块硬盘(最好是固态硬盘)做成raid1来装操作系统,剩下的盘来做成raid10来存放数据..   即系统盘raid1,其余盘raid10..<br />
+其余的9台服务器用来做集群,每台服务器都用两块盘做成raid1来装操作系统,剩余的盘做raid5...</p>
+<p><font color='gray'>小黑板: 做集群既能提升性能,也能防止单点故障</font></p>
+<h3 id="_17"><font color='orange'>[机械磁盘]</font><a class="headerlink" href="#_17" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p>IO时间 = 平均寻道时间 + 平均延迟时间(转速越高 延迟时间越低)</p>
+</blockquote>
+<p><font color='gray'>先提一嘴, 直接关机会损失机械磁盘,因为在高速运转中,突然停止,有惯性的..寿命减一.</font></p>
+<p><img alt="" src="../assets/%E6%9C%BA%E6%A2%B0%E7%A3%81%E7%9B%98.png" /> </p>
+<p>图中的数字0 1 2 3..指的是盘面. 上图中共有3个盘片,6个盘面.即一个盘片有2个盘面..</p>
+<p>1&gt; <font color='brown'><strong>磁道</strong></font> : 磁头放的位置随着主轴转动一周所经过的地方就是一个磁道.<br />
+2&gt; <font color='brown'><strong>柱面</strong></font> : 图中的6个磁头在自个儿所处的盘面的同一磁道从上到下构成了一个柱面.<br />
+3&gt; <font color='brown'><strong>分区</strong></font> : 也就是我们通常说的D盘,E盘等. 从一个柱面开始到另一个柱面之间所包含的内容.闭区间.<br />
+4&gt; <font color='brown'><strong>扇区、扇面、簇</strong></font> : <br />
+&nbsp;&nbsp;&nbsp;&nbsp; 机械磁盘最小读写单位是扇区.. 通常是 <strong>512个Bytes字节</strong>.<br />
+&nbsp;&nbsp;&nbsp;&nbsp; 操作系统最小读写单位是一个block块.. 通常是8个扇区的大小.即 <strong>4k</strong>.</p>
+<p><img alt="" src="../assets/%E6%9C%BA%E6%A2%B0%E7%A3%81%E7%9B%982.png" /> </p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>这就涉及到了前文所讲的linux优化机制&lt;buffer缓冲区&gt;,通过一个类比具体展开来说..
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>buffer缓冲区 --- 大卡车
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>操作系统的block块 --- 收纳箱
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>硬盘的扇区 --- 单个快递盒子
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>大卡车里面存放了n个收纳箱,每个收纳箱里面存放了8个快递盒子.
+</code></pre></div>
+<p>5&gt; <font color='brown'><strong>平均寻道时间、平均延迟时间</strong></font></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>Q: 我们说机械磁盘慢... 慢在哪？
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>A: 既不是找到数据后读取数据,也不是从磁盘读取完数据后往内存送的过程
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>   (计算机硬件之间是通过电路连接在一起的,很快!)
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>   即找到数据后,读数据再往内存中读的时间忽略不计. 慢是慢在找到数据的过程..
+</code></pre></div>
+<p><strong>平均寻道时间</strong> : 指磁盘在接收到系统指令后,磁头从开始移动到数据所在的磁道所花费时间的平均值,大概5ms. <br />
+<strong>平均延迟时间</strong> : 以7200转/分(120转/s)的机械硬盘为例,转一圈大概需要1/120=0.008s.. 我们知道数据是在磁道上存着的, 运气好在磁道起始位置就找到了,运气不好,在一圈的末尾.. 取个平均值,找半圈能找到,也就是0.004s..4ms..</p>
+<p>综上, <font color='green'>7200转/分的机械硬盘IO延迟时间大概是9ms</font>,看似很短,但也能让一个简单的cpu运行上百万条二进制指令..</p>
+<h3 id="_18"><font color='orange'>[固态硬盘]</font><a class="headerlink" href="#_18" title="Permanent link">&para;</a></h3>
+<p>依赖电子存取数据,造价高.. 但比机械硬盘速度快,因为省去了机械的过程..<br />
+<font color='gray'>Ps: 可能会在固态硬盘上看到类似于15k的参数,意思就是此固态的速度等同于15000转/分钟的机械磁盘.</font></p>
+<h3 id="swap"><font color='orange'>[swap虚拟内存]</font><a class="headerlink" href="#swap" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p>参考链接: <code>https://www.cnblogs.com/linhaifeng/articles/13915855.html</code></p>
+</blockquote>
+<p>许多计算机支持 <strong>虚拟内存机制</strong> ,该机制使计算机可以运行大于物理内存的程序.<br />
+它会将正在使用的程序放入内存中执行, 而暂时不需要执行的程序放到磁盘的某块地方,这块地方叫做虚拟内存.</p>
+<p>在linux系统中,会对硬盘进行分区.. 其中有个分区名为 <font color='brown'><strong>swap分区</strong></font>..(充当临时内存)<br />
+当物理内存不够用的时候,linux才会将它认为内存中暂时用不到的数据往硬盘的swap分区里放... 
+swap分区充当临时内存,是假的内存,这一倒腾,速度肯定慢..但是续命啦(´▽｀)<br />
+前提是linux系统哦！！swap分区不能像其他硬盘空间一样使用.. 看似浪费,实则可以应急保命.<br />
+<font color='gray'>Ps: 知道了也没用系列 -- 在计算机内存不够用的时候,linux还可能随机kill掉进程..</font></p>
+<hr />
+<h2 id="io">IO设备<a class="headerlink" href="#io" title="Permanent link">&para;</a></h2>
+<blockquote>
+<p>I/O设备,指的是即能往外读数据也能往里写数据的设备... 比如内存、硬盘是I/O设备; <br />
+键盘鼠标准确点应该叫做输入设备;显示器打印机准确点应该叫做输出设备.. 但我们都将它们归为I/O设备..</p>
+</blockquote>
+<p><font color='brown'>I/O设备一般分为两部分: <strong>设备控制器</strong> 和设备本身.. </font> </p>
+<p><strong>[设备控制器]</strong> <br />
+<em>计算机硬件都在主板上</em>,主板上有很多的接口,每个接口(eg 接显示器的VGA接口,放内存条的接口,硬盘的接口等)的背后都对应着一个芯片,此&lt;芯片&gt;就叫做设备控制器..</p>
+<p><strong>[驱动程序]</strong> <br />
+驱动程序简单理解就是使 <strong>I/O设备</strong> 运转的程序..<br />
+驱动程序会安装在操作系统里面的,操作系统调用驱动程序,驱动程序通过控制设备控制器来控制设备本身..<br />
+所以,安装完操作系统会有个步骤,安装驱动!! 知道为什么了吧!(´▽｀) </p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>Q: 驱动程序不能由操作系统自个儿开发吗？
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>A: 先不说常见的操作系统有三个 window linux mac..
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>   以显卡为例,若OS这一软件在一开始就包含了显卡的驱动程序,那么显卡的不同生产厂商生产的显卡都必须按照OS的显卡驱动程序的标准来造显卡,但事实上显卡的不同生产厂商造显卡的内部细节是不一样的..
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>   (正是因为这些内部的细节才使不同厂商生产的显卡性能不一样)
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>   所以显卡的制造厂商除了造显卡还需要针对本厂商的显卡专门开发显卡驱动..然后,操作系统安装本台计算机正在使用的显卡对应厂商开发的显卡驱动,保证显卡的正常运行..(兼容性的体现)
+<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>   注意哦,显卡的不同制造厂商开的的显卡驱动都必须遵循OS规定好的接口,这样OS才能安装得上驱动..
+<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a>
+<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a>Ps: 通过前面我们知道计算机启动会先启动BIOS,BIOS启动我们真正使用的OS(windows、linux、mac),OS还会要求BIOS去检查一下硬件相关的驱动是否正常..
+</code></pre></div>
+<hr />
+<h2 id="_19">总线<a class="headerlink" href="#_19" title="Permanent link">&para;</a></h2>
+<p>北桥即 <strong>PCI</strong> 桥: 连接高速设备的芯片<br />
+南桥即 <strong>ISA</strong> 桥: 连接慢速设备的芯片</p>
+<p><img alt="" src="../assets/%E6%80%BB%E7%BA%BF.png" /> </p>
+<hr />
+<h2 id="_20">计算机启动过程<a class="headerlink" href="#_20" title="Permanent link">&para;</a></h2>
+<p>step1: 计算机通电<br />
+step2: 启动BIOS(计算机启动一定会先启动此系统);<br />
+&nbsp;&nbsp;&nbsp;&nbsp; 扫描启动设备/启动盘(光盘、U盘、本地硬盘等),依次检索(有默认的顺序,可调 参数会在CMOS里保存).<br />
+&nbsp;&nbsp;&nbsp;&nbsp; 若在某一启动设备中找到操作系统,就开始往内存里读;若都没有找到,停在BIOS界面...<br />
+&nbsp;&nbsp;&nbsp;&nbsp; <font color='gray'>Ps 通常一闪而过,毫无察觉就进入了window界面.. 可以通过开机按键停在BIOS界面 </font><br />
+step3: 操作系统的引导信息会放在启动盘第一个分区里,这是固定死的..<br />
+&nbsp;&nbsp;&nbsp;&nbsp; 读取启动盘的第一个扇区的数据(称之为<font color='brown'>主引导记录MBR</font>);其大小为512字节..<br />
+&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; 前446字节为引导信息,里面有一个bootloader'启动加载'程序 -- grub程序;<br />
+&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; 后46字节为分区信息;
+&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; 最后2字节为结束标志位..
+&nbsp;&nbsp;&nbsp;&nbsp; <font color='gray'>BIOS只需要将grap程序往内存里读</font><br />
+&nbsp;&nbsp;&nbsp;&nbsp; <font color='gray'>grap负责将OS内核装载进内存,启动OS(即将操作系统剩下的大部队招呼进内存)</font><br />
+step4: 操作系统会让BIOS去检测驱动程序是否正常..若没有问题,BIOS就退出舞台,OS接管整个硬件的运行!</p>
+<hr />
+<h2 id="io_1">优化/降低IO<a class="headerlink" href="#io_1" title="Permanent link">&para;</a></h2>
+<blockquote>
+<p>所有优化到最后都会停留到IO性能的优化上.. 最主要的是硬盘IO.  </p>
+<p>比如7200转/分的机械硬盘IO延迟时间大概是9ms,这9ms的时间cpu就是闲着的..<br />
+为了尽量让cpu不闲着,不难发现,我们需要着重于优化&lt;硬盘-内存&gt;这一环节..降低硬盘IO..</p>
+</blockquote>
+<p>先来看看 <strong>linux操作系统&lt;这个软件&gt;</strong> 在这一环节怎么做的.<br />
+linux自带优化机制 <font color='red'><em>cache缓存</em> </font>(从硬盘中读数据到内存)和 <font color='red'><em>buffer缓冲区</em> </font>(从内存往硬盘中存数据)<br />
+读 先不删,在内存中缓存下来,下次读就直接从内存中取就行;写 攒一波再存;<br />
+<font color='gray'>注意,释放cache没影响,释放buffer时要先把内存的数据刷到硬盘里面去.</font> <code>sync</code></p>
+<p>要知道,OS不能把所有的硬盘数据都缓存到内存里,只会缓存linux自己觉得你会经常访问的数据..<br />
+并且linux缓存的数据不一定是我们自个儿开发的应用软件想要的..</p>
+<p>所以在我们 <strong>自己写的软件</strong> ,想要降低硬盘IO, 要有类似的机制, 遵循两个优化原则:<br />
+1&gt; <font color='brown'>针对读操作, 数据能从内存中取就不要从硬盘.. </font> <br />
+2&gt; <font color='brown'>针对写操作, 在内存中攒一波再写入硬盘..</font></p>
+<hr />
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+          <a href="#" class="md-top md-icon" data-md-component="top" hidden>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
+            回到页面顶部
+          </a>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+    <nav class="md-footer__inner md-grid" aria-label="页脚" >
+      
+        
+        <a href="../0_%E5%89%8D%E5%A5%8F%28%E4%BB%8B%E7%BB%8D%29/" class="md-footer__link md-footer__link--prev" aria-label="上一页: 前奏(介绍)" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                上一页
+              </span>
+              前奏(介绍)
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="../2_%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" class="md-footer__link md-footer__link--next" aria-label="下一页: 操作系统" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                下一页
+              </span>
+              操作系统
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright © 2023 from Dc_OnePiece
+    </div>
+  
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "navigation.top", "navigation.expand", "navigation.instant", "navigation.tracking", "search.suggest", "search.highlight", "search.share"], "search": "../../assets/javascripts/workers/search.5bf1dace.min.js", "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.config.lang": "ja", "search.config.pipeline": "trimmer, stemmer", "search.config.separator": "[\\s\\-\uff0c\u3002]+", "search.placeholder": "\u641c\u7d22", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version.title": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.37e9125f.min.js"></script>
+      
+        <script src="../../resources/js/extra.js"></script>
+      
+    
+  </body>
+</html>

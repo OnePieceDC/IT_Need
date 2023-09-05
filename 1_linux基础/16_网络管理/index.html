@@ -1,0 +1,2463 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="These are my study notes.">
+      
+      
+        <meta name="author" content="DC">
+      
+      
+      <link rel="icon" href="../../resources/images/favicon.ico">
+      <meta name="generator" content="mkdocs-1.3.1, mkdocs-material-8.5.3">
+    
+    
+      
+        <title>网络管理 - IT必备知识</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.7a952b86.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.cbb835fc.min.css">
+        
+      
+      
+
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../resources/css/extra.css">
+    
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lxgw-wenkai-webfont@1.1.0/style.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="blue-grey" data-md-color-accent="amber">
+  
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#_1" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../.." title="IT必备知识" class="md-header__button md-logo" aria-label="IT必备知识" data-md-component="logo">
+      
+  <img src="../../resources/images/favicon.ico" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            IT必备知识
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              网络管理
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      <form class="md-header__option" data-md-component="palette">
+        
+          
+          
+          <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="blue-grey" data-md-color-accent="amber"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+          
+            <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"/></svg>
+            </label>
+          
+        
+          
+          
+          <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="blue-grey" data-md-color-accent="amber"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_2">
+          
+            <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12c0-2.42-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"/></svg>
+            </label>
+          
+        
+      </form>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="分享" aria-label="分享" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7 0-.24-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91 1.61 0 2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08Z"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="标签" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../0_%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/0_%E5%89%8D%E5%A5%8F%28%E4%BB%8B%E7%BB%8D%29/" class="md-tabs__link">
+        计算机基础(8)
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+    
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../0_%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C/" class="md-tabs__link md-tabs__link--active">
+        linux基础(20)
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../5_db/0_%E5%9F%BA%E7%A1%80/0_install_db/" class="md-tabs__link">
+        mysql(19)
+      </a>
+    </li>
+  
+
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../9_git/0_git%E7%94%9F%E6%B4%BB%E7%89%88/" class="md-tabs__link">
+        git(2)
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../13_%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/0_%E9%80%92%E5%BD%92_%E6%9F%A5%E6%89%BE/" class="md-tabs__link">
+        查找排序算法(5)
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="IT必备知识" class="md-nav__button md-logo" aria-label="IT必备知识" data-md-component="logo">
+      
+  <img src="../../resources/images/favicon.ico" alt="logo">
+
+    </a>
+    IT必备知识
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" data-md-toggle="__nav_1" type="checkbox" id="__nav_1" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_1">
+          计算机基础(8)
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="计算机基础(8)" data-md-level="1">
+        <label class="md-nav__title" for="__nav_1">
+          <span class="md-nav__icon md-icon"></span>
+          计算机基础(8)
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../0_%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/0_%E5%89%8D%E5%A5%8F%28%E4%BB%8B%E7%BB%8D%29/" class="md-nav__link">
+        前奏(介绍)
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../0_%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/1_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A1%AC%E4%BB%B6%E7%BB%84%E6%88%90/" class="md-nav__link">
+        计算机硬件组成
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../0_%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/2_%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" class="md-nav__link">
+        操作系统
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../0_%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/3_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E6%A6%82%E8%A7%88/" class="md-nav__link">
+        计算机网络概览
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../0_%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/4_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E4%B9%8B%E7%BD%91%E7%BB%9C%E6%8E%A5%E5%8F%A3%E5%B1%82/" class="md-nav__link">
+        网络接口层
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../0_%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/5_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E4%B9%8B%E7%BD%91%E7%BB%9C%E5%B1%82/" class="md-nav__link">
+        网络层
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../0_%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/6_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E4%B9%8B%E4%BC%A0%E8%BE%93%E5%B1%82/" class="md-nav__link">
+        传输层
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../0_%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/7_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%A1%A5%E5%85%85/" class="md-nav__link">
+        补充
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2">
+          linux基础(20)
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="linux基础(20)" data-md-level="1">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          linux基础(20)
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0_%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C/" class="md-nav__link">
+        准备工作
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../1_%E5%88%9D%E8%AF%86shell%E4%B8%8E%E5%9F%BA%E7%A1%80%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" class="md-nav__link">
+        初识shell与基础常用命令
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../2_%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86%E4%B9%8B%E5%9F%BA%E7%A1%80%E5%91%BD%E4%BB%A4/" class="md-nav__link">
+        文件管理之基础命令
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../3_%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86%E4%B9%8B%E5%9B%9B%E5%A4%A7%E6%A8%A1%E5%BC%8F/" class="md-nav__link">
+        文件管理之四大模式
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../4_%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86%E4%B9%8B%E5%91%BD%E4%BB%A4%E8%A1%A5%E5%85%85/" class="md-nav__link">
+        文件管理之命令补充
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../5_%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86%E4%B9%8B%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/" class="md-nav__link">
+        文件管理之文件系统
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../6_%E6%9D%83%E9%99%90%E7%AE%A1%E7%90%86%E4%B9%8B%E7%94%A8%E6%88%B7%E4%B8%8E%E7%BB%84/" class="md-nav__link">
+        权限管理之用户与组
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../7_%E6%9D%83%E9%99%90%E7%AE%A1%E7%90%86%E4%B9%8B%E6%96%87%E4%BB%B6%E6%9D%83%E9%99%90/" class="md-nav__link">
+        权限管理之文件权限
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../8_%E6%9D%83%E9%99%90%E7%AE%A1%E7%90%86%E4%B9%8BACL/" class="md-nav__link">
+        权限管理之ACL
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../9_%E6%9D%83%E9%99%90%E7%AE%A1%E7%90%86%E4%B9%8Bsu%E4%B8%8Esudo/" class="md-nav__link">
+        权限管理之su与sudo
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../10_%E8%BD%AF%E4%BB%B6%E5%8C%85%E7%AE%A1%E7%90%86%E4%B9%8Brpm/" class="md-nav__link">
+        软件包管理之rpm
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../11_%E8%BD%AF%E4%BB%B6%E5%8C%85%E7%AE%A1%E7%90%86%E4%B9%8Byum/" class="md-nav__link">
+        软件包管理之yum
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../12_%E6%9F%A5%E7%9C%8B%E8%BF%9B%E7%A8%8B/" class="md-nav__link">
+        查看进程
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../13_%E7%AE%A1%E7%90%86%E8%BF%9B%E7%A8%8B/" class="md-nav__link">
+        管理进程
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../14_%E5%AD%98%E5%82%A8%E7%AE%A1%E7%90%86%E4%B9%8B%E4%BC%A0%E7%BB%9F%E7%A3%81%E7%9B%98%E7%AE%A1%E7%90%86/" class="md-nav__link">
+        存储管理之传统磁盘管理
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../15_%E5%AD%98%E5%82%A8%E7%AE%A1%E7%90%86%E4%B9%8BLVM/" class="md-nav__link">
+        存储管理之LVM
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          网络管理
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        网络管理
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    网卡名字修改
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    网络相关的一些命令
+  </a>
+  
+    <nav class="md-nav" aria-label="网络相关的一些命令">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#lspci" class="md-nav__link">
+    lspci
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mii-tool" class="md-nav__link">
+    mii-tool
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ping" class="md-nav__link">
+    ping
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ifconfig" class="md-nav__link">
+    ifconfig
+  </a>
+  
+    <nav class="md-nav" aria-label="ifconfig">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    基本选项
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    命令结果解析
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mtu" class="md-nav__link">
+    万兆网卡的MTU
+  </a>
+  
+    <nav class="md-nav" aria-label="万兆网卡的MTU">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    千兆万兆区别
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    永久配置
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    解决溢出数严重的问题
+  </a>
+  
+    <nav class="md-nav" aria-label="解决溢出数严重的问题">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    储备知识
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    解决过程
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    网卡相关配置文件
+  </a>
+  
+    <nav class="md-nav" aria-label="网卡相关配置文件">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ifcfg-eth0" class="md-nav__link">
+    解析 ifcfg-eth0文件
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ifcfg-eth1" class="md-nav__link">
+    配置ifcfg-eth1文件
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dns" class="md-nav__link">
+    DNS相关配置文件
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#etcservices" class="md-nav__link">
+    /etc/services
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    交换与路由
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#linux" class="md-nav__link">
+    Linux主机充当路由
+  </a>
+  
+    <nav class="md-nav" aria-label="Linux主机充当路由">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    三大前提
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_13" class="md-nav__link">
+    转发流程
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_14" class="md-nav__link">
+    网关/路由
+  </a>
+  
+    <nav class="md-nav" aria-label="网关/路由">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_15" class="md-nav__link">
+    分类、优先级
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_16" class="md-nav__link">
+    查看路由表信息
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_17" class="md-nav__link">
+    添加/删除路由
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_18" class="md-nav__link">
+    配置永久路由
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_19" class="md-nav__link">
+    路由实验
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../17_shell%E5%9F%BA%E7%A1%80/" class="md-nav__link">
+        shell基础
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../18_crond%E8%AE%A1%E5%88%92%E4%BB%BB%E5%8A%A1/" class="md-nav__link">
+        crond计划任务
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../19_%E7%B3%BB%E7%BB%9F%E4%BC%98%E5%8C%96/" class="md-nav__link">
+        系统优化
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3">
+          mysql(19)
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="mysql(19)" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          mysql(19)
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" data-md-toggle="__nav_3_1" type="checkbox" id="__nav_3_1" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3_1">
+          基础
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="基础" data-md-level="2">
+        <label class="md-nav__title" for="__nav_3_1">
+          <span class="md-nav__icon md-icon"></span>
+          基础
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../5_db/0_%E5%9F%BA%E7%A1%80/0_install_db/" class="md-nav__link">
+        数据库安装
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../5_db/0_%E5%9F%BA%E7%A1%80/1_db_command/" class="md-nav__link">
+        sql命令总结
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../5_db/0_%E5%9F%BA%E7%A1%80/2_imp_knowledge/" class="md-nav__link">
+        imp_knowledge
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../5_db/0_%E5%9F%BA%E7%A1%80/3_table_field/" class="md-nav__link">
+        字段的约束和类型
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../5_db/0_%E5%9F%BA%E7%A1%80/4_table_relation/" class="md-nav__link">
+        表关系
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../5_db/0_%E5%9F%BA%E7%A1%80/5_permissions/" class="md-nav__link">
+        权限管理
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../5_db/0_%E5%9F%BA%E7%A1%80/6_single_query/" class="md-nav__link">
+        单表查询
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../5_db/0_%E5%9F%BA%E7%A1%80/7_multi_query/" class="md-nav__link">
+        多表查询
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../5_db/0_%E5%9F%BA%E7%A1%80/8_query_practice/" class="md-nav__link">
+        query_practice
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../5_db/0_%E5%9F%BA%E7%A1%80/9_pymysql/" class="md-nav__link">
+        pymysql
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../5_db/0_%E5%9F%BA%E7%A1%80/10_just_know/" class="md-nav__link">
+        just_know
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../5_db/0_%E5%9F%BA%E7%A1%80/other/01_to_11/" class="md-nav__link">
+        other1
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../5_db/0_%E5%9F%BA%E7%A1%80/other/05/" class="md-nav__link">
+        other2
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" data-md-toggle="__nav_3_2" type="checkbox" id="__nav_3_2" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3_2">
+          进阶
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="进阶" data-md-level="2">
+        <label class="md-nav__title" for="__nav_3_2">
+          <span class="md-nav__icon md-icon"></span>
+          进阶
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../5_db/1_%E8%BF%9B%E9%98%B6/0_index/" class="md-nav__link">
+        索引
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../5_db/1_%E8%BF%9B%E9%98%B6/1_explain/" class="md-nav__link">
+        执行计划
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../5_db/1_%E8%BF%9B%E9%98%B6/2_transaction/" class="md-nav__link">
+        事务
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../5_db/1_%E8%BF%9B%E9%98%B6/3_db_readPhenomenon/" class="md-nav__link">
+        读现象
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../5_db/1_%E8%BF%9B%E9%98%B6/4_lock/" class="md-nav__link">
+        锁
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../5_db/1_%E8%BF%9B%E9%98%B6/other/" class="md-nav__link">
+        数据库连接池
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4">
+          git(2)
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="git(2)" data-md-level="1">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          git(2)
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../9_git/0_git%E7%94%9F%E6%B4%BB%E7%89%88/" class="md-nav__link">
+        git生活版
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../9_git/1_git%E7%A0%94%E7%A9%B6%E7%89%88/" class="md-nav__link">
+        git研究版
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" data-md-toggle="__nav_5" type="checkbox" id="__nav_5" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_5">
+          查找排序算法(5)
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="查找排序算法(5)" data-md-level="1">
+        <label class="md-nav__title" for="__nav_5">
+          <span class="md-nav__icon md-icon"></span>
+          查找排序算法(5)
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../13_%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/0_%E9%80%92%E5%BD%92_%E6%9F%A5%E6%89%BE/" class="md-nav__link">
+        查找
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../13_%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/1_LowB%E4%B8%89%E4%BA%BA%E7%BB%84/" class="md-nav__link">
+        LowB三人组
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../13_%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/2_NB%E4%B8%89%E4%BA%BA%E7%BB%84/" class="md-nav__link">
+        NB三人组
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../13_%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/3_%E5%85%B6%E5%AE%83%E6%8E%92%E5%BA%8F/" class="md-nav__link">
+        其它排序
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../13_%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/4_%E6%9F%A5%E6%89%BE%E4%B9%A0%E9%A2%98/" class="md-nav__link">
+        查找习题
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    网卡名字修改
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    网络相关的一些命令
+  </a>
+  
+    <nav class="md-nav" aria-label="网络相关的一些命令">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#lspci" class="md-nav__link">
+    lspci
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mii-tool" class="md-nav__link">
+    mii-tool
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ping" class="md-nav__link">
+    ping
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ifconfig" class="md-nav__link">
+    ifconfig
+  </a>
+  
+    <nav class="md-nav" aria-label="ifconfig">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    基本选项
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    命令结果解析
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mtu" class="md-nav__link">
+    万兆网卡的MTU
+  </a>
+  
+    <nav class="md-nav" aria-label="万兆网卡的MTU">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    千兆万兆区别
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    永久配置
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    解决溢出数严重的问题
+  </a>
+  
+    <nav class="md-nav" aria-label="解决溢出数严重的问题">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    储备知识
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    解决过程
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    网卡相关配置文件
+  </a>
+  
+    <nav class="md-nav" aria-label="网卡相关配置文件">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ifcfg-eth0" class="md-nav__link">
+    解析 ifcfg-eth0文件
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ifcfg-eth1" class="md-nav__link">
+    配置ifcfg-eth1文件
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dns" class="md-nav__link">
+    DNS相关配置文件
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#etcservices" class="md-nav__link">
+    /etc/services
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    交换与路由
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#linux" class="md-nav__link">
+    Linux主机充当路由
+  </a>
+  
+    <nav class="md-nav" aria-label="Linux主机充当路由">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    三大前提
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_13" class="md-nav__link">
+    转发流程
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_14" class="md-nav__link">
+    网关/路由
+  </a>
+  
+    <nav class="md-nav" aria-label="网关/路由">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_15" class="md-nav__link">
+    分类、优先级
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_16" class="md-nav__link">
+    查看路由表信息
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_17" class="md-nav__link">
+    添加/删除路由
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_18" class="md-nav__link">
+    配置永久路由
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_19" class="md-nav__link">
+    路由实验
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  <h1>网络管理</h1>
+
+<h2 id="_1">网卡名字修改<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<blockquote>
+<p>以太网协议规定上网的机器必须有一块网卡, 俗成以太网卡</p>
+</blockquote>
+<p>CentOS6及以前, 第一块、第二块网卡依次命名为 eth0、eth1... CentOS7网卡的命名为ens33..<br />
+除此之外,都有一块命名为lo虚拟的本地回环网卡.. 数据包到网卡了,没有往交换机走,原路返回,自己发给自己.<br />
+<font color='gray'>127.0.0.1 相当于一台计算机即当客户端也当服务端,用于保证软件本身的开发没问题,<strong>排除网络的因素</strong></font></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="s2">&quot;&quot;&quot;-- 1.GRUB添加kernel参数 --&quot;&quot;&quot;</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>vim /etc/sysconfig/grub <span class="c1"># -- GRUB_CMDLINE_LINUX=&quot;rhgb quiet &#39;net.ifnames=0 biosdevname=0&#39;&quot;</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="s2">&quot;&quot;&quot;-- 2.加载到引导分区 --&quot;&quot;&quot;</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>grub2-mkconfig -o /boot/grub2/grub.cfg
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="s2">&quot;&quot;&quot;-- 3.修改网卡配置文件名称以及配置文件里网卡的名称 --&quot;&quot;&quot;</span>
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="nb">cd</span> /etc/sysconfig/network-scripts/
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>mv ifcfg-ens33 ifcfg-eth0
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>sed -i <span class="s2">&quot;s#ens33#eth0#g&quot;</span> ifcfg-eth0 <span class="c1"># -- 将ens33改为eth0</span>
+<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>
+<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a><span class="c1">## 注意哦,前三步没有先后顺序,怎么样都可以</span>
+<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>
+<a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a><span class="s2">&quot;&quot;&quot;-- 重启系统生效 --&quot;&quot;&quot;</span>
+<a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>reboot
+</code></pre></div>
+<p>关机为vm虚拟机添加一张NAT模式的网卡.. 添加后开机 可以发现第二块网卡的默认名字是eth1</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="s2">&quot;&quot;&quot;-- 临时激活网卡 --&quot;&quot;&quot;</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># ifconfig eth1 up</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># ifconfig | grep eth[01]</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>eth0: <span class="nv">flags</span><span class="o">=</span><span class="m">4163</span>&lt;UP,BROADCAST,RUNNING,MULTICAST&gt;  mtu <span class="m">1500</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>eth1: <span class="nv">flags</span><span class="o">=</span><span class="m">4163</span>&lt;UP,BROADCAST,RUNNING,MULTICAST&gt;  mtu <span class="m">1500</span>
+</code></pre></div>
+<hr />
+<h2 id="_2">网络相关的一些命令<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<h3 id="lspci"><font color='orange'>lspci</font><a class="headerlink" href="#lspci" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p>查看当前系统所连接的所有网卡</p>
+</blockquote>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1">#  lspci | grep -i eth</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="c1"># 可以看到,现目前有两块以太网协议的网卡</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="m">02</span>:01.0 Ethernet controller: Intel Corporation 82545EM Gigabit Ethernet Controller <span class="o">(</span>Copper<span class="o">)</span> <span class="o">(</span>rev <span class="m">01</span><span class="o">)</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="m">02</span>:04.0 Ethernet controller: Intel Corporation 82545EM Gigabit Ethernet Controller <span class="o">(</span>Copper<span class="o">)</span> <span class="o">(</span>rev <span class="m">01</span><span class="o">)</span>
+</code></pre></div>
+<h3 id="mii-tool"><font color='orange'>mii-tool</font><a class="headerlink" href="#mii-tool" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p>检测网卡是否已经连接好网线</p>
+</blockquote>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># mii-tool eth1</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>eth1: negotiated 1000baseT-FD flow-control, link ok <span class="c1"># -- link ok代表该网卡是接了网线的</span>
+</code></pre></div>
+<h3 id="ping"><font color='orange'>ping</font><a class="headerlink" href="#ping" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p>用于测试两台主机网络是否连通</p>
+</blockquote>
+<p><code>ping 目标IP地址</code><br />
+<code>ping -c 次数 目标IP地址</code></p>
+<p><strong>原理:</strong>  ping命令会基于ICMP协议(TCP/IP协议簇的一个子协议)给对方发送数据包,若对方回应,就代表连通了.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="nb">echo</span> <span class="m">1</span> &gt; /proc/sys/net/ipv4/icmp_echo_ignore_all
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>设置此命令后,其他任何主机都ping不同本机.. 通常会在整个集群架构的网络环境部署完成后进行该设置..
+</code></pre></div>
+<hr />
+<h2 id="ifconfig">ifconfig<a class="headerlink" href="#ifconfig" title="Permanent link">&para;</a></h2>
+<h3 id="_3"><font color='orange'>基本选项</font><a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
+<p><code>ifconfig</code> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -- 查看已经激活的网卡信息 <br />
+<code>ifconfig -a</code>  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  -- 查看所有网卡信息(包括未激活的网卡)<br />
+<code>ifconfig eth0</code>  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -- 查看单个网卡信息</p>
+<p><code>ifconfig eth1 up</code> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -- <em>临时</em> 开启网卡 <br />
+<code>ifconfig eth1 down</code> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -- 关闭网卡 <font color='gray'>实验时,别关闭eth0网卡,xshll远程连接是通过该网卡连接的..</font></p>
+<p><code>ifconfig eth1 192.168.1.122 netmask 255.255.255.0</code>   or  <code>ifconfig eth1 192.168.1.122/24</code><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -- <em>临时</em> 为网卡设定IP和掩码 (重启服务器失效)</p>
+<p><code>ifconfig eth0:1 192.168.0.2 netmask 255.255.255.0</code><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -- <em>临时</em> 为网卡配置子接口<br />
+<code>ifconfig eth0:1 down</code>  or  <code>ifconfig eth0:1 del 192.168.0.2</code> <br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -- 删除该子接口  <font color='gray'>不必指定子网掩码</font></p>
+<p><font color='brown'><strong>注意哦!</strong></font>  通过ifconfig命令的配置都是 <strong>临时</strong> 配的!! 重启机器后就恢复如初了.. <br />
+<font color='blue'>若想永久配置,需要修改 <code>/etc/sysconfig/network-scripts</code> 路径下面的配置文件 </font></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="c1">## -- 若要使用ifconfig命令,需要安装 yum install net-tools -y</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># rpm -qf `which ifconfig`</span>
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>net-tools-2.0-0.25.20131004git.el7.x86_64
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="s2">&quot;&quot;&quot;</span>
+<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="s2">eth0:1 此网卡是不存在的,是没有mac地址的,可叫做虚拟网卡</span>
+<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="s2">       相当于给eth0配了两个IP地址.. 但流量走的都是同一张网卡</span>
+<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a><span class="s2">真实环境下,若要给服务器配置两个IP地址,会使用两个网卡,两个网卡处于不同的网段并连接不同的交换机..这样靠谱些.</span>
+<a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a><span class="s2">&quot;&quot;&quot;</span>
+<a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># ifconfig eth0:1 192.168.0.2/24</span>
+<a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># ifconfig</span>
+<a id="__codelineno-5-12" name="__codelineno-5-12" href="#__codelineno-5-12"></a>eth0: <span class="nv">flags</span><span class="o">=</span><span class="m">4163</span>&lt;UP,BROADCAST,RUNNING,MULTICAST&gt;  mtu <span class="m">1500</span>
+<a id="__codelineno-5-13" name="__codelineno-5-13" href="#__codelineno-5-13"></a>        inet <span class="m">172</span>.16.150.131  netmask <span class="m">255</span>.255.255.0  broadcast <span class="m">172</span>.16.150.255
+<a id="__codelineno-5-14" name="__codelineno-5-14" href="#__codelineno-5-14"></a>                ... ... ...
+<a id="__codelineno-5-15" name="__codelineno-5-15" href="#__codelineno-5-15"></a>eth0:1: <span class="nv">flags</span><span class="o">=</span><span class="m">4163</span>&lt;UP,BROADCAST,RUNNING,MULTICAST&gt;  mtu <span class="m">1500</span>
+<a id="__codelineno-5-16" name="__codelineno-5-16" href="#__codelineno-5-16"></a>        inet <span class="m">192</span>.168.0.2  netmask <span class="m">255</span>.255.255.0  broadcast <span class="m">192</span>.168.0.255
+<a id="__codelineno-5-17" name="__codelineno-5-17" href="#__codelineno-5-17"></a>        ether <span class="m">00</span>:0c:29:90:30:3e  txqueuelen <span class="m">1000</span>  <span class="o">(</span>Ethernet<span class="o">)</span>
+<a id="__codelineno-5-18" name="__codelineno-5-18" href="#__codelineno-5-18"></a>... ... ... 
+</code></pre></div>
+<h3 id="_4"><font color='orange'>命令结果解析</font><a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
+<p><code>ifconfig eth0</code></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="s2">&quot;&quot;&quot; 第一行</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="s2">从flags标记可知该接口已启用,支持广播、组播. MTU最大传输单元:1500字节</span>
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="s2">flags参数:</span>
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="s2">    UP:表示“接口已启用”/网卡已经激活</span>
+<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="s2">    BROADCAST:表示该网卡支持广播,能收到广播包</span>
+<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a><span class="s2">    RUNNING:表示网卡已连接网线,该网线能正常工作</span>
+<a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a><span class="s2">    MULTICAST:表示该网卡支持多播.. </span>
+<a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a><span class="s2">            多播/组播简单来说就是将多台机器放到一个组里,发包的时候,只有这个组里的机器能收到</span>
+<a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a><span class="s2">        promisc:繁杂模式,简单来说,这台机器所有数据包都可以收到</span>
+<a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a><span class="s2">                我们知道局域网里广播的数据包,计算机收到后发现目标主机不是自己,会将这个包丢掉</span>
+<a id="__codelineno-6-11" name="__codelineno-6-11" href="#__codelineno-6-11"></a><span class="s2">                若该计算机开启了繁杂模式,就不会将此广播包丢掉.抓包.</span>
+<a id="__codelineno-6-12" name="__codelineno-6-12" href="#__codelineno-6-12"></a><span class="s2">                繁杂模式通常用于kali等渗透测试,安全方面的配置..</span>
+<a id="__codelineno-6-13" name="__codelineno-6-13" href="#__codelineno-6-13"></a><span class="s2">                感兴趣可以参考:https://www.cnblogs.com/linhaifeng/articles/13949611.html</span>
+<a id="__codelineno-6-14" name="__codelineno-6-14" href="#__codelineno-6-14"></a>
+<a id="__codelineno-6-15" name="__codelineno-6-15" href="#__codelineno-6-15"></a><span class="s2">`ifconfig eth0 promisc`   # -- 开启繁杂模式</span>
+<a id="__codelineno-6-16" name="__codelineno-6-16" href="#__codelineno-6-16"></a><span class="s2">`ifconfig eth0 -promisc`  # -- 关闭繁杂模式</span>
+<a id="__codelineno-6-17" name="__codelineno-6-17" href="#__codelineno-6-17"></a><span class="s2">&quot;&quot;&quot;</span>
+<a id="__codelineno-6-18" name="__codelineno-6-18" href="#__codelineno-6-18"></a>eth0: <span class="nv">flags</span><span class="o">=</span><span class="m">4163</span>&lt;UP,BROADCAST,RUNNING,MULTICAST&gt;  mtu <span class="m">1500</span>
+<a id="__codelineno-6-19" name="__codelineno-6-19" href="#__codelineno-6-19"></a>        <span class="c1"># -- 网卡的IPv4地址、子网掩码、本网段的广播地址</span>
+<a id="__codelineno-6-20" name="__codelineno-6-20" href="#__codelineno-6-20"></a>        inet <span class="m">172</span>.16.150.131  netmask <span class="m">255</span>.255.255.0  broadcast <span class="m">172</span>.16.150.255
+<a id="__codelineno-6-21" name="__codelineno-6-21" href="#__codelineno-6-21"></a>        <span class="c1"># -- IPv6地址、掩码长度、作用域,link表示仅该接口有效    </span>
+<a id="__codelineno-6-22" name="__codelineno-6-22" href="#__codelineno-6-22"></a>        inet6 fe80::20c:29ff:fe90:303e  prefixlen <span class="m">64</span>  scopeid 0x20&lt;link&gt;
+<a id="__codelineno-6-23" name="__codelineno-6-23" href="#__codelineno-6-23"></a>        <span class="c1"># -- 以太网卡的MAC地址、以太网卡最大传输队列长度,接口类型为Ethernet</span>
+<a id="__codelineno-6-24" name="__codelineno-6-24" href="#__codelineno-6-24"></a>        ether <span class="m">00</span>:0c:29:90:30:3e  txqueuelen <span class="m">1000</span>  <span class="o">(</span>Ethernet<span class="o">)</span>
+<a id="__codelineno-6-25" name="__codelineno-6-25" href="#__codelineno-6-25"></a>        <span class="s2">&quot;&quot;&quot; R接收 T发送&quot;&quot;&quot;</span>
+<a id="__codelineno-6-26" name="__codelineno-6-26" href="#__codelineno-6-26"></a>        <span class="c1"># -- 从该主机开机那一刻到现在,此接口/网卡累积接收的报文个数,这些包总共有多大</span>
+<a id="__codelineno-6-27" name="__codelineno-6-27" href="#__codelineno-6-27"></a>        RX packets <span class="m">3942</span>  bytes <span class="m">764610</span> <span class="o">(</span><span class="m">746</span>.6 KiB<span class="o">)</span>
+<a id="__codelineno-6-28" name="__codelineno-6-28" href="#__codelineno-6-28"></a>        <span class="c1"># -- 累积接收报文错误数、丢弃数、溢出数(很重要!!!)、冲突的帧数</span>
+<a id="__codelineno-6-29" name="__codelineno-6-29" href="#__codelineno-6-29"></a>        RX errors <span class="m">0</span>  dropped <span class="m">0</span>  overruns <span class="m">0</span>  frame <span class="m">0</span>
+<a id="__codelineno-6-30" name="__codelineno-6-30" href="#__codelineno-6-30"></a>        <span class="c1"># -- 从该主机开机那一刻到现在,此接口/网卡累积发送的报文个数,总字节数</span>
+<a id="__codelineno-6-31" name="__codelineno-6-31" href="#__codelineno-6-31"></a>        TX packets <span class="m">842</span>  bytes <span class="m">130860</span> <span class="o">(</span><span class="m">127</span>.7 KiB<span class="o">)</span>
+<a id="__codelineno-6-32" name="__codelineno-6-32" href="#__codelineno-6-32"></a>        <span class="c1"># -- 累积发送报文错误数、丢弃数、溢出数、载荷数(发生carrier错误而丢失的数据包数)、冲突数 </span>
+<a id="__codelineno-6-33" name="__codelineno-6-33" href="#__codelineno-6-33"></a>        TX errors <span class="m">0</span>  dropped <span class="m">0</span> overruns <span class="m">0</span>  carrier <span class="m">0</span>  collisions <span class="m">0</span>
+</code></pre></div>
+<hr />
+<h2 id="mtu">万兆网卡的MTU<a class="headerlink" href="#mtu" title="Permanent link">&para;</a></h2>
+<blockquote>
+<p>千兆  1000Mb/s  管理网络-- MTU: 1500    万兆 10000Mb/s  集群化作业 -- MTU: 9000</p>
+</blockquote>
+<h3 id="_5"><font color='orange'>千兆万兆区别</font><a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
+<p>现目前我们用的网卡是双绞线接个水晶头连接的<strong>千兆网卡</strong>, <strong>主要用于管理网络</strong>; 保持MTU默认值1500kb就行..</p>
+<p>若涉及到集群化作业, 比如用集群做存储..  通常就需要用到<strong>万兆网卡</strong>..    MTU值应该设置为9000kb..<br />
+万兆(10G)网卡需要搭配光纤模块、光纤、万兆交换机(几十万RMB,很贵)使用 Hhhh<br />
+<font color='gray'>像阿里云提供给中小型公司的虚机就是构建在一套集群之上, vm之间的通信本来就比物理主机慢, 为了尽可能减少网络IO, 提高网络传输效率, 阿里云在硬件方面用的就是万兆网卡.... </font><br />
+<font color='gray' size=2>小声bibi,若是用真机做集群化架构,需要进行网卡绑定, 涉及到team技术、lacp协议等.. (集群相关的都是高阶知识,我暂且只会学基础,等我以后开发转运维,再捣腾捣腾, 哈哈哈哈哈)</font></p>
+<h3 id="_6"><font color='orange'>永久配置</font><a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
+<p><code>ifconfig eth0 mtu 9000</code>  临时配置MTU值,重启服务器就失效了.. 那如何永久配置呢？</p>
+<p><font color='blue'><strong>解决方案</strong>: 在 <code>/etc/rc.local</code>文件里添加 修改MTU值的命令...</font><br />
+原理: /etc/rc.local文件在计算机开机的时候,它会自动运行, 所以一开机就需要运行的命令都可写到此文件里</p>
+<p><strong>注意:</strong> 记得执行命令 <code>chmod +x /etc/rc.d/rc.local</code></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="c1">## -- 可以看到/etc/rc.local的文件类型是l 代表软链接</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="c1">## -- 源文件是 /etc/rc.d/rc.local</span>
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># ll /etc/rc.local</span>
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a>lrwxrwxrwx. <span class="m">1</span> root root <span class="m">13</span> 6月  <span class="m">30</span> <span class="m">23</span>:42 /etc/rc.local -&gt; rc.d/rc.local
+<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a>
+<a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a><span class="c1">## -- /etc/rc.d/rc.local文件是没有可执行权限的 意味着除了root用户的其他用户都不能执行它</span>
+<a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a><span class="c1">## -- 所以需要赋予其他用户对此文件的可执行权限 chmod +x /etc/rc.d/rc.local</span>
+<a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># ll /etc/rc.d/rc.local</span>
+<a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a>-rw-r--r--. <span class="m">1</span> root root <span class="m">473</span> 1月  <span class="m">14</span> <span class="m">2022</span> /etc/rc.d/rc.local
+<a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># chmod +x /etc/rc.d/rc.local</span>
+<a id="__codelineno-7-11" name="__codelineno-7-11" href="#__codelineno-7-11"></a>
+<a id="__codelineno-7-12" name="__codelineno-7-12" href="#__codelineno-7-12"></a><span class="c1">## 在里面添加内容,ifconfig eth0 mtu 9000</span>
+<a id="__codelineno-7-13" name="__codelineno-7-13" href="#__codelineno-7-13"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># vim /etc/rc.local</span>
+</code></pre></div>
+<hr />
+<h2 id="_7">解决溢出数严重的问题<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h2>
+<blockquote>
+<p>ifconfig结果中第6行的 <font color='brown'><strong>overruns</strong></font> 溢出数是非常重要的指标!!!</p>
+<p><code>ethtool -g eth0</code><br />
+<code>ethtool -G eth0 rx 2048</code><br />
+<code>ethtool -G eth0 tx 2048</code>  </p>
+</blockquote>
+<h3 id="_8"><font color='orange'>储备知识</font><a class="headerlink" href="#_8" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="m">1</span>&gt; 全｜半双工通信
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>   全双工是指交换机在发送数据的同时也能够接收数据,两者同步进行,
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>   这好比我们平时打电话一样,说话的同时也能够听到对方的声音... 半双工好比是对讲机...
+<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a>   目前网卡一般都应该采用全双工模式,全双工的好处在于迟延小、冲突少、速度快.
+<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="m">2</span>&gt; 数据链路层三大功能之一差错监测: 循环冗余检验码CRC
+<a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a>   步骤关键字: 多项式 异或操作<span class="o">(</span>异为1 同为0<span class="o">)</span>
+<a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a>   假设有数据1101011011需要传输, 采用CRC的生成多项式为P<span class="o">(</span>X<span class="o">)=</span>X^4+X+1, 请计算添加了CRC校验码之后的数据.
+<a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a>   解: 多项式位串为 --&gt; <span class="m">10011</span>, 模二除法得到余数1110, 所以得到结果11010110111110
+<a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a><span class="m">3</span>&gt; 网卡工作原理:
+<a id="__codelineno-8-10" name="__codelineno-8-10" href="#__codelineno-8-10"></a>   先从OSI七层协议视角,回顾下发包:
+<a id="__codelineno-8-11" name="__codelineno-8-11" href="#__codelineno-8-11"></a>      应用层产生一个数据,依次往下发,包装TCP/UDP的头 -- 数据段<span class="p">;</span>包装网络IP的头 -- 数据报<span class="p">;</span> 
+<a id="__codelineno-8-12" name="__codelineno-8-12" href="#__codelineno-8-12"></a>      包装以太网的头 -- 数据帧frame<span class="p">;</span> 接着转成二进制位通过网线传输给对方.
+<a id="__codelineno-8-13" name="__codelineno-8-13" href="#__codelineno-8-13"></a>   网卡发包:
+<a id="__codelineno-8-14" name="__codelineno-8-14" href="#__codelineno-8-14"></a>      <span class="m">1</span>. ip数据报+14个字节的mac头/以太网头变成数据帧frame
+<a id="__codelineno-8-15" name="__codelineno-8-15" href="#__codelineno-8-15"></a>      <span class="m">2</span>. frame被拷贝到网卡芯片内部的缓冲区,由网卡处理
+<a id="__codelineno-8-16" name="__codelineno-8-16" href="#__codelineno-8-16"></a>      <span class="m">3</span>. 网卡芯片为frame添加头部同步信息和CRC校验<span class="o">(</span>此时才是真正可以发送的包<span class="o">)</span>,然后发送该包
+<a id="__codelineno-8-17" name="__codelineno-8-17" href="#__codelineno-8-17"></a>   网卡收包:
+<a id="__codelineno-8-18" name="__codelineno-8-18" href="#__codelineno-8-18"></a>      <span class="m">1</span>. 网络包到达网卡,网卡先检查数据包的CRC校验,保证其完整性和正确性,
+<a id="__codelineno-8-19" name="__codelineno-8-19" href="#__codelineno-8-19"></a>         若不完整会丢弃<span class="o">(</span>丢弃不可怕,TCP协议会重新发包的<span class="o">)</span><span class="p">;</span>若完整会去掉它的头得到frame
+<a id="__codelineno-8-20" name="__codelineno-8-20" href="#__codelineno-8-20"></a>      <span class="m">2</span>. 网卡将frame拷贝到网卡内部的FIFO<span class="o">(</span>frist <span class="k">in</span> frist out先进先出<span class="o">)</span>缓冲区
+<a id="__codelineno-8-21" name="__codelineno-8-21" href="#__codelineno-8-21"></a>      <span class="m">3</span>. 网卡驱动程序会产生硬件中断,提醒OS干活,OS产生软件中断,将frame从网卡拷贝到内存中
+<a id="__codelineno-8-22" name="__codelineno-8-22" href="#__codelineno-8-22"></a>                 然后一层层的拆包
+</code></pre></div>
+<h3 id="_9"><font color='orange'>解决过程</font><a class="headerlink" href="#_9" title="Permanent link">&para;</a></h3>
+<p>正常情况, 网卡一边接收数据包放到网卡缓冲区中,OS一边从中取出数据包到内存中, 网卡缓冲区不会有溢出. <br />
+若遇到高并发的情况,流量激增,网卡缓冲区满了,往网卡缓冲区里挤的网络包速度远大于OS取的速度...<br />
+新的网络包进不了缓冲区,就会出现溢出.. overruns值升高..<br />
+这会导致客户端就访问不进来了,用户等待时间较长,体验很差!!</p>
+<p><font color='purple'><strong>排除网络的干扰</strong></font></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="s2">&quot;&quot;&quot; step1:查看是否连接网线 &quot;&quot;&quot;</span>
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># mii-tool eth0</span>
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>eth0: negotiated 1000baseT-FD flow-control, link ok
+<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="s2">&quot;&quot;&quot; step2:查看工作模式是否正常 &quot;&quot;&quot;</span>
+<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># ethtool eth0 | egrep &#39;Speed|Duplex&#39;</span>
+<a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a>    Speed: 1000Mb/s     <span class="c1">## -- 千兆网卡</span>
+<a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a>    Duplex: Full            <span class="c1">## -- Full 代表全双工 half的话代表半双工</span>
+<a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a><span class="s2">&quot;&quot;&quot; step3:查看网卡与MTU是否匹配 &quot;&quot;&quot;</span>
+<a id="__codelineno-9-9" name="__codelineno-9-9" href="#__codelineno-9-9"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># ifconfig eth0 | grep mtu</span>
+<a id="__codelineno-9-10" name="__codelineno-9-10" href="#__codelineno-9-10"></a>eth0: <span class="nv">flags</span><span class="o">=</span><span class="m">4163</span>&lt;UP,BROADCAST,RUNNING,MULTICAST&gt;  mtu <span class="m">1500</span>
+<a id="__codelineno-9-11" name="__codelineno-9-11" href="#__codelineno-9-11"></a><span class="s2">&quot;&quot;&quot; step4:查看CRC校验是否正常 &quot;&quot;&quot;</span>
+<a id="__codelineno-9-12" name="__codelineno-9-12" href="#__codelineno-9-12"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># ethtool -S eth0 | grep crc </span>
+<a id="__codelineno-9-13" name="__codelineno-9-13" href="#__codelineno-9-13"></a>     rx_crc_errors: <span class="m">0</span>  <span class="c1">## -- crc错误值大通常是因为服务器外部的网络环境有问题导致的</span>
+<a id="__codelineno-9-14" name="__codelineno-9-14" href="#__codelineno-9-14"></a>
+<a id="__codelineno-9-15" name="__codelineno-9-15" href="#__codelineno-9-15"></a>Speed、Duplex、CRC之类的都没问题,基本可以排除物理层面的干扰
+</code></pre></div>
+<p><font color='purple'><strong>网络没问题, 那么问题就出现在服务器上了</strong></font></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>【监测overruns值】
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>    <span class="k">while</span> true<span class="p">;</span><span class="k">do</span> ifconfig eth0 <span class="p">|</span> grep RX <span class="p">|</span> grep overruns<span class="p">;</span>sleep <span class="m">0</span>.5<span class="p">;</span>clear<span class="p">;</span><span class="k">done</span>
+<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>    监测的时候,某一时刻,overruns达到了上百,又降了下来<span class="o">(</span>TCP重新发包了<span class="o">)</span>,不用过于担心
+<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a>    若值一直一直在增长,意味着在一直累积溢出的包,用户一直访问不进来,体验极差..
+<a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a>
+<a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a>解决方案:
+<a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a>    低配版 -- 单台服务器,调大缓冲区..
+<a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a>             缓冲区最高4096,不够了咋整？一个网卡的性能有极限的,用多个网卡 -- 垂直扩展
+<a id="__codelineno-10-9" name="__codelineno-10-9" href="#__codelineno-10-9"></a>    高配版 --加机子,集群化作业,多台机器抗压力,流量就被分散了. -- 水平扩展!!!
+<a id="__codelineno-10-10" name="__codelineno-10-10" href="#__codelineno-10-10"></a>    So!开发不能鄙视运维,开发的软件再好,最多支持几千并发,但运维集群化作业能把软件的并发性能放大几十上百倍..
+<a id="__codelineno-10-11" name="__codelineno-10-11" href="#__codelineno-10-11"></a>
+<a id="__codelineno-10-12" name="__codelineno-10-12" href="#__codelineno-10-12"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># ethtool -g eth0   # -- 查看</span>
+<a id="__codelineno-10-13" name="__codelineno-10-13" href="#__codelineno-10-13"></a>Ring parameters <span class="k">for</span> eth0:
+<a id="__codelineno-10-14" name="__codelineno-10-14" href="#__codelineno-10-14"></a>Pre-set maximums:
+<a id="__codelineno-10-15" name="__codelineno-10-15" href="#__codelineno-10-15"></a>RX:     <span class="m">4096</span>        <span class="c1"># -- 接收的缓冲区大小</span>
+<a id="__codelineno-10-16" name="__codelineno-10-16" href="#__codelineno-10-16"></a>RX Mini:    <span class="m">0</span>
+<a id="__codelineno-10-17" name="__codelineno-10-17" href="#__codelineno-10-17"></a>RX Jumbo:   <span class="m">0</span>
+<a id="__codelineno-10-18" name="__codelineno-10-18" href="#__codelineno-10-18"></a>TX:     <span class="m">4096</span>        <span class="c1"># -- 传输的缓冲区大小</span>
+<a id="__codelineno-10-19" name="__codelineno-10-19" href="#__codelineno-10-19"></a>Current hardware settings: <span class="c1"># -- 当前硬件的设置</span>
+<a id="__codelineno-10-20" name="__codelineno-10-20" href="#__codelineno-10-20"></a>RX:     <span class="m">256</span>
+<a id="__codelineno-10-21" name="__codelineno-10-21" href="#__codelineno-10-21"></a>RX Mini:    <span class="m">0</span>
+<a id="__codelineno-10-22" name="__codelineno-10-22" href="#__codelineno-10-22"></a>RX Jumbo:   <span class="m">0</span>
+<a id="__codelineno-10-23" name="__codelineno-10-23" href="#__codelineno-10-23"></a>TX:     <span class="m">256</span>
+<a id="__codelineno-10-24" name="__codelineno-10-24" href="#__codelineno-10-24"></a>
+<a id="__codelineno-10-25" name="__codelineno-10-25" href="#__codelineno-10-25"></a>ethtool -G eth0 rx <span class="m">2048</span>  <span class="c1"># 设置调大</span>
+<a id="__codelineno-10-26" name="__codelineno-10-26" href="#__codelineno-10-26"></a>ethtool -G eth0 tx <span class="m">2048</span>  <span class="c1"># 设置调大</span>
+<a id="__codelineno-10-27" name="__codelineno-10-27" href="#__codelineno-10-27"></a>Ps:还可以想着将网卡降速..这想法挺奇怪的Hhhh
+</code></pre></div>
+<hr />
+<h2 id="_10">网卡相关配置文件<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h2>
+<h3 id="ifcfg-eth0"><font color='orange'>解析 ifcfg-eth0文件</font><a class="headerlink" href="#ifcfg-eth0" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p>vim /etc/sysconfig/network-scripts/ifcfg-eth0</p>
+</blockquote>
+<p><code>systemctl restart network</code>  重启网络服务会去加载这些配置文件</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>▲ 必要字段
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="s2">&quot;&quot;&quot;</span>
+<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="s2">BOOTPROTO若设置为dchp,表明动态获取IP地址,在租约时间内IP地址不会变..到期了后重新分配IP..</span>
+<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a><span class="s2">IPADDR、NETMASK、GATEWAY、DNS1、DNS2这几个字段只有在BOOTPROTO的值为static或none时才会生效..</span>
+<a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a><span class="s2">IPADDR、NETMASK保证了局域网里的通信,GATEWAY、DNS1、DNS2保证了与外网的通信.</span>
+<a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a><span class="s2">    IPADDR的配置要注意,vm网卡若用的桥接模式要防止占用其他设备的IP,若用的NAT模式没关系.</span>
+<a id="__codelineno-11-7" name="__codelineno-11-7" href="#__codelineno-11-7"></a><span class="s2">    DNS的地址最多配置3个,配置后会写入/etc/resolv.conf文件中</span>
+<a id="__codelineno-11-8" name="__codelineno-11-8" href="#__codelineno-11-8"></a><span class="s2">    GATEWAY的值可以通过`route -n`命令查看路由器上配置的网关地址;</span>
+<a id="__codelineno-11-9" name="__codelineno-11-9" href="#__codelineno-11-9"></a><span class="s2">企业里通常是集群化作业,so,BOOTPROTO的值都会是static!!!!!!</span>
+<a id="__codelineno-11-10" name="__codelineno-11-10" href="#__codelineno-11-10"></a><span class="s2">Ps:可以先DHCP动态获取IP,然后在静态配置时,去查看/etc/resolv.conf文件里面已设置的DNS(nameserver字段的值)     通常是8.8.8.8 和 网关的地址</span>
+<a id="__codelineno-11-11" name="__codelineno-11-11" href="#__codelineno-11-11"></a>
+<a id="__codelineno-11-12" name="__codelineno-11-12" href="#__codelineno-11-12"></a><span class="s2">NM_CONTROLLED可以不添加,前提是执行命令</span>
+<a id="__codelineno-11-13" name="__codelineno-11-13" href="#__codelineno-11-13"></a><span class="s2">   systemctl stop NetworkManger systemctl disable NetworkManger</span>
+<a id="__codelineno-11-14" name="__codelineno-11-14" href="#__codelineno-11-14"></a><span class="s2">&quot;&quot;&quot;</span>
+<a id="__codelineno-11-15" name="__codelineno-11-15" href="#__codelineno-11-15"></a><span class="nv">TYPE</span><span class="o">=</span><span class="s2">&quot;Ethernet&quot;</span>             <span class="c1">## -- Ethernet类型表明是以太网卡！</span>
+<a id="__codelineno-11-16" name="__codelineno-11-16" href="#__codelineno-11-16"></a><span class="nv">BOOTPROTO</span><span class="o">=</span><span class="s2">&quot;static&quot;</span>          <span class="c1">## -- none 或者 static 都可以手动指定静态IP</span>
+<a id="__codelineno-11-17" name="__codelineno-11-17" href="#__codelineno-11-17"></a><span class="nv">IPADDR</span> <span class="o">=</span> <span class="m">192</span>.168.0.100      <span class="c1">## -- IP地址</span>
+<a id="__codelineno-11-18" name="__codelineno-11-18" href="#__codelineno-11-18"></a><span class="nv">NETMASK</span> <span class="o">=</span> <span class="m">255</span>.255.255.0     <span class="c1">## -- IP掩码地址</span>
+<a id="__codelineno-11-19" name="__codelineno-11-19" href="#__codelineno-11-19"></a><span class="nv">GATEWAY</span> <span class="o">=</span> <span class="m">192</span>.168.0.254     <span class="c1">## -- 网关地址</span>
+<a id="__codelineno-11-20" name="__codelineno-11-20" href="#__codelineno-11-20"></a><span class="nv">DNS1</span> <span class="o">=</span> <span class="m">192</span>.168.0.254        <span class="c1">## -- 第一个DNS地址</span>
+<a id="__codelineno-11-21" name="__codelineno-11-21" href="#__codelineno-11-21"></a><span class="nv">DNS2</span> <span class="o">=</span> <span class="m">8</span>.8.8.8              <span class="c1">## -- 第二个DNS地址</span>
+<a id="__codelineno-11-22" name="__codelineno-11-22" href="#__codelineno-11-22"></a><span class="nv">NAME</span><span class="o">=</span><span class="s2">&quot;eth0&quot;</span>                 <span class="c1">## -- 名字</span>
+<a id="__codelineno-11-23" name="__codelineno-11-23" href="#__codelineno-11-23"></a><span class="nv">DEVICE</span><span class="o">=</span><span class="s2">&quot;eth0&quot;</span>               <span class="c1">## -- 设备名</span>
+<a id="__codelineno-11-24" name="__codelineno-11-24" href="#__codelineno-11-24"></a><span class="nv">ONBOOT</span><span class="o">=</span><span class="s2">&quot;yes&quot;</span>                <span class="c1">## -- 代表网卡是否跟着NETWORK网络服务的启动而激活</span>
+<a id="__codelineno-11-25" name="__codelineno-11-25" href="#__codelineno-11-25"></a><span class="nv">NM_CONTROLLED</span><span class="o">=</span><span class="s2">&quot;no&quot;</span>          <span class="c1">## -- 表明网卡不受NetworkManager服务的影响</span>
+<a id="__codelineno-11-26" name="__codelineno-11-26" href="#__codelineno-11-26"></a>
+<a id="__codelineno-11-27" name="__codelineno-11-27" href="#__codelineno-11-27"></a>
+<a id="__codelineno-11-28" name="__codelineno-11-28" href="#__codelineno-11-28"></a>
+<a id="__codelineno-11-29" name="__codelineno-11-29" href="#__codelineno-11-29"></a>▲ 其他不必要字段
+<a id="__codelineno-11-30" name="__codelineno-11-30" href="#__codelineno-11-30"></a><span class="c1">## -- 配置网卡路由文件的时候需要进行此字段的设置 表示DHCP的路由配置不生效!!</span>
+<a id="__codelineno-11-31" name="__codelineno-11-31" href="#__codelineno-11-31"></a><span class="nv">DEFROUTE</span> <span class="o">=</span> <span class="s2">&quot;no&quot;</span>
+<a id="__codelineno-11-32" name="__codelineno-11-32" href="#__codelineno-11-32"></a><span class="c1">## -- 配置网卡路由文件的时候需要进行此字段的设置 值为no表示DHCP设置的路由允许被覆盖!!</span>
+<a id="__codelineno-11-33" name="__codelineno-11-33" href="#__codelineno-11-33"></a><span class="nv">PEERROUTES</span> <span class="o">=</span> <span class="s2">&quot;no&quot;</span>
+<a id="__codelineno-11-34" name="__codelineno-11-34" href="#__codelineno-11-34"></a><span class="c1">## -- 网卡的MAC地址信息,centos7里没有,centos6里有</span>
+<a id="__codelineno-11-35" name="__codelineno-11-35" href="#__codelineno-11-35"></a><span class="nv">HWADDR</span><span class="o">=</span><span class="m">14</span>:da:e9:eb:a9:61  
+<a id="__codelineno-11-36" name="__codelineno-11-36" href="#__codelineno-11-36"></a><span class="c1">## -- 是否允许普通用户启动或者停止该网卡</span>
+<a id="__codelineno-11-37" name="__codelineno-11-37" href="#__codelineno-11-37"></a><span class="nv">USERCTL</span><span class="o">=</span>no
+<a id="__codelineno-11-38" name="__codelineno-11-38" href="#__codelineno-11-38"></a><span class="c1">## -- 是否在该网卡上启动IPV6的功能</span>
+<a id="__codelineno-11-39" name="__codelineno-11-39" href="#__codelineno-11-39"></a><span class="nv">IPV6INIT</span><span class="o">=</span>no 　　　　　　　
+<a id="__codelineno-11-40" name="__codelineno-11-40" href="#__codelineno-11-40"></a><span class="c1">## --是否允许网卡在启动时向DHCP服务器查询DNS信息,该字段了解即可</span>
+<a id="__codelineno-11-41" name="__codelineno-11-41" href="#__codelineno-11-41"></a>    <span class="c1"># 设置为yes时,此文件设置的DNS将覆盖/etc/resolv.conf</span>
+<a id="__codelineno-11-42" name="__codelineno-11-42" href="#__codelineno-11-42"></a>    <span class="c1"># BOOTPROTO若设置为dchp(配置文件中的DNS1是不生效的),则默认为yes,dhcp的dns会覆盖/etc/resolv.conf</span>
+<a id="__codelineno-11-43" name="__codelineno-11-43" href="#__codelineno-11-43"></a><span class="nv">PEERDNS</span><span class="o">=</span>yes 　　　　　　　　        
+<a id="__codelineno-11-44" name="__codelineno-11-44" href="#__codelineno-11-44"></a><span class="c1">## -- 若冲突,可以直接删除</span>
+<a id="__codelineno-11-45" name="__codelineno-11-45" href="#__codelineno-11-45"></a><span class="nv">UUID</span><span class="o">=</span><span class="s2">&quot;3919d7da-ef03-40a0-814e-d78c047e1f87&quot;</span> 
+</code></pre></div>
+<h3 id="ifcfg-eth1"><font color='orange'>配置ifcfg-eth1文件</font><a class="headerlink" href="#ifcfg-eth1" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="c1"># -- 可以发现只有网卡eth0的配置文件,虽然新增了eth1网卡,但系统并没有自动为它生成配置文件,所以eth1是临时的</span>
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># ls /etc/sysconfig/network-scripts | grep ifcfg-eth</span>
+<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a>ifcfg-eth0
+<a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a>
+<a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a><span class="nb">cd</span> /etc/sysconfig/network-scripts/
+<a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a>cp ifcfg-eth0 ifcfg-eth1
+<a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a>vim ifcfg-eth1
+<a id="__codelineno-12-8" name="__codelineno-12-8" href="#__codelineno-12-8"></a>
+<a id="__codelineno-12-9" name="__codelineno-12-9" href="#__codelineno-12-9"></a><span class="s2">&quot;&quot;&quot;</span>
+<a id="__codelineno-12-10" name="__codelineno-12-10" href="#__codelineno-12-10"></a><span class="s2">若不想通过172.16.150.100这个IP地址访问外网就没必要指定GATEWAY网关等字段信息</span>
+<a id="__codelineno-12-11" name="__codelineno-12-11" href="#__codelineno-12-11"></a><span class="s2">真正的生产环境里,也不会给每块网卡配置网关,一块网卡配置了就行了</span>
+<a id="__codelineno-12-12" name="__codelineno-12-12" href="#__codelineno-12-12"></a><span class="s2">So,我们可以将eth0网卡用于外网通信,eth1网卡用于内网通信...</span>
+<a id="__codelineno-12-13" name="__codelineno-12-13" href="#__codelineno-12-13"></a><span class="s2">&quot;&quot;&quot;</span>
+<a id="__codelineno-12-14" name="__codelineno-12-14" href="#__codelineno-12-14"></a><span class="nv">TYPE</span><span class="o">=</span><span class="s2">&quot;Ethernet&quot;</span>
+<a id="__codelineno-12-15" name="__codelineno-12-15" href="#__codelineno-12-15"></a><span class="nv">BOOTPROTO</span><span class="o">=</span><span class="s2">&quot;static&quot;</span>
+<a id="__codelineno-12-16" name="__codelineno-12-16" href="#__codelineno-12-16"></a><span class="nv">IPADDR</span> <span class="o">=</span> <span class="m">172</span>.16.150.100
+<a id="__codelineno-12-17" name="__codelineno-12-17" href="#__codelineno-12-17"></a><span class="nv">NETMASK</span> <span class="o">=</span> <span class="m">255</span>.255.255.0
+<a id="__codelineno-12-18" name="__codelineno-12-18" href="#__codelineno-12-18"></a><span class="c1">#GATEWAY = 172.16.150.2</span>
+<a id="__codelineno-12-19" name="__codelineno-12-19" href="#__codelineno-12-19"></a><span class="c1">#DNS1 = 172.16.150.2 </span>
+<a id="__codelineno-12-20" name="__codelineno-12-20" href="#__codelineno-12-20"></a><span class="c1">#DNS2 = 8.8.8.8</span>
+<a id="__codelineno-12-21" name="__codelineno-12-21" href="#__codelineno-12-21"></a><span class="nv">NAME</span><span class="o">=</span><span class="s2">&quot;eth1&quot;</span> 
+<a id="__codelineno-12-22" name="__codelineno-12-22" href="#__codelineno-12-22"></a><span class="nv">DEVICE</span><span class="o">=</span><span class="s2">&quot;eth1&quot;</span>   
+<a id="__codelineno-12-23" name="__codelineno-12-23" href="#__codelineno-12-23"></a><span class="nv">ONBOOT</span><span class="o">=</span><span class="s2">&quot;yes&quot;</span>
+<a id="__codelineno-12-24" name="__codelineno-12-24" href="#__codelineno-12-24"></a><span class="nv">NM_CONTROLLED</span><span class="o">=</span><span class="s2">&quot;no&quot;</span> 
+</code></pre></div>
+<hr />
+<h2 id="dns">DNS相关配置文件<a class="headerlink" href="#dns" title="Permanent link">&para;</a></h2>
+<p><code>/etc/resolv.conf</code>  &nbsp;&nbsp;&nbsp;&nbsp; DNS解析文件, 可设置DNS指向,最多3个<br />
+<code>/etc/hosts</code> &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; 本地名称解析文件,  <font color='blue'><strong>优先于DNS解析文件</strong></font></p>
+<p><font color='brown'>DNS查询顺序 </font><br />
+&nbsp;&nbsp;&nbsp;&nbsp; 浏览器DNS缓存 --&gt; 本地系统DNS缓存 --&gt; 本地计算机HOSTS文件 --&gt; ISP DNS缓存 --&gt; 递归or迭代搜索</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>▲ 一个小实验,修改配置文件/etc/hosts 在末尾添加1.1.1.1 www.baidu.com
+<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># ping www.baidu.com</span>
+<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a>PING www.a.shifen.com <span class="o">(</span><span class="m">14</span>.215.177.39<span class="o">)</span> <span class="m">56</span><span class="o">(</span><span class="m">84</span><span class="o">)</span> bytes of data.
+<a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a>... ...
+<a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># ping www.baidu.com</span>
+<a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a>PING www.baidu.com <span class="o">(</span><span class="m">1</span>.1.1.1<span class="o">)</span> <span class="m">56</span><span class="o">(</span><span class="m">84</span><span class="o">)</span> bytes of data.  <span class="c1"># -- 百度域名被解析成了1.1.1.1</span>
+<a id="__codelineno-13-7" name="__codelineno-13-7" href="#__codelineno-13-7"></a>... ...
+<a id="__codelineno-13-8" name="__codelineno-13-8" href="#__codelineno-13-8"></a>
+<a id="__codelineno-13-9" name="__codelineno-13-9" href="#__codelineno-13-9"></a>某公司用A B C D E..HI..等20台机器搭建了一个集群!! A要跟其它机器通信,需要知道目标主机的IP地址..
+<a id="__codelineno-13-10" name="__codelineno-13-10" href="#__codelineno-13-10"></a>并且在相应的配置文件中配置目标主机的IP..
+<a id="__codelineno-13-11" name="__codelineno-13-11" href="#__codelineno-13-11"></a>这样做不好,一方面IP地址难记<span class="p">;</span>另一方面主机的IP地址日后可能会变..一变,20台主机重新修改配置文件很麻烦..
+<a id="__codelineno-13-12" name="__codelineno-13-12" href="#__codelineno-13-12"></a>
+<a id="__codelineno-13-13" name="__codelineno-13-13" href="#__codelineno-13-13"></a>
+<a id="__codelineno-13-14" name="__codelineno-13-14" href="#__codelineno-13-14"></a>最规范的做法:
+<a id="__codelineno-13-15" name="__codelineno-13-15" href="#__codelineno-13-15"></a>    在公司内部自己搭建个DNS服务<span class="p">;</span>会先给这20台机器每台机器起个名字,也就是域名,每个域名对应一个IP地址记录在DNS服务器中..<span class="sb">`</span>hostnamectl set-hostname egon.xxx.com<span class="sb">`</span>永久设置主机名.
+<a id="__codelineno-13-16" name="__codelineno-13-16" href="#__codelineno-13-16"></a>    这样一来,配置文件中只需要使用域名即可,当A主机与集群中其他机器通信时,会去自己搭建的DNS服务器上查一查对应的域名解析.. 当某个主机的IP地址变了,集群中20级台机器的配置文件都不需要动,改DNS服务器上的某条解析记录即可..
+<a id="__codelineno-13-17" name="__codelineno-13-17" href="#__codelineno-13-17"></a>因为是内部搭建的DNS服务器,域名还不用注册.. 也便于集群中增加主机时的操作..
+<a id="__codelineno-13-18" name="__codelineno-13-18" href="#__codelineno-13-18"></a>    搭建个DNS服务不仅可以增加可扩展性,DNS服务器还可以做负载均衡等..
+<a id="__codelineno-13-19" name="__codelineno-13-19" href="#__codelineno-13-19"></a>
+<a id="__codelineno-13-20" name="__codelineno-13-20" href="#__codelineno-13-20"></a>偷懒的做法:
+<a id="__codelineno-13-21" name="__codelineno-13-21" href="#__codelineno-13-21"></a>    不搭建DNS服务,在一台机器上将20台机器的解析记录写入/etc/hosts文件,再给每台机器都发送一份,但意味着每次改动,每台机器都要同步一下..<span class="o">(</span>有一些自动化管理工具,改动以后可自动批量的每台机器都传一份<span class="o">)</span>
+</code></pre></div>
+<hr />
+<h2 id="etcservices">/etc/services<a class="headerlink" href="#etcservices" title="Permanent link">&para;</a></h2>
+<blockquote>
+<p>记录了每一个软件跟它对应的端口号以及协议</p>
+</blockquote>
+<p>常见的服务端对应的端口号</p>
+<table>
+<thead>
+<tr>
+<th>服务端</th>
+<th>端口号</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>dhcp</td>
+<td>67</td>
+</tr>
+<tr>
+<td>dns</td>
+<td>53</td>
+</tr>
+<tr>
+<td>mysql</td>
+<td>3306</td>
+</tr>
+<tr>
+<td>ssh</td>
+<td>22</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="n">grep</span> <span class="s1">&#39;^ftp\|^ssh&#39;</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">services</span> 
+</code></pre></div>
+<hr />
+<h2 id="_11">交换与路由<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h2>
+<p><strong>交换:</strong> 指同网络访问.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 多台主机处于同一个LAN/交换机/局域网中,配置同网段的不同ip就可以直接通信,二层网络本质是基于mac地址的通信,不需要进行转发,这里默认交换机未划分过vlan(<font color='gray'>即不讨论三层交换</font>)..  </p>
+<p><strong>路由:</strong> 指跨网络访问的路径选择. <br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 若要与外网通信,就需要转发/路由.. 路由器上配置的有网关.. <strong>网关有个特点, 至少得有两个地址, 对内得有一个局域网地址, 对外得有一个外网地址..</strong></p>
+<hr />
+<h2 id="linux">Linux主机充当路由<a class="headerlink" href="#linux" title="Permanent link">&para;</a></h2>
+<h3 id="_12"><font color='orange'>三大前提</font><a class="headerlink" href="#_12" title="Permanent link">&para;</a></h3>
+<p>将一台linux主机A当作路由的<font color='brown'>三大前提</font>: <br />
+1&gt; 主机A至少得有两块网卡分别连接不同的网段;<br />
+&nbsp;&nbsp;&nbsp;&nbsp; (A主机连接的不同网段里的主机都必须将网关指向主机A)<br />
+2&gt; 主机A开启路由转发功能(默认是关闭的); <code>echo 1 &gt; /proc/sys/net/ipv4/ip_forward</code> 临时打开.<br />
+3&gt; 在该linux主机上添加正确的路由规则/策略..</p>
+<h3 id="_13"><font color='orange'>转发流程</font><a class="headerlink" href="#_13" title="Permanent link">&para;</a></h3>
+<p>A主机的linux OS左手网卡1,右手网卡2,连接两个不同的网段..(B主机处于网段1,C主机处于网段2)<br />
+B、C处于不同网段,是不能直接通信的, A可以作为BC之间互通的桥梁..  <font color='gray'>B &lt;<mark>&gt; A &lt;</mark>&gt; C</font></p>
+<p>主机B发送了个数据包,会从网卡1进来的, A主机的linux内核会先判断此包是不是给本机的, 不是的话就正常的丢掉.. </p>
+<p>若是给本机的: <br />
+&nbsp;&nbsp;&nbsp;&nbsp; 情况1: 该数据包就是明确的给本机上层的应用程序的; <br />
+&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <font color='blue'> 数据包流向: 网卡1 - 操作系统(A主机的 <em>内核空间</em> ) - 应用程序(A主机的 <em>用户空间</em>) </font><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 情况1&gt; 应用程序处理完数据包就结束了,不需要返回数据包;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 情况2&gt; 应用程序处理完数据包产生了新的结果,新的数据包从A的用户空间丢到了A的内核空间.. <br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 内核再判断新的数据包从哪个网卡发出去... <br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 新数据包的目标主机是C就从网卡2出去;是B就从网卡1原路返回...<br />
+&nbsp;&nbsp;&nbsp;&nbsp; 情况2: 将本机的OS Linux当作路由器使用,数据包不会进入A主机的用户空间,数据包会从网卡2出去,转发给C;</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="c1"># -- 可以看到 linux主机的路由转发功能默认是关闭的 0关闭 1开启</span>
+<a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># cat /proc/sys/net/ipv4/ip_forward</span>
+<a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a><span class="m">0</span>
+</code></pre></div>
+<hr />
+<h2 id="_14">网关/路由<a class="headerlink" href="#_14" title="Permanent link">&para;</a></h2>
+<blockquote>
+<p><strong>route命令</strong></p>
+</blockquote>
+<h3 id="_15"><font color='orange'>分类、优先级</font><a class="headerlink" href="#_15" title="Permanent link">&para;</a></h3>
+<p>Linux上的路由分为3种:<br />
+&nbsp;&nbsp;&nbsp;&nbsp; 1&gt; <strong>主机路由</strong>: 明确指定了到达某台主机应该怎么走.. 主机路由也叫做静态路由 <font color='gray'>掩码位32位 </font><br />
+&nbsp;&nbsp;&nbsp;&nbsp; 2&gt; <strong>网络路由</strong>: 指明到某类网络怎么走, 精确到了某个网段.. <font color='gray'>掩码位小于32位</font>  <br />
+&nbsp;&nbsp;&nbsp;&nbsp; 3&gt; <strong>默认路由</strong>: 不走主机路由的和网络路由的, 全部都走默认路由.  <font color='gray'>掩码全为0 </font><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 操作系统上设置的默认路由一般称为网关..</p>
+<p><font color='gray'><strong>回顾下,</strong> 子网掩码与IP地址做与运算可以算出网络地址(同1为1,否则为0).. 一个B类的IP地址,子网掩码至少是8位,IP地址的网络位向主机位借位(借的叫做子网位)来划分子网..</font> <br />
+子网掩码越短意味着划分的子网数越少, 每个子网的范围(每个子网中的主机个数)就越大; 反之则相反!!!</p>
+<p><font color='brown'><strong>优先级:(根据精确度判断的)</strong> 主机路由 &gt; 网络路由 &gt; 默认路由 </font><br />
+<font color='gray'>若路由条目的掩码长度相同, 则比较节点之间的管理距离(比如metric), 管理距离短的生效</font></p>
+<p>举个栗子, <code>1.1.1.10/32</code> 32位的掩码意味着IP地址的前32位都是网络号,没有剩下主机位,不能借位,该IP也就不能划分任何的子网.. 1.1.1.10网段没有任何其他机器... 只有它自己.. 精确到了一台机器!!!</p>
+<hr />
+<h3 id="_16"><font color='orange'>查看路由表信息</font><a class="headerlink" href="#_16" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p><code>route -n</code>    -n选项表示不解析主机名</p>
+</blockquote>
+<p>Destination: 去往目标,目的地<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 0.0.0.0/0 代表所有的IP地址都是目的地 <br />
+Gateway: 下一跳(下一步交给谁做转发) <br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 0.0.0.0表明没有下一跳,通过Iface指定的网卡往局域网里一丢.<br />
+                    谁收到算谁的,收到的那台主机不会将该数据包做下一跳的转发.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 172.16.150.2 指定了网关IP 表明网关会安排下一跳<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 169.254.0.0   是保留网关 <br />
+Genmask: 子网掩码<br />
+Flags: 标志位<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; U 此路由规则正在生效<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; G 网关<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; H 主机路由 <br />
+Metric: 总共经历多少跳<br />
+Iface: 从哪个网卡出去</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="c1">## -- 这些信息是从DHCP里获取到的,若不想要DHCP的,想自己配置的生效,则需要修改配置文件！</span>
+<a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># route -n</span>
+<a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a>Kernel IP routing table <span class="c1"># -- 内核IP路由表</span>
+<a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a>Destination     Gateway         Genmask         Flags Metric Ref    Use Iface
+<a id="__codelineno-16-5" name="__codelineno-16-5" href="#__codelineno-16-5"></a><span class="m">0</span>.0.0.0         <span class="m">172</span>.16.150.2    <span class="m">0</span>.0.0.0         UG    <span class="m">0</span>      <span class="m">0</span>        <span class="m">0</span> eth0
+<a id="__codelineno-16-6" name="__codelineno-16-6" href="#__codelineno-16-6"></a><span class="m">169</span>.254.0.0     <span class="m">0</span>.0.0.0         <span class="m">255</span>.255.0.0     U     <span class="m">1002</span>   <span class="m">0</span>        <span class="m">0</span> eth0 <span class="c1"># --保留网关,了解</span>
+<a id="__codelineno-16-7" name="__codelineno-16-7" href="#__codelineno-16-7"></a><span class="m">172</span>.16.150.0    <span class="m">0</span>.0.0.0         <span class="m">255</span>.255.255.0   U     <span class="m">0</span>      <span class="m">0</span>        <span class="m">0</span> eth0
+<a id="__codelineno-16-8" name="__codelineno-16-8" href="#__codelineno-16-8"></a><span class="m">192</span>.168.122.0   <span class="m">0</span>.0.0.0         <span class="m">255</span>.255.255.0   U     <span class="m">0</span>      <span class="m">0</span>        <span class="m">0</span> virbr0
+</code></pre></div>
+<hr />
+<h3 id="_17"><font color='orange'>添加/删除路由</font><a class="headerlink" href="#_17" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>eth0网卡 -- inet <span class="m">172</span>.16.150.131  netmask <span class="m">255</span>.255.255.0
+<a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a>系统会默认添加一条网络路由!!! <span class="sb">`</span>route add -net <span class="m">192</span>.168.0.0/24 dev eth0<span class="sb">`</span>
+<a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a>
+<a id="__codelineno-17-4" name="__codelineno-17-4" href="#__codelineno-17-4"></a>为何只要添加一个ip地址,就会默认增加一个该ip地址的网段路由？
+</code></pre></div>
+<p>1&gt; <strong>添加/删除主机路由,精确到一个IP地址</strong></p>
+<p><code>route add -host 1.1.1.10/32 dev eth0</code> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; --  不需要转发则指定dev<br />
+<code>route add -host 1.1.1.11/32 gw 172.16.150.2</code> &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; --  若需要转发,指定gw
+<code>route del -host 1.1.1.10/32</code></p>
+<p>2&gt; <strong>添加/删除网络路由</strong></p>
+<p><code>route add -net 2.2.2.0/24 dev eth0</code><br />
+<code>route del -net 2.2.2.0/24</code></p>
+<p>3&gt; <strong>删除/添加默认路由</strong></p>
+<p><code>route del default</code><br />
+<code>route add -net 0.0.0.0/0 gw 172.16.150.2</code> 或者 <code>route add default gw 172.16.150.2</code></p>
+<p><font color='blue'>systemctl restart network 重启网络配置后, 上述的设置失效</font></p>
+<hr />
+<h3 id="_18"><font color='orange'>配置永久路由</font><a class="headerlink" href="#_18" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>vim /etc/syconfig/network-scripts/route-eth0
+<a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a>
+<a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a>注意:
+<a id="__codelineno-18-4" name="__codelineno-18-4" href="#__codelineno-18-4"></a>    <span class="m">1</span>&gt; 新增一个路由配置文件,前提需要一个相对应的名为ifcfg-eth0的网卡配置文件 
+<a id="__codelineno-18-5" name="__codelineno-18-5" href="#__codelineno-18-5"></a>       名字要对应上哦! route-ethX, 要从哪个接口出去X就是几
+<a id="__codelineno-18-6" name="__codelineno-18-6" href="#__codelineno-18-6"></a>    <span class="m">2</span>&gt; 在文件中配置永久默认路由, 则必须保证所有使用了DHCP服务的网卡配置文件ifcfg-ethX中的
+<a id="__codelineno-18-7" name="__codelineno-18-7" href="#__codelineno-18-7"></a>           DEFROUTE指令设置为<span class="s2">&quot;no&quot;</span>,表明DHCP的路由配置不生效<span class="p">;</span>
+<a id="__codelineno-18-8" name="__codelineno-18-8" href="#__codelineno-18-8"></a>           PEERROUTES指令设置为<span class="s2">&quot;no&quot;</span>,表示DHCP设置的路由允许被覆盖.
+<a id="__codelineno-18-9" name="__codelineno-18-9" href="#__codelineno-18-9"></a>
+<a id="__codelineno-18-10" name="__codelineno-18-10" href="#__codelineno-18-10"></a>配置规则:每一行一个路由条目, 先是要到达的目标, 然后是via关键字,最后是下一跳地址.
+<a id="__codelineno-18-11" name="__codelineno-18-11" href="#__codelineno-18-11"></a>       要求下一跳必须能到达,且一般都和ethX同网段..
+</code></pre></div>
+<p>例如eth0网卡的IP地址是192.168.10.123,,要通过网卡eth0出去到达10.0.0.10,,<strong>那么下一跳的地址要和eth0的地址在同网段</strong>..如192.168.10.222 ...<br />
+<font color='purple'>看计算机网络之网络层.md 中 网络层整个流程 这部分的内容, 注意图中的路由器1的IP 192.168.100.4 和路由器2的IP 192.168.100.5 !!</font></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a><span class="c1"># -- 默认路由</span>
+<a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a>default     via <span class="m">192</span>.168.100.1 dev eth0
+<a id="__codelineno-19-3" name="__codelineno-19-3" href="#__codelineno-19-3"></a><span class="m">0</span>.0.0.0/0   via <span class="m">192</span>.168.100.1 dev eth0
+<a id="__codelineno-19-4" name="__codelineno-19-4" href="#__codelineno-19-4"></a>
+<a id="__codelineno-19-5" name="__codelineno-19-5" href="#__codelineno-19-5"></a><span class="c1"># -- 网段路由</span>
+<a id="__codelineno-19-6" name="__codelineno-19-6" href="#__codelineno-19-6"></a><span class="m">192</span>.168.10.0/24   via <span class="m">192</span>.168.100.1 dev eth0
+<a id="__codelineno-19-7" name="__codelineno-19-7" href="#__codelineno-19-7"></a>
+<a id="__codelineno-19-8" name="__codelineno-19-8" href="#__codelineno-19-8"></a><span class="c1"># -- 主机路由,在centos7中 dev得指定</span>
+<a id="__codelineno-19-9" name="__codelineno-19-9" href="#__codelineno-19-9"></a><span class="m">192</span>.168.100.52/32 via <span class="m">192</span>.168.100.33 dev eth0
+</code></pre></div>
+<p>配置完后, 重启network服务即可立即生效...</p>
+<hr />
+<h2 id="_19">路由实验<a class="headerlink" href="#_19" title="Permanent link">&para;</a></h2>
+<p><img alt="" src="../assets/%E8%B7%AF%E7%94%B1%E5%AE%9E%E9%AA%8C.jpeg" /></p>
+<p>略.. 实验详见<code>https://zhuanlan.zhihu.com/p/337256553</code> </p>
+<p><font color='gray'>让我偷偷懒,主要是开发真就用不到... 路由的配置又很繁琐.. 有点累, 理论方面是整理规整了的！！！ </font></p>
+<hr />
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+          <a href="#" class="md-top md-icon" data-md-component="top" hidden>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
+            回到页面顶部
+          </a>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+    <nav class="md-footer__inner md-grid" aria-label="页脚" >
+      
+        
+        <a href="../15_%E5%AD%98%E5%82%A8%E7%AE%A1%E7%90%86%E4%B9%8BLVM/" class="md-footer__link md-footer__link--prev" aria-label="上一页: 存储管理之LVM" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                上一页
+              </span>
+              存储管理之LVM
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="../17_shell%E5%9F%BA%E7%A1%80/" class="md-footer__link md-footer__link--next" aria-label="下一页: shell基础" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                下一页
+              </span>
+              shell基础
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright © 2023 from Dc_OnePiece
+    </div>
+  
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "navigation.top", "navigation.expand", "navigation.instant", "navigation.tracking", "search.suggest", "search.highlight", "search.share"], "search": "../../assets/javascripts/workers/search.5bf1dace.min.js", "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.config.lang": "ja", "search.config.pipeline": "trimmer, stemmer", "search.config.separator": "[\\s\\-\uff0c\u3002]+", "search.placeholder": "\u641c\u7d22", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version.title": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.37e9125f.min.js"></script>
+      
+        <script src="../../resources/js/extra.js"></script>
+      
+    
+  </body>
+</html>
